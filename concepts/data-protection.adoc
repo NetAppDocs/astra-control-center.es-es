@@ -1,0 +1,60 @@
+---
+sidebar: sidebar 
+permalink: concepts/data-protection.html 
+keywords: backup, back up, backup apps, back up apps, snapshots, snapshot an app, take a snapshot, take a backup, view backups, view snapshots, set policy, set schedule, schedule backups, schedule snapshots 
+summary: Conozca los tipos disponibles de protección de datos en Astra Control Center y cómo usarlos de la mejor forma para proteger sus aplicaciones. 
+---
+= Protección de datos
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/concepts/
+
+
+[role="lead"]
+Conozca los tipos disponibles de protección de datos en Astra Control Center y cómo usarlos de la mejor forma para proteger sus aplicaciones.
+
+
+
+== Snapshot, backups y políticas de protección
+
+Un _snapshot_ es una copia puntual de una aplicación que se almacena en el mismo volumen aprovisionado que la aplicación. Por lo general son rápidas. Es posible usar snapshots locales para restaurar la aplicación a un momento específico anterior. Las copias Snapshot son útiles para los clones rápidos; las copias Snapshot incluyen todos los objetos de Kubernetes para la aplicación, incluidos los archivos de configuración.
+
+Un _backup_ se almacena en el almacén de objetos externo y puede tardar más en tomarse en comparación con las instantáneas locales. Puede restaurar una copia de seguridad de aplicaciones en el mismo clúster, o puede migrar una aplicación restaurando su copia de seguridad en un clúster diferente. También es posible elegir un período de retención más largo para backups. Debido a que están almacenados en el almacén de objetos externo, los backups generalmente ofrecen mejor protección que las copias Snapshot en caso de fallo del servidor o pérdida de datos.
+
+Una _política de protección_ es una forma de proteger una aplicación mediante la creación automática de instantáneas, copias de seguridad o ambas de acuerdo con un programa definido para esa aplicación. Una política de protección también permite elegir cuántas Snapshot y backups se retendrán en la programación. Automatizar los backups y las copias Snapshot con una política de protección es la mejor manera de garantizar que cada aplicación esté protegida en función de las necesidades de la organización.
+
+
+CAUTION: _no puede estar completamente protegido hasta que tenga una copia de seguridad_ reciente. Esto es importante porque los backups se almacenan en un almacén de objetos lejos de los volúmenes persistentes. Si un fallo o accidente limpia el cluster y su almacenamiento persistente asociado, necesitará una copia de seguridad para recuperar. Una Snapshot no le permite recuperar.
+
+
+
+== Clones
+
+Un _clone_ es un duplicado exacto de una aplicación, su configuración y su almacenamiento persistente. Es posible crear manualmente un clon en el mismo clúster de Kubernetes o en otro clúster. El clonado de una aplicación puede ser útil si necesita mover aplicaciones y almacenamiento de un clúster de Kubernetes a otro.
+
+
+
+== La replicación en un clúster remoto
+
+Con Astra Control, puede aumentar la continuidad del negocio para sus aplicaciones con un objetivo de punto de recuperación (RPO) y un objetivo de tiempo de recuperación bajo (Recovery Time Objective) mediante funcionalidades de replicación asíncrona de la tecnología SnapMirror de NetApp. Una vez que se ha configurado, esto permite a sus aplicaciones replicar los cambios de aplicaciones y datos de un clúster a otro.
+
+Astra Control replica de forma asíncrona las copias Snapshot de las aplicaciones en un clúster remoto. El proceso de replicación incluye datos en los volúmenes persistentes replicados por SnapMirror y los metadatos de aplicaciones protegidos por Astra Control.
+
+La replicación de aplicaciones es diferente de la copia de seguridad y la restauración de aplicaciones de las siguientes formas:
+
+* *Replicación de aplicaciones*: Astra Control requiere que los clústeres de Kubernetes de origen y destino estén disponibles y gestionados con sus respectivos back-ends de almacenamiento de ONTAP configurados para habilitar SnapMirror de NetApp. Astra Control toma la instantánea de las aplicaciones basadas en normativas y la replica en el clúster remoto. La tecnología SnapMirror de NetApp se usa para replicar los datos de volúmenes persistentes. Para conmutar al nodo de respaldo, Astra Control puede poner en línea la aplicación replicada al volver a crear los objetos de aplicación en el clúster de Kubernetes de destino con los volúmenes replicados en el clúster de ONTAP de destino. Dado que los datos de volúmenes persistentes ya están presentes en el clúster de ONTAP de destino, Astra Control puede ofrecer tiempos de recuperación rápidos en caso de fallo.
+* *Copia de seguridad y restauración de aplicaciones*: Al hacer copias de seguridad de aplicaciones, Astra Control crea una instantánea de los datos de la aplicación y los almacena en un bloque de almacenamiento de objetos. Cuando se necesita una restauración, los datos del bloque deben copiarse a un volumen persistente del clúster de ONTAP. La operación de backup/restauración no requiere que el clúster de Kubernetes/ONTAP secundario esté disponible y gestionado, pero la copia de datos adicional puede provocar tiempos de restauración más prolongados.
+
+
+Para saber cómo replicar aplicaciones, consulte link:../use/replicate_snapmirror.html["Replicación de aplicaciones en un sistema remoto mediante la tecnología SnapMirror"].
+
+Las siguientes imágenes muestran el proceso de backup y restauración programado en comparación con el proceso de replicación.
+
+El proceso de backup copia los datos en bloques de S3 y restaura a partir de bloques S3:
+
+image:acc-backup_4in.png["Esta imagen muestra un backup y una restauración programados entre dos clústeres de Kubernetes que usan S3 bucket"]
+
+Por otro lado, la replicación se realiza replicando en ONTAP para después crear el relevo de funciones en los recursos de Kubernetes:
+
+image:acc-replication_4in.png["Esta imagen muestra la replicación y la conmutación al nodo de respaldo entre dos clústeres de Kubernetes y dos clústeres de ONTAP"]

@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: acc-earlier-versions.html 
+keywords: what is astra, what are earlier versions 
+summary: La documentación de versiones anteriores está disponible por si no está ejecutando la versión más reciente. 
+---
+= Versiones anteriores de la documentación de Astra Control Center
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Hay documentación disponible sobre versiones anteriores.
+
+* https://docs.netapp.com/us-en/astra-control-center-2208/index.html["Documentación de Astra Control Center 22.08"^]
+* https://docs.netapp.com/us-en/astra-control-center-2204/index.html["Documentación de Astra Control Center 22.04"^]
+* https://docs.netapp.com/us-en/astra-control-center-2112/index.html["Documentación de Astra Control Center 21.12"^]
+* https://docs.netapp.com/us-en/astra-control-center-2108/index.html["Documentación de Astra Control Center 21.08"^]
+

@@ -1,0 +1,181 @@
+---
+sidebar: sidebar 
+permalink: use/manage-local-users-and-roles.html 
+keywords: add users, edit users, remove users, delete users, manage roles 
+summary: Gestione usuarios y funciones en el sistema Astra Control Center. 
+---
+= Gestione usuarios locales y roles
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Puede añadir, eliminar y editar usuarios de la instalación de Astra Control Center mediante la interfaz de usuario de Astra Control. Puede utilizar la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para gestionar usuarios.
+
+También se puede utilizar LDAP para realizar autenticación para los usuarios seleccionados.
+
+
+
+== Utilice LDAP
+
+LDAP es un protocolo estándar del sector para acceder a información de directorio distribuida y una opción muy popular para la autenticación empresarial. Puede conectar Astra Control Center a un servidor LDAP para realizar la autenticación de los usuarios seleccionados de Astra Control. En un nivel elevado, la configuración implica integrar Astra con LDAP y definir los usuarios y grupos de Astra Control correspondientes a las definiciones LDAP. Puede utilizar la API Astra Control o la interfaz de usuario web para configurar la autenticación LDAP y los usuarios y grupos LDAP. En la siguiente documentación, se ofrece más información:
+
+* https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html["Utilice la API Astra Control para gestionar la autenticación y los usuarios remotos"^]
+* link:manage-remote-users-groups.html["Utilice la interfaz de usuario de Astra Control para gestionar grupos y usuarios remotos"]
+* link:manage-remote-authentication.html["Utilice la interfaz de usuario de Astra Control para gestionar la autenticación remota"]
+
+
+
+
+== Añadir usuarios
+
+Los propietarios y administradores de cuentas pueden agregar más usuarios a la instalación de Astra Control Center.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *usuarios*.
+. Seleccione *Agregar usuario*.
+. Introduzca el nombre del usuario, la dirección de correo electrónico y una contraseña temporal.
++
+El usuario deberá cambiar la contraseña en el primer inicio de sesión.
+
+. Seleccione una función de usuario con los permisos de sistema adecuados.
++
+Cada rol proporciona los siguientes permisos:
+
++
+** Un *Visor* puede ver los recursos.
+** Un *Miembro* tiene permisos de función de Viewer y puede administrar aplicaciones y clústeres, anular la administración de aplicaciones y eliminar instantáneas y copias de seguridad.
+** Un *Admin* tiene permisos de rol de miembro y puede agregar y quitar cualquier otro usuario excepto el propietario.
+** *Owner* tiene permisos de función de administrador y puede agregar y eliminar cualquier cuenta de usuario.
+
+
+. Para agregar restricciones a un usuario con un rol de miembro o de visor, active la casilla de verificación *restringir la función a restricciones* .
++
+Para obtener más información sobre cómo agregar restricciones, consulte link:manage-local-users-and-roles.html["Gestione usuarios locales y roles"].
+
+. Seleccione *Agregar*.
+
+
+
+
+== Gestionar contraseñas
+
+Puede gestionar las contraseñas de las cuentas de usuario en Astra Control Center.
+
+
+
+=== Cambie la contraseña
+
+Puede cambiar la contraseña de su cuenta de usuario en cualquier momento.
+
+.Pasos
+. Seleccione el icono Usuario situado en la parte superior derecha de la pantalla.
+. Seleccione *Perfil*.
+. En el menú Opciones de la columna *acciones* y seleccione *Cambiar contraseña*.
+. Introduzca una contraseña que se ajuste a los requisitos de contraseña.
+. Introduzca una vez más la contraseña para confirmarla.
+. Seleccione *Cambiar contraseña*.
+
+
+
+
+=== Restablecer la contraseña de otro usuario
+
+Si su cuenta tiene permisos de rol de administrador o propietario, puede restablecer las contraseñas de otras cuentas de usuario así como las suyas propias. Al restablecer una contraseña, asigna una contraseña temporal que el usuario tendrá que cambiar al iniciar sesión.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la lista desplegable *acciones*.
+. Seleccione *Restablecer contraseña*.
+. Introduzca una contraseña temporal que cumpla los requisitos de contraseña.
+. Introduzca una vez más la contraseña para confirmarla.
++
+
+NOTE: La próxima vez que el usuario inicie sesión, se le pedirá que cambie la contraseña.
+
+. Seleccione *Restablecer contraseña*.
+
+
+
+
+== Quitar usuarios
+
+Los usuarios con el rol propietario o administrador pueden eliminar otros usuarios de la cuenta en cualquier momento.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. En la ficha *usuarios* , active la casilla de verificación en la fila de cada usuario que desee quitar.
+. En el menú Opciones de la columna *acciones*, seleccione *Eliminar usuario/s*.
+. Cuando se le solicite, confirme la eliminación escribiendo la palabra "eliminar" y, a continuación, seleccione *Sí, Eliminar usuario*.
+
+
+.Resultado
+Astra Control Center elimina al usuario de la cuenta.
+
+
+
+== Gestionar roles
+
+Es posible gestionar roles si se añaden restricciones de espacio de nombres y se restringen los roles del usuario a dichas restricciones. Esto le permite controlar el acceso a los recursos de su organización. Puede utilizar la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para administrar roles.
+
+
+
+=== Agregar una restricción de espacio de nombres a una función
+
+Un usuario Administrador o propietario puede agregar restricciones de espacio de nombres a las funciones de miembro o de visor.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *usuarios*.
+. En la columna *acciones*, seleccione el botón de menú para un usuario con la función Miembro o Visor.
+. Seleccione *Editar rol*.
+. Active la casilla de verificación *restringir rol a restricciones*.
++
+La casilla de verificación sólo está disponible para funciones de miembro o de visor. Puede seleccionar un rol diferente de la lista desplegable *rol*.
+
+. Seleccione *Agregar restricción*.
++
+Se puede ver la lista de restricciones disponibles por espacio de nombres o por etiqueta de espacio de nombres.
+
+. En la lista desplegable *Tipo de restricción*, seleccione *espacio de nombres Kubernetes* o *etiqueta de espacio de nombres Kubernetes* dependiendo de cómo estén configurados los espacios de nombres.
+. Seleccione uno o más espacios de nombres o etiquetas de la lista para redactar una restricción que restrinja las funciones a esos espacios de nombres.
+. Seleccione *Confirmar*.
++
+La página *Editar función* muestra la lista de restricciones que ha elegido para esta función.
+
+. Seleccione *Confirmar*.
++
+En la página *cuenta*, puede ver las restricciones de cualquier rol de miembro o de visor en la columna *rol*.
+
+
+
+
+NOTE: Si habilita restricciones para una función y selecciona *Confirmar* sin agregar restricciones, se considera que la función tiene restricciones completas (se deniega el acceso a cualquier recurso asignado a espacios de nombres).
+
+
+
+=== Quitar una restricción de espacio de nombres de una función
+
+Un usuario Admin o Owner puede eliminar una restricción de espacio de nombres de una función.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *usuarios*.
+. En la columna *acciones*, seleccione el botón de menú para un usuario con la función Miembro o Visor que tiene restricciones activas.
+. Seleccione *Editar rol*.
++
+El cuadro de diálogo *Editar función* muestra las restricciones activas para la función.
+
+. Seleccione *X* a la derecha de la restricción que debe eliminar.
+. Seleccione *Confirmar*.
+
+
+
+
+== Si quiere más información
+
+* link:../concepts/user-roles-namespaces.html["Roles de usuario y espacios de nombres"]
+

@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: use/view-account-activity.html 
+keywords: activity, log, activities, download log, download csv, csv 
+summary: Puede ver los detalles de las actividades en su cuenta de Astra Control. Por ejemplo, cuando se invitó a nuevos usuarios, cuando se agregaba un clúster o cuando se tomaba una snapshot. También puede exportar la actividad de su cuenta a un archivo CSV. 
+---
+= Controlar la actividad de la cuenta
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Puede ver los detalles de las actividades en su cuenta de Astra Control. Por ejemplo, cuando se invitó a nuevos usuarios, cuando se agregaba un clúster o cuando se tomaba una snapshot. También puede exportar la actividad de su cuenta a un archivo CSV.
+
+
+TIP: Si gestiona los clústeres de Kubernetes desde Astra Control y Astra Control se conecta a Cloud Insights, Astra Control envía registros de eventos a Cloud Insights. La información de registro, incluida la información sobre la implementación de POD y los archivos adjuntos de PVC, aparece en el registro de actividad de control de Astra. Utilice esta información para identificar cualquier problema en los clústeres de Kubernetes que está gestionando.
+
+.Ver toda la actividad de la cuenta en Astra Control
+. Seleccione *actividad*.
+. Utilice los filtros para restringir la lista de actividades o utilice el cuadro de búsqueda para encontrar exactamente lo que busca.
+. Seleccione *Exportar a CSV* para descargar la actividad de su cuenta en un archivo CSV.
+
+
+.Ver la actividad de la cuenta de una aplicación específica
+. Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
+. Seleccione *actividad*.
+
+
+.Ver la actividad de la cuenta de los clústeres
+. Seleccione *Clusters* y, a continuación, seleccione el nombre del clúster.
+. Seleccione *actividad*.
+
+
+.Tome la acción para resolver eventos que requieren atención
+. Seleccione *actividad*.
+. Seleccione un evento que requiera atención.
+. Seleccione la opción desplegable *tomar acción*.
++
+En esta lista, puede ver las posibles acciones correctivas que puede adoptar, ver la documentación relacionada con el problema y obtener soporte para ayudar a resolver el problema.
+
+

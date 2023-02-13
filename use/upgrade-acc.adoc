@@ -1,0 +1,454 @@
+---
+sidebar: sidebar 
+permalink: use/upgrade-acc.html 
+keywords: astra upgrade, upgrade astra control center, how to upgrade astra control, update 
+summary: Para actualizar Astra Control Center, descargue el paquete y actualice siguiendo los pasos descritos. 
+---
+= Actualice Astra Control Center
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/get-started/
+
+
+[role="lead"]
+Para actualizar Astra Control Center, descargue el paquete de instalación desde el sitio de soporte de NetApp y complete estas instrucciones. Puede utilizar este procedimiento para actualizar Astra Control Center en entornos conectados a Internet o con conexión por aire.
+
+.Lo que necesitará
+* Antes de realizar la actualización, consulte link:../get-started/requirements.html#operational-environment-requirements["Requisitos del entorno operativo"^] Para garantizar que su entorno cumple los requisitos mínimos para la implantación de Astra Control Center. Su entorno debe tener lo siguiente:
++
+** Una versión compatible de Astra Trident para determinar la versión que está ejecutando, ejecute el siguiente comando con su Astra Control Center existente:
++
+[listing]
+----
+kubectl get tridentversion -n trident
+----
++
+Consulte https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to["Documentación de Astra Trident"] para actualizar desde una versión anterior.
+
++
+
+WARNING: Debe actualizar a Astra Trident 22.10 *ANTERIOR* a la actualización a Kubernetes 1.25.
+
+** Una distribución de Kubernetes compatible para determinar la versión que está ejecutando, ejecute el siguiente comando con su Astra Control Center existente: `kubectl get nodes -o wide`
+** Suficientes recursos del clúster para determinar los recursos del clúster, ejecute el siguiente comando en el clúster existente de Astra Control Center: `kubectl describe node <node name>`
+** Registro que puede utilizar para insertar y cargar imágenes de Astra Control Center
+** Una clase de almacenamiento predeterminada para determinar la clase de almacenamiento predeterminada; ejecute el siguiente comando en su Astra Control Center existente: `kubectl get storageclass`
+
+
+* (Sólo OpenShift) Asegúrese de que todos los operadores de clúster están en buen estado y disponibles.
++
+[listing]
+----
+kubectl get clusteroperators
+----
+* Asegúrese de que todos los servicios de API están en buen estado y disponibles.
++
+[listing]
+----
+kubectl get apiservices
+----
+* Cierre la sesión de la interfaz de usuario de Astra Control Center antes de comenzar la actualización.
+
+
+.Acerca de esta tarea
+El proceso de actualización del Centro de control de Astra le guiará por los siguientes pasos de alto nivel:
+
+* <<Descargue y extraiga Astra Control Center>>
+* <<Elimine el complemento Astra kubectl de NetApp y vuelva a instalarlo>>
+* <<Agregue las imágenes al registro local>>
+* <<Instale el operador actualizado de Astra Control Center>>
+* <<Actualice Astra Control Center>>
+* <<Comprobar el estado del sistema>>
+
+
+
+IMPORTANT: No elimine el operador Astra Control Center (por ejemplo, `kubectl delete -f astra_control_center_operator_deploy.yaml`) En cualquier momento durante la actualización o el funcionamiento de Astra Control Center para evitar la eliminación de las dosis.
+
+
+TIP: Realice actualizaciones en una ventana de mantenimiento cuando no se estén ejecutando las programaciones, los backups y las snapshots.
+
+
+
+== Descargue y extraiga Astra Control Center
+
+. Vaya a la https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de productos de Astra Control Center"^] En el sitio de soporte de NetApp. Puede seleccionar la última versión u otra que desee en el menú desplegable.
+. Descargue el paquete que contiene Astra Control Center (`astra-control-center-[version].tar.gz`).
+. (Recomendado pero opcional) Descargue el paquete de certificados y firmas para Astra Control Center (`astra-control-center-certs-[version].tar.gz`) para verificar la firma del paquete:
++
+[source, console]
+----
+tar -vxzf astra-control-center-certs-[version].tar.gz
+----
++
+[source, console]
+----
+openssl dgst -sha256 -verify certs/AstraControlCenter-public.pub -signature certs/astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
+----
++
+Se mostrará la salida `Verified OK` después de una verificación correcta.
+
+. Extraiga las imágenes del paquete Astra Control Center:
++
+[source, console]
+----
+tar -vxzf astra-control-center-[version].tar.gz
+----
+
+
+
+
+== Elimine el complemento Astra kubectl de NetApp y vuelva a instalarlo
+
+El complemento de la línea de comandos Astra bectl de NetApp ahorra tiempo en la realización de tareas comunes asociadas a la puesta en marcha y la actualización de Astra Control Center.
+
+. Determine si tiene instalado el plugin:
++
+[listing]
+----
+kubectl astra
+----
+. Realice una de estas acciones:
++
+** Si el complemento está instalado, el comando debería devolver la ayuda del complemento kubectl. Para eliminar una versión existente de kubectl-astra, ejecute este comando: `delete /usr/local/bin/kubectl-astra`.
+** Si el comando devuelve un error, el plugin no está instalado y puede continuar con el siguiente paso para instalarlo.
+
+
+. Instale el complemento:
++
+.. Enumere los binarios disponibles del complemento Astra kubectl de NetApp, y anote el nombre del archivo que necesita para el sistema operativo y la arquitectura de CPU:
++
+
+NOTE: La biblioteca de complementos kubectl forma parte del paquete tar y se extrae en la carpeta `kubectl-astra`.
+
++
+[source, console]
+----
+ls kubectl-astra/
+----
+.. Mueva el binario correcto a la ruta actual y cambie el nombre a. `kubectl-astra`:
++
+[source, console]
+----
+cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
+----
+
+
+
+
+
+
+== Agregue las imágenes al registro local
+
+. Complete la secuencia de pasos apropiada para el motor del contenedor:
+
+
+[role="tabbed-block"]
+====
+.Docker
+--
+. Cambie al directorio raíz del tarball. Debería ver este archivo y directorio:
++
+`acc.manifest.bundle.yaml`
+`acc/`
+
+. Inserte las imágenes del paquete en el directorio de imágenes de Astra Control Center en su registro local. Realice las siguientes sustituciones antes de ejecutar el `push-images` comando:
++
+** Sustituya <BUNDLE_FILE> por el nombre del archivo Astra Control Bundle (`acc.manifest.bundle.yaml`).
+** Sustituya <MY_FULL_REGISTRY_PATH> por la URL del repositorio de Docker; por ejemplo, "https://<docker-registry>"[].
+** Reemplace <MY_REGISTRY_USER> por el nombre de usuario.
+** Sustituya <MY_REGISTRY_TOKEN> por un token autorizado para el registro.
++
+[source, console]
+----
+kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
+----
+
+
+
+
+--
+.Podman
+--
+. Cambie al directorio raíz del tarball. Debería ver este archivo y directorio:
++
+`acc.manifest.bundle.yaml`
+`acc/`
+
+. Inicie sesión en su registro:
++
+[source, console]
+----
+podman login <YOUR_REGISTRY>
+----
+. Prepare y ejecute una de las siguientes secuencias de comandos personalizadas para la versión de Podman que utilice. Sustituya <MY_FULL_REGISTRY_PATH> por la URL del repositorio que incluye cualquier subdirectorio.
++
+[source, subs="specialcharacters,quotes"]
+----
+*Podman 4*
+----
++
+[source, console]
+----
+export REGISTRY=<MY_FULL_REGISTRY_PATH>
+export PACKAGENAME=acc
+export PACKAGEVERSION=22.11.0-82
+export DIRECTORYNAME=acc
+for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
+astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
+podman tag ${astraImageNoPath} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+done
+----
++
+[source, subs="specialcharacters,quotes"]
+----
+*Podman 3*
+----
++
+[source, console]
+----
+export REGISTRY=<MY_FULL_REGISTRY_PATH>
+export PACKAGENAME=acc
+export PACKAGEVERSION=22.11.0-82
+export DIRECTORYNAME=acc
+for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
+astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
+podman tag ${astraImageNoPath} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+done
+----
++
+
+NOTE: La ruta de acceso de imagen que crea el script debe parecerse a la siguiente, dependiendo de la configuración del Registro: `https://netappdownloads.jfrog.io/docker-astra-control-prod/netapp/astra/acc/22.11.0-82/image:version`
+
+
+
+--
+====
+
+
+== Instale el operador actualizado de Astra Control Center
+
+. Cambie el directorio:
++
+[listing]
+----
+cd manifests
+----
+. Edite la implementación del operador de Astra Control Center yaml (`astra_control_center_operator_deploy.yaml`) para referirse a su registro local y secreto.
++
+[listing]
+----
+vim astra_control_center_operator_deploy.yaml
+----
++
+.. Si utiliza un registro que requiere autenticación, reemplace o edite la línea predeterminada de `imagePullSecrets: []` con lo siguiente:
++
+[listing]
+----
+imagePullSecrets:
+- name: <astra-registry-cred_or_custom_name_of_secret>
+----
+.. Cambiar `[your_registry_path]` para la `kube-rbac-proxy` imagen a la ruta del registro en la que se insertó la imagen en un <<Agregue las imágenes al registro local,paso anterior>>.
+.. Cambiar `[your_registry_path]` para la `acc-operator` imagen a la ruta del registro en la que se insertó la imagen en un <<Agregue las imágenes al registro local,paso anterior>>.
+.. Añada los siguientes valores a la `env` sección:
++
+[listing]
+----
+- name: ACCOP_HELM_UPGRADETIMEOUT
+  value: 300m
+----
++
+[listing, subs="+quotes"]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    control-plane: controller-manager
+  name: acc-operator-controller-manager
+  namespace: netapp-acc-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+    spec:
+      containers:
+      - args:
+        - --secure-listen-address=0.0.0.0:8443
+        - --upstream=http://127.0.0.1:8080/
+        - --logtostderr=true
+        - --v=10
+        *image: [your_registry_path]/kube-rbac-proxy:v4.8.0*
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 8443
+          name: https
+      - args:
+        - --health-probe-bind-address=:8081
+        - --metrics-bind-address=127.0.0.1:8080
+        - --leader-elect
+        env:
+        - name: ACCOP_LOG_LEVEL
+          value: "2"
+        *- name: ACCOP_HELM_UPGRADETIMEOUT*
+          *value: 300m*
+        *image: [your_registry_path]/acc-operator:[version x.y.z]*
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 300m
+            memory: 750Mi
+          requests:
+            cpu: 100m
+            memory: 75Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+      *imagePullSecrets: []*
+      securityContext:
+        runAsUser: 65532
+      terminationGracePeriodSeconds: 10
+----
+
+
+. Instale el operador actualizado de Astra Control Center:
++
+[listing]
+----
+kubectl apply -f astra_control_center_operator_deploy.yaml
+----
++
+Respuesta de ejemplo:
+
++
+[listing]
+----
+namespace/netapp-acc-operator unchanged
+customresourcedefinition.apiextensions.k8s.io/astracontrolcenters.astra.netapp.io configured
+role.rbac.authorization.k8s.io/acc-operator-leader-election-role unchanged
+clusterrole.rbac.authorization.k8s.io/acc-operator-manager-role configured
+clusterrole.rbac.authorization.k8s.io/acc-operator-metrics-reader unchanged
+clusterrole.rbac.authorization.k8s.io/acc-operator-proxy-role unchanged
+rolebinding.rbac.authorization.k8s.io/acc-operator-leader-election-rolebinding unchanged
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-manager-rolebinding configured
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding unchanged
+configmap/acc-operator-manager-config unchanged
+service/acc-operator-controller-manager-metrics-service unchanged
+deployment.apps/acc-operator-controller-manager configured
+----
+. Verifique que los pods se estén ejecutando:
++
+[listing]
+----
+kubectl get pods -n netapp-acc-operator
+----
+
+
+
+
+== Actualice Astra Control Center
+
+. Edite el recurso personalizado de Astra Control Center (CR):
++
+[listing]
+----
+kubectl edit AstraControlCenter -n [netapp-acc or custom namespace]
+----
+. Cambie el número de versión de Astra (`astraVersion` dentro de `Spec`) a la versión que está actualizando a:
++
+[listing, subs="+quotes"]
+----
+spec:
+  accountName: "Example"
+  *astraVersion: "[Version number]"*
+----
+. Compruebe que la ruta del Registro de imágenes coincide con la ruta del Registro a la que ha insertado las imágenes en <<Agregue las imágenes al registro local,paso anterior>>. Actualizar `imageRegistry` dentro de `Spec` si el registro ha cambiado desde la última instalación.
++
+[listing]
+----
+  imageRegistry:
+    name: "[your_registry_path]"
+----
+. Añada lo siguiente a su `CRDs` configuración dentro de `Spec`:
++
+[listing]
+----
+crds:
+  shouldUpgrade: true
+----
+. Añada las siguientes líneas dentro de `additionalValues` dentro de `Spec` En el Centro de control de Astra CR:
++
+[listing]
+----
+additionalValues:
+    nautilus:
+      startupProbe:
+        periodSeconds: 30
+        failureThreshold: 600
+----
++
+Después de guardar y salir del editor de archivos, se aplicarán los cambios y comenzará la actualización.
+
+. (Opcional) Verifique que los POD terminan y estén disponibles de nuevo:
++
+[listing]
+----
+watch kubectl get pods -n [netapp-acc or custom namespace]
+----
+. Espere a que las condiciones de estado de Astra Control indiquen que la actualización está completa y lista (`True`):
++
+[listing]
+----
+kubectl get AstraControlCenter -n [netapp-acc or custom namespace]
+----
++
+Respuesta:
+
++
+[listing]
+----
+NAME    UUID                                      VERSION     ADDRESS         READY
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      22.11.0-82  10.111.111.111  True
+----
++
+
+NOTE: Para supervisar el estado de actualización durante la operación, ejecute el siguiente comando: `kubectl get AstraControlCenter -o yaml -n [netapp-acc or custom namespace]`
+
++
+
+NOTE: Para inspeccionar los registros del operador de Astra Control Center, ejecute el siguiente comando:
+`kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f`
+
+
+
+
+
+== Comprobar el estado del sistema
+
+. Inicie sesión en Astra Control Center.
+. Compruebe que la versión se ha actualizado. Consulte la página *Soporte* de la interfaz de usuario.
+. Compruebe que todos los clústeres y aplicaciones gestionados siguen presentes y protegidos.
+

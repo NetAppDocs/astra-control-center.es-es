@@ -1,0 +1,118 @@
+---
+sidebar: sidebar 
+permalink: use/manage-remote-authentication.html 
+keywords: enable ldap authentication, disable, ldap, authentication, configure, manage 
+summary: Gestione la autenticación LDAP en su sistema Astra Control. 
+---
+= Administrar la autenticación remota
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+LDAP es un protocolo estándar del sector para acceder a información de directorio distribuida y una opción muy popular para la autenticación empresarial. Puede conectar Astra Control Center a un servidor LDAP para realizar la autenticación de los usuarios seleccionados de Astra Control.
+
+En un nivel elevado, la configuración implica integrar Astra con LDAP y definir los usuarios y grupos de Astra Control correspondientes a las definiciones LDAP. Puede utilizar la API Astra Control o la interfaz de usuario web para configurar la autenticación LDAP y los usuarios y grupos LDAP.
+
+
+IMPORTANT: Astra Control Center utiliza la dirección de correo electrónico en el atributo "mail" LDAP para buscar y realizar un seguimiento de los usuarios remotos. Este atributo puede ser un campo opcional o vacío en su directorio. Debe existir una dirección de correo electrónico en este campo para los usuarios remotos que desee que aparezcan en Astra Control Center. Esta dirección de correo electrónico se utiliza como nombre de usuario en Astra Control Center para la autenticación.
+
+
+
+== Añada un certificado para la autenticación LDAPS
+
+Agregue el certificado TLS privado del servidor LDAP para que Astra Control Center pueda autenticarse con el servidor LDAP cuando utilice una conexión LDAPS. Sólo tiene que hacerlo una vez o cuando caduque el certificado que ha instalado.
+
+.Pasos
+. Vaya a *cuenta*.
+. Seleccione la ficha *certificados*.
+. Seleccione *Agregar*.
+. Cargue el `.pem` archiva o pega el contenido del archivo desde el portapapeles.
+. Seleccione la casilla de verificación *Trusted*.
+. Seleccione *Agregar certificado*.
+
+
+
+
+== Habilite la autenticación remota
+
+Puede habilitar la autenticación LDAP y configurar la conexión entre Astra Control y el servidor LDAP remoto.
+
+.Lo que necesitará
+Si planea utilizar LDAPS, asegúrese de que el certificado TLS privado del servidor LDAP está instalado en Astra Control Center para que Astra Control Center pueda autenticarse con el servidor LDAP. Consulte <<Añada un certificado para la autenticación LDAPS>> si desea obtener instrucciones.
+
+.Pasos
+. Vaya a *cuenta > conexiones*.
+. En el panel *autenticación remota*, seleccione el menú de configuración.
+. Seleccione *conectar*.
+. Introduzca la dirección IP del servidor, el puerto y el protocolo de conexión preferido (LDAP o LDAPS).
++
+
+NOTE: Como práctica recomendada, use LDAPS al conectarse con el servidor LDAP. Debe instalar el certificado TLS privado del servidor LDAP en Astra Control Center antes de conectarse con LDAPS.
+
+. Introduzca las credenciales de la cuenta de servicio en formato de correo electrónico (administrator@example.com). Astra Control utilizará estas credenciales al conectar con el servidor LDAP.
+. En la sección *coincidencia de usuario*, introduzca el DN base y un filtro de búsqueda de usuario apropiado que se utilizará al recuperar información de usuario del servidor LDAP.
+. En la sección *coincidencia de grupo*, introduzca el DN base de búsqueda de grupo y un filtro de búsqueda de grupo personalizado adecuado.
++
+
+NOTE: Asegúrese de utilizar el nombre completo (DN) de base correcto y un filtro de búsqueda apropiado para *coincidencia de usuario* y *coincidencia de grupo*. El DN base indica a Astra Control en qué nivel del árbol de directorios iniciar la búsqueda, y el filtro de búsqueda limita las partes del árbol de directorios de las búsquedas de Astra Control.
+
+. Seleccione *Enviar*.
+
+
+.Resultado
+El estado del panel *autenticación remota* pasa a *pendiente* y a *conectado* cuando se establece la conexión con el servidor LDAP.
+
+
+
+== Desactivar la autenticación remota
+
+Puede deshabilitar temporalmente una conexión activa con el servidor LDAP.
+
+
+NOTE: Cuando se deshabilita una conexión a un servidor LDAP, se guardan todas las opciones y se conservan todos los usuarios y grupos remotos que se agregaron a Astra Control desde ese servidor LDAP. Puede volver a conectarse a este servidor LDAP en cualquier momento.
+
+.Pasos
+. Vaya a *cuenta > conexiones*.
+. En el panel *autenticación remota*, seleccione el menú de configuración.
+. Seleccione *Desactivar*.
+
+
+.Resultado
+El estado del panel *autenticación remota* pasa a *Desactivada*. Se conservan todos los ajustes de autenticación remota, usuarios remotos y grupos remotos, y se puede volver a habilitar la conexión en cualquier momento.
+
+
+
+== Edite la configuración de autenticación remota
+
+Si ha desactivado la conexión al servidor LDAP o el panel *autenticación remota* se encuentra en el estado "error de conexión", puede editar los valores de configuración.
+
+
+NOTE: No puede editar la dirección IP o la dirección URL del servidor LDAP cuando el panel *autenticación remota* está en estado "Desactivada". Necesita hacerlo <<Desconecte la autenticación remota>> primero.
+
+.Pasos
+. Vaya a *cuenta > conexiones*.
+. En el panel *autenticación remota*, seleccione el menú de configuración.
+. Seleccione *Editar*.
+. Realice los cambios necesarios y seleccione *Editar*.
+
+
+
+
+== Desconecte la autenticación remota
+
+Puede desconectarse de un servidor LDAP y eliminar los ajustes de configuración de Astra Control.
+
+
+CAUTION: Cuando se desconecta del servidor LDAP, todas las opciones de configuración de ese servidor LDAP se eliminan de Astra Control, así como todos los usuarios y grupos remotos que se hayan agregado de ese servidor LDAP.
+
+.Pasos
+. Vaya a *cuenta > conexiones*.
+. En el panel *autenticación remota*, seleccione el menú de configuración.
+. Seleccione *desconectar*.
+
+
+.Resultado
+El estado del panel *autenticación remota* pasa a *desconectado*. La configuración de autenticación remota, los usuarios remotos y los grupos remotos se eliminan de Astra Control.

@@ -1,0 +1,18 @@
+---
+section: concepts
+title: Conceptos
+entries:
+- title: Arquitectura y componentes
+  url: "/concepts/architecture.html"
+- title: Protección de datos
+  url: "/concepts/data-protection.html"
+- title: Licencia
+  url: "/concepts/licensing.html"
+- title: Gestión de aplicaciones
+  url: "/concepts/app-management.html"
+- title: Clases de almacenamiento y tamaño de VP
+  url: "/concepts/choose-class-and-size.html"
+- title: Roles de usuario y espacios de nombres
+  url: "/concepts/user-roles-namespaces.html"
+- title: Seguridad de POD
+  url: "/concepts/understand-pod-security.html"

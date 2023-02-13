@@ -1,0 +1,689 @@
+---
+sidebar: sidebar 
+permalink: get-started/install_acc-cvo.html 
+keywords: astra installation, install astra control center, cloud volumes ontap, amazon web services, aws, azure, gcp, google cloud platform, how to install astra control, deploy, download from netapp support 
+summary: Para instalar Astra Control Center después de tratar algunos requisitos previos medioambientales, descargará el paquete e instálelo siguiendo los pasos descritos. 
+---
+= Instale Astra Control Center con un back-end de almacenamiento de Cloud Volumes ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/get-started/
+
+
+[role="lead"]
+Con Astra Control Center, puede gestionar sus aplicaciones en un entorno de cloud híbrido con clústeres de Kubernetes e instancias de Cloud Volumes ONTAP autogestionados. Puede poner en marcha Astra Control Center en sus clústeres de Kubernetes en las instalaciones o en uno de los clústeres de Kubernetes autogestionados en el entorno de cloud.
+
+Con una de estas puestas en marcha, puede realizar operaciones de gestión de datos de aplicaciones utilizando Cloud Volumes ONTAP como back-end de almacenamiento. También es posible configurar un bloque de S3 como destino de backup.
+
+Para instalar Astra Control Center en Amazon Web Services (AWS), Google Cloud Platform (GCP) y Microsoft Azure con una back-end de almacenamiento de Cloud Volumes ONTAP, realice los siguientes pasos en función de su entorno de cloud.
+
+* <<Ponga en marcha Astra Control Center en Amazon Web Services>>
+* <<Ponga en marcha Astra Control Center en Google Cloud Platform>>
+* <<Ponga en marcha Astra Control Center en Microsoft Azure>>
+
+
+Puede gestionar sus aplicaciones en distribuciones con clústeres de Kubernetes autogestionados, como OpenShift Container Platform (OCP). Sólo se validan los clústeres OCP autogestionados para la implantación de Astra Control Center.
+
+
+
+== Ponga en marcha Astra Control Center en Amazon Web Services
+
+Puede poner en marcha Astra Control Center en un clúster de Kubernetes autogestionado alojado en un cloud público de Amazon Web Services (AWS).
+
+
+
+=== Lo que necesitará para AWS
+
+Antes de poner en marcha Astra Control Center en AWS, necesitará los siguientes elementos:
+
+* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"].
+* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"].
+* Cuenta de Cloud Central de NetApp
+* Si utiliza OCP, los permisos de Red Hat OpenShift Container Platform (OCP) (en el nivel de espacio de nombres para crear pods)
+* Credenciales de AWS, Access ID y Secret Key con permisos que permiten crear cubos y conectores
+* Acceso e inicio de sesión del Elastic Container Registry (ECR) de la cuenta de AWS
+* Se requieren entradas de zona alojada de AWS y ruta 53 para acceder a la interfaz de usuario de Astra Control
+
+
+
+
+=== Requisitos de los entornos operativos para AWS
+
+Astra Control Center requiere los siguientes entornos operativos para AWS:
+
+* OpenShift Container Platform de Red Hat 4.8
+
+
+
+NOTE: Asegúrese de que el entorno operativo que elija para alojar Astra Control Center cumple los requisitos de recursos básicos que se describen en la documentación oficial del entorno.
+
+Astra Control Center requiere los siguientes recursos además de los requisitos de recursos del entorno:
+
+[cols="1h,2a"]
+|===
+| Componente | Requisito 
+
+
+| Capacidad de almacenamiento Cloud Volumes ONTAP de back-end de NetApp  a| 
+300 GB como mínimo disponible
+
+
+
+| Nodos de trabajo (requisitos de AWS EC2)  a| 
+Al menos 3 nodos de trabajo en total, con 4 núcleos vCPU y 12 GB de RAM en cada uno
+
+
+
+| Equilibrador de carga  a| 
+Tipo de servicio "LoadBalancer" disponible para que el tráfico de entrada se envíe a los servicios en el clúster de entorno operativo
+
+
+
+| FQDN  a| 
+Método para señalar el FQDN de Astra Control Center a la dirección IP de carga equilibrada
+
+
+
+| Astra Trident (instalado como parte de la detección de clústeres de Kubernetes en NetApp BlueXP, anteriormente Cloud Manager)  a| 
+Astra Trident 21.04 o posterior instalado y configurado y NetApp ONTAP versión 9.5 o posterior como back-end de almacenamiento
+
+
+
+| Registro de imágenes  a| 
+Debe tener un registro privado existente, como AWS Elastic Container Registry, al que puede insertar imágenes de creación de Astra Control Center. Debe proporcionar la dirección URL del registro de imágenes donde cargará las imágenes.
+
+
+NOTE: El clúster alojado de Astra Control Center y el clúster gestionado deben tener acceso al mismo registro de imágenes para poder realizar copias de seguridad y restaurar aplicaciones mediante la imagen basada en Restic.
+
+
+
+| Configuración de Astra Trident/ONTAP  a| 
+Astra Control Center requiere que se cree una clase de almacenamiento y se establezca como la clase de almacenamiento predeterminada. Astra Control Center es compatible con las siguientes clases de almacenamiento ONTAP Kubernetes que se crean al importar su clúster de Kubernetes a NetApp BlueXP (anteriormente Cloud Manager). Los proporciona Astra Trident:
+
+* `vsaworkingenvironment-<>-ha-nas               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-ha-san               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io`
+
+
+|===
+
+NOTE: Estos requisitos suponen que Astra Control Center es la única aplicación que se ejecuta en el entorno operativo. Si el entorno ejecuta aplicaciones adicionales, ajuste estos requisitos mínimos según corresponda.
+
+
+NOTE: El token del registro de AWS caduca en 12 horas, después del cual deberá renovar el secreto del registro de imagen Docker.
+
+
+
+=== Información general sobre la implementación para AWS
+
+He aquí una descripción general del proceso de instalación de Astra Control Center para AWS con Cloud Volumes ONTAP como back-end de almacenamiento.
+
+Cada uno de estos pasos se explica más detalladamente a continuación.
+
+. <<Compruebe que dispone de suficientes permisos IAM>>.
+. <<Instale un clúster RedHat OpenShift en AWS>>.
+. <<Configure AWS>>.
+. <<Configuración de BlueXP de NetApp para AWS>>.
+. <<Instale Astra Control Center para AWS>>.
+
+
+
+
+=== Compruebe que dispone de suficientes permisos IAM
+
+Asegúrese de tener suficientes roles y permisos de IAM que le permiten instalar un clúster RedHat OpenShift y un conector BlueXP de NetApp (anteriormente Cloud Manager).
+
+Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-aws.html#initial-aws-credentials["Credenciales iniciales de AWS"^].
+
+
+
+=== Instale un clúster RedHat OpenShift en AWS
+
+Instale un clúster RedHat OpenShift Container Platform en AWS.
+
+Para obtener instrucciones de instalación, consulte https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html["Instalación de un clúster en AWS en OpenShift Container Platform"^].
+
+
+
+=== Configure AWS
+
+A continuación, configure AWS para crear una red virtual, configurar instancias de computación EC2, crear un bloque de AWS S3, crear un Elastic Container Register (ECR) para alojar las imágenes de Astra Control Center y empujar las imágenes a este registro.
+
+Siga la documentación de AWS para completar los pasos siguientes. Consulte https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html["Documentación de instalación de AWS"^].
+
+. Cree una red virtual AWS.
+. Revise las instancias de computación EC2. Puede ser un servidor con configuración básica o máquinas virtuales en AWS.
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en AWS para cumplir los requisitos de Astra. Consulte link:../requirements.html["Requisitos del Centro de Control de Astra"].
+. Cree al menos un bloque de AWS S3 para almacenar los backups.
+. Cree un AWS Elastic Container Registry (ECR) para alojar todas las imágenes ACC.
++
+
+NOTE: Si no crea la ECR, Astra Control Center no puede acceder a los datos de supervisión de un clúster que contenga Cloud Volumes ONTAP con un back-end de AWS. El problema se produce cuando el clúster que intenta detectar y gestionar mediante Astra Control Center no tiene acceso a AWS ECR.
+
+. Inserte las imágenes ACC en el registro definido.
+
+
+
+NOTE: El token del registro de contenedor elástico de AWS (ECR) caduca al cabo de 12 horas y provoca errores en las operaciones de clonado de varios clústeres. Este problema ocurre cuando se gestiona un back-end de almacenamiento desde Cloud Volumes ONTAP configurado para AWS. Para corregir este problema, vuelva a autenticarse con la ECR y genere un nuevo secreto para que las operaciones de clonación se reanuden correctamente.
+
+A continuación mostramos un ejemplo de una puesta en marcha de AWS:
+
+image:acc-cvo-aws2.png["Esta imagen muestra un ejemplo de Astra Control Center con una implementación de Cloud Volumes ONTAP"]
+
+
+
+=== Configuración de BlueXP de NetApp para AWS
+
+Con NetApp BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añada un conector a AWS, cree un entorno de trabajo e importe el clúster.
+
+Siga la documentación de BlueXP para completar los siguientes pasos. Consulte lo siguiente:
+
+* https://docs.netapp.com/us-en/occm/task_getting_started_aws.html["Introducción a Cloud Volumes ONTAP en AWS"^].
+* https://docs.netapp.com/us-en/occm/task_creating_connectors_aws.html#create-a-connector["Cree un conector en AWS mediante BlueXP"^]
+
+
+.Pasos
+. Agregue sus credenciales a BlueXP.
+. Crear un área de trabajo.
+. Agregue un conector para AWS. Elija AWS como proveedor.
+. Cree un entorno de trabajo para su entorno de cloud.
++
+.. Ubicación: "Amazon Web Services (AWS)"
+.. Tipo: "Cloud Volumes ONTAP ha"
+
+
+. Importe el clúster OpenShift. El clúster se conectará al entorno de trabajo que acaba de crear.
++
+.. Consulte los detalles del clúster de NetApp seleccionando *K8s* > *Lista de clústeres* > *Detalles del clúster*.
+.. En la esquina superior derecha, tenga en cuenta la versión de Trident.
+.. Observe las clases de almacenamiento del clúster Cloud Volumes ONTAP que muestran NetApp como el aprovisionador.
++
+Esto importa su clúster de Red Hat OpenShift y le asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Trident se instala automáticamente como parte del proceso de importación y detección.
+
+
+
+. Obsérvese todos los volúmenes y volúmenes persistentes en esta puesta en marcha de Cloud Volumes ONTAP.
+
+
+
+TIP: Cloud Volumes ONTAP puede funcionar como un nodo único o en alta disponibilidad. Si está habilitada, anote el estado de alta disponibilidad y el estado de implementación del nodo que se ejecutan en AWS.
+
+
+
+=== Instale Astra Control Center para AWS
+
+Siga la norma link:../get-started/install_acc.html["Instrucciones de instalación de Astra Control Center"].
+
+
+NOTE: AWS utiliza el tipo de bloque Generic S3.
+
+
+
+== Ponga en marcha Astra Control Center en Google Cloud Platform
+
+Puede poner en marcha Astra Control Center en un clúster de Kubernetes autogestionado alojado en un cloud público de Google Cloud Platform (GCP).
+
+
+
+=== Qué necesitará para GCP
+
+Antes de implementar Astra Control Center en GCP, necesitará los siguientes elementos:
+
+* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"].
+* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"].
+* Cuenta de Cloud Central de NetApp
+* Si se utiliza OCP, Red Hat OpenShift Container Platform (OCP) 4.10
+* Si utiliza OCP, los permisos de Red Hat OpenShift Container Platform (OCP) (en el nivel de espacio de nombres para crear pods)
+* Cuenta de servicio de GCP con permisos que le permiten crear cubos y conectores
+
+
+
+
+=== Requisitos del entorno operativo para GCP
+
+
+NOTE: Asegúrese de que el entorno operativo que elija para alojar Astra Control Center cumple los requisitos de recursos básicos que se describen en la documentación oficial del entorno.
+
+Astra Control Center requiere los siguientes recursos además de los requisitos de recursos del entorno:
+
+[cols="1h,2a"]
+|===
+| Componente | Requisito 
+
+
+| Capacidad de almacenamiento Cloud Volumes ONTAP de back-end de NetApp  a| 
+300 GB como mínimo disponible
+
+
+
+| Nodos de trabajo (requisitos de computación de GCP)  a| 
+Al menos 3 nodos de trabajo en total, con 4 núcleos vCPU y 12 GB de RAM en cada uno
+
+
+
+| Equilibrador de carga  a| 
+Tipo de servicio "LoadBalancer" disponible para que el tráfico de entrada se envíe a los servicios en el clúster de entorno operativo
+
+
+
+| FQDN (ZONA DNS DE GCP)  a| 
+Método para señalar el FQDN de Astra Control Center a la dirección IP de carga equilibrada
+
+
+
+| Astra Trident (instalado como parte de la detección de clústeres de Kubernetes en NetApp BlueXP, anteriormente Cloud Manager)  a| 
+Astra Trident 21.04 o posterior instalado y configurado y NetApp ONTAP versión 9.5 o posterior como back-end de almacenamiento
+
+
+
+| Registro de imágenes  a| 
+Debe tener un registro privado existente, como Google Container Registry, al que puede insertar imágenes de creación de Astra Control Center. Debe proporcionar la dirección URL del registro de imágenes donde cargará las imágenes.
+
+
+NOTE: Es necesario habilitar el acceso anónimo para extraer imágenes RTIC para realizar copias de seguridad.
+
+
+
+| Configuración de Astra Trident/ONTAP  a| 
+Astra Control Center requiere que se cree una clase de almacenamiento y se establezca como la clase de almacenamiento predeterminada. Astra Control Center es compatible con las siguientes clases de almacenamiento ONTAP Kubernetes que se crean al importar su clúster Kubernetes a BlueXP de NetApp. Los proporciona Astra Trident:
+
+* `vsaworkingenvironment-<>-ha-nas               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-ha-san               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io`
+
+
+|===
+
+NOTE: Estos requisitos suponen que Astra Control Center es la única aplicación que se ejecuta en el entorno operativo. Si el entorno ejecuta aplicaciones adicionales, ajuste estos requisitos mínimos según corresponda.
+
+
+
+=== Información general de puesta en marcha para GCP
+
+A continuación se ofrece una descripción general del proceso de instalación de Astra Control Center en un clúster OCP autogestionado en GCP con Cloud Volumes ONTAP como back-end de almacenamiento.
+
+Cada uno de estos pasos se explica más detalladamente a continuación.
+
+. <<Instale un clúster RedHat OpenShift en GCP>>.
+. <<Cree un proyecto de GCP y una nube privada virtual>>.
+. <<Compruebe que dispone de suficientes permisos IAM>>.
+. <<Configure GCP>>.
+. <<Configuración de NetApp BlueXP para GCP>>.
+. <<Instale Astra Control Center para GCP>>.
+
+
+
+
+=== Instale un clúster RedHat OpenShift en GCP
+
+El primer paso es instalar un clúster RedHat OpenShift en GCP.
+
+Para obtener instrucciones de instalación, consulte lo siguiente:
+
+* https://access.redhat.com/documentation/en-us/openshift_container_platform/4.10/html-single/installing/index#installing-on-gcp["Instalar un clúster OpenShift en GCP"^]
+* https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account["Creación de una cuenta de servicio de GCP"^]
+
+
+
+
+=== Cree un proyecto de GCP y una nube privada virtual
+
+Cree al menos un proyecto de GCP y una nube privada virtual (VPC).
+
+
+NOTE: OpenShift podría crear sus propios grupos de recursos. Además de ellas, debe definir también un VPC de GCP. Consulte la documentación de OpenShift.
+
+Es posible que desee crear un grupo de recursos de clúster de plataforma y un grupo de recursos de clúster de aplicación OpenShift de destino.
+
+
+
+=== Compruebe que dispone de suficientes permisos IAM
+
+Asegúrese de tener suficientes roles y permisos de IAM que le permiten instalar un clúster RedHat OpenShift y un conector BlueXP de NetApp (anteriormente Cloud Manager).
+
+Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html#setting-up-permissions["Credenciales y permisos iniciales de GCP"^].
+
+
+
+=== Configure GCP
+
+A continuación, configure GCP para crear un VPC, configure instancias de computación, cree un almacenamiento de objetos de Google Cloud, cree un Registro de contenedor de Google para alojar las imágenes de Astra Control Center y empuje las imágenes a este registro.
+
+Siga la documentación de GCP para completar los siguientes pasos. Consulte instalación del clúster OpenShift en GCP.
+
+. Cree un proyecto de GCP y VPC en el GCP que planea utilizar para el clúster de OCP con el back-end de CVO.
+. Revise las instancias de computación. Puede tratarse de un servidor de configuración básica o máquinas virtuales en GCP.
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestro y trabajador, cambie el tipo de instancia de GCP para que cumpla los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"].
+. Cree al menos un bloque de almacenamiento en cloud de GCP para almacenar sus backups.
+. Crear un secreto, que es necesario para el acceso a bloques.
+. Cree un registro de Google Container para alojar todas las imágenes de Astra Control Center.
+. Configure el acceso al registro de contenedores de Google para inserción/extracción de Docker para todas las imágenes de Astra Control Center.
++
+Ejemplo: Las imágenes ACC se pueden insertar en este registro introduciendo la siguiente secuencia de comandos:
+
++
+[listing]
+----
+gcloud auth activate-service-account <service account email address>
+--key-file=<GCP Service Account JSON file>
+----
++
+Este script requiere un archivo de manifiesto de Astra Control Center y su ubicación del Registro de imágenes de Google.
+
++
+Ejemplo:
+
++
+[listing]
+----
+manifestfile=astra-control-center-<version>.manifest
+GCP_CR_REGISTRY=<target image repository>
+ASTRA_REGISTRY=<source ACC image repository>
+
+while IFS= read -r image; do
+    echo "image: $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image"
+    root_image=${image%:*}
+    echo $root_image
+    docker pull $ASTRA_REGISTRY/$image
+    docker tag $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image
+    docker push $GCP_CR_REGISTRY/$image
+done < astra-control-center-22.04.41.manifest
+----
+. Configure zonas DNS.
+
+
+
+
+=== Configuración de NetApp BlueXP para GCP
+
+Con NetApp BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añada un conector a GCP, cree un entorno de trabajo e importe el clúster.
+
+Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://docs.netapp.com/us-en/occm/task_getting_started_gcp.html["Introducción a Cloud Volumes ONTAP en GCP"^].
+
+.Lo que necesitará
+* Acceso a la cuenta de servicio de GCP con los permisos y roles de IAM necesarios
+
+
+.Pasos
+. Agregue sus credenciales a BlueXP. Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-adding-gcp-accounts.html["Adición de cuentas de GCP"^].
+. Agregue un conector para GCP.
++
+.. Elija "GCP" como el proveedor.
+.. Introduzca las credenciales de GCP. Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html["Creación de un conector en GCP desde BlueXP"^].
+.. Asegúrese de que el conector está en marcha y cambie a dicho conector.
+
+
+. Cree un entorno de trabajo para su entorno de cloud.
++
+.. Ubicación: "GCP"
+.. Tipo: "Cloud Volumes ONTAP ha"
+
+
+. Importe el clúster OpenShift. El clúster se conectará al entorno de trabajo que acaba de crear.
++
+.. Consulte los detalles del clúster de NetApp seleccionando *K8s* > *Lista de clústeres* > *Detalles del clúster*.
+.. En la esquina superior derecha, tenga en cuenta la versión de Trident.
+.. Tenga en cuenta las clases de almacenamiento del clúster de Cloud Volumes ONTAP que muestran "NetApp" como el aprovisionador.
++
+Esto importa su clúster de Red Hat OpenShift y le asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Trident se instala automáticamente como parte del proceso de importación y detección.
+
+
+
+. Obsérvese todos los volúmenes y volúmenes persistentes en esta puesta en marcha de Cloud Volumes ONTAP.
+
+
+
+TIP: Cloud Volumes ONTAP puede funcionar como un nodo único o en alta disponibilidad. Si está habilitada, anote el estado de alta disponibilidad y el estado de puesta en marcha del nodo que se ejecutan en GCP.
+
+
+
+=== Instale Astra Control Center para GCP
+
+Siga la norma link:../get-started/install_acc.html["Instrucciones de instalación de Astra Control Center"].
+
+
+NOTE: GCP utiliza el tipo de bloque Generic S3.
+
+. Genere el secreto Docker para obtener imágenes de la instalación de Astra Control Center:
++
+[listing]
+----
+kubectl create secret docker-registry <secret name> --docker-server=<Registry location> --docker-username=_json_key --docker-password="$(cat <GCP Service Account JSON file>)" --namespace=pcloud
+----
+
+
+
+
+== Ponga en marcha Astra Control Center en Microsoft Azure
+
+Puede poner en marcha Astra Control Center en un clúster de Kubernetes autogestionado que se aloja en un cloud público de Microsoft Azure.
+
+
+
+=== Lo que necesitará para Azure
+
+Antes de poner en marcha Astra Control Center en Azure, necesitará los siguientes elementos:
+
+* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"].
+* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"].
+* Cuenta de Cloud Central de NetApp
+* Si se utiliza OCP, Red Hat OpenShift Container Platform (OCP) 4.8
+* Si utiliza OCP, los permisos de Red Hat OpenShift Container Platform (OCP) (en el nivel de espacio de nombres para crear pods)
+* Credenciales de Azure con permisos que le permiten crear cubos y conectores
+
+
+
+
+=== Requisitos del entorno operativo para Azure
+
+Asegúrese de que el entorno operativo que elija para alojar Astra Control Center cumple los requisitos de recursos básicos que se describen en la documentación oficial del entorno.
+
+Astra Control Center requiere los siguientes recursos además de los requisitos de recursos del entorno:
+
+Consulte link:../get-started/requirements.html#operational-environment-requirements["Requisitos del entorno operativo del Centro de control de Astra"].
+
+[cols="1h,2a"]
+|===
+| Componente | Requisito 
+
+
+| Capacidad de almacenamiento Cloud Volumes ONTAP de back-end de NetApp  a| 
+300 GB como mínimo disponible
+
+
+
+| Nodos de trabajo (requisitos de computación de Azure)  a| 
+Al menos 3 nodos de trabajo en total, con 4 núcleos vCPU y 12 GB de RAM en cada uno
+
+
+
+| Equilibrador de carga  a| 
+Tipo de servicio "LoadBalancer" disponible para que el tráfico de entrada se envíe a los servicios en el clúster de entorno operativo
+
+
+
+| FQDN (zona DNS de Azure)  a| 
+Método para señalar el FQDN de Astra Control Center a la dirección IP de carga equilibrada
+
+
+
+| Astra Trident (instalado como parte de la detección de clústeres de Kubernetes en NetApp BlueXP)  a| 
+Como back-end de almacenamiento, se usará Astra Trident 21.04 o posterior instalado y configurado, y NetApp ONTAP versión 9.5 o posterior
+
+
+
+| Registro de imágenes  a| 
+Debe disponer de un registro privado existente, como Azure Container Registry (ACR), al que puede insertar imágenes de creación de Astra Control Center. Debe proporcionar la dirección URL del registro de imágenes donde cargará las imágenes.
+
+
+NOTE: Es necesario habilitar el acceso anónimo para extraer imágenes RTIC para realizar copias de seguridad.
+
+
+
+| Configuración de Astra Trident/ONTAP  a| 
+Astra Control Center requiere que se cree una clase de almacenamiento y se establezca como la clase de almacenamiento predeterminada. Astra Control Center es compatible con las siguientes clases de almacenamiento ONTAP Kubernetes que se crean al importar su clúster Kubernetes a BlueXP de NetApp. Los proporciona Astra Trident:
+
+* `vsaworkingenvironment-<>-ha-nas               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-ha-san               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io`
+
+
+|===
+
+NOTE: Estos requisitos suponen que Astra Control Center es la única aplicación que se ejecuta en el entorno operativo. Si el entorno ejecuta aplicaciones adicionales, ajuste estos requisitos mínimos según corresponda.
+
+
+
+=== Información general sobre la implementación para Azure
+
+A continuación se ofrece una descripción general del proceso de instalación de Astra Control Center para Azure.
+
+Cada uno de estos pasos se explica más detalladamente a continuación.
+
+. <<Instale un clúster RedHat OpenShift en Azure>>.
+. <<Cree grupos de recursos de Azure>>.
+. <<Compruebe que dispone de suficientes permisos IAM>>.
+. <<Configure Azure>>.
+. <<Configuración de NetApp BlueXP (anteriormente Cloud Manager) para Azure>>.
+. <<Instalar y configurar Astra Control Center para Azure>>.
+
+
+
+
+=== Instale un clúster RedHat OpenShift en Azure
+
+El primer paso es instalar un clúster RedHat OpenShift en Azure.
+
+Para obtener instrucciones de instalación, consulte lo siguiente:
+
+* https://docs.openshift.com/container-platform/4.8/installing/installing_azure/preparing-to-install-on-azure.html["Instalando el clúster de OpenShift en Azure"^].
+* https://docs.openshift.com/container-platform/4.8/installing/installing_azure/installing-azure-account.html#installing-azure-account["Instalar una cuenta de Azure"^].
+
+
+
+
+=== Cree grupos de recursos de Azure
+
+Cree al menos un grupo de recursos de Azure.
+
+
+NOTE: OpenShift podría crear sus propios grupos de recursos. Además de estos, también debe definir los grupos de recursos de Azure. Consulte la documentación de OpenShift.
+
+Es posible que desee crear un grupo de recursos de clúster de plataforma y un grupo de recursos de clúster de aplicación OpenShift de destino.
+
+
+
+=== Compruebe que dispone de suficientes permisos IAM
+
+Asegúrese de tener suficientes roles y permisos IAM para poder instalar un clúster RedHat OpenShift y un conector BlueXP de NetApp.
+
+Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-azure.html["Credenciales y permisos de Azure"^].
+
+
+
+=== Configure Azure
+
+A continuación, configure Azure para crear una red virtual, configurar instancias de computación, crear un contenedor de Azure Blob, crear un registro de contenedores de Azure (ACR) para alojar las imágenes de Astra Control Center y colocar las imágenes en este registro.
+
+Siga la documentación de Azure para completar los siguientes pasos. Consulte https://docs.openshift.com/container-platform/4.8/installing/installing_azure/preparing-to-install-on-azure.html["Instalando el clúster de OpenShift en Azure"^].
+
+. Cree una red virtual de Azure.
+. Revise las instancias de computación. Puede ser un servidor con configuración básica o máquinas virtuales en Azure.
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en Azure para cumplir los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"].
+. Cree al menos un contenedor de Azure Blob para almacenar los backups.
+. Cree una cuenta de almacenamiento. Necesitará una cuenta de almacenamiento para crear un contenedor que se utilizará como bloque en Astra Control Center.
+. Crear un secreto, que es necesario para el acceso a bloques.
+. Cree un Azure Container Registry (ACR) para alojar todas las imágenes de Astra Control Center.
+. Configure el acceso ACR para pulsar/extraer todas las imágenes del Centro de control de Astra.
+. Inserte las imágenes ACC en este registro introduciendo el siguiente script:
++
+[listing]
+----
+az acr login -n <AZ ACR URL/Location>
+This script requires ACC manifest file and your Azure ACR location.
+----
++
+*Ejemplo*:
+
++
+[listing]
+----
+manifestfile=astra-control-center-<version>.manifest
+AZ_ACR_REGISTRY=<target image repository>
+ASTRA_REGISTRY=<source ACC image repository>
+
+while IFS= read -r image; do
+    echo "image: $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image"
+    root_image=${image%:*}
+    echo $root_image
+    docker pull $ASTRA_REGISTRY/$image
+    docker tag $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRYY/$image
+    docker push $AZ_ACR_REGISTRY/$image
+done < astra-control-center-22.04.41.manifest
+----
+. Configure zonas DNS.
+
+
+
+
+=== Configuración de NetApp BlueXP (anteriormente Cloud Manager) para Azure
+
+Con BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añada un conector a Azure, cree un entorno de trabajo e importe el clúster.
+
+Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://docs.netapp.com/us-en/occm/task_getting_started_azure.html["Introducción a BlueXP en Azure"^].
+
+.Lo que necesitará
+Acceso a la cuenta de Azure con los permisos y roles de IAM necesarios
+
+.Pasos
+. Agregue sus credenciales a BlueXP.
+. Agregue un conector para Azure. Consulte https://mysupport.netapp.com/site/info/cloud-manager-policies["Políticas de BlueXP"^].
++
+.. Elija *Azure* como proveedor.
+.. Introduzca las credenciales de Azure, incluidos el ID de aplicación, el secreto de cliente y el ID del directorio (inquilino).
++
+Consulte https://docs.netapp.com/us-en/occm/task_creating_connectors_azure.html["Creación de un conector en Azure desde BlueXPr"^].
+
+
+
+. Asegúrese de que el conector está en marcha y cambie a dicho conector.
++
+image:acc-cvo-azure-connectors.png["Esta imagen muestra los conectores de BlueXP"]
+
+. Cree un entorno de trabajo para su entorno de cloud.
++
+.. Ubicación: "Microsoft Azure".
+.. Tipo: "Cloud Volumes ONTAP ha".
+
+
++
+image:acc-cvo-azure-working-environment.png["Esta imagen muestra las ubicaciones del entorno de trabajo en BlueXP"]
+
+. Importe el clúster OpenShift. El clúster se conectará al entorno de trabajo que acaba de crear.
++
+.. Consulte los detalles del clúster de NetApp seleccionando *K8s* > *Lista de clústeres* > *Detalles del clúster*.
++
+image:acc-cvo-azure-connected.png["Esta imagen muestra un clúster importado en BlueXP"]
+
+.. En la esquina superior derecha, tenga en cuenta la versión de Trident.
+.. Observe las clases de almacenamiento del clúster Cloud Volumes ONTAP que muestran NetApp como el aprovisionador.
+
+
++
+Esto importa su clúster de Red Hat OpenShift y asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Trident se instala automáticamente como parte del proceso de importación y detección.
+
+. Obsérvese todos los volúmenes y volúmenes persistentes en esta puesta en marcha de Cloud Volumes ONTAP.
+. Cloud Volumes ONTAP puede funcionar como un nodo único o en alta disponibilidad. Si ha está habilitada, anote el estado de alta disponibilidad y el estado de puesta en marcha del nodo que se ejecutan en Azure.
+
+
+
+
+=== Instalar y configurar Astra Control Center para Azure
+
+Instale Astra Control Center con el estándar link:../get-started/install_acc.html["instrucciones de instalación"].
+
+Con Astra Control Center, añada un bucket de Azure. Consulte link:../get-started/setup_overview.html["Configure Astra Control Center y añada cucharones"].

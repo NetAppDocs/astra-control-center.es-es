@@ -1,0 +1,120 @@
+---
+sidebar: sidebar 
+permalink: use/manage-backend.html 
+keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra 
+summary: Añada almacenamiento para sus aplicaciones Kubernetes en las instalaciones. Astra Control descubre y utiliza los recursos que ya se han puesto en marcha, incluidos Trident, ONTAP y las clases de almacenamiento asociadas. 
+---
+= Gestione el entorno de administración del almacenamiento
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Gestionar los clústeres de almacenamiento en Astra Control como back-end de almacenamiento le permite obtener vínculos entre los volúmenes persistentes (VP) y el back-end de almacenamiento, así como mediciones de almacenamiento adicionales. Puede supervisar la capacidad del almacenamiento y los detalles del estado, incluido el rendimiento si el Centro de control Astra está conectado a Cloud Insights.
+
+Para obtener instrucciones sobre cómo gestionar los back-ends de almacenamiento con la API Astra Control, consulte link:https://docs.netapp.com/us-en/astra-automation/["Información sobre API y automatización de Astra"^].
+
+Es posible completar las siguientes tareas relacionadas con la gestión de un back-end de almacenamiento:
+
+* link:../get-started/setup_overview.html#add-a-storage-backend["Añada un back-end de almacenamiento"]
+* <<Ver detalles del back-end de almacenamiento>>
+* <<Desgestione un back-end de almacenamiento>>
+* <<Quite un back-end de almacenamiento>>
+
+
+
+
+== Ver detalles del back-end de almacenamiento
+
+Puede ver la información del back-end de almacenamiento desde Dashboard o desde la opción Backends.
+
+
+
+=== Consulte los detalles del back-end de almacenamiento en la Consola
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Tablero*.
+. Revise el panel del back-end de almacenamiento de Dashboard que muestra el estado:
++
+** *Insalubre*: El almacenamiento no está en un estado óptimo. Esto puede deberse a un problema de latencia o a que una aplicación está degradada debido a un problema de contenedor, por ejemplo.
+** *Todo sano*: El almacenamiento ha sido gestionado y se encuentra en un estado óptimo.
+** *Descubierto*: El almacenamiento ha sido descubierto, pero no gestionado por Astra Control.
+
+
+
+
+
+
+=== Consulte los detalles del backends de almacenamiento en la opción Backends
+
+Vea información sobre el estado, la capacidad y el rendimiento del back-end (rendimiento de IOPS y/o latencia).
+
+Puede ver los volúmenes que usan las aplicaciones de Kubernetes, que se almacenan en un back-end de almacenamiento seleccionado. Con Cloud Insights, puede ver información adicional. Consulte https://docs.netapp.com/us-en/cloudinsights/["Documentación de Cloud Insights"].
+
+.Pasos
+. En el área de navegación de la izquierda, seleccione *Backends*.
+. Seleccione el back-end de almacenamiento.
++
+
+TIP: Si conectas a Cloud Insights de NetApp, aparecerán extractos de datos de Cloud Insights en la página backends.
+
++
+image:../use/acc_backends_ci_connection2.png["Captura de pantalla de la página backends"]
+
+. Para ir directamente a Cloud Insights, seleccione el icono *Cloud Insights* junto a la imagen de métricas.
+
+
+
+
+== Desgestione un back-end de almacenamiento
+
+Puede anular la gestión del back-end.
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Backends*.
+. Seleccione el back-end de almacenamiento.
+. En el menú Opciones de la columna *acciones*, seleccione *Unmanage*.
+. Escriba "desgestionar" para confirmar la acción.
+. Seleccione *Sí, anular la administración del backend de almacenamiento*.
+
+
+
+
+== Quite un back-end de almacenamiento
+
+Puede eliminar un back-end de almacenamiento que ya no se esté utilizando. Se recomienda hacer esto para mantener su configuración sencilla y actualizada.
+
+.Lo que necesitará
+* Asegúrese de que el back-end de almacenamiento no esté gestionado.
+* Compruebe que el back-end de almacenamiento no tenga ningún volumen asociado con el clúster.
+
+
+.Pasos
+. En la navegación izquierda, seleccione *Backends*.
+. Si se gestiona el back-end, desgestione.
++
+.. Seleccione *gestionado*.
+.. Seleccione el back-end de almacenamiento.
+.. En la opción *acciones*, seleccione *Unmanage*.
+.. Escriba "desgestionar" para confirmar la acción.
+.. Seleccione *Sí, anular la administración del backend de almacenamiento*.
+
+
+. Seleccione *descubierto*.
++
+.. Seleccione el back-end de almacenamiento.
+.. En la opción *acciones*, seleccione *Quitar*.
+.. Escriba "eliminar" para confirmar la acción.
+.. Seleccione *Sí, quite el backend de almacenamiento*.
+
+
+
+
+
+
+== Obtenga más información
+
+* https://docs.netapp.com/us-en/astra-automation/index.html["Utilice la API Astra Control"^]
+

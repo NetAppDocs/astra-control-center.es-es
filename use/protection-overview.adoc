@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: use/protection-overview.html 
+keywords: backup, back up, backup apps, back up apps, snapshots, snapshot an app, take a snapshot, take a backup, view backups, view snapshots, set policy, set schedule, schedule backups, schedule snapshots 
+summary: Conozca los tipos disponibles de protección de datos en Astra Control Center y cómo usarlos de la mejor forma para proteger sus aplicaciones. 
+---
+= Información general sobre la protección
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Puede crear backups, clones, snapshots y políticas de protección para sus aplicaciones con Astra Control Center. El backup de sus aplicaciones ayuda a que los servicios y los datos asociados estén disponibles lo más posible; durante un desastre, la restauración a partir de una copia de seguridad puede garantizar la recuperación completa de una aplicación y sus datos asociados con una interrupción mínima. Los backups, clones y copias Snapshot pueden ayudar a protegerse frente a amenazas comunes como el ransomware, la pérdida accidental de datos y los desastres medioambientales. link:../concepts/data-protection.html["Conozca los tipos disponibles de protección de datos en Astra Control Center y cuándo utilizarlas"].
+
+Además, puede replicar aplicaciones en un clúster remoto como preparación para la recuperación ante desastres.
+
+
+
+== Flujo de trabajo de protección de aplicaciones
+
+Puede utilizar el siguiente ejemplo de flujo de trabajo para empezar a proteger las aplicaciones.
+
+
+
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Uno"] Proteja todas las aplicaciones
+
+[role="quick-margin-para"]
+Para asegurarse de que sus aplicaciones están protegidas inmediatamente, link:protect-apps.html#create-a-backup["cree una copia de seguridad manual de todas las aplicaciones"].
+
+
+
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dos"] Configure una política de protección para cada aplicación
+
+[role="quick-margin-para"]
+Para automatizar futuros backups y copias Snapshot, link:protect-apps.html#configure-a-protection-policy["configure una política de protección para cada aplicación"]. A modo de ejemplo, puede comenzar con backups semanales y snapshots diarias, con una retención de un mes para ambos. La automatización de backups y snapshots con una política de protección es muy recomendada con respecto a copias de Snapshot y backups manuales.
+
+
+
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Tres"] Ajuste las políticas de protección
+
+[role="quick-margin-para"]
+A medida que cambian las aplicaciones y sus patrones de uso, ajuste las políticas de protección según sea necesario para proporcionar la mejor protección.
+
+
+
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Cuatro"] Replicar aplicaciones en un clúster remoto
+
+[role="quick-margin-para"]
+link:replicate_snapmirror.html["Replicar aplicaciones"] A un clúster remoto mediante la tecnología NetApp SnapMirror. Astra Control replica las instantáneas en un clúster remoto, lo que proporciona una función asíncrona y de recuperación ante desastres.
+
+
+
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["Cinco"] En caso de desastre, restaure sus aplicaciones con la última copia de seguridad o replicación en el sistema remoto
+
+[role="quick-margin-para"]
+Si se produce la pérdida de datos, puede recuperarlo link:restore-apps.html["restaurar la copia de seguridad más reciente"] la primera para cada aplicación. Luego puede restaurar la snapshot más reciente (si está disponible). O bien, puede utilizar la replicación en un sistema remoto.

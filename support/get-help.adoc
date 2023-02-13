@@ -1,0 +1,113 @@
+---
+sidebar: sidebar 
+permalink: support/get-help.html 
+keywords: how to get help with astra control, how to get support with astra control, astra control knowledgebase, netapp technical support, discord, phone, web, ticket, contact support, support ticket, support bundle 
+summary: 'NetApp ofrece compatibilidad con Astra Control de varias formas. Hay disponibles amplias opciones de soporte gratuito las 24 horas del día, los 7 días de la semana, como artículos de la base de conocimiento (KB) y un canal Discord. Su cuenta de Astra Control incluye soporte técnico remoto mediante emisión de boletos web.' 
+---
+= Obtenga ayuda
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/support/
+
+
+[role="lead"]
+NetApp ofrece compatibilidad con Astra Control de varias formas. Hay disponibles amplias opciones de soporte gratuito las 24 horas del día, los 7 días de la semana, como artículos de la base de conocimiento (KB) y un canal Discord. Su cuenta de Astra Control incluye soporte técnico remoto mediante emisión de boletos web.
+
+
+IMPORTANT: Si dispone de una licencia de evaluación para Astra Control Center, puede obtener asistencia técnica. Sin embargo, la creación de casos a través del sitio de soporte de NetApp (NSS) no está disponible. Puede ponerse en contacto con el servicio de asistencia técnica a través de la opción de comentarios o utilizar el canal Discord para el autoservicio.
+
+Usted debe primero link:../get-started/setup_overview.html["Active el soporte para su número de serie de NetApp"] para poder utilizar estas opciones de soporte no autoservicio. Se necesita una cuenta de SSO del sitio de soporte de NetApp (NSS) para el chat y los efectos de la emisión de boletos web junto con la gestión de casos.
+
+
+
+== Opciones de autosoporte
+
+Puede acceder a las opciones de soporte desde la interfaz de usuario del Centro de control de Astra seleccionando la pestaña *Soporte* del menú principal.
+
+Estas opciones están disponibles de forma gratuita las 24 horas del día, los 7 días de la semana
+
+* https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra["*Knowledge base* (se requiere inicio de sesión)"^]: Buscar artículos, preguntas frecuentes o romper información relacionada con Astra Control.
+* *Centro de documentación*: Este es el sitio de documentación que está viendo actualmente.
+* https://discord.gg/NetApp["*Obtenga ayuda a través de Discord*"^]: Ve a Astra en la categoría Pub para conectarte con colegas y expertos.
+* *Crear un caso de soporte*: Generar paquetes de soporte que se proporcionarán al soporte de NetApp para la solución de problemas.
+* *Danos tu opinión sobre Astra Control*: Envía un correo electrónico a astra.feedback@netapp.com para que sepamos tus pensamientos, ideas o preocupaciones.
+
+
+
+
+== Habilite la carga diaria programada del bundle de soporte al soporte de NetApp
+
+Durante la instalación de Astra Control Center, si lo especifica `enrolled: true` para `autoSupport` En el archivo Astra Control Center Custom Resource (CR) (`astra_control_center.yaml`), los paquetes de soporte diario se cargan automáticamente en el https://mysupport.netapp.com/site/["Sitio de soporte de NetApp"^].
+
+
+
+== Genere el paquete de soporte para suministrar soporte de NetApp
+
+Astra Control Center permite al usuario administrador generar paquetes, que incluyen información útil para el soporte de NetApp, incluidos registros, eventos para todos los componentes de la implementación, métricas e información de topología sobre los clústeres y las aplicaciones que se están gestionando. Si está conectado a Internet, puede cargar los paquetes de soporte en el sitio de soporte de NetApp (NSS) directamente desde la interfaz de usuario de Astra Control Center.
+
+
+NOTE: El tiempo que tarda Astra Control Center en generar el paquete depende del tamaño de la instalación de Astra Control Center, así como de los parámetros del paquete de soporte solicitado. La duración especificada al solicitar un bundle de soporte determina el tiempo que se tarda en generar el paquete (por ejemplo, un periodo de tiempo más corto provoca una generación más rápida de los paquetes).
+
+.Antes de empezar
+Determine si se necesitará una conexión proxy para cargar paquetes en NSS. Si se necesita una conexión proxy, compruebe que Astra Control Center se ha configurado para utilizar un servidor proxy.
+
+. Seleccione *Cuentas* > *conexiones*.
+. Compruebe la configuración del proxy en *Ajustes de conexión*.
+
+
+.Pasos
+. Cree un caso en el portal NSS utilizando el número de serie de la licencia que aparece en la página *Soporte* de la interfaz de usuario de Astra Control Center.
+. Realice los siguientes pasos para generar el paquete de soporte con la interfaz de usuario de Astra Control Center:
++
+.. En la página *Soporte*, en el icono paquete de soporte, seleccione *generar*.
+.. En la ventana *generar un paquete de soporte*, seleccione el periodo de tiempo.
++
+Puede elegir entre períodos de tiempo rápidos o personalizados.
+
++
+
+NOTE: Puede elegir un intervalo de fechas personalizado, así como especificar un período de tiempo personalizado durante el intervalo de fechas.
+
+.. Después de realizar las selecciones, seleccione *Confirmar*.
+.. Active la casilla de comprobación *Upload el paquete en el sitio de soporte de NetApp cuando se genere*.
+.. Seleccione *generar paquete*.
++
+Cuando el paquete de soporte esté listo, aparecerá una notificación en la página *Cuentas* > *notificación* del área Alertas, en la página *actividad* y también en la lista de notificaciones (accesible seleccionando el icono en la parte superior derecha de la interfaz de usuario).
+
++
+Si la generación ha fallado, aparecerá un icono en la página generar paquete. Seleccione el icono para ver el mensaje.
+
+
+
+
+
+
+TIP: El icono de notificaciones en el lado superior derecho de la interfaz de usuario proporciona información sobre los eventos relacionados con el paquete de soporte, como cuando se crea correctamente el paquete, cuando se produce un error en la creación del paquete, cuando no se pudo cargar el paquete, cuando no se pudo descargar el paquete, etc.
+
+
+
+=== Si tiene una instalación con problemas de aire
+
+Si tiene una instalación con problemas de aire, realice los siguientes pasos después de que se genere el paquete de soporte. Cuando el paquete está disponible para descarga, el icono Descargar aparece junto a *generar* en la sección *Paquetes de soporte* de la página *Soporte*.
+
+.Pasos
+. Seleccione el icono Descargar para descargar el paquete localmente.
+. Cargue manualmente el paquete en NSS.
++
+Puede utilizar uno de los siguientes métodos para ello:
+
++
+** Uso https://upload.netapp.com/sg["Carga de archivos autenticados de NetApp (se requiere inicio de sesión)"^].
+** Adjunte el paquete al caso directamente en NSS.
+** Utilice Active IQ de NetApp.
+
+
+
+
+[discrete]
+== Obtenga más información
+
+* https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp["Cómo cargar un archivo en NetApp (se requiere inicio de sesión)"^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_manually_upload_AutoSupport_messages_to_NetApp_in_ONTAP_9["Cómo cargar manualmente un archivo en NetApp (se requiere inicio de sesión)"^]
+

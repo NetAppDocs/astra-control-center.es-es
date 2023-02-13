@@ -1,0 +1,111 @@
+---
+sidebar: sidebar 
+permalink: concepts/understand-pod-security.html 
+keywords: login, Astra Control Center, web ui, tls, certificate 
+summary: Debe comprender cómo funciona la seguridad de POD antes de instalar Astra Control Center. 
+---
+= Seguridad de POD
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/concepts/
+
+
+[role="lead"]
+Astra Control Center admite la limitación de privilegios mediante directivas de seguridad de POD (PSP) y la admisión de seguridad de POD (PSA). Estos marcos le permiten limitar qué usuarios o grupos pueden ejecutar contenedores y qué privilegios pueden tener dichos contenedores.
+
+Algunas distribuciones de Kubernetes pueden tener una configuración de seguridad en POD predeterminada que es demasiado restrictiva y causa problemas al instalar Astra Control Center.
+
+Puede utilizar la información y los ejemplos que se incluyen aquí para comprender los cambios de seguridad del POD que realiza Astra Control Center, y utilizar un método de seguridad de POD que proporcione la protección que necesita sin interferir con las funciones de Astra Control Center.
+
+
+
+== El Servicio de Seguridad y Seguridad de la Seguridad y la Seguridad en el Control Center
+
+Durante la instalación, Astra Control Center permite la aplicación de una admisión de seguridad de POD agregando la siguiente etiqueta a la `netapp-acc` o un espacio de nombres personalizado:
+
+[listing]
+----
+pod-security.kubernetes.io/enforce: privileged
+----
+
+
+== PSP instalado por Astra Control Center
+
+Al instalar Astra Control Center en Kubernetes 1.23 o 1.24, se crean varias directivas de seguridad para POD durante la instalación. Algunas de ellas son permanentes y algunas se crean durante ciertas operaciones y se eliminan una vez que se completa la operación. Astra Control Center no intenta instalar PSP cuando el clúster de hosts ejecuta Kubernetes 1.25 o posterior, ya que no son compatibles con estas versiones.
+
+
+
+=== Se crean PSP durante la instalación
+
+Durante la instalación de Astra Control Center, el operador Astra Control Center instala una directiva de seguridad de POD personalizada, a. `Role` y un `RoleBinding` Objeto compatible con la implementación de los servicios Astra Control Center en el espacio de nombres Astra Control Center.
+
+La política y los objetos nuevos tienen los siguientes atributos:
+
+[listing]
+----
+kubectl get psp
+
+NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
+netapp-astra-deployment-psp    false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
+
+kubectl get role -n <namespace_name>
+
+NAME                                     CREATED AT
+netapp-astra-deployment-role             2022-06-27T19:34:58Z
+
+kubectl get rolebinding -n <namespace_name>
+
+NAME                                     ROLE                                          AGE
+netapp-astra-deployment-rb               Role/netapp-astra-deployment-role             32m
+----
+
+
+=== Se crean PSP durante las operaciones de backup
+
+Durante las operaciones de copia de seguridad, Astra Control Center crea una directiva de seguridad dinámica de POD, a. `ClusterRole` y un `RoleBinding` objeto. Estos permiten utilizar el proceso de backup, que se produce en un espacio de nombres aparte.
+
+La política y los objetos nuevos tienen los siguientes atributos:
+
+[listing]
+----
+kubectl get psp
+
+NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
+netapp-astra-backup            false   DAC_READ_SEARCH                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
+
+kubectl get role -n <namespace_name>
+
+NAME                  CREATED AT
+netapp-astra-backup   2022-07-21T00:00:00Z
+
+kubectl get rolebinding -n <namespace_name>
+
+NAME                  ROLE                       AGE
+netapp-astra-backup   Role/netapp-astra-backup   62s
+----
+
+
+=== Se crean PSP durante la gestión del clúster
+
+Cuando gestiona un clúster, Astra Control Center instala el operador de supervisión de netapp en el clúster gestionado. Este operador crea una directiva de seguridad de POD, a. `ClusterRole` y un `RoleBinding` Objeto para implementar servicios de telemetría en el espacio de nombres de Astra Control Center.
+
+La política y los objetos nuevos tienen los siguientes atributos:
+
+[listing]
+----
+kubectl get psp
+
+NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
+netapp-monitoring-psp-nkmo     true    AUDIT_WRITE,NET_ADMIN,NET_RAW   RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
+
+kubectl get role -n <namespace_name>
+
+NAME                                           CREATED AT
+netapp-monitoring-role-privileged              2022-07-21T00:00:00Z
+
+kubectl get rolebinding -n <namespace_name>
+
+NAME                                                  ROLE                                                AGE
+netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-role-privileged              2m5s
+----

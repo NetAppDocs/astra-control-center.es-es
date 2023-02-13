@@ -1,0 +1,82 @@
+---
+sidebar: sidebar 
+permalink: use/manage-remote-users-groups.html 
+keywords: import, import users, search, search users, groups, import groups 
+summary: Gestione grupos y usuarios LDAP remotos en su sistema Astra Control Center. 
+---
+= Administrar grupos y usuarios remotos
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Si ha activado la autenticación LDAP en el sistema Astra Control, puede buscar usuarios y grupos LDAP e incluirlos en los usuarios aprobados del sistema.
+
+
+
+== Agregar un usuario remoto
+
+Los propietarios y administradores de cuentas pueden agregar usuarios remotos a Astra Control.
+
+
+NOTE: No puede agregar un usuario remoto si ya existe en el sistema un usuario local con la misma dirección de correo electrónico. Para agregar el usuario como usuario remoto, elimine primero el usuario local del sistema.
+
+
+IMPORTANT: Astra Control Center utiliza la dirección de correo electrónico en el atributo "mail" LDAP para buscar y realizar un seguimiento de los usuarios remotos. Este atributo puede ser un campo opcional o vacío en su directorio. Debe existir una dirección de correo electrónico en este campo para los usuarios remotos que desee que aparezcan en Astra Control Center. Esta dirección de correo electrónico se utiliza como nombre de usuario en Astra Control Center para la autenticación.
+
+.Pasos
+. Vaya al área *cuenta*.
+. Seleccione la ficha *usuarios y grupos*.
+. En el extremo derecho de la página, seleccione *usuarios remotos*.
+. Seleccione *Agregar*.
+. Opcionalmente, busque un usuario LDAP introduciendo la dirección de correo electrónico del usuario en el campo *Filtrar por correo electrónico*.
+. Seleccione uno o varios usuarios de la lista.
+. Asigne un rol al usuario.
++
+
+NOTE: Si asigna roles diferentes a un usuario y al grupo del usuario, tiene prioridad el rol más permisivo.
+
+. Opcionalmente, asigne una o más restricciones de espacio de nombres a este usuario y seleccione *restringir rol a restricciones* para aplicarlas. Puede agregar una nueva restricción de espacio de nombres seleccionando *Agregar restricción*.
++
+
+NOTE: Cuando a un usuario se le asignan varias funciones a través de la pertenencia a grupos LDAP, las restricciones de la función más permisiva son las únicas que surtan efecto. Por ejemplo, si un usuario con una función de visor local se une a tres grupos que están enlazados a la función Member, la suma de las restricciones de las funciones Member se aplicará y se ignoran todas las restricciones de la función Viewer.
+
+. Seleccione *Agregar*.
+
+
+.Resultado
+El nuevo usuario aparece en la lista de usuarios remotos. En esta lista, puede ver restricciones activas en el usuario, así como administrar el usuario desde el menú *acciones*.
+
+
+
+== Agregar un grupo remoto
+
+Para agregar muchos usuarios remotos a la vez, los propietarios de cuentas y los administradores pueden agregar grupos remotos a Astra Control. Cuando agrega un grupo remoto, todos los usuarios remotos de ese grupo se agregan a Astra Control y heredan la misma función.
+
+.Pasos
+. Vaya al área *cuenta*.
+. Seleccione la ficha *usuarios y grupos*.
+. En el extremo derecho de la página, seleccione *grupos remotos*.
+. Seleccione *Agregar*.
++
+En esta ventana, puede ver una lista de los nombres comunes y nombres distintivos de los grupos LDAP que Astra Control ha recuperado del directorio.
+
+. Opcionalmente, busque un grupo LDAP introduciendo el nombre común del grupo en el campo *filtro por nombre común*.
+. Seleccione uno o varios grupos de la lista.
+. Asigne un rol a los grupos.
++
+
+NOTE: El rol que seleccione se asigna a todos los usuarios de este grupo. Si asigna roles diferentes a un usuario y al grupo del usuario, tiene prioridad el rol más permisivo.
+
+. Opcionalmente, asigne una o más restricciones de espacio de nombres a este grupo y seleccione *restringir rol a restricciones* para aplicarlas. Puede agregar una nueva restricción de espacio de nombres seleccionando *Agregar restricción*.
++
+
+NOTE: Cuando a un usuario se le asignan varias funciones a través de la pertenencia a grupos LDAP, las restricciones de la función más permisiva son las únicas que surtan efecto. Por ejemplo, si un usuario con una función de visor local se une a tres grupos que están enlazados a la función Member, la suma de las restricciones de las funciones Member se aplicará y se ignoran todas las restricciones de la función Viewer.
+
+. Seleccione *Agregar*.
+
+
+.Resultado
+El nuevo grupo aparece en la lista de grupos remotos y todos los usuarios remotos de este grupo aparecen en la lista de usuarios remotos. En esta lista, puede ver detalles sobre el grupo, así como administrar el grupo desde el menú *acciones*.

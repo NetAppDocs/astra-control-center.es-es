@@ -1,0 +1,24 @@
+---
+sidebar: sidebar 
+permalink: support/troubleshooting-acc.html 
+keywords: how to get help with astra control, astra control knowledgebase 
+summary: 'NetApp ofrece compatibilidad con Astra Control de varias formas. Hay disponibles amplias opciones de autosoporte gratuitas las 24 horas del día, los siete días de la semana, como artículos de base de conocimiento (KB) y un canal de Slack. Su cuenta de Astra Control incluye soporte técnico remoto mediante emisión de boletos web.' 
+---
+= Resolución de problemas
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/support/
+
+
+[role="lead"]
+Aprenda a solucionar algunos problemas comunes que puede encontrar.
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra["Base de conocimientos de NetApp para Astra"^]
+
+[discrete]
+== Obtenga más información
+
+* https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp["Cómo cargar un archivo en NetApp (se requiere inicio de sesión)"^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_manually_upload_AutoSupport_messages_to_NetApp_in_ONTAP_9["Cómo cargar manualmente un archivo en NetApp (se requiere inicio de sesión)"^]
+

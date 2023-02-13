@@ -1,0 +1,186 @@
+---
+sidebar: sidebar 
+permalink: use/protect-apps.html 
+keywords: backup, back up, backup apps, back up apps, snapshots, snapshot an app, take a snapshot, take a backup, view backups, view snapshots, set policy, set schedule, schedule backups, schedule snapshots 
+summary: Proteja sus aplicaciones tomando snapshots y backups usando una política de protección automatizada o de manera ad hoc. 
+---
+= Proteja las aplicaciones con snapshots y backups
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Proteger todas las aplicaciones mediante la toma de snapshots y backups a través de una política de protección automatizada o de manera ad hoc. Puede utilizar la interfaz de usuario de Astra Control Center o https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para proteger aplicaciones.
+
+.Acerca de esta tarea
+* *Helm implementó aplicaciones*: Si utiliza Helm para implementar aplicaciones, Astra Control Center requiere Helm versión 3. Se admite por completo la gestión y clonación de las aplicaciones implementadas con Helm 3 (o actualizadas de Helm 2 a Helm 3). Las aplicaciones implementadas con Helm 2 no son compatibles.
+* *(sólo clústeres de OpenShift) Agregar directivas*: Cuando se crea un proyecto para alojar una aplicación en un clúster de OpenShift, se asigna un UID de SecurityContext al proyecto (o espacio de nombres de Kubernetes). Para habilitar Astra Control Center para proteger su aplicación y mover la aplicación a otro clúster o proyecto en OpenShift, debe agregar directivas que permitan que la aplicación se ejecute como cualquier UID. Por ejemplo, los siguientes comandos de la CLI de OpenShift otorgan las directivas adecuadas a una aplicación de WordPress.
++
+`oc new-project wordpress`
+`oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
+`oc adm policy add-scc-to-user privileged -z default -n wordpress`
+
+
+
+Puede realizar las siguientes tareas relacionadas con la protección de los datos de la aplicación:
+
+* <<Configure una política de protección>>
+* <<Crear una copia de Snapshot>>
+* <<Cree un backup>>
+* <<Ver Snapshot y backups>>
+* <<Eliminar snapshots>>
+* <<Cancelar backups>>
+* <<Eliminar backups>>
+
+
+
+
+== Configure una política de protección
+
+La política de protección protege una aplicación mediante la creación de snapshots, backups o ambos con una programación definida. Puede optar por crear snapshots y backups por hora, día, semana y mes, y especificar la cantidad de copias que desea retener.
+
+Si necesita que backups o snapshots se ejecuten con más frecuencia de una vez por hora, puede hacerlo https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html["Utilice la API REST de Astra Control para crear copias Snapshot y copias de seguridad"^].
+
+.Pasos
+. Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
+. Seleccione *Protección de datos*.
+. Seleccione *Configurar política de protección*.
+. Defina una programación de protección eligiendo la cantidad de snapshots y backups que se mantendrán por hora, día, semana y mes.
++
+Puede definir las programaciones por hora, por día, por semana y por mes de forma simultánea. Una programación no se activa hasta que se establece un nivel de retención.
+
++
+Al establecer un nivel de retención para backups, puede elegir el bloque en el que desea almacenar los backups.
+
++
+En el siguiente ejemplo, se establecen cuatro programaciones de protección: Por hora, día, semana y mes para las copias Snapshot y los backups.
+
++
+image:screenshot-config-protection-policy.png["Captura de pantalla de una directiva de configuración de ejemplo en la que puede elegir hacer Snapshots y backups cada hora, día, semana o mes."]
+
+. Seleccione *Revisión*.
+. Seleccione *Configurar política de protección.*
+
+
+.Resultado
+Astra Control implementa la política de protección de datos mediante la creación y retención de copias Snapshot y copias de seguridad con la política de programación y retención que haya definido.
+
+
+
+== Crear una copia de Snapshot
+
+Puede crear una snapshot bajo demanda en cualquier momento.
+
+.Pasos
+. Seleccione *aplicaciones*.
+. En el menú Opciones de la columna *acciones* de la aplicación deseada, seleccione *Snapshot*.
+. Personalice el nombre de la instantánea y, a continuación, seleccione *Siguiente*.
+. Revise el resumen de la instantánea y seleccione *Snapshot*.
+
+
+.Resultado
+Se inicia el proceso Snapshot. Una instantánea se realiza correctamente cuando el estado es *saludable* en la columna *Estado* de la página *Protección de datos* > *instantáneas*.
+
+
+
+== Cree un backup
+
+También puede realizar copias de seguridad de una aplicación en cualquier momento.
+
+
+NOTE: Los bloques de S3 de Astra Control Center no informan sobre la capacidad disponible. Antes de realizar una copia de seguridad o clonar aplicaciones gestionadas por Astra Control Center, compruebe la información de los bloques en el sistema de gestión ONTAP o StorageGRID.
+
+.Pasos
+. Seleccione *aplicaciones*.
+. En el menú Opciones de la columna *acciones* de la aplicación deseada, seleccione *copia de seguridad*.
+. Personalice el nombre del backup.
+. Elija si desea realizar una copia de seguridad de la aplicación desde una instantánea existente. Si selecciona esta opción, puede elegir entre una lista de snapshots existentes.
+. Seleccione un bucket de destino para el backup en la lista de bloques de almacenamiento.
+. Seleccione *Siguiente*.
+. Revise el resumen de copia de seguridad y seleccione *copia de seguridad*.
+
+
+.Resultado
+Astra Control crea una copia de seguridad de la aplicación.
+
+
+NOTE: Si la red tiene una interrupción del servicio o es anormalmente lenta, es posible que se agote el tiempo de espera de una operación de backup. Esto provoca un error en el backup.
+
+
+NOTE: Si necesita cancelar una copia de seguridad en ejecución, utilice las instrucciones de <<Cancelar backups>>. Para eliminar la copia de seguridad, espere hasta que haya finalizado y, a continuación, utilice las instrucciones de <<Eliminar backups>>.
+
+
+NOTE: Después de una operación de protección de datos (clonado, backup, restauración) y un cambio de tamaño posterior de volumen persistente, se demora hasta veinte minutos antes de que se muestre el tamaño del nuevo volumen en la interfaz de usuario. La operación de protección de datos se realiza correctamente en cuestión de minutos, y se puede utilizar el software de gestión para el back-end de almacenamiento para confirmar el cambio de tamaño del volumen.
+
+
+
+== Ver Snapshot y backups
+
+Puede ver las instantáneas y las copias de seguridad de una aplicación desde la pestaña Data Protection.
+
+.Pasos
+. Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
+. Seleccione *Protección de datos*.
++
+Las instantáneas se muestran de forma predeterminada.
+
+. Seleccione *copias de seguridad* para ver la lista de copias de seguridad.
+
+
+
+
+== Eliminar snapshots
+
+Elimine las snapshots programadas o bajo demanda que ya no necesite.
+
+
+NOTE: No es posible eliminar una copia de Snapshot que se está replicando actualmente.
+
+.Pasos
+. Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación administrada.
+. Seleccione *Protección de datos*.
+. En el menú Opciones de la columna *acciones* de la instantánea deseada, seleccione *Eliminar instantánea*.
+. Escriba la palabra "delete" para confirmar la eliminación y, a continuación, seleccione *Yes, Delete snapshot*.
+
+
+.Resultado
+Astra Control elimina la instantánea.
+
+
+
+== Cancelar backups
+
+Es posible cancelar una copia de seguridad que esté en curso.
+
+
+TIP: Para cancelar una copia de seguridad, la copia de seguridad debe estar en `Running` estado. No puede cancelar una copia de seguridad que esté en `Pending` estado.
+
+.Pasos
+. Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
+. Seleccione *Protección de datos*.
+. Seleccione *copias de seguridad*.
+. En el menú Opciones de la columna *acciones* para la copia de seguridad deseada, seleccione *Cancelar*.
+. Escriba la palabra "cancelar" para confirmar la operación y, a continuación, seleccione *Sí, cancelar copia de seguridad*.
+
+
+
+
+== Eliminar backups
+
+Elimine los backups programados o bajo demanda que ya no necesita.
+
+
+NOTE: Si necesita cancelar una copia de seguridad en ejecución, utilice las instrucciones de <<Cancelar backups>>. Para eliminar la copia de seguridad, espere hasta que haya finalizado y, a continuación, utilice estas instrucciones.
+
+.Pasos
+. Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
+. Seleccione *Protección de datos*.
+. Seleccione *copias de seguridad*.
+. En el menú Opciones de la columna *acciones* de la copia de seguridad deseada, seleccione *Eliminar copia de seguridad*.
+. Escriba la palabra "delete" para confirmar la eliminación y, a continuación, seleccione *Yes, Delete backup*.
+
+
+.Resultado
+Astra Control elimina la copia de seguridad.

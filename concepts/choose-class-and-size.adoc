@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: concepts/choose-class-and-size.html 
+keywords: service level, storage class, storage classes, pv size, persistent volume size, volume size, bandwidth, performance, persistent, volume, kubernetes, containers 
+summary: Astra Control Center admite las clases de almacenamiento de Trident con el respaldo del almacenamiento de ONTAP. Debe comprender cómo la clase de almacenamiento y el tamaño de volumen persistente pueden ayudarle a cumplir sus objetivos de rendimiento. 
+---
+= Clases de almacenamiento y tamaño de volumen persistente
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/concepts/
+
+
+[role="lead"]
+Astra Control Center es compatible con ONTAP como back-end de almacenamiento.
+
+
+
+== Descripción general
+
+Astra Control Center admite lo siguiente:
+
+* * Clases de almacenamiento Trident respaldadas por almacenamiento ONTAP*: Si utiliza un back-end de ONTAP, Astra Control Center ofrece la capacidad de importar el back-end de ONTAP para informar sobre diversos datos de supervisión.
+
+
+
+NOTE: Las clases de almacenamiento de Trident deben preconfigurarse fuera de Astra Control Center.
+
+
+
+== Clases de almacenamiento
+
+Cuando agregue un clúster a Astra Control Center, se le pedirá que seleccione una clase de almacenamiento previamente configurada en ese clúster como la clase de almacenamiento predeterminada. Este tipo de almacenamiento se usará cuando no se especifique ningún tipo de almacenamiento en una reclamación de volumen persistente (RVP). La clase de almacenamiento predeterminada se puede cambiar en cualquier momento dentro de Astra Control Center y cualquier clase de almacenamiento se puede usar en cualquier momento especificando el nombre de la clase de almacenamiento dentro del gráfico PVC o Helm. Compruebe que solo tiene una única clase de almacenamiento predeterminada definida para el clúster de Kubernetes.
+
+
+
+== Si quiere más información
+
+* https://docs.netapp.com/us-en/trident/index.html["Documentación de Astra Trident"^]
+

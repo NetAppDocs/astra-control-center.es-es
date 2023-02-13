@@ -1,0 +1,50 @@
+---
+sidebar: sidebar 
+permalink: use/view-dashboard.html 
+keywords: dashboard, cluster health, unhealthy apps, protected apps, discovered apps 
+summary: Seleccione Consola para ver una vista de alto nivel de las aplicaciones, la informática y el estado de las mismas. 
+---
+= Ver un resumen del estado de las aplicaciones y el clúster
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Seleccione * Dashboard* para ver una vista de alto nivel de sus aplicaciones, clusters, back-ends de almacenamiento y su estado.
+
+No se trata sólo de números o Estados estáticos, sino que se puede profundizar en cada uno de ellos. Por ejemplo, si las aplicaciones no están completamente protegidas, puede pasar el ratón sobre el icono para identificar qué aplicaciones no están completamente protegidas, lo que incluye un motivo.
+
+
+
+== Aplicaciones
+
+El mosaico *aplicaciones* le ayuda a identificar lo siguiente:
+
+* Cuántas aplicaciones gestiona actualmente con Astra.
+* Si esas aplicaciones gestionadas están en buen estado.
+* Si las aplicaciones están totalmente protegidas (están protegidas si hay backups recientes disponibles).
+* El número de aplicaciones que se han detectado, pero que aún no se han administrado.
++
+Lo ideal sería que este número fuera cero porque gestionaría o ignoraría aplicaciones después de que se descubrieran. Y, a continuación, supervisaría el número de aplicaciones detectadas en el Panel de control para identificar cuándo los desarrolladores añaden nuevas aplicaciones a un clúster.
+
+
+
+
+
+== Icono de clústeres
+
+El mosaico *Clusters* proporciona detalles similares sobre el estado de los clústeres que está administrando utilizando Astra Control Center, y puede profundizar para obtener más detalles como usted puede con una app.
+
+
+
+== Icono de los back-ends de almacenamiento
+
+El mosaico *back-ends* de almacenamiento proporciona información para ayudarle a identificar el estado de los back-ends de almacenamiento, incluidos:
+
+* Cuántos back-ends de almacenamiento se gestionan
+* Si estos back-ends administrados son en buen estado
+* Si los back-ends están totalmente protegidos
+* La cantidad de back-ends que se detectan, pero todavía no se gestionan.
+
