@@ -2664,4 +2664,5 @@
   <block id="f789b438cbc1e82cd52918fc029eeb85" category="sidebar">Automatice con la API REST de Astra Control</block>
   <block id="0b79795d3efc95b9976c7c5b933afce2" category="sidebar">Introducción</block>
   <block id="0adc03eac86772ad2c75c8f140be417e" category="sidebar">Conocimiento y apoyo</block>
+  <block id="2fae9bf7af2c006788415b299aad1207" category="admonition">Cuando se realiza una restauración sin movimiento de una aplicación que utiliza el almacenamiento ONTAP de NetApp, el espacio utilizado por la aplicación restaurada puede duplicarse. Después de realizar una restauración sin movimiento, elimine las instantáneas no deseadas de la aplicación restaurada para liberar espacio de almacenamiento.</block>
 </blocks>
