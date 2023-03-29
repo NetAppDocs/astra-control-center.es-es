@@ -2036,9 +2036,6 @@
   <block id="188a76b2699abe04bd8f364305ffa5fb" category="list-text">ontap-san-económico (no se admite la replicación de aplicaciones)</block>
   <block id="783d1a3e740eff9085416ec3f709793f" category="section-title">Compatibles con los back-ends de almacenamiento</block>
   <block id="160a276b6627d6a6aa9859d6c2835948" category="paragraph">Astra Control Center admite los siguientes back-ends de almacenamiento.</block>
-  <block id="dfac4790f1edf6101275f3ef6bff1bf3" category="list-text">NetApp ONTAP 9.5 o sistemas AFF y FAS más recientes</block>
-  <block id="419590ef59b29bd36215f285b4098a7c" category="list-text">ONTAP 9.8 de NetApp o sistemas AFF y FAS más recientes para la replicación de aplicaciones basadas en SnapMirror</block>
-  <block id="0f0b99ea2f70cd363c2c6a279f74e760" category="list-text">Cloud Volumes ONTAP de NetApp</block>
   <block id="1a8fab43fd54631009166886f3f59682" category="paragraph">Para utilizar Astra Control Center, compruebe que dispone de las siguientes licencias de ONTAP, en función de lo que necesite:</block>
   <block id="a701f5d044348085ee4f97fef6636845" category="list-text">FlexClone</block>
   <block id="93ec3a6d617fbea35565aff959939259" category="inline-link">Información sobre licencias de SnapMirror</block>
@@ -2669,4 +2666,9 @@
   <block id="d3472e0a53fc9484c0dd7ec15e76da1d" category="paragraph">Un _backup_ se basa en una instantánea. Se almacena en el almacén de objetos externo y, debido a esto, puede tardar más en hacerse en comparación con las copias Snapshot locales. Puede restaurar una copia de seguridad de aplicaciones en el mismo clúster, o puede migrar una aplicación restaurando su copia de seguridad en un clúster diferente. También es posible elegir un período de retención más largo para backups. Debido a que están almacenados en el almacén de objetos externo, los backups generalmente ofrecen mejor protección que las copias Snapshot en caso de fallo del servidor o pérdida de datos.</block>
   <block id="5becefddd70e438fb63cc4c816b5f6cc" category="paragraph">Una _política de protección_ es una forma de proteger una aplicación mediante la creación automática de instantáneas, copias de seguridad o ambas de acuerdo con un programa definido para esa aplicación. Una política de protección también permite elegir cuántas Snapshot y backups se retendrán en la programación, y establecer diferentes niveles de granularidad de programación. Automatizar los backups y las copias Snapshot con una política de protección es la mejor forma de garantizar que cada aplicación esté protegida en función de las necesidades de la organización y los requisitos del acuerdo de nivel de servicio.</block>
   <block id="5d18a3d426ac931bca06d705d79d80cf" category="paragraph">Un _clone_ es un duplicado exacto de una aplicación, su configuración y sus volúmenes de datos persistentes. Es posible crear manualmente un clon en el mismo clúster de Kubernetes o en otro clúster. El clonado de una aplicación puede ser útil si necesita mover aplicaciones y almacenamiento de un clúster de Kubernetes a otro.</block>
+  <block id="f4830a7c07883165a7a5c8d341286873" category="list-text">NetApp ONTAP 9.5 o sistemas AFF, FAS y ASA más recientes</block>
+  <block id="a6c8aa58cced8f18c41300f47bec2c86" category="list-text">NetApp ONTAP 9.8 o sistemas AFF, FAS y ASA más recientes para la replicación de aplicaciones basada en SnapMirror</block>
+  <block id="2f69a705b60cbc3d6bba3c41c6be8810" category="list-text">NetApp ONTAP Select 9.5 o posterior</block>
+  <block id="8ccf427f70709789c9c7a4f0ffd8f8cc" category="list-text">NetApp ONTAP Select 9.8 o posterior para la replicación de aplicaciones basadas en SnapMirror</block>
+  <block id="bfd904fc0dcf06a45fdb48323bd3a82d" category="list-text">NetApp Cloud Volumes ONTAP 9.5 o posterior</block>
 </blocks>
