@@ -22,6 +22,8 @@ Para instalar Astra Control Center, descargue el paquete de instalación desde e
 
 
 ====
+Para ver una demostración del proceso de instalación de Astra Control Center, consulte https://www.youtube.com/watch?v=eurMV80b0Ks&list=PLdXI3bZJEw7mJz13z7YdiGCS6gNQgV_aN&index=5["este vídeo"^].
+
 .Lo que necesitará
 * link:requirements.html["Antes de comenzar la instalación, prepare su entorno para la implementación de Astra Control Center"].
 * Si ha configurado o desea configurar directivas de seguridad de POD en su entorno, familiarícese con las directivas de seguridad de POD y cómo afectan a la instalación de Astra Control Center. Consulte link:../concepts/understand-pod-security.html["Comprender las restricciones de directivas de seguridad de POD"].

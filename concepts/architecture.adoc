@@ -33,7 +33,7 @@ image:astra-architecture-diagram-v5.png["Imagen conceptual que describe la arqui
 
 ** Astra Control Center utiliza los siguientes back-ends de almacenamiento:
 +
-*** ONTAP AFF y FAS. Como plataforma de hardware y software de almacenamiento, ONTAP proporciona servicios de almacenamiento básicos, compatibilidad con varios protocolos de acceso a almacenamiento y funcionalidad de gestión del almacenamiento, como copias Snapshot y mirroring.
+*** ONTAP AFF, FAS y ASA. Como plataforma de hardware y software de almacenamiento, ONTAP proporciona servicios de almacenamiento básicos, compatibilidad con varios protocolos de acceso a almacenamiento y funcionalidad de gestión del almacenamiento, como copias Snapshot y mirroring.
 *** Cloud Volumes ONTAP
 
 
