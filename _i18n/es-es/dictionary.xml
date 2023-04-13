@@ -1903,9 +1903,7 @@
   <block id="842f680f400de3b6ee92728ef695d366" category="list-text">Gestione automáticamente el almacenamiento persistente</block>
   <block id="0a5245490d6d6f511bbdb3db35acfe54" category="list-text">Crear copias Snapshot y backups bajo demanda que se tienen en cuenta las aplicaciones</block>
   <block id="f107a6e34d3d0df36d460bc5b3a5fe8b" category="list-text">Automatice las operaciones de backup y Snapshot condicionadas por políticas</block>
-  <block id="50f9f66165bfd78e72eb71c73f5252c0" category="list-text">Replique una aplicación en un sistema remoto mediante la tecnología SnapMirror de NetApp</block>
   <block id="ae3099cc177fc161f80c6965fe89a71a" category="list-text">Migre aplicaciones y datos de un clúster de Kubernetes a otro</block>
-  <block id="4f508b1a632fa280de99843b2fe48176" category="list-text">Clonar fácilmente una aplicación desde el almacenamiento provisional hasta la producción</block>
   <block id="1c26e7db082840fcbfcd87527c92e1aa" category="list-text">Visualizar el estado de la protección y el estado de la aplicación</block>
   <block id="6c4ff7542dcef16bc12bbbab0c160e9a" category="list-text">Trabaje con una interfaz de usuario web o una API para implementar sus flujos de trabajo de backup y migración</block>
   <block id="6762973af9b127d271f0d2b2aea0bc96" category="section-title">Modelos de puesta en marcha</block>
@@ -1958,7 +1956,6 @@
   <block id="181e1260b62d0667dd25d8e26eba83f5" category="paragraph">El plan gratuito de Astra Control le permite gestionar hasta 10 espacios de nombres en su cuenta. Si desea gestionar más de 10, deberá configurar la facturación actualizando del plan gratuito al plan Premium.</block>
   <block id="b714fdd25acef8e71be758de7ff02f0b" category="section-title">Cómo funciona Astra Control Center</block>
   <block id="90d397f2aa31c2e6d9f5dfda5d12adca" category="paragraph">Astra Control Center se ejecuta en forma local en su propia nube privada.</block>
-  <block id="9fec972e16132554b3f6d7a367b20c12" category="paragraph">Astra Control Center admite clústeres de Kubernetes con un tipo de almacenamiento basado en Trident con un entorno de administración del almacenamiento ONTAP 9.5 y versiones posteriores.</block>
   <block id="51269e2584d26b04961877ec77db6da7" category="paragraph">En un entorno conectado a la nube, Astra Control Center utiliza Cloud Insights para proporcionar supervisión y telemetría avanzadas. Ante la ausencia de una conexión con Cloud Insights, la telemetría y la supervisión limitadas (7 días de métricas) están disponibles en Astra Control Center y también se exportan a herramientas de supervisión nativas de Kubernetes (como Prometheus y Grafana) mediante puntos finales de métricas abiertas.</block>
   <block id="ea2708b459fc0cad6936ec216bd9405e" category="paragraph">Astra Control Center está totalmente integrado en el ecosistema de AutoSupport y Active IQ para proporcionar a los usuarios y el soporte de NetApp información sobre solución de problemas y uso.</block>
   <block id="46d0a394f0b8bd48b4ad9f07551cc671" category="paragraph">Puede probar Astra Control Center con una licencia de evaluación de 90 días. La versión de evaluación es compatible con las opciones de correo electrónico y comunidad. Además, tendrá acceso a los artículos de la base de conocimientos y a la documentación desde la consola de soporte del producto.</block>
@@ -2677,4 +2674,7 @@
   <block id="11c38116a632436215a6716507c1a287" category="list-text"><block ref="11c38116a632436215a6716507c1a287" category="inline-link-rx"></block></block>
   <block id="201e09e85ad81db8a19ef9f20c05d1a5" category="inline-link">este vídeo</block>
   <block id="259f3be9b6c8eefb44e844c2b70333dc" category="paragraph">Para ver una demostración del proceso de instalación de Astra Control Center, consulte<block ref="cbbdec23221803dc148346abe5a297c0" category="inline-link-rx"></block>.</block>
+  <block id="f7173fff9a92f2bab2648f86282ab07c" category="list-text">Replicar aplicaciones en un sistema remoto mediante la tecnología SnapMirror de NetApp (Astra Control Center)</block>
+  <block id="631928ccc601c8e49976a8d73af28304" category="list-text">Clone aplicaciones de almacenamiento provisional a producción</block>
+  <block id="469a0111714c5c9a6b3b013ec5fb5b82" category="paragraph">Astra Control Center admite clústeres de Kubernetes con un tipo de almacenamiento basado en Trident con un back-end de almacenamiento ONTAP 9,5 y posterior.</block>
 </blocks>

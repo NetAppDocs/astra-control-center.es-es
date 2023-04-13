@@ -11,9 +11,9 @@ Astra Control ofrece funcionalidades cruciales para la gestión del ciclo de vid
 * Gestione automáticamente el almacenamiento persistente
 * Crear copias Snapshot y backups bajo demanda que se tienen en cuenta las aplicaciones
 * Automatice las operaciones de backup y Snapshot condicionadas por políticas
-* Replique una aplicación en un sistema remoto mediante la tecnología SnapMirror de NetApp
 * Migre aplicaciones y datos de un clúster de Kubernetes a otro
-* Clonar fácilmente una aplicación desde el almacenamiento provisional hasta la producción
+* Replicar aplicaciones en un sistema remoto mediante la tecnología SnapMirror de NetApp (Astra Control Center)
+* Clone aplicaciones de almacenamiento provisional a producción
 * Visualizar el estado de la protección y el estado de la aplicación
 * Trabaje con una interfaz de usuario web o una API para implementar sus flujos de trabajo de backup y migración
 
@@ -53,6 +53,7 @@ Usted administra cualquier actualización
 +
 ** Amazon EBS
 ** Amazon FSX para ONTAP de NetApp
+** https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-getting-started-gcp.html["Cloud Volumes ONTAP"^]
 
 
 * Google Cloud:
@@ -71,7 +72,9 @@ Usted administra cualquier actualización
 
 * Clústeres autogestionados:
 +
-** Sistemas ONTAP AFF y FAS de NetApp
+** Amazon EBS
+** Disco persistente de Google
+** Discos gestionados de Azure
 ** https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/["Cloud Volumes ONTAP"^]
 
 
@@ -120,7 +123,7 @@ El plan gratuito de Astra Control le permite gestionar hasta 10 espacios de nomb
 
 Astra Control Center se ejecuta en forma local en su propia nube privada.
 
-Astra Control Center admite clústeres de Kubernetes con un tipo de almacenamiento basado en Trident con un entorno de administración del almacenamiento ONTAP 9.5 y versiones posteriores.
+Astra Control Center admite clústeres de Kubernetes con un tipo de almacenamiento basado en Trident con un back-end de almacenamiento ONTAP 9,5 y posterior.
 
 En un entorno conectado a la nube, Astra Control Center utiliza Cloud Insights para proporcionar supervisión y telemetría avanzadas. Ante la ausencia de una conexión con Cloud Insights, la telemetría y la supervisión limitadas (7 días de métricas) están disponibles en Astra Control Center y también se exportan a herramientas de supervisión nativas de Kubernetes (como Prometheus y Grafana) mediante puntos finales de métricas abiertas.
 
