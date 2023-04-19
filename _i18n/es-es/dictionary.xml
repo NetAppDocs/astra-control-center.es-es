@@ -1454,7 +1454,6 @@
   <block id="81d47d4dec7b1222070eae27bb4310ee" category="inline-link-macro">Si está evaluando Astra Control Center, descargue el archivo de licencia de evaluación</block>
   <block id="6004daa4ba0df7760d75bccaccd9cdeb" category="list-text"><block ref="1ac362ab549aa84c347d7d5271314ad6" category="inline-link-macro-rx"></block>. Una licencia de evaluación le permite utilizar Astra Control Center durante 90 días a partir de la fecha de descarga de la licencia.</block>
   <block id="b5172acff46c1ccd4ef355f7c403ba48" category="inline-link-macro">Si ya ha adquirido Astra Control Center, genere su archivo de licencia de NetApp (NLF)</block>
-  <block id="5e83d0e22710b5fb10a24a55f0464eab" category="list-text"><block ref="be01b2f45d5e5a31b2acb026a0c1fc3d" category="inline-link-macro-rx"></block> En el sitio de soporte de NetApp. Después de comprar el producto, recibirá un número de serie y la licencia, que usará en el sitio de soporte.</block>
   <block id="40c5eb63f5dc254aeb1e6c3a7b34d15d" category="inline-link-macro">compatibles con los back-ends de almacenamiento</block>
   <block id="3e55b813dfc77f5a692ec8411b86bba6" category="paragraph">Para obtener más información sobre las licencias necesarias para los back-ends de almacenamiento de ONTAP, consulte <block ref="dff615b80497dbcbaf9794a9900b6f10" category="inline-link-macro-rx"></block>.</block>
   <block id="a26876e2ece0b6007cf03e315d57d9d2" category="admonition">Puede añadir un clúster, añadir un bloque y gestionar un back-end de almacenamiento sin una licencia.</block>
@@ -2677,4 +2676,5 @@
   <block id="631928ccc601c8e49976a8d73af28304" category="list-text">Clone aplicaciones de almacenamiento provisional a producción</block>
   <block id="469a0111714c5c9a6b3b013ec5fb5b82" category="paragraph">Astra Control Center admite clústeres de Kubernetes con un tipo de almacenamiento basado en Trident con un back-end de almacenamiento ONTAP 9,5 y posterior.</block>
   <block id="55315f5951ded0d790960290885139fe" category="list-text">En un explorador, introduzca el FQDN <block ref="dc9578bcbcc5cd41a7cdbcff047d86d3" prefix="(" category="inline-code"></block>) que utilizó en la<block ref="d27903c79b643b2f565c31e894abb568" prefix=" " category="inline-code"></block> en la<block ref="70b058e54d2bda749060070a7f9c4e5c" prefix=" " category="inline-code"></block> CR cuando <block ref="356be5820e2645bace29d82a8018f43d" category="inline-xref-macro-rx"></block>.</block>
+  <block id="71bf3827c9b969b454eaf3d5987aad95" category="list-text"><block ref="097c36d7e339c9c56e3325b9bd9b1890" category="inline-link-macro-rx"></block> En el sitio de soporte de NetApp. Después de comprar el producto, recibirá un número de serie y la licencia, que usará en el sitio de soporte.</block>
 </blocks>
