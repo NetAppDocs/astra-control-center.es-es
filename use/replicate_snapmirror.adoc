@@ -60,7 +60,7 @@ NOTE: Puede replicar simultáneamente una aplicación diferente (que se ejecute 
 * *Configuración de Astra Trident/ONTAP*: Astra Control Center requiere que se cree una clase de almacenamiento y se establezca como la clase de almacenamiento predeterminada. Astra Control Center es compatible con los siguientes controladores de ONTAP proporcionados por Astra Trident para la replicación:
 +
 ** ontap-nas
-** ontap-nas-flexgroup
+** Economía ontap-nas (la funcionalidad de replicación de SnapMirror con Astra Control no está disponible para esta clase de almacenamiento)
 ** san ontap
 
 
@@ -87,11 +87,15 @@ La configuración de una relación de replicación implica los siguientes elemen
 +
 ** *Clúster de destino*: Introduzca un clúster de destino que sea diferente del origen.
 ** *Clase de almacenamiento de destino*: Seleccione o introduzca la clase de almacenamiento que utiliza la SVM emparejado en el clúster ONTAP de destino.
-** *Tipo de replicación*: "Asincrónica" es actualmente el único tipo de replicación disponible. 
+** *Tipo de replicación*: "Asincrónica" es actualmente el único tipo de replicación disponible.
 ** *Espacio de nombres de destino*: Introduzca espacios de nombres de destino nuevos o existentes para el clúster de destino.
 ** (Opcional) Añada espacios de nombres adicionales seleccionando *Agregar espacio de nombres* y eligiendo el espacio de nombres en la lista desplegable.
 ** *Frecuencia de replicación*: Establezca la frecuencia con la que desea que Astra Control tome una instantánea y la replique en su destino.
-** * Offset*: Establezca el número de minutos desde la parte superior de la hora que desea que Astra Control tome una instantánea. Es posible que desee utilizar un offset para no coincidir con otras operaciones programadas. Por ejemplo, si desea tomar la copia Snapshot cada 5 minutos a partir de las 10:02, introduzca "02" como el desplazamiento minutos. El resultado sería 10:02, 10:07, 10:12, etc.
+** * Offset*: Establezca el número de minutos desde la parte superior de la hora que desea que Astra Control tome una instantánea. Es posible que desee utilizar un offset para no coincidir con otras operaciones programadas.
++
+
+TIP: Reajuste los programas de copia de seguridad y replicación para evitar superposiciones de programas. Por ejemplo, realice backups en la parte superior de la hora cada hora y programe la replicación para que comience con un desplazamiento de 5 minutos y un intervalo de 10 minutos.
+
 
 
 . Seleccione *Siguiente*, revise el resumen y seleccione *Guardar*.
@@ -141,10 +145,11 @@ Con Astra Control, puede "conmutar por error" las aplicaciones replicadas a un c
 .Resultado
 Las siguientes acciones ocurren como resultado del procedimiento de conmutación por error:
 
-* En el clúster de destino, la aplicación se inicia a partir de la snapshot replicada más reciente.
+* En el clúster de destino, la aplicación se inicia según la última instantánea replicada.
 * El clúster de origen y la aplicación (si están operativas) no se han detenido y se seguirá ejecutando.
 * El estado de replicación cambia a "recuperación tras fallos" y luego a "recuperación tras fallos" cuando ha finalizado.
 * La política de protección de la aplicación de origen se copia en la aplicación de destino en función de los horarios presentes en la aplicación de origen en el momento de la conmutación por error.
+* Si la aplicación de origen tiene uno o más ganchos de ejecución posteriores a la restauración habilitados, esos ganchos de ejecución se ejecutan para la aplicación de destino.
 * Astra Control muestra la aplicación tanto en los clústeres de origen como de destino y su estado respectivo.
 
 

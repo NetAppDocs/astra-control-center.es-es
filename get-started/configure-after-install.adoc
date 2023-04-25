@@ -23,11 +23,11 @@ Algunos entornos utilizan los objetos ResourceQuotas y LimitRanges para evitar q
 Puede utilizar los siguientes pasos para recuperar y eliminar estas cuotas y límites. En estos ejemplos, el resultado del comando se muestra inmediatamente después del comando.
 
 .Pasos
-. Obtenga las cuotas de recursos en la `netapp-acc` espacio de nombres:
+. Obtenga las cuotas de recursos en la `netapp-acc` espacio de nombres (o con nombre personalizado):
 +
 [source, console]
 ----
-kubectl get quota -n netapp-acc
+kubectl get quota -n [netapp-acc or custom namespace]
 ----
 +
 Respuesta:
@@ -44,23 +44,23 @@ pods-medium   16s   requests.cpu: 0/10, requests.memory: 0/20Gi    limits.cpu: 0
 +
 [source, console]
 ----
-kubectl delete resourcequota  pods-high -n netapp-acc
+kubectl delete resourcequota pods-high -n [netapp-acc or custom namespace]
 ----
 +
 [source, console]
 ----
-kubectl delete resourcequota  pods-low -n netapp-acc
+kubectl delete resourcequota pods-low -n [netapp-acc or custom namespace]
 ----
 +
 [source, console]
 ----
-kubectl delete resourcequota  pods-medium -n netapp-acc
+kubectl delete resourcequota pods-medium -n [netapp-acc or custom namespace]
 ----
-. Obtenga los rangos de límites en la `netapp-acc` espacio de nombres:
+. Obtenga los rangos de límites en la `netapp-acc` espacio de nombres (o con nombre personalizado):
 +
 [source, console]
 ----
-kubectl get limits -n netapp-acc
+kubectl get limits -n [netapp-acc or custom namespace]
 ----
 +
 Respuesta:
@@ -75,7 +75,7 @@ cpu-limit-range   2022-06-27T19:01:23Z
 +
 [source, console]
 ----
-kubectl delete limitrange cpu-limit-range -n netapp-acc
+kubectl delete limitrange cpu-limit-range -n [netapp-acc or custom namespace]
 ----
 
 
@@ -90,13 +90,13 @@ Algunos entornos utilizan construcciones de NetworkPolicy para restringir el tr�
 +
 [source, console]
 ----
-kubectl get networkpolicy -n netapp-acc
+kubectl get networkpolicy -n [netapp-acc or custom namespace]
 ----
-. Para cada objeto NetworkPolicy devuelto por el comando anterior, utilice el siguiente comando para eliminarlo. Sustituya <OBJECT_NAME> por el nombre del objeto devuelto:
+. Para cada objeto NetworkPolicy devuelto por el comando anterior, utilice el siguiente comando para eliminarlo. Reemplace [OBJECT_NAME] por el nombre del objeto devuelto:
 +
 [source, console]
 ----
-kubectl delete networkpolicy <OBJECT_NAME> -n netapp-acc
+kubectl delete networkpolicy [OBJECT_NAME] -n [netapp-acc or custom namespace]
 ----
 . Aplique el siguiente archivo de recursos para configurar el `acc-avp-network-policy` Objeto para permitir que los servicios de complemento Astra hagan solicitudes a los servicios de Astra Control Center. Reemplace la información entre paréntesis <> por la información de su entorno:
 +
@@ -155,7 +155,7 @@ El certificado autofirmado predeterminado se utiliza para dos tipos de conexione
 Al reemplazar el certificado TLS predeterminado, se reemplaza el certificado utilizado para la autenticación de estas conexiones.
 
 ====
-.Lo que necesitará
+.Antes de empezar
 * Clúster Kubernetes con Astra Control Center instalado
 * Acceso administrativo a un shell de comandos en el clúster para ejecutar `kubectl` comandos
 * Archivos de claves privadas y certificados de la CA

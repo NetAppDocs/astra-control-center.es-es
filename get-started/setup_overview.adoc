@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: get-started/setup_overview.html 
 keywords: set up astra control, astra control license, add cluster, add storage backend, import storage, add bucket 
-summary: Después de instalar Astra Control Center, inicie sesión en la interfaz de usuario y cambie la contraseña, le interesa configurar una licencia, añadir clústeres, gestionar el almacenamiento y añadir bloques. 
+summary: Después de instalar Astra Control Center, iniciar sesión en la interfaz de usuario y cambiar la contraseña, querrá configurar una licencia, añadir clústeres, habilitar la autenticación, gestionar el almacenamiento y añadir buckets. 
 ---
 = Configure Astra Control Center
 :hardbreaks:
@@ -12,12 +12,13 @@ summary: Después de instalar Astra Control Center, inicie sesión en la interfa
 
 
 [role="lead"]
-Después de instalar Astra Control Center, inicie sesión en la interfaz de usuario y cambie la contraseña, le interesa configurar una licencia, añadir clústeres, gestionar el almacenamiento y añadir bloques.
+Después de instalar Astra Control Center, iniciar sesión en la interfaz de usuario y cambiar la contraseña, querrá configurar una licencia, añadir clústeres, habilitar la autenticación, gestionar el almacenamiento y añadir buckets.
 
 .Tareas
 * <<Agregue una licencia de Astra Control Center>>
 * <<Prepare su entorno para la gestión de clústeres con Astra Control>>
 * <<Añada el clúster>>
+* <<Habilite la autenticación en el back-end de almacenamiento de ONTAP>>
 * <<Añada un back-end de almacenamiento>>
 * <<Añadir un bucket>>
 
@@ -26,7 +27,9 @@ Después de instalar Astra Control Center, inicie sesión en la interfaz de usua
 
 == Agregue una licencia de Astra Control Center
 
-Puede añadir una nueva licencia con la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation/index.html["API"^] Para obtener todas las funciones de Astra Control Center. Sin una licencia, el uso de Astra Control Center se limita a gestionar usuarios y agregar nuevos clústeres.
+Al instalar Astra Control Center, ya hay una licencia de evaluación integrada instalada. Si estás evaluando Astra Control Center, puedes omitir este paso.
+
+Puede añadir una nueva licencia con la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation/index.html["API"^].
 
 Las licencias de Astra Control Center miden los recursos de CPU mediante unidades de CPU de Kubernetes y representan los recursos de CPU asignados a los nodos de trabajo de todos los clústeres de Kubernetes gestionados. Las licencias se basan en el uso de vCPU. Para obtener más información sobre cómo se calculan las licencias, consulte link:../concepts/licensing.html["Licencia"^].
 
@@ -36,7 +39,7 @@ NOTE: Si su instalación crece para superar el número de unidades CPU con licen
 
 NOTE: Para actualizar una evaluación existente o una licencia completa, consulte link:../use/update-licenses.html["Actualizar una licencia existente"^].
 
-.Lo que necesitará
+.Antes de empezar
 * Acceso a una instancia de Astra Control Center recién instalada.
 * Permisos del rol de administrador.
 * A. link:../concepts/licensing.html["Archivo de licencia de NetApp"^] (NLF).
@@ -61,17 +64,17 @@ NOTE: Si tiene una licencia de evaluación y no envía datos a AutoSupport, aseg
 
 Antes de añadir un clúster, debe asegurarse de que se cumplen las siguientes condiciones previas. También debe realizar comprobaciones de cumplimiento de las condiciones para asegurarse de que su clúster esté listo para añadirse a Astra Control Center y crear funciones para la gestión de clústeres.
 
-.Lo que necesitará
+.Antes de empezar
 * Asegúrese de que los nodos de trabajo del clúster estén configurados con los controladores de almacenamiento adecuados para que los pods puedan interactuar con el almacenamiento de back-end.
-* Su entorno cumple con el link:../get-started/requirements.html#operational-environment-requirements["requisitos del entorno operativo"^] Para Astra Trident y Astra Control Center.
-* Una versión de Astra Trident que es link:../get-started/requirements.html#operational-environment-requirements["Compatible con Astra Control Center"^] está instalado:
+* Su entorno cumple con el link:../get-started/requirements.html["requisitos del entorno operativo"^] Para Astra Trident y Astra Control Center.
+* Una versión de Astra Trident que es link:../get-started/requirements.html#astra-trident-requirements["Compatible con Astra Control Center"^] está instalado:
 +
 
-NOTE: Puede hacerlo https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#choose-the-deployment-method["Ponga en marcha Astra Trident"^] Mediante el operador de Trident (manualmente o mediante el gráfico Helm) o. `tridentctl`. Antes de instalar o actualizar Astra Trident, revise https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["compatibles con front-ends, back-ends y configuraciones de host"^].
+NOTE: Puede hacerlo https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#choose-the-deployment-method["Ponga en marcha Astra Trident"^] Usar el operador Astra Trident (manualmente o mediante un gráfico Helm) o. `tridentctl`. Antes de instalar o actualizar Astra Trident, revise https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html["compatibles con front-ends, back-ends y configuraciones de host"^].
 
 +
-** *Trident Storage backend configurado*: Debe haber al menos un backend de almacenamiento de Astra Trident https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend["configurado"^] en el clúster.
-** * Clases de almacenamiento Trident configuradas*: Debe haber al menos una clase de almacenamiento Astra Trident https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html["configurado"^] en el clúster. Si se configura una clase de almacenamiento predeterminada, asegúrese de que es la única clase de almacenamiento que tiene la anotación predeterminada.
+** *El backend de almacenamiento Astra Trident configurado*: Debe haber al menos un backend de almacenamiento Astra Trident https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend["configurado"^] en el clúster.
+** *Clases de almacenamiento Astra Trident configuradas*: Al menos una clase de almacenamiento Astra Trident debe ser https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html["configurado"^] en el clúster. Si se configura una clase de almacenamiento predeterminada, asegúrese de que es la única clase de almacenamiento que tiene la anotación predeterminada.
 ** *Astra Trident volume snapshot Controller y volume snapshot class instalado y configurado*: La controladora de instantáneas de volumen debe ser https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller["instalado"^] Para poder crear instantáneas en Astra Control. Al menos un Astra Trident `VolumeSnapshotClass` ha sido https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-set-up-a-volumesnapshotclass["configuración"^] por un administrador.
 
 
@@ -96,14 +99,14 @@ export-policy rule modify -vserver <storage virtual machine name> -policyname <p
 Ejecute las siguientes comprobaciones de elegibilidad para asegurarse de que su clúster esté listo para ser agregado a Astra Control Center.
 
 .Pasos
-. Compruebe la versión de Trident.
+. Compruebe la versión de Astra Trident.
 +
 [source, console]
 ----
 kubectl get tridentversions -n trident
 ----
 +
-Si Trident existe, se muestra una salida similar a la siguiente:
+Si existe Astra Trident, obtendrá un resultado similar al siguiente:
 
 +
 [listing]
@@ -112,7 +115,7 @@ NAME      VERSION
 trident   22.10.0
 ----
 +
-Si Trident no existe, se muestra un resultado similar al siguiente:
+Si Astra Trident no existe, obtendrá un resultado similar al siguiente:
 
 +
 [listing]
@@ -121,7 +124,7 @@ error: the server doesn't have a resource type "tridentversions"
 ----
 +
 
-NOTE: Si Trident no está instalado o la versión instalada no es la más reciente, debe instalar la versión más reciente de Trident antes de continuar. Consulte la https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html["Documentación de Trident"^] si desea obtener instrucciones.
+NOTE: Si Astra Trident no está instalado o la versión instalada no es la más reciente, debe instalar la versión más reciente de Astra Trident antes de continuar. Consulte la https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html["Documentación de Astra Trident"^] si desea obtener instrucciones.
 
 . Asegúrese de que los pods estén ejecutando:
 +
@@ -129,7 +132,7 @@ NOTE: Si Trident no está instalado o la versión instalada no es la más recien
 ----
 kubectl get pods -n trident
 ----
-. Determine si las clases de almacenamiento utilizan los controladores Trident compatibles. El nombre del aprovisionador debe ser `csi.trident.netapp.io`. Consulte el siguiente ejemplo:
+. Determine si las clases de almacenamiento están utilizando los controladores Astra Trident compatibles. El nombre del aprovisionador debe ser `csi.trident.netapp.io`. Consulte el siguiente ejemplo:
 +
 [source, console]
 ----
@@ -152,7 +155,7 @@ ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          t
 
 Opcionalmente, puede crear una función de administrador limitada para Astra Control Center. Este procedimiento no es obligatorio para la configuración de Astra Control Center. Este procedimiento ayuda a crear una imagen de kubeconfig independiente que limita los permisos de control de Astra en los clústeres que gestiona.
 
-.Lo que necesitará
+.Antes de empezar
 Asegúrese de que tiene lo siguiente para el clúster que tiene intención de administrar antes de completar los pasos del procedimiento:
 
 * kubectl v1.23 o posterior instalado
@@ -473,7 +476,7 @@ Para comenzar a gestionar las aplicaciones, añada un clúster de Kubernetes y g
 
 TIP: Le recomendamos que Astra Control Center gestione el clúster en el que se implementa primero antes de añadir otros clústeres a Astra Control Center para su gestión. Disponer del cluster inicial en administración es necesario para enviar datos Kubemetrics y datos asociados al cluster para mediciones y resolución de problemas.
 
-.Lo que necesitará
+.Antes de empezar
 * Antes de añadir un clúster, revise y realice la operación necesaria <<Prepare su entorno para la gestión de clústeres con Astra Control,requisitos previos>>.
 
 
@@ -498,7 +501,7 @@ IMPORTANT: Si crea el suyo propio `kubeconfig` file, debe definir sólo un eleme
 . Seleccione la clase de almacenamiento predeterminada que se utilizará para este clúster de Kubernetes y seleccione *Siguiente*.
 +
 
-NOTE: Debe seleccionar una clase de almacenamiento de Trident respaldada por un almacenamiento de ONTAP.
+NOTE: Debe seleccionar una clase de almacenamiento de Astra Trident respaldada por almacenamiento de ONTAP.
 
 . Revise la información y si todo parece bien, seleccione *Agregar*.
 
@@ -511,31 +514,322 @@ IMPORTANT: Después de agregar un clúster para administrarlo en Astra Control C
 
 
 
+== Habilite la autenticación en el back-end de almacenamiento de ONTAP
+
+El Centro de control de Astra ofrece dos modos de autenticación de un back-end de ONTAP:
+
+* *Autenticación basada en credenciales*: El nombre de usuario y la contraseña de un usuario de ONTAP con los permisos requeridos. Debe utilizar un rol de inicio de sesión de seguridad predefinido, como admin o vsadmin, para garantizar la máxima compatibilidad con las versiones de ONTAP.
+* *Autenticación basada en certificados*: Astra Control Center también puede comunicarse con un clúster de ONTAP utilizando un certificado instalado en el backend. Debe usar el certificado de cliente, la clave y el certificado de CA de confianza si se utilizan (recomendado).
+
+
+Más adelante, puede actualizar los back-ends existentes para pasar de un tipo de autenticación a otro método. Solo se admite un método de autenticación a la vez.
+
+
+
+=== Habilite la autenticación basada en credenciales
+
+Astra Control Center requiere las credenciales para un ámbito del clúster `admin` Para comunicarse con el backend de ONTAP. Debe utilizar roles estándar predefinidos como `admin`. Esto garantiza la compatibilidad con futuras versiones de ONTAP que podrían exponer API de funciones para que las utilicen en futuras versiones del Centro de control de Astra.
+
+
+NOTE: Puede crearse y utilizarse un rol de inicio de sesión de seguridad personalizado con Astra Control Center, pero no es recomendable.
+
+Una definición de backend de ejemplo tiene el siguiente aspecto:
+
+[listing]
+----
+{
+  "version": 1,
+  "backendName": "ExampleBackend",
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "admin",
+  "password": "secret"
+}
+----
+La definición de backend es el único lugar en el que las credenciales se almacenan en texto sin formato. La creación o actualización de un backend es el único paso que requiere conocimiento de las credenciales. De este modo, se trata de una operación exclusiva para administrador que realiza el administrador de Kubernetes o de almacenamiento.
+
+
+
+=== Habilite la autenticación basada en certificados
+
+Astra Control Center puede utilizar certificados para comunicarse con back-ends de ONTAP nuevos y existentes. Debe introducir la siguiente información en la definición de backend.
+
+* `clientCertificate`: Certificado de cliente.
+* `clientPrivateKey`: Clave privada asociada.
+* `trustedCACertificate`: Certificado de CA de confianza. Si se utiliza una CA de confianza, se debe proporcionar este parámetro. Esto se puede ignorar si no se utiliza ninguna CA de confianza.
+
+
+Es posible usar uno de los siguientes tipos de certificados:
+
+* Certificado autofirmado
+* Certificado de terceros
+
+
+
+
+==== Habilite la autenticación con un certificado autofirmado
+
+Un flujo de trabajo típico implica los pasos siguientes.
+
+.Pasos
+. Genere una clave y un certificado de cliente. Al generar, defina el nombre común (CN) en el usuario ONTAP para autenticarse como.
++
+[source, Console]
+----
+openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout k8senv.key -out k8senv.pem -subj "/C=US/ST=NC/L=RTP/O=NetApp/CN=<common-name>"
+----
+. Instale el certificado de cliente de tipo `client-ca` Y el clúster de ONTAP.
++
+[source, Console]
+----
+security certificate install -type client-ca -cert-name <certificate-name> -vserver <vserver-name>
+security ssl modify -vserver <vserver-name> -client-enabled true
+----
+. Confirme que el rol de inicio de sesión de seguridad de ONTAP admite el método de autenticación de certificado.
++
+[source, Console]
+----
+security login create -user-or-group-name vsadmin -application ontapi -authentication-method cert -vserver <vserver-name>
+security login create -user-or-group-name vsadmin -application http -authentication-method cert -vserver <vserver-name>
+----
+. Pruebe la autenticación mediante el certificado generado. Sustituya <LIF de gestión de ONTAP> y <vserver name> por la IP de LIF de gestión y el nombre SVM. Debe asegurarse de que la LIF tiene su política de servicio establecida en `default-data-management`.
++
+[source, Curl]
+----
+curl -X POST -Lk https://<ONTAP-Management-LIF>/servlets/netapp.servlets.admin.XMLrequest_filer --key k8senv.key --cert ~/k8senv.pem -d '<?xml version="1.0" encoding="UTF-8"?><netapp xmlns=http://www.netapp.com/filer/admin version="1.21" vfiler="<vserver-name>"><vserver-get></vserver-get></netapp>
+----
+. Con los valores obtenidos del paso anterior, añada el back-end del almacenamiento en la interfaz de usuario de Astra Control Center.
+
+
+
+
+==== Active la autenticación con un certificado de terceros
+
+Si tiene un certificado de terceros, puede configurar la autenticación basada en certificados con estos pasos.
+
+.Pasos
+. Genere la clave privada y CSR:
++
+[source, Console]
+----
+openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out ontap_cert_request.csr -keyout ontap_cert_request.key -addext "subjectAltName = DNS:<ONTAP_CLUSTER_FQDN_NAME>,IP:<ONTAP_MGMT_IP>”
+----
+. Transfiera la CSR a la CA de Windows (CA de terceros) y emita el certificado firmado.
+. Descargue el certificado firmado y asígnele el nombre `ontap_signed_cert.crt'
+. Exporte el certificado raíz de Windows CA (CA de terceros).
+. Asigne un nombre a este archivo `ca_root.crt`
++
+Ahora tiene los siguientes tres archivos:
+
++
+** *Clave privada*: `ontap_signed_request.key` (Esta es la clave correspondiente para el certificado de servidor en ONTAP. Se necesita al instalar el certificado de servidor.)
+** *Certificado firmado*: `ontap_signed_cert.crt` (Esto también se denomina _server certificate_ en ONTAP.)
+** *Certificado de CA raíz*: `ca_root.crt` (Esto también se denomina _server-ca certificate_ en ONTAP.)
+
+
+. Instale estos certificados en ONTAP. Generar e instalar `server` y.. `server-ca` Certificados en ONTAP.
++
+Detalles en sample.yaml
+
++
+[%collapsible]
+====
+[listing]
+----
+# Copy the contents of ca_root.crt and use it here.
+
+security certificate install -type server-ca
+
+Please enter Certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<certificate details>
+-----END CERTIFICATE-----
+
+
+You should keep a copy of the CA-signed digital certificate for future reference.
+
+The installed certificate's CA and serial number for reference:
+
+CA:
+serial:
+
+The certificate's generated name for reference:
+
+
+===
+
+# Copy the contents of ontap_signed_cert.crt and use it here. For key, use the contents of ontap_cert_request.key file.
+security certificate install -type server
+Please enter Certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<certificate details>
+-----END CERTIFICATE-----
+
+Please enter Private Key: Press <Enter> when done
+
+-----BEGIN PRIVATE KEY-----
+<private key details>
+-----END PRIVATE KEY-----
+
+Enter certificates of certification authorities (CA) which form the certificate chain of the server certificate. This starts with the issuing CA certificate of the server certificate and can range up to the root CA certificate.
+Do you want to continue entering root and/or intermediate certificates {y|n}: n
+
+The provided certificate does not have a common name in the subject field.
+Enter a valid common name to continue installation of the certificate: <ONTAP_CLUSTER_FQDN_NAME>
+
+You should keep a copy of the private key and the CA-signed digital certificate for future reference.
+The installed certificate's CA and serial number for reference:
+CA:
+serial:
+The certificate's generated name for reference:
+
+
+==
+# Modify the vserver settings to enable SSL for the installed certificate
+
+ssl modify -vserver <vserver_name> -ca <CA>  -server-enabled true -serial <serial number>       (security ssl modify)
+
+==
+# Verify if the certificate works fine:
+
+openssl s_client -CAfile ca_root.crt -showcerts -servername server -connect <ONTAP_CLUSTER_FQDN_NAME>:443
+CONNECTED(00000005)
+depth=1 DC = local, DC = umca, CN = <CA>
+verify return:1
+depth=0
+verify return:1
+write W BLOCK
+---
+Certificate chain
+0 s:
+   i:/DC=local/DC=umca/<CA>
+
+-----BEGIN CERTIFICATE-----
+<Certificate details>
+
+----
+====
+. Cree el certificado de cliente para el mismo host para la comunicación sin contraseña. Astra Control Center utiliza este proceso para comunicarse con ONTAP.
+. Genere e instale los certificados de cliente en ONTAP:
++
+Detalles en sample.yaml
+
++
+[%collapsible]
+====
+[listing]
+----
+# Use /CN=admin or use some other account which has privileges.
+openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout ontap_test_client.key -out ontap_test_client.pem -subj "/CN=admin"
+
+Copy the content of ontap_test_client.pem file and use it in the below command:
+security certificate install -type client-ca -vserver <vserver_name>
+
+Please enter Certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<Certificate details>
+-----END CERTIFICATE-----
+
+You should keep a copy of the CA-signed digital certificate for future reference.
+The installed certificate’s CA and serial number for reference:
+
+CA:
+serial:
+The certificate’s generated name for reference:
+
+
+==
+
+ssl modify -vserver <vserver_name> -client-enabled true
+(security ssl modify)
+
+# Setting permissions for certificates
+security login create -user-or-group-name admin -application ontapi -authentication-method cert -role admin -vserver <vserver_name>
+
+security login create -user-or-group-name admin -application http -authentication-method cert -role admin -vserver <vserver_name>
+
+==
+
+#Verify passwordless communication works fine with the use of only certificates:
+
+curl --cacert ontap_signed_cert.crt  --key ontap_test_client.key --cert ontap_test_client.pem https://<ONTAP_CLUSTER_FQDN_NAME>/api/storage/aggregates
+{
+"records": [
+{
+"uuid": "f84e0a9b-e72f-4431-88c4-4bf5378b41bd",
+"name": "<aggr_name>",
+"node": {
+"uuid": "7835876c-3484-11ed-97bb-d039ea50375c",
+"name": "<node_name>",
+"_links": {
+"self": {
+"href": "/api/cluster/nodes/7835876c-3484-11ed-97bb-d039ea50375c"
+}
+}
+},
+"_links": {
+"self": {
+"href": "/api/storage/aggregates/f84e0a9b-e72f-4431-88c4-4bf5378b41bd"
+}
+}
+}
+],
+"num_records": 1,
+"_links": {
+"self": {
+"href": "/api/storage/aggregates"
+}
+}
+}%
+
+
+
+----
+====
+. Añada el back-end de almacenamiento en la interfaz de usuario de Astra Control Center y proporcione los siguientes valores:
++
+** *Certificado de cliente*: ontap_test_client.pem
+** *Clave privada*: ontap_test_client.key
+** *Certificado de CA de confianza*: ontap_signed_cert.crt
+
+
+
+
+
+
 == Añada un back-end de almacenamiento
 
 Puede añadir un back-end de almacenamiento de ONTAP existente a Astra Control Center para gestionar sus recursos.
 
 Gestionar los clústeres de almacenamiento en Astra Control como back-end de almacenamiento le permite obtener vínculos entre los volúmenes persistentes (VP) y el back-end de almacenamiento, así como mediciones de almacenamiento adicionales.
 
+Después de configurar las credenciales o la información de autenticación de certificados, puede añadir un back-end de almacenamiento de ONTAP existente a Astra Control Center para gestionar sus recursos.
+
 .Pasos
 . En el panel de control del área de navegación de la izquierda, seleccione *Backends*.
-. Debe realizar una de las siguientes acciones:
+. Seleccione *Agregar*.
+. En la sección Usar existente de la página Agregar backend de almacenamiento, seleccione *ONTAP*.
+. Seleccione una de las siguientes opciones:
 +
-** *Nuevos back-ends*: Seleccione *Agregar* para administrar un back-end existente, seleccione *ONTAP* y seleccione *Siguiente*.
-** *Backends descubiertos*: Desde el menú acciones, seleccione *Administrar* en un backend descubierto desde el cluster administrado.
-
-
-. Introduzca la dirección IP de gestión del clúster de ONTAP y las credenciales de administrador. Las credenciales deben ser credenciales para todo el clúster.
+** *Usar credenciales de administrador*: Ingrese la dirección IP de administración del clúster de ONTAP y las credenciales de administración. Las credenciales deben ser credenciales para todo el clúster.
 +
 
 NOTE: El usuario cuyas credenciales introduzca aquí debe tener la `ontapi` Método de acceso de inicio de sesión de usuario habilitado en System Manager de ONTAP en el clúster de ONTAP. Si planea utilizar la replicación de SnapMirror, aplique las credenciales de usuario con el rol "admin", que tiene los métodos de acceso `ontapi` y.. `http`, En clústeres ONTAP de origen y destino. Consulte https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list["Gestionar cuentas de usuario en la documentación de ONTAP"^] si quiere más información.
+
+** *Utilice un certificado*: Cargue el certificado `.pem` archivo, la clave de certificado `.key` archivo y, opcionalmente, el archivo de entidad de certificación.
+
 
 . Seleccione *Siguiente*.
 . Confirme los detalles del backend y seleccione *Administrar*.
 
 
 .Resultado
-El back-end aparece en la `Healthy` estado en la lista con información resumida.
+El back-end aparece en la `online` estado en la lista con información resumida.
 
 
 NOTE: Es posible que deba actualizar la página para que se muestre el back-end.
@@ -548,7 +842,7 @@ Puede añadir un bloque con la interfaz de usuario de Astra Control o. https://d
 
 No necesita un bloque de Astra Control si clona la configuración de sus aplicaciones y el almacenamiento persistente en el mismo clúster. La funcionalidad de snapshots de aplicaciones no requiere un bloque.
 
-.Lo que necesitará
+.Antes de empezar
 * Un cubo al que se puede acceder desde sus clusters gestionados por Astra Control Center.
 * Credenciales para el bloque.
 * Un bloque de los siguientes tipos:
@@ -614,7 +908,7 @@ Ahora que ha iniciado sesión y ha añadido clústeres a Astra Control Center, e
 * link:../use/protection-overview.html["Proteja sus aplicaciones"]
 * link:../use/manage-notifications.html["Gestionar notificaciones"]
 * link:../use/monitor-protect.html#connect-to-cloud-insights["Conéctese a Cloud Insights"]
-* link:../get-started/add-custom-tls-certificate.html["Agregue un certificado TLS personalizado"]
+* link:../get-started/configure-after-install.html#add-a-custom-tls-certificate["Agregue un certificado TLS personalizado"]
 * link:../use/view-clusters.html#change-the-default-storage-class["Cambie la clase de almacenamiento predeterminada"]
 
 

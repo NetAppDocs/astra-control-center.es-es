@@ -1,0 +1,69 @@
+---
+indexpage:
+  lead: El software Astra Control Center proporciona gestión de datos para aplicaciones
+    de los clústeres de Kubernetes en su entorno local. Realice backups fácilmente
+    de aplicaciones de Kubernetes, migre datos a un clúster diferente y cree, de forma
+    instantánea, clones de aplicaciones de trabajo. Si necesita gestionar aplicaciones
+    de Kubernetes que se ejecutan en un cloud público, diríjase a los documentos de
+    Astra Control Service.
+  tiles:
+  - title: Comience con Astra Control Center
+    links:
+    - title: Más información sobre Astra Control Center
+      url: "/get-started/intro.html"
+    - title: Novedades de Astra Control Center
+      url: "/release-notes/whats-new.html"
+    - title: Notas de la versión
+      url: "/release-notes/rn_overview.html"
+    - title: Pruébelo
+      url: "/get-started/quick-start.html"
+    - title: Instalar Astra Control Center
+      url: "/get-started/install_acc.html"
+  - title: Utilice Astra Control Center
+    links:
+    - title: Gestionar cuentas
+      url: "/use/manage-local-users-and-roles.html"
+    - title: Gestionar aplicaciones
+      url: "/use/manage-apps.html"
+    - title: Proteja sus aplicaciones
+      url: "/use/protect-apps.html"
+    - title: Clone y migre aplicaciones
+      url: "/use/clone-apps.html"
+    - title: Replicación de aplicaciones en un sistema remoto
+      url: "/use/replicate_snapmirror.html"
+  - title: Utilice la API REST de Astra Control
+    links:
+    - title: Introducción a la API Astra Control
+      url: https://docs.netapp.com/us-en/astra-automation/get-started/before_get_started.html
+    - title: Referencia de API
+      url: https://docs.netapp.com/us-en/astra-automation/reference/overview.html
+    - title: Flujos de trabajo API
+      url: https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html
+  - title: Utilice el servicio Astra Control Service
+    links:
+    - title: Obtenga más información sobre el servicio Astra Control
+      url: https://docs.netapp.com/us-en/astra/get-started/intro.html
+    - title: Novedades del servicio Astra Control Service
+      url: https://docs.netapp.com/us-en/astra/release-notes/whats-new.html
+    - title: Inicio rápido del servicio Astra Control
+      url: https://docs.netapp.com/us-en/astra/get-started/quick-start.html
+  - title: Breve descripción de la solución
+    links:
+    - title: PostgreSQL DBaaS con Astra Control
+      url: https://cloud.netapp.com/hubfs/SB-4122-0221-PostgresSQL-DBaaS-with-Astra%20(2).pdf
+    - title: MySQL DBaaS con Astra Control
+      url: https://cloud.netapp.com/hubfs/SB-4110-0221-MySQL-Astra%20(2).pdf
+    - title: Simplifique la gestión del ciclo de vida de Jenkins
+      url: https://cloud.netapp.com/hubfs/SB-4100-Jenkins%20(2).pdf
+  - title: Blogs y comunidad
+    links:
+    - title: Canal de discordia
+      url: https://discord.gg/NetApp
+    - title: Blog de Astra Control
+      url: https://cloud.netapp.com/blog/topic/astra
+    - title: Comunidad de NetApp
+      url: https://community.netapp.com/
+    - title: Kubernetes Hub
+      url: https://cloud.netapp.com/kubernetes-hub
+    - title: Dónde obtener ayuda
+      url: "/support/get-help.html"

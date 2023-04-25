@@ -34,20 +34,21 @@ Para la URL, en un explorador, introduzca el nombre de dominio completo (FQDN) q
 
 == Licencia
 
-*Estoy utilizando la licencia de Evaluación. ¿Cómo puedo cambiar a la licencia completa?*
+*Estoy usando una licencia de evaluación. ¿Cómo cambio a la licencia completa?*
 
-Si desea cambiar fácilmente a una licencia completa, obtenga el archivo de licencia de NetApp (NLF).
+Puede cambiar fácilmente a una licencia completa si obtiene el archivo de licencia de NetApp (NLF) de NetApp.
 
 * Pasos*
 
 . En la navegación de la izquierda, seleccione *cuenta* > *Licencia*.
-. Seleccione *Agregar licencia*.
+. En la descripción general de la licencia, a la derecha de la información de la licencia, seleccione el menú Opciones.
+. Selecciona *Reemplazar*.
 . Busque el archivo de licencia que ha descargado y seleccione *Agregar*.
 
 
-*Estoy utilizando la licencia de Evaluación. ¿Puedo seguir gestionando aplicaciones?*
+*Estoy usando una licencia de evaluación. ¿Puedo seguir gestionando aplicaciones?*
 
-Sí, puede comprobar la funcionalidad de administración de aplicaciones con la licencia de evaluación.
+Sí, puede probar la funcionalidad de administración de aplicaciones con una licencia de evaluación (incluida la licencia de evaluación integrada que se instala de forma predeterminada). No hay diferencia en las capacidades o características entre una licencia de evaluación y una licencia completa; la licencia de evaluación simplemente tiene una vida útil más corta. Consulte link:../concepts/licensing.html["Licencia"^] si quiere más información.
 
 
 
@@ -70,7 +71,7 @@ La eliminación de un clúster de Astra Control no realizará ningún cambio en 
 
 WARNING: Quite siempre un clúster de Astra Control antes de eliminarlo mediante cualquier otro método. La eliminación de un clúster con otra herramienta mientras Astra Control sigue gestionando puede causar problemas para su cuenta Astra Control.
 
-* ¿Trident de NetApp se desinstala automáticamente de un clúster cuando lo descontrolo?* cuando se desvincula un clúster de Astra Control Center, Trident no se desinstala automáticamente del clúster. Para desinstalar Trident, tendrá que hacerlo https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Siga estos pasos en la documentación de Trident"^].
+*¿Astra Trident de NetApp se desinstala automáticamente de un clúster cuando lo desgestiono?* Al desgestionar un clúster desde Astra Control Center, Astra Trident no se desinstala automáticamente del clúster. Para desinstalar Astra Trident, debes hacerlo https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Siga estos pasos en la documentación de Astra Trident"^].
 
 
 
@@ -88,9 +89,13 @@ Se eliminarán todos los backups o las snapshots existentes. Las aplicaciones y 
 
 No Aunque Astra Control puede detectar aplicaciones que utilizan almacenamiento de terceros, no puede gestionar una aplicación que utilice almacenamiento de terceros.
 
-*¿Debo administrar Astra Control mismo?* no, no debería gestionar Astra Control por sí mismo porque es una "app del sistema".
+*Debería gestionar Astra Control en sí?*
 
-*¿Afectan los POD que no son saludables a la gestión de aplicaciones?* Si una aplicación gestionada tiene pods en estado incorrecto, Astra Control no puede crear nuevos backups y clones.
+No, no deberías gestionar Astra Control en sí mismo porque es una «aplicación del sistema».
+
+*¿Las vainas poco saludables afectan a la gestión de la aplicación?*
+
+No, el estado de los pods no afecta a la gestión de la aplicación.
 
 
 

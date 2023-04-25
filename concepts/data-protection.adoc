@@ -65,3 +65,9 @@ image:acc-backup_4in.png["Esta imagen muestra un backup y una restauración prog
 Por otro lado, la replicación se realiza replicando en ONTAP para después crear el relevo de funciones en los recursos de Kubernetes:
 
 image:acc-replication_4in.png["Esta imagen muestra la replicación y la conmutación al nodo de respaldo entre dos clústeres de Kubernetes y dos clústeres de ONTAP"]
+
+
+
+== Backups, snapshots y clones con una licencia caducada
+
+Si caduca la licencia, solo puede añadir una nueva aplicación o realizar operaciones de protección de la aplicación (como snapshots, backups, clones y operaciones de restauración) si la aplicación que está añadiendo o protegiendo es otra instancia de Astra Control Center.

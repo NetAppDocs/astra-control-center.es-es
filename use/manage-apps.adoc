@@ -20,7 +20,7 @@ Usted primero link:../get-started/setup_overview.html#add-cluster["Añada un cl�
 
 Astra Control tiene los siguientes requisitos de gestión de aplicaciones:
 
-* *Licencia*: Para gestionar aplicaciones mediante Astra Control Center, necesita una licencia Astra Control Center.
+* *Licencias*: Para administrar aplicaciones con Astra Control Center, necesitas la licencia de evaluación integrada de Astra Control Center o una licencia completa.
 * *Namespaces*: Las aplicaciones se pueden definir dentro de uno o más espacios de nombres especificados en un único clúster mediante Astra Control. Una aplicación puede contener recursos que abarcan varios espacios de nombres dentro del mismo clúster. Astra Control no admite la capacidad de definir las aplicaciones en varios clústeres.
 * *Clase de almacenamiento*: Si instala una aplicación con una clase de almacenamiento definida explícitamente y necesita clonar la aplicación, el clúster de destino para la operación de clonación debe tener la clase de almacenamiento especificada originalmente. Se producirá un error al clonar una aplicación con una clase de almacenamiento definida explícitamente a un clúster que no tenga la misma clase de almacenamiento.
 * *Recursos de Kubernetes*: Las aplicaciones que usan recursos de Kubernetes no recopilados por Astra Control podrían no tener funciones completas de gestión de datos de aplicaciones. Astra Control recopila los siguientes recursos de Kubernetes:
@@ -106,10 +106,9 @@ Aunque Astra Control le permite gestionar por separado ambos niveles de la jerar
 
 TIP: A modo de ejemplo, puede que desee establecer una normativa de backup para «maria» con una cadencia semanal, pero es posible que deba realizar backups de «mariadb» (que se encuentra en el mismo espacio de nombres) con mayor frecuencia que esta. Según estas necesidades, debería gestionar las aplicaciones por separado, no como una aplicación de espacio de nombres único.
 
-.Lo que necesitará
+.Antes de empezar
 * Se añadió un clúster de Kubernetes a Astra Control.
 * Una o más aplicaciones instaladas en el clúster. <<Métodos de instalación de aplicaciones compatibles,Obtenga más información sobre los métodos de instalación de aplicaciones compatibles>>.
-* Uno o más pods activos.
 * Espacios de nombres existentes en el clúster Kubernetes que se añadió a Astra Control.
 * (Opcional) una etiqueta de Kubernetes en cualquiera link:../use/manage-apps.html#app-management-requirements["Recursos de Kubernetes compatibles"].
 +
@@ -140,19 +139,7 @@ Definir una aplicación le proporciona un control más granular de lo que se deb
 
 WARNING: Al definir aplicaciones, asegúrese de no incluir un recurso de Kubernetes en varias aplicaciones con políticas de protección. La superposición de políticas de protección en recursos de Kubernetes puede provocar conflictos de datos. <<Ejemplo: Separar la normativa de protección para diferentes versiones,Más información en un ejemplo.>>
 
-[CAUTION]
-====
-La ejecución de una operación de restauración sin movimiento en una aplicación que comparte recursos con otra aplicación puede tener resultados no intencionados. Los recursos compartidos entre las aplicaciones se reemplazan cuando se realiza una restauración sin movimiento en una de las aplicaciones. Por ejemplo, en la siguiente situación se crea una situación no deseada cuando se utiliza la replicación de SnapMirror de NetApp:
-
-. Defina la aplicación `app1` uso del espacio de nombres `ns1`.
-. Puede configurar una relación de replicación para `app1`.
-. Defina la aplicación `app2` (en el mismo clúster) mediante los espacios de nombres `ns1` y.. `ns2`.
-. Puede configurar una relación de replicación para `app2`.
-. La replicación se invierte para `app2`. Esto provoca la `app1` en el clúster de origen que se va a desactivar.
-
-
-====
-.<strong> </strong> sobre la adición de recursos de ámbito de clúster a los espacios de nombres de aplicaciones.
+.Obtenga más información sobre la adición de recursos con ámbito de clúster a los espacios de nombres de la aplicación.
 [%collapsible]
 ====
 Puede importar recursos de clúster asociados a los recursos de espacio de nombres además de los que se incluyen automáticamente Astra Control. Puede agregar una regla que incluirá recursos de un grupo específico, tipo, versión y, opcionalmente, etiqueta. Es posible que desee hacer esto si hay recursos que Astra Control no incluye automáticamente.

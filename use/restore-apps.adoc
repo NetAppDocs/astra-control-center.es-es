@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: use/restore-apps.html 
-keywords: restore app, restoring an app, restore an app, restore 
+keywords: restore app, restoring an app, restore, migrate nas-economy 
 summary: Astra puede restaurar la configuración de sus aplicaciones y el almacenamiento persistente a partir de una copia Snapshot o una copia de seguridad. Los backups de almacenamiento persistente se transfieren del almacén de objetos, por lo que la restauración a partir de un backup existente se completará con la más rápida. 
 ---
 = Restaurar aplicaciones
@@ -15,53 +15,52 @@ summary: Astra puede restaurar la configuración de sus aplicaciones y el almace
 Astra Control puede restaurar su aplicación a partir de una instantánea o una copia de seguridad. La restauración a partir de una snapshot existente será más rápida cuando se restaure la aplicación en el mismo clúster. Puede utilizar la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para restaurar aplicaciones.
 
 
-NOTE: Cuando se realiza una restauración sin movimiento de una aplicación que utiliza el almacenamiento ONTAP de NetApp, el espacio utilizado por la aplicación restaurada puede duplicarse. Después de realizar una restauración sin movimiento, elimine las instantáneas no deseadas de la aplicación restaurada para liberar espacio de almacenamiento.
+NOTE: Si se agrega un filtro de espacio de nombres a un enlace de ejecución que se ejecuta después de una operación de restauración o clonado y el origen y destino de la restauración o clonado se encuentran en diferentes espacios de nombres, el filtro de espacio de nombres solo se aplica al espacio de nombres de destino.
 
 .Acerca de esta tarea
-* *Proteger sus aplicaciones primero*: Se recomienda tomar una instantánea o hacer una copia de seguridad de su aplicación antes de restaurarla. Esto le permitirá clonar desde la snapshot o backup en el caso de que la restauración no se realice correctamente.
+* *Proteja sus aplicaciones primero*: Se recomienda encarecidamente que tome una instantánea o una copia de seguridad de su aplicación antes de restaurarla. Esto le permitirá clonar desde la snapshot o backup en el caso de que la restauración no se realice correctamente.
 * *Comprobar volúmenes de destino*: Si restaura a un clúster diferente, asegúrese de que el clúster utiliza el mismo modo de acceso de volumen persistente (por ejemplo, ReadWriteMany). Se producirá un error en la operación de restauración si el modo de acceso al volumen persistente de destino es diferente.
+* *Planificar necesidades de espacio*: Cuando se realiza una restauración in situ de una aplicación que utiliza almacenamiento ONTAP de NetApp, el espacio utilizado por la aplicación restaurada puede duplicarse. Después de realizar una restauración sin movimiento, elimine las instantáneas no deseadas de la aplicación restaurada para liberar espacio de almacenamiento.
 * *(sólo clústeres de OpenShift) Agregar directivas*: Cuando se crea un proyecto para alojar una aplicación en un clúster de OpenShift, se asigna un UID de SecurityContext al proyecto (o espacio de nombres de Kubernetes). Para habilitar Astra Control Center para proteger su aplicación y mover la aplicación a otro clúster o proyecto en OpenShift, debe agregar directivas que permitan que la aplicación se ejecute como cualquier UID. Por ejemplo, los siguientes comandos de la CLI de OpenShift otorgan las directivas adecuadas a una aplicación de WordPress.
 +
 `oc new-project wordpress`
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 
-* *Helm desplegó apps*: Las aplicaciones de clonación desplegadas con Helm 3 (o actualizadas de Helm 2 a Helm 3) son totalmente compatibles. Las aplicaciones implementadas con Helm 2 no son compatibles.
+* * Aplicaciones implementadas de Helm*: Las aplicaciones implementadas con Helm 3 (o actualizadas de Helm 2 a Helm 3) son totalmente compatibles. Las aplicaciones implementadas con Helm 2 no son compatibles.
 
 
+[CAUTION]
+====
+La ejecución de una operación de restauración sin movimiento en una aplicación que comparte recursos con otra aplicación puede tener resultados no intencionados. Los recursos compartidos entre las aplicaciones se reemplazan cuando se realiza una restauración sin movimiento en una de las aplicaciones. Para obtener más información, consulte <<Complicaciones de restauración in situ para una aplicación que comparte recursos con otra aplicación,este ejemplo>>.
+
+====
 .Pasos
 . Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
-. Seleccione *Protección de datos*.
-. Si desea restaurar desde una instantánea, mantenga seleccionado el icono *instantáneas*. De lo contrario, seleccione el icono *copias de seguridad* para restaurar desde una copia de seguridad.
-. En el menú Opciones de la columna *acciones* de la instantánea o copia de seguridad desde la que desea restaurar, seleccione *Restaurar aplicación*.
+. En el menú Opciones de la columna Acciones, seleccione *Restaurar*.
 . Elija el tipo de restauración:
 +
 ** *Restaurar en espacios de nombres originales*: Utilice este procedimiento para restaurar la aplicación en su sitio al cluster original.
 +
-[CAUTION]
-====
-La ejecución de una operación de restauración sin movimiento en una aplicación que comparte recursos con otra aplicación puede tener resultados no intencionados. Los recursos compartidos entre las aplicaciones se reemplazan cuando se realiza una restauración sin movimiento en una de las aplicaciones. Por ejemplo, en la siguiente situación se crea una situación no deseada cuando se utiliza la replicación de SnapMirror de NetApp:
 
-... Defina la aplicación `app1` uso del espacio de nombres `ns1`.
-... Puede configurar una relación de replicación para `app1`.
-... Defina la aplicación `app2` (en el mismo clúster) mediante los espacios de nombres `ns1` y.. `ns2`.
-... Puede configurar una relación de replicación para `app2`.
-... La replicación se invierte para `app2`. Esto provoca la `app1` en el clúster de origen que se va a desactivar.
+NOTE: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` driver, debe restaurar la aplicación utilizando las clases de almacenamiento originales. No puede especificar una clase de almacenamiento diferente si va a restaurar la aplicación en el mismo espacio de nombres.
 
-
-====
 +
-... Seleccione la instantánea que se va a utilizar para restaurar la aplicación in situ, que revierte la aplicación a una versión anterior de sí misma.
+... Seleccione la instantánea o la copia de seguridad que desea utilizar para restaurar la aplicación en el lugar, lo que revierte la aplicación a una versión anterior de sí misma.
 ... Seleccione *Siguiente*.
 +
 
 NOTE: Si se restaura en un espacio de nombres que se eliminó previamente, se crea un espacio de nombres nuevo con el mismo nombre como parte del proceso de restauración. Cualquier usuario que tenga derechos para administrar aplicaciones en el espacio de nombres previamente eliminado debe restaurar manualmente los derechos en el espacio de nombres recién creado.
 
-... Revise los detalles sobre la acción de restauración, escriba "restore" y seleccione *Restaurar*.
 
 
 ** *Restaurar en nuevos espacios de nombres*: Utilice este procedimiento para restaurar la aplicación en otro clúster o con diferentes espacios de nombres desde el origen.
 +
+
+NOTE: Puede utilizar este procedimiento para cualquiera de los dos  a una clase de almacenamiento respaldada por `ontap-nas` En el mismo clúster *O* copie la aplicación en otro clúster con una clase de almacenamiento respaldada por el `ontap-nas-economy` controlador.
+
++
+... Especifique el nombre de la aplicación restaurada.
 ... Elija el clúster de destino de la aplicación que desea restaurar.
 ... Introduzca un espacio de nombres de destino para cada espacio de nombres de origen asociado a la aplicación.
 +
@@ -69,13 +68,36 @@ NOTE: Si se restaura en un espacio de nombres que se eliminó previamente, se cr
 NOTE: Astra Control crea nuevos espacios de nombres de destino como parte de esta opción de restauración. Los espacios de nombres de destino que especifique no deben estar ya presentes en el clúster de destino.
 
 ... Seleccione *Siguiente*.
-... Seleccione la instantánea que desea utilizar para restaurar la aplicación.
+... Seleccione la instantánea o la copia de seguridad que desea utilizar para restaurar la aplicación.
 ... Seleccione *Siguiente*.
-... Revise los detalles sobre la acción de restauración y seleccione *Restaurar*.
+... Elija una de las siguientes opciones:
++
+**** *Restaurar usando clases de almacenamiento originales*: La aplicación utiliza la clase de almacenamiento asociada originalmente a menos que no exista en el clúster de destino. En este caso, se utilizará la clase de almacenamiento predeterminada para el clúster.
+**** *Restaurar usando una clase de almacenamiento diferente*: Seleccione una clase de almacenamiento que exista en el clúster de destino. Todos los volúmenes de aplicaciones, independientemente de sus tipos de almacenamiento asociados originalmente, se migrarán a esta clase de almacenamiento diferente como parte de la restauración.
+
+
+... Seleccione *Siguiente*.
 
 
 
 
+. Elija cualquier recurso para filtrar:
++
+** *Restaurar todos los recursos*: Restaurar todos los recursos asociados con la aplicación original.
+** *Filtrar recursos*: Especificar reglas para restaurar un subconjunto de los recursos originales de la aplicación:
++
+... Seleccione incluir o excluir recursos de la aplicación restaurada.
+... Seleccione *Agregar regla de inclusión* o *Agregar regla de exclusión* y configure la regla para filtrar los recursos correctos durante la restauración de la aplicación. Puede editar una regla o eliminarla y volver a crear una regla hasta que la configuración sea correcta.
++
+
+NOTE: Para obtener más información sobre la configuración de reglas de inclusión y exclusión, consulte <<Filtre recursos durante una restauración de aplicación>>.
+
+
+
+
+
+. Seleccione *Siguiente*.
+. Revise los detalles sobre la acción de restauración cuidadosamente, escriba “restaurar” (si se le solicita) y seleccione *Restaurar*.
 
 
 .Resultado
@@ -86,3 +108,82 @@ NOTE: Después de una operación de protección de datos (clonado, backup o rest
 
 
 IMPORTANT: Cualquier usuario miembro con restricciones de espacio de nombres por nombre/ID de espacio de nombres o por etiquetas de espacio de nombres puede clonar o restaurar una aplicación en un nuevo espacio de nombres en el mismo clúster o en cualquier otro clúster de la cuenta de su organización. Sin embargo, el mismo usuario no puede acceder a la aplicación clonada o restaurada en el nuevo espacio de nombres. Después de crear un espacio de nombres nuevo mediante una operación de clonado o restauración, el propietario/administrador de la cuenta puede editar las restricciones de la cuenta de usuario miembro y actualizar las restricciones de roles para que el usuario afectado conceda acceso al nuevo espacio de nombres.
+
+
+
+== Filtre recursos durante una restauración de aplicación
+
+Puede agregar una regla de filtro a un link:../use/restore-apps.html["restaurar"] operación que especificará los recursos de aplicación existentes que se incluirán o excluirán de la aplicación restaurada. Puede incluir o excluir recursos basados en un espacio de nombres, etiqueta o GVK (GroupVersionKind) especificado.
+
+.Lea más sobre Incluir y excluir escenarios
+[%collapsible]
+====
+* *Selecciona una regla de inclusión con espacios de nombres originales (restauración in situ)*: Los recursos de aplicación existentes que definas en la regla se eliminarán y reemplazarán por aquellos de la instantánea o copia de seguridad seleccionada que estés utilizando para la restauración. Cualquier recurso que no especifique en la regla Incluir permanecerá sin cambios.
+* *Selecciona una regla de inclusión con nuevos espacios de nombres*: Usa la regla para seleccionar los recursos específicos que deseas en la aplicación restaurada. Los recursos que no especifique en la regla Incluir no se incluirán en la aplicación restaurada.
+* *Selecciona una regla de exclusión con espacios de nombres originales (restauración in situ)*: Los recursos que especifiques para ser excluidos no se restaurarán y permanecerán sin cambios. Los recursos que no especifique para excluir se restaurarán de la Snapshot o el backup. Todos los datos de los volúmenes persistentes se eliminarán y volverán a crear si el StatefulSet correspondiente forma parte de los recursos filtrados.
+* *Selecciona una regla de exclusión con nuevos espacios de nombres*: Usa la regla para seleccionar los recursos específicos que deseas eliminar de la aplicación restaurada. Los recursos que no especifique para excluir se restaurarán de la Snapshot o el backup.
+
+
+====
+Las reglas son tipos de inclusión o exclusión. Las reglas que combinan la inclusión y exclusión de recursos no están disponibles.
+
+.Pasos
+. Una vez que haya elegido filtrar recursos y seleccionado una opción Incluir o Excluir en el asistente Restaurar aplicación, seleccione *Agregar regla de inclusión* o *Agregar regla de exclusión*.
++
+
+NOTE: No puede excluir ningún recurso en el ámbito del clúster que Astra Control incluya automáticamente.
+
+. Configure la regla de filtro:
++
+
+NOTE: Debe especificar al menos un espacio de nombres, una etiqueta o un GVK. Asegúrese de que los recursos que retenga después de aplicar las reglas de filtro sean suficientes para mantener la aplicación restaurada en buen estado.
+
++
+.. Seleccione un espacio de nombres específico para la regla. Si no hace una selección, se usarán todos los espacios de nombres en el filtro.
++
+
+NOTE: Si la aplicación contenía originalmente varios espacios de nombres y la restauraba en nuevos espacios de nombres, todos los espacios de nombres se crearán incluso si no contienen recursos.
+
+.. (Opcional) Introduzca un nombre de recurso.
+.. (Opcional) *Selector de etiquetas*: Incluye a. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors["selector de etiquetas"^] para agregar a la regla. El selector de etiquetas se utiliza para filtrar sólo los recursos que coincidan con la etiqueta seleccionada.
+.. (Opcional) Seleccione *Usar GVK (GroupVersionKind) configurado para filtrar recursos* para opciones de filtrado adicionales.
++
+
+NOTE: Si utiliza un filtro GVK, debe especificar Versión y Tipo.
+
++
+... (Opcional) *Grupo*: En la lista desplegable, seleccione el grupo API de Kubernetes.
+... *Kind*: En la lista desplegable, seleccione el esquema de objeto para el tipo de recurso de Kubernetes a utilizar en el filtro.
+... *Versión*: Seleccione la versión de la API de Kubernetes.
+
+
+
+
+. Revise la regla que se crea en función de las entradas.
+. Seleccione *Agregar*.
++
+
+TIP: Puede crear tantas reglas de inclusión y exclusión de recursos como desee. Las reglas aparecen en el resumen de la aplicación de restauración antes de iniciar la operación.
+
+
+
+
+
+== Migre del almacenamiento económico de ontap-nas al almacenamiento ontap-nas
+
+Puedes utilizar un Astra Control link:../use/restore-apps.html["restauración de aplicaciones"] operación para migrar volúmenes de aplicaciones desde un tipo de almacenamiento respaldado por `ontap-nas-economy`, que permite opciones limitadas de protección de aplicaciones, a una clase de almacenamiento respaldada por `ontap-nas` Con toda su gama de opciones de protección Astra Control. La operación de restauración migra volúmenes basados en qtree que usan una `ontap-nas-economy` back-end a volúmenes estándar respaldados por `ontap-nas`. Volúmenes, independientemente de si lo sean `ontap-nas-economy` con un respaldo exclusivo o mixto, se migrará a la clase de almacenamiento de destino. Una vez finalizada la migración, las opciones de protección dejan de limitarse.
+
+
+
+== Complicaciones de restauración in situ para una aplicación que comparte recursos con otra aplicación
+
+Puede realizar una operación de restauración in situ en una aplicación que comparta recursos con otra aplicación y produzca resultados no deseados. Los recursos compartidos entre las aplicaciones se reemplazan cuando se realiza una restauración sin movimiento en una de las aplicaciones.
+
+A continuación se muestra un ejemplo que crea una situación no deseable cuando se usa la replicación SnapMirror de NetApp para una restauración:
+
+. Defina la aplicación `app1` uso del espacio de nombres `ns1`.
+. Puede configurar una relación de replicación para `app1`.
+. Defina la aplicación `app2` (en el mismo clúster) mediante los espacios de nombres `ns1` y.. `ns2`.
+. Puede configurar una relación de replicación para `app2`.
+. La replicación se invierte para `app2`. Esto provoca la `app1` en el clúster de origen que se va a desactivar.
+

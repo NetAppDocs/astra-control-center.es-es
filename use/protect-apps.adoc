@@ -43,6 +43,12 @@ La política de protección protege una aplicación mediante la creación de sna
 
 Si necesita que backups o snapshots se ejecuten con más frecuencia de una vez por hora, puede hacerlo https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html["Utilice la API REST de Astra Control para crear copias Snapshot y copias de seguridad"^].
 
+
+TIP: Reajuste los programas de copia de seguridad y replicación para evitar superposiciones de programas. Por ejemplo, realice backups en la parte superior de la hora cada hora y programe la replicación para que comience con un desplazamiento de 5 minutos y un intervalo de 10 minutos.
+
+
+IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, las políticas de protección no se pueden utilizar. Si desea una política de protección, use una clase de almacenamiento alternativa.
+
 .Pasos
 . Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
 . Seleccione *Protección de datos*.
@@ -73,6 +79,9 @@ Astra Control implementa la política de protección de datos mediante la creaci
 
 Puede crear una snapshot bajo demanda en cualquier momento.
 
+
+IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, no se pueden utilizar instantáneas. Utilice una clase de almacenamiento alternativa para las instantáneas.
+
 .Pasos
 . Seleccione *aplicaciones*.
 . En el menú Opciones de la columna *acciones* de la aplicación deseada, seleccione *Snapshot*.
@@ -91,6 +100,9 @@ También puede realizar copias de seguridad de una aplicación en cualquier mome
 
 
 NOTE: Los bloques de S3 de Astra Control Center no informan sobre la capacidad disponible. Antes de realizar una copia de seguridad o clonar aplicaciones gestionadas por Astra Control Center, compruebe la información de los bloques en el sistema de gestión ONTAP o StorageGRID.
+
+
+IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, las copias de seguridad son disruptivas y la aplicación no estará disponible hasta que se complete la operación de copia de seguridad.
 
 .Pasos
 . Seleccione *aplicaciones*.

@@ -197,10 +197,10 @@ Siga la documentación de BlueXP para completar los siguientes pasos. Consulte l
 . Importe el clúster OpenShift. El clúster se conectará al entorno de trabajo que acaba de crear.
 +
 .. Consulte los detalles del clúster de NetApp seleccionando *K8s* > *Lista de clústeres* > *Detalles del clúster*.
-.. En la esquina superior derecha, tenga en cuenta la versión de Trident.
+.. En la esquina superior derecha, observa la versión de Astra Trident.
 .. Observe las clases de almacenamiento del clúster Cloud Volumes ONTAP que muestran NetApp como el aprovisionador.
 +
-Esto importa su clúster de Red Hat OpenShift y le asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Trident se instala automáticamente como parte del proceso de importación y detección.
+Esto importa su clúster de Red Hat OpenShift y le asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Astra Trident se instala automáticamente como parte del proceso de importación y detección.
 
 
 
@@ -403,7 +403,7 @@ Con NetApp BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añ
 
 Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://docs.netapp.com/us-en/occm/task_getting_started_gcp.html["Introducción a Cloud Volumes ONTAP en GCP"^].
 
-.Lo que necesitará
+.Antes de empezar
 * Acceso a la cuenta de servicio de GCP con los permisos y roles de IAM necesarios
 
 
@@ -428,7 +428,7 @@ Siga la documentación de BlueXP para completar los siguientes pasos. Consulte h
 .. En la esquina superior derecha, tenga en cuenta la versión de Trident.
 .. Tenga en cuenta las clases de almacenamiento del clúster de Cloud Volumes ONTAP que muestran "NetApp" como el aprovisionador.
 +
-Esto importa su clúster de Red Hat OpenShift y le asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Trident se instala automáticamente como parte del proceso de importación y detección.
+Esto importa su clúster de Red Hat OpenShift y le asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Astra Trident se instala automáticamente como parte del proceso de importación y detección.
 
 
 
@@ -483,7 +483,7 @@ Asegúrese de que el entorno operativo que elija para alojar Astra Control Cente
 
 Astra Control Center requiere los siguientes recursos además de los requisitos de recursos del entorno:
 
-Consulte link:../get-started/requirements.html#operational-environment-requirements["Requisitos del entorno operativo del Centro de control de Astra"].
+Consulte link:../get-started/requirements.html["Requisitos del entorno operativo del Centro de control de Astra"].
 
 [cols="1h,2a"]
 |===
@@ -636,7 +636,7 @@ Con BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añada un 
 
 Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://docs.netapp.com/us-en/occm/task_getting_started_azure.html["Introducción a BlueXP en Azure"^].
 
-.Lo que necesitará
+.Antes de empezar
 Acceso a la cuenta de Azure con los permisos y roles de IAM necesarios
 
 .Pasos
@@ -669,12 +669,12 @@ image:acc-cvo-azure-working-environment.png["Esta imagen muestra las ubicaciones
 +
 image:acc-cvo-azure-connected.png["Esta imagen muestra un clúster importado en BlueXP"]
 
-.. En la esquina superior derecha, tenga en cuenta la versión de Trident.
+.. En la esquina superior derecha, observa la versión de Astra Trident.
 .. Observe las clases de almacenamiento del clúster Cloud Volumes ONTAP que muestran NetApp como el aprovisionador.
 
 
 +
-Esto importa su clúster de Red Hat OpenShift y asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Trident se instala automáticamente como parte del proceso de importación y detección.
+Esto importa su clúster de Red Hat OpenShift y asigna una clase de almacenamiento predeterminada. Seleccione la clase de almacenamiento. Astra Trident se instala automáticamente como parte del proceso de importación y detección.
 
 . Obsérvese todos los volúmenes y volúmenes persistentes en esta puesta en marcha de Cloud Volumes ONTAP.
 . Cloud Volumes ONTAP puede funcionar como un nodo único o en alta disponibilidad. Si ha está habilitada, anote el estado de alta disponibilidad y el estado de puesta en marcha del nodo que se ejecutan en Azure.

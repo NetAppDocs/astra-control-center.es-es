@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: use/manage-backend.html 
 keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra 
-summary: Añada almacenamiento para sus aplicaciones Kubernetes en las instalaciones. Astra Control descubre y utiliza los recursos que ya se han puesto en marcha, incluidos Trident, ONTAP y las clases de almacenamiento asociadas. 
+summary: 'Gestionar los clústeres de almacenamiento en Astra Control como back-end de almacenamiento le permite obtener vínculos entre los volúmenes persistentes (VP) y el back-end de almacenamiento, así como mediciones de almacenamiento adicionales. Puede supervisar la capacidad del almacenamiento y los detalles del estado, incluido el rendimiento si el Centro de control Astra está conectado a Cloud Insights.' 
 ---
 = Gestione el entorno de administración del almacenamiento
 :hardbreaks:
@@ -20,6 +20,8 @@ Es posible completar las siguientes tareas relacionadas con la gestión de un ba
 
 * link:../get-started/setup_overview.html#add-a-storage-backend["Añada un back-end de almacenamiento"]
 * <<Ver detalles del back-end de almacenamiento>>
+* <<Editar los detalles de autenticación del back-end de almacenamiento>>
+* <<Gestionar un back-end de almacenamiento detectado>>
 * <<Desgestione un back-end de almacenamiento>>
 * <<Quite un back-end de almacenamiento>>
 
@@ -51,7 +53,7 @@ Puede ver la información del back-end de almacenamiento desde Dashboard o desde
 
 Vea información sobre el estado, la capacidad y el rendimiento del back-end (rendimiento de IOPS y/o latencia).
 
-Puede ver los volúmenes que usan las aplicaciones de Kubernetes, que se almacenan en un back-end de almacenamiento seleccionado. Con Cloud Insights, puede ver información adicional. Consulte https://docs.netapp.com/us-en/cloudinsights/["Documentación de Cloud Insights"].
+Puede ver los volúmenes que usan las aplicaciones de Kubernetes, que se almacenan en un back-end de almacenamiento seleccionado. Con Cloud Insights, puede ver información adicional. Consulte https://docs.netapp.com/us-en/cloudinsights/["Documentación de Cloud Insights"^].
 
 .Pasos
 . En el área de navegación de la izquierda, seleccione *Backends*.
@@ -64,6 +66,52 @@ TIP: Si conectas a Cloud Insights de NetApp, aparecerán extractos de datos de C
 image:../use/acc_backends_ci_connection2.png["Captura de pantalla de la página backends"]
 
 . Para ir directamente a Cloud Insights, seleccione el icono *Cloud Insights* junto a la imagen de métricas.
+
+
+
+
+== Editar los detalles de autenticación del back-end de almacenamiento
+
+El Centro de control de Astra ofrece dos modos de autenticación de un back-end de ONTAP.
+
+* *Autenticación basada en credenciales*: El nombre de usuario y la contraseña de un usuario de ONTAP con los permisos requeridos. Debe utilizar un rol de inicio de sesión de seguridad predefinido, como admin, para garantizar la máxima compatibilidad con las versiones de ONTAP.
+* *Autenticación basada en certificados*: Astra Control Center también puede comunicarse con un clúster de ONTAP utilizando un certificado instalado en el backend. Debe usar el certificado de cliente, la clave y el certificado de CA de confianza si se utilizan (recomendado).
+
+
+Puede actualizar los back-ends existentes para pasar de un tipo de autenticación a otro método. Solo se admite un método de autenticación a la vez.
+
+Para obtener más información sobre la activación de la autenticación basada en certificados, consulte link:../get-started/setup_overview.html#enable-authentication-on-the-ontap-storage-backend["Habilite la autenticación en el back-end de almacenamiento de ONTAP"].
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Backends*.
+. Seleccione el back-end de almacenamiento.
+. En el campo Credenciales, seleccione el icono *Editar*.
+. En la página Editar, seleccione una de las siguientes opciones.
++
+** *Usar credenciales de administrador*: Ingrese la dirección IP de administración del clúster de ONTAP y las credenciales de administración. Las credenciales deben ser credenciales para todo el clúster.
++
+
+NOTE: El usuario cuyas credenciales introduzca aquí debe tener la `ontapi` Método de acceso de inicio de sesión de usuario habilitado en System Manager de ONTAP en el clúster de ONTAP. Si planea utilizar la replicación de SnapMirror, aplique las credenciales de usuario con el rol "admin", que tiene los métodos de acceso `ontapi` y.. `http`, En clústeres ONTAP de origen y destino. Consulte https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list["Gestionar cuentas de usuario en la documentación de ONTAP"^] si quiere más información.
+
+** *Utilice un certificado*: Cargue el certificado `.pem` archivo, la clave de certificado `.key` archivo y, opcionalmente, el archivo de entidad de certificación.
+
+
+. Seleccione *Guardar*.
+
+
+
+
+== Gestionar un back-end de almacenamiento detectado
+
+Puede seleccionar gestionar un back-end de almacenamiento no gestionado pero detectado. Cuando gestionas un back-end de almacenamiento, Astra Control indica si ha caducado un certificado para la autenticación.
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Backends*.
+. Seleccione la opción *Descubrido*.
+. Seleccione el back-end de almacenamiento.
+. En el menú Opciones de la columna *Acciones*, selecciona *Administrar*.
+. Realice los cambios.
+. Seleccione *Guardar*.
 
 
 
@@ -86,7 +134,7 @@ Puede anular la gestión del back-end.
 
 Puede eliminar un back-end de almacenamiento que ya no se esté utilizando. Se recomienda hacer esto para mantener su configuración sencilla y actualizada.
 
-.Lo que necesitará
+.Antes de empezar
 * Asegúrese de que el back-end de almacenamiento no esté gestionado.
 * Compruebe que el back-end de almacenamiento no tenga ningún volumen asociado con el clúster.
 

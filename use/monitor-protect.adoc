@@ -85,9 +85,12 @@ Debe accederse a Cloud Insights desde la red que utiliza Astra Control Center, o
 Cuando el Centro de control de Astra está conectado a Cloud Insights, se crea un POD de unidad de adquisición. Este pod recoge datos de los back-ends de almacenamiento gestionados por Astra Control Center y los empuja a Cloud Insights. Este pod requiere 8 GB de RAM y 2 núcleos de CPU.
 
 
-NOTE: Después de activar la conexión Cloud Insights, puede ver la información de rendimiento en la página *backends* así como conectarse a Cloud Insights desde aquí después de seleccionar un back-end de almacenamiento. También puede encontrar la información en *Panel* en la sección clúster, y también puede conectarse a Cloud Insights desde allí.
+NOTE: Cuando Astra Control Center se empareja con Cloud Insights, no debes usar la opción *Modificar implementación* en Cloud Insights. 
 
-.Lo que necesitará
+
+NOTE: Después de habilitar la conexión Cloud Insights, puede ver la información de rendimiento en la página *Backends*, así como conectarse a Cloud Insights después de seleccionar un backend de almacenamiento. También puede encontrar la información en el *Tablero* en la sección Clúster y conectarse a Cloud Insights desde allí.
+
+.Antes de empezar
 * Una cuenta de Astra Control Center con privilegios *admin*/*owner*.
 * Una licencia válida de Astra Control Center.
 * Un servidor proxy si la red en la que se ejecuta Astra Control Center requiere un proxy para conectarse a Internet.
@@ -272,14 +275,14 @@ NOTE: Si se recopilaron varios datos de clúster, las métricas de cada clúster
 
 == Conectar a Fluentd
 
-Puede enviar registros (eventos Kubernetes) desde el sistema supervisado por Astra Control Center a su terminal Fluentd. La conexión fluentd está desactivada de forma predeterminada.
+Puede enviar registros (eventos de Kubernetes) desde un sistema supervisado por Astra Control Center a su extremo de Fluentd. La conexión fluentd está desactivada de forma predeterminada.
 
 image:fluentbit.png["Este es un diagrama conceptual de los registros de eventos que van de Astra a Fluentd."]
 
 
 NOTE: Sólo se reenvían a Fluentd los registros de eventos de los clusters gestionados.
 
-.Lo que necesitará
+.Antes de empezar
 * Una cuenta de Astra Control Center con privilegios *admin*/*owner*.
 * Astra Control Center se ha instalado y se ejecuta en un clúster de Kubernetes.
 

@@ -129,7 +129,7 @@ Puede eliminar un cubo que ya no esté en uso o que no esté sano. Se recomienda
 
 NOTE: No se puede eliminar un bloque predeterminado. Si desea eliminar ese bloque, seleccione primero otro bloque como predeterminado.
 
-.Lo que necesitará
+.Antes de empezar
 * Antes de empezar, debe comprobar que no hay copias de seguridad en ejecución o completadas para este bloque.
 * Debe comprobar que el bloque no se esté utilizando en ninguna política de protección activa.
 

@@ -12,18 +12,38 @@ summary: Descubra cómo las acciones que puede realizar con Astra Control Center
 
 
 [role="lead"]
-Astra Control Center requiere la instalación de una licencia para habilitar la funcionalidad completa de gestión de datos de aplicaciones. Cuando se implementa Astra Control Center sin una licencia, se muestra un banner en la interfaz de usuario web, con la advertencia de que la funcionalidad del sistema es limitada.
+Al implementar Astra Control Center, se instala con una licencia de evaluación integrada de 90 días para 4.800 unidades CPU. Si necesita más capacidad o un período de evaluación más largo, o si desea actualizar a una licencia completa, puede obtener una licencia de evaluación diferente o una licencia completa de NetApp.
 
 Usted obtiene una licencia de una de las siguientes maneras:
 
-* link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center["Si está evaluando Astra Control Center, descargue el archivo de licencia de evaluación"^]. Una licencia de evaluación le permite utilizar Astra Control Center durante 90 días a partir de la fecha de descarga de la licencia.
+* Si va a evaluar Astra Control Center y necesita términos de evaluación distintos a los incluidos en la licencia de evaluación integrada, póngase en contacto con NetApp para solicitar un archivo de licencia de evaluación diferente.
 * link:https://mysupport.netapp.com/site/["Si ya ha adquirido Astra Control Center, genere su archivo de licencia de NetApp (NLF)"^] En el sitio de soporte de NetApp. Después de comprar el producto, recibirá un número de serie y la licencia, que usará en el sitio de soporte.
 
 
 Para obtener más información sobre las licencias necesarias para los back-ends de almacenamiento de ONTAP, consulte link:../get-started/requirements.html["compatibles con los back-ends de almacenamiento"].
 
 
-NOTE: Puede añadir un clúster, añadir un bloque y gestionar un back-end de almacenamiento sin una licencia.
+NOTE: Asegúrese de que su licencia habilita al menos tantas unidades de CPU como necesite. Si el número de unidades de CPU que gestiona Astra Control Center supera las unidades de CPU disponibles en la nueva licencia que se está aplicando, no podrá aplicar la nueva licencia.
+
+
+
+== Licencias de evaluación y licencias completas
+
+Se proporciona una licencia de evaluación integrada con una nueva instalación de Astra Control Center. Una licencia de evaluación habilita las mismas capacidades y funciones que una licencia completa durante un periodo limitado (90 días). Después del período de evaluación, se requiere una licencia completa para continuar con todas las funciones.
+
+
+
+== Caducidad de la licencia
+
+Si la licencia de Astra Control Center activa caduca, la funcionalidad de interfaz de usuario y API de las siguientes funciones no están disponibles:
+
+* Snapshots y backups locales manuales
+* Snapshot y backups locales programados
+* Restauración a partir de una copia de Snapshot o un backup
+* Clonado desde una copia de Snapshot o estado actual
+* Gestionar nuevas aplicaciones
+* Configurar políticas de replicación
+
 
 
 
@@ -31,7 +51,10 @@ NOTE: Puede añadir un clúster, añadir un bloque y gestionar un back-end de al
 
 Al añadir un nuevo clúster a Astra Control Center, no cuenta con licencias consumidas hasta que Astra Control Center gestione al menos una aplicación que se ejecute en el clúster.
 
-Cuando se empieza a gestionar una aplicación en un clúster, todas las unidades CPU del clúster se incluyen en el consumo de licencia de Astra Control Center.
+Cuando comienza a administrar una aplicación en un clúster, todas las unidades de CPU de ese clúster se incluyen en el consumo de licencias de Astra Control Center, excepto las unidades de CPU de nodo de clúster Red Hat OpenShift que se notifican mediante un mediante la etiqueta `node-role.kubernetes.io/infra: ""`.
+
+
+NOTE: Los nodos de infraestructura de Red Hat OpenShift no consumen licencias en Astra Control Center. Para marcar un nodo como un nodo de infraestructura, aplique la etiqueta `node-role.kubernetes.io/infra: ""` al nodo.
 
 
 

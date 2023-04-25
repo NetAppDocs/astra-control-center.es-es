@@ -50,7 +50,7 @@ NOTE: Antes de anular la administración del clúster, debe anular la administra
 Cuando se desadministra un clúster:
 
 * Con esta acción, Astra Control Center no gestiona su clúster. No realiza cambios en la configuración del clúster y no elimina el clúster.
-* Trident no se desinstalará del clúster. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Descubra cómo desinstalar Trident"^].
+* Astra Trident no se desinstala del clúster. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Descubra cómo desinstalar Astra Trident"^].
 
 
 .Pasos

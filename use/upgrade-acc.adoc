@@ -14,8 +14,8 @@ summary: Para actualizar Astra Control Center, descargue el paquete y actualice 
 [role="lead"]
 Para actualizar Astra Control Center, descargue el paquete de instalación desde el sitio de soporte de NetApp y complete estas instrucciones. Puede utilizar este procedimiento para actualizar Astra Control Center en entornos conectados a Internet o con conexión por aire.
 
-.Lo que necesitará
-* Antes de realizar la actualización, consulte link:../get-started/requirements.html#operational-environment-requirements["Requisitos del entorno operativo"^] Para garantizar que su entorno cumple los requisitos mínimos para la implantación de Astra Control Center. Su entorno debe tener lo siguiente:
+.Antes de empezar
+* Antes de realizar la actualización, consulte link:../get-started/requirements.html["requisitos del entorno operativo"^] Para garantizar que su entorno cumple los requisitos mínimos para la implantación de Astra Control Center. Su entorno debe tener lo siguiente:
 +
 ** Una versión compatible de Astra Trident para determinar la versión que está ejecutando, ejecute el siguiente comando con su Astra Control Center existente:
 +
@@ -100,7 +100,7 @@ tar -vxzf astra-control-center-[version].tar.gz
 
 == Elimine el complemento Astra kubectl de NetApp y vuelva a instalarlo
 
-El complemento de la línea de comandos Astra bectl de NetApp ahorra tiempo en la realización de tareas comunes asociadas a la puesta en marcha y la actualización de Astra Control Center.
+Puede utilizar el complemento de línea de comandos kubectl de Astra de NetApp para insertar imágenes en un repositorio de Docker local.
 
 . Determine si tiene instalado el plugin:
 +
@@ -192,7 +192,7 @@ podman login <YOUR_REGISTRY>
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=22.11.0-82
+export PACKAGEVERSION=23.04.0-22
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -211,7 +211,7 @@ done
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=22.11.0-82
+export PACKAGEVERSION=23.04.0-22
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -222,8 +222,13 @@ done
 ----
 +
 
-NOTE: La ruta de acceso de imagen que crea el script debe parecerse a la siguiente, dependiendo de la configuración del Registro: `https://netappdownloads.jfrog.io/docker-astra-control-prod/netapp/astra/acc/22.11.0-82/image:version`
+NOTE: La ruta de acceso de imagen que crea el script debe parecerse a la siguiente, dependiendo de la configuración del Registro:
 
++
+[listing]
+----
+https://netappdownloads.jfrog.io/docker-astra-control-prod/netapp/astra/acc/23.04.0-22/image:version
+----
 
 
 --
@@ -249,8 +254,7 @@ vim astra_control_center_operator_deploy.yaml
 +
 [listing]
 ----
-imagePullSecrets:
-- name: <astra-registry-cred_or_custom_name_of_secret>
+imagePullSecrets: [{name: astra-registry-cred}]
 ----
 .. Cambiar `[your_registry_path]` para la `kube-rbac-proxy` imagen a la ruta del registro en la que se insertó la imagen en un <<Agregue las imágenes al registro local,paso anterior>>.
 .. Cambiar `[your_registry_path]` para la `acc-operator` imagen a la ruta del registro en la que se insertó la imagen en un <<Agregue las imágenes al registro local,paso anterior>>.
@@ -303,7 +307,7 @@ spec:
           value: "2"
         *- name: ACCOP_HELM_UPGRADETIMEOUT*
           *value: 300m*
-        *image: [your_registry_path]/acc-operator:[version x.y.z]*
+        *image: [your_registry_path]/acc-operator:23.04.21*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -377,7 +381,7 @@ kubectl get pods -n netapp-acc-operator
 ----
 kubectl edit AstraControlCenter -n [netapp-acc or custom namespace]
 ----
-. Cambie el número de versión de Astra (`astraVersion` dentro de `Spec`) a la versión que está actualizando a:
+. Cambie el número de versión de Astra (`astraVersion` dentro de `spec`) a la versión que está actualizando a:
 +
 [listing, subs="+quotes"]
 ----
@@ -385,21 +389,21 @@ spec:
   accountName: "Example"
   *astraVersion: "[Version number]"*
 ----
-. Compruebe que la ruta del Registro de imágenes coincide con la ruta del Registro a la que ha insertado las imágenes en <<Agregue las imágenes al registro local,paso anterior>>. Actualizar `imageRegistry` dentro de `Spec` si el registro ha cambiado desde la última instalación.
+. Compruebe que la ruta del Registro de imágenes coincide con la ruta del Registro a la que ha insertado las imágenes en <<Agregue las imágenes al registro local,paso anterior>>. Actualizar `imageRegistry` dentro de `spec` si el registro ha cambiado desde la última instalación.
 +
 [listing]
 ----
   imageRegistry:
     name: "[your_registry_path]"
 ----
-. Añada lo siguiente a su `CRDs` configuración dentro de `Spec`:
+. Añada lo siguiente a su `crds` configuración dentro de `spec`:
 +
 [listing]
 ----
 crds:
   shouldUpgrade: true
 ----
-. Añada las siguientes líneas dentro de `additionalValues` dentro de `Spec` En el Centro de control de Astra CR:
+. Añada las siguientes líneas dentro de `additionalValues` dentro de `spec` En el Centro de control de Astra CR:
 +
 [listing]
 ----
@@ -409,9 +413,7 @@ additionalValues:
         periodSeconds: 30
         failureThreshold: 600
 ----
-+
-Después de guardar y salir del editor de archivos, se aplicarán los cambios y comenzará la actualización.
-
+. Guarde y salga del editor de archivos. Se aplicarán los cambios y comenzará la actualización.
 . (Opcional) Verifique que los POD terminan y estén disponibles de nuevo:
 +
 [listing]
@@ -431,7 +433,7 @@ Respuesta:
 [listing]
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      22.11.0-82  10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      23.04.0-22  10.111.111.111  True
 ----
 +
 
