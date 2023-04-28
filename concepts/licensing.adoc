@@ -17,7 +17,7 @@ Al implementar Astra Control Center, se instala con una licencia de evaluación 
 Usted obtiene una licencia de una de las siguientes maneras:
 
 * Si va a evaluar Astra Control Center y necesita términos de evaluación distintos a los incluidos en la licencia de evaluación integrada, póngase en contacto con NetApp para solicitar un archivo de licencia de evaluación diferente.
-* link:https://mysupport.netapp.com/site/["Si ya ha adquirido Astra Control Center, genere su archivo de licencia de NetApp (NLF)"^] En el sitio de soporte de NetApp. Después de comprar el producto, recibirá un número de serie y la licencia, que usará en el sitio de soporte.
+* link:https://mysupport.netapp.com/site/["Si ya ha adquirido Astra Control Center, genere su archivo de licencia de NetApp (NLF)"^] Al iniciar sesión en el sitio de soporte de NetApp y navegar a sus licencias de software en el menú Sistemas.
 
 
 Para obtener más información sobre las licencias necesarias para los back-ends de almacenamiento de ONTAP, consulte link:../get-started/requirements.html["compatibles con los back-ends de almacenamiento"].
