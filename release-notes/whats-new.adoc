@@ -22,7 +22,7 @@ Nos complace anunciar la última versión de Astra Control Center.
 * link:../concepts/licensing.html["Licencia de evaluación de 90 días habilitada de forma predeterminada para nuevas instalaciones de Astra Control Center"^]
 * link:../use/execution-hooks.html["Funciones mejoradas de enlaces de ejecución con opciones de filtrado adicionales"^]
 * link:../use/execution-hooks.html["Ahora se pueden ejecutar ganchos de ejecución después de la conmutación al nodo de respaldo de la replicación con Astra Control Center"^]
-* link:../get-started/requirements.html["Compatibilidad con la economía de NAS como tipo de almacenamiento"^]
+* 
 * link:../use/restore-apps.html#filter-resources-during-an-application-restore["Soporte para incluir o excluir recursos de aplicaciones durante las operaciones de restauración"^]
 * link:../use/manage-apps.html["Compatibilidad para la gestión de aplicaciones solo de datos"]
 
