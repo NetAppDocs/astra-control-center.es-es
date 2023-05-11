@@ -12,7 +12,7 @@ summary: Proteja sus aplicaciones tomando snapshots y backups usando una políti
 
 
 [role="lead"]
-Proteger todas las aplicaciones mediante la toma de snapshots y backups a través de una política de protección automatizada o de manera ad hoc. Puede utilizar la interfaz de usuario de Astra Control Center o https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para proteger aplicaciones.
+Proteger todas las aplicaciones mediante la toma de snapshots y backups a través de una política de protección automatizada o de manera ad hoc. Puede utilizar la interfaz de usuario de Astra Control Center o https://["La API de control Astra"^] para proteger aplicaciones.
 
 .Acerca de esta tarea
 * *Helm implementó aplicaciones*: Si utiliza Helm para implementar aplicaciones, Astra Control Center requiere Helm versión 3. Se admite por completo la gestión y clonación de las aplicaciones implementadas con Helm 3 (o actualizadas de Helm 2 a Helm 3). Las aplicaciones implementadas con Helm 2 no son compatibles.
@@ -41,7 +41,7 @@ Puede realizar las siguientes tareas relacionadas con la protección de los dato
 
 La política de protección protege una aplicación mediante la creación de snapshots, backups o ambos con una programación definida. Puede optar por crear snapshots y backups por hora, día, semana y mes, y especificar la cantidad de copias que desea retener.
 
-Si necesita que backups o snapshots se ejecuten con más frecuencia de una vez por hora, puede hacerlo https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html["Utilice la API REST de Astra Control para crear copias Snapshot y copias de seguridad"^].
+Si necesita que backups o snapshots se ejecuten con más frecuencia de una vez por hora, puede hacerlo https://["Utilice la API REST de Astra Control para crear copias Snapshot y copias de seguridad"^].
 
 
 TIP: Reajuste los programas de copia de seguridad y replicación para evitar superposiciones de programas. Por ejemplo, realice backups en la parte superior de la hora cada hora y programe la replicación para que comience con un desplazamiento de 5 minutos y un intervalo de 10 minutos.

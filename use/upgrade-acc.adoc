@@ -24,7 +24,7 @@ Para actualizar Astra Control Center, descargue el paquete de instalación desde
 kubectl get tridentversion -n trident
 ----
 +
-Consulte https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to["Documentación de Astra Trident"] para actualizar desde una versión anterior.
+Consulte https://["Documentación de Astra Trident"] para actualizar desde una versión anterior.
 
 +
 
@@ -72,7 +72,7 @@ TIP: Realice actualizaciones en una ventana de mantenimiento cuando no se estén
 
 == Descargue y extraiga Astra Control Center
 
-. Vaya a la https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de productos de Astra Control Center"^] En el sitio de soporte de NetApp. Puede seleccionar la última versión u otra que desee en el menú desplegable.
+. Vaya a la https://["Página de descargas de productos de Astra Control Center"^] En el sitio de soporte de NetApp. Puede seleccionar la última versión u otra que desee en el menú desplegable.
 . Descargue el paquete que contiene Astra Control Center (`astra-control-center-[version].tar.gz`).
 . (Recomendado pero opcional) Descargue el paquete de certificados y firmas para Astra Control Center (`astra-control-center-certs-[version].tar.gz`) para verificar la firma del paquete:
 +
@@ -155,7 +155,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 . Inserte las imágenes del paquete en el directorio de imágenes de Astra Control Center en su registro local. Realice las siguientes sustituciones antes de ejecutar el `push-images` comando:
 +
 ** Sustituya <BUNDLE_FILE> por el nombre del archivo Astra Control Bundle (`acc.manifest.bundle.yaml`).
-** Sustituya <MY_FULL_REGISTRY_PATH> por la URL del repositorio de Docker; por ejemplo, "https://<docker-registry>"[].
+** Sustituya <MY_FULL_REGISTRY_PATH> por la URL del repositorio de Docker; por ejemplo, "https://[].
 ** Reemplace <MY_REGISTRY_USER> por el nombre de usuario.
 ** Sustituya <MY_REGISTRY_TOKEN> por un token autorizado para el registro.
 +

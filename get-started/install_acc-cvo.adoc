@@ -135,7 +135,7 @@ Cada uno de estos pasos se explica más detalladamente a continuación.
 
 Asegúrese de tener suficientes roles y permisos de IAM que le permiten instalar un clúster RedHat OpenShift y un conector BlueXP de NetApp (anteriormente Cloud Manager).
 
-Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-aws.html#initial-aws-credentials["Credenciales iniciales de AWS"^].
+Consulte https://["Credenciales iniciales de AWS"^].
 
 
 
@@ -143,7 +143,7 @@ Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-account
 
 Instale un clúster RedHat OpenShift Container Platform en AWS.
 
-Para obtener instrucciones de instalación, consulte https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html["Instalación de un clúster en AWS en OpenShift Container Platform"^].
+Para obtener instrucciones de instalación, consulte https://["Instalación de un clúster en AWS en OpenShift Container Platform"^].
 
 
 
@@ -151,7 +151,7 @@ Para obtener instrucciones de instalación, consulte https://docs.openshift.com/
 
 A continuación, configure AWS para crear una red virtual, configurar instancias de computación EC2, crear un bloque de AWS S3, crear un Elastic Container Register (ECR) para alojar las imágenes de Astra Control Center y empujar las imágenes a este registro.
 
-Siga la documentación de AWS para completar los pasos siguientes. Consulte https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html["Documentación de instalación de AWS"^].
+Siga la documentación de AWS para completar los pasos siguientes. Consulte https://["Documentación de instalación de AWS"^].
 
 . Cree una red virtual AWS.
 . Revise las instancias de computación EC2. Puede ser un servidor con configuración básica o máquinas virtuales en AWS.
@@ -180,8 +180,8 @@ Con NetApp BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añ
 
 Siga la documentación de BlueXP para completar los siguientes pasos. Consulte lo siguiente:
 
-* https://docs.netapp.com/us-en/occm/task_getting_started_aws.html["Introducción a Cloud Volumes ONTAP en AWS"^].
-* https://docs.netapp.com/us-en/occm/task_creating_connectors_aws.html#create-a-connector["Cree un conector en AWS mediante BlueXP"^]
+* https://["Introducción a Cloud Volumes ONTAP en AWS"^].
+* https://["Cree un conector en AWS mediante BlueXP"^]
 
 
 .Pasos
@@ -323,8 +323,8 @@ El primer paso es instalar un clúster RedHat OpenShift en GCP.
 
 Para obtener instrucciones de instalación, consulte lo siguiente:
 
-* https://access.redhat.com/documentation/en-us/openshift_container_platform/4.10/html-single/installing/index#installing-on-gcp["Instalar un clúster OpenShift en GCP"^]
-* https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account["Creación de una cuenta de servicio de GCP"^]
+* https://["Instalar un clúster OpenShift en GCP"^]
+* https://["Creación de una cuenta de servicio de GCP"^]
 
 
 
@@ -344,7 +344,7 @@ Es posible que desee crear un grupo de recursos de clúster de plataforma y un g
 
 Asegúrese de tener suficientes roles y permisos de IAM que le permiten instalar un clúster RedHat OpenShift y un conector BlueXP de NetApp (anteriormente Cloud Manager).
 
-Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html#setting-up-permissions["Credenciales y permisos iniciales de GCP"^].
+Consulte https://["Credenciales y permisos iniciales de GCP"^].
 
 
 
@@ -401,18 +401,18 @@ done < astra-control-center-22.04.41.manifest
 
 Con NetApp BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añada un conector a GCP, cree un entorno de trabajo e importe el clúster.
 
-Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://docs.netapp.com/us-en/occm/task_getting_started_gcp.html["Introducción a Cloud Volumes ONTAP en GCP"^].
+Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://["Introducción a Cloud Volumes ONTAP en GCP"^].
 
 .Antes de empezar
 * Acceso a la cuenta de servicio de GCP con los permisos y roles de IAM necesarios
 
 
 .Pasos
-. Agregue sus credenciales a BlueXP. Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-adding-gcp-accounts.html["Adición de cuentas de GCP"^].
+. Agregue sus credenciales a BlueXP. Consulte https://["Adición de cuentas de GCP"^].
 . Agregue un conector para GCP.
 +
 .. Elija "GCP" como el proveedor.
-.. Introduzca las credenciales de GCP. Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html["Creación de un conector en GCP desde BlueXP"^].
+.. Introduzca las credenciales de GCP. Consulte https://["Creación de un conector en GCP desde BlueXP"^].
 .. Asegúrese de que el conector está en marcha y cambie a dicho conector.
 
 
@@ -560,8 +560,8 @@ El primer paso es instalar un clúster RedHat OpenShift en Azure.
 
 Para obtener instrucciones de instalación, consulte lo siguiente:
 
-* https://docs.openshift.com/container-platform/4.8/installing/installing_azure/preparing-to-install-on-azure.html["Instalando el clúster de OpenShift en Azure"^].
-* https://docs.openshift.com/container-platform/4.8/installing/installing_azure/installing-azure-account.html#installing-azure-account["Instalar una cuenta de Azure"^].
+* https://["Instalando el clúster de OpenShift en Azure"^].
+* https://["Instalar una cuenta de Azure"^].
 
 
 
@@ -581,7 +581,7 @@ Es posible que desee crear un grupo de recursos de clúster de plataforma y un g
 
 Asegúrese de tener suficientes roles y permisos IAM para poder instalar un clúster RedHat OpenShift y un conector BlueXP de NetApp.
 
-Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-azure.html["Credenciales y permisos de Azure"^].
+Consulte https://["Credenciales y permisos de Azure"^].
 
 
 
@@ -589,7 +589,7 @@ Consulte https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-account
 
 A continuación, configure Azure para crear una red virtual, configurar instancias de computación, crear un contenedor de Azure Blob, crear un registro de contenedores de Azure (ACR) para alojar las imágenes de Astra Control Center y colocar las imágenes en este registro.
 
-Siga la documentación de Azure para completar los siguientes pasos. Consulte https://docs.openshift.com/container-platform/4.8/installing/installing_azure/preparing-to-install-on-azure.html["Instalando el clúster de OpenShift en Azure"^].
+Siga la documentación de Azure para completar los siguientes pasos. Consulte https://["Instalando el clúster de OpenShift en Azure"^].
 
 . Cree una red virtual de Azure.
 . Revise las instancias de computación. Puede ser un servidor con configuración básica o máquinas virtuales en Azure.
@@ -634,19 +634,19 @@ done < astra-control-center-22.04.41.manifest
 
 Con BlueXP (anteriormente Cloud Manager), cree un espacio de trabajo, añada un conector a Azure, cree un entorno de trabajo e importe el clúster.
 
-Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://docs.netapp.com/us-en/occm/task_getting_started_azure.html["Introducción a BlueXP en Azure"^].
+Siga la documentación de BlueXP para completar los siguientes pasos. Consulte https://["Introducción a BlueXP en Azure"^].
 
 .Antes de empezar
 Acceso a la cuenta de Azure con los permisos y roles de IAM necesarios
 
 .Pasos
 . Agregue sus credenciales a BlueXP.
-. Agregue un conector para Azure. Consulte https://mysupport.netapp.com/site/info/cloud-manager-policies["Políticas de BlueXP"^].
+. Agregue un conector para Azure. Consulte https://["Políticas de BlueXP"^].
 +
 .. Elija *Azure* como proveedor.
 .. Introduzca las credenciales de Azure, incluidos el ID de aplicación, el secreto de cliente y el ID del directorio (inquilino).
 +
-Consulte https://docs.netapp.com/us-en/occm/task_creating_connectors_azure.html["Creación de un conector en Azure desde BlueXPr"^].
+Consulte https://["Creación de un conector en Azure desde BlueXPr"^].
 
 
 

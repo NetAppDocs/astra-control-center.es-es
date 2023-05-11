@@ -305,7 +305,6 @@
   <block id="9814d372a97a81b36a132ad2cacfdff7" category="paragraph">Un cubo puede estar en uno de estos estados:</block>
   <block id="42a0d288cadd6192424c03a28590c9fd" category="list-text">Pending: Se ha programado la detección del bloque.</block>
   <block id="fac51c0a7c720a76e584ea5b21dc752a" category="list-text">Disponible: El cucharón está disponible para su uso.</block>
-  <block id="7f5b082de7160fe4d88fcb73b137ef12" category="list-text">Removido: El cucharón no está accesible actualmente.</block>
   <block id="2670ea2abab7233a3fe9b29dabc0e86c" category="paragraph">Para obtener instrucciones sobre cómo gestionar los cubos con la API Astra Control, consulte <block ref="ef5b26cd6e9ab40377842cc20d2b4ebf" category="inline-link-macro-rx"></block>.</block>
   <block id="39ee41fd712c4d72dd841699443ac03f" category="paragraph">Puede realizar estas tareas relacionadas con la gestión de bloques:</block>
   <block id="b2e5388a257b4977b3f119a349e21dc1" category="inline-link-macro">Añadir un bucket</block>
@@ -341,7 +340,6 @@
   <block id="cea7924acf8d3c8a75f4abdda00f5229" category="paragraph">Debe eliminar las credenciales de bloque solo si se han aplicado credenciales nuevas a un bloque o si ya no se utiliza el bloque de forma activa.</block>
   <block id="a31d0ea55a51bfbd5a603a8f5fa7a37a" category="admonition">El primer conjunto de credenciales que agregue a Astra Control siempre está en uso porque Astra Control utiliza las credenciales para autenticar el bloque de copia de seguridad. No elimine estas credenciales si el bloque está en uso activo, ya que esto dará lugar a fallos de copia de seguridad y a falta de disponibilidad de copia de seguridad.</block>
   <block id="b2b8741126a8674edc86e6286a85c804" category="inline-link">solución de problemas de eliminación de credenciales del bloque</block>
-  <block id="983be0b26fa308ee99003c55cac37fb5" category="admonition">Si elimina las credenciales de bloque activas, consulte<block ref="939cc867881057c221247142d6425e0a" category="inline-link-rx"></block>.</block>
   <block id="576924ceb67cb5e87c15acdcb112c47d" category="paragraph">Para obtener instrucciones sobre cómo eliminar credenciales de S3 mediante la API Astra Control, consulte <block ref="ef5b26cd6e9ab40377842cc20d2b4ebf" category="inline-link-macro-rx"></block>.</block>
   <block id="52eddccfd67295f46df3a2a0dcec5e44" category="section-title">Retirar un cucharón</block>
   <block id="f53ffd7307293ef8f5f91ade211805ee" category="paragraph">Puede eliminar un cubo que ya no esté en uso o que no esté sano. Se recomienda hacer esto para mantener la configuración del almacén de objetos sencilla y actualizada.</block>
@@ -1256,13 +1254,11 @@
   <block id="70fc1bae36d48b09899dc323f7fbc3b4" category="paragraph">Los clones de aplicaciones dentro del mismo clúster fallan constantemente con el gráfico BitNami PostgreSQL 11.5.0. Para clonar correctamente, utilice una versión anterior o posterior del gráfico.</block>
   <block id="9a9f5df9245945e0d6fd7c59478636f9" category="section-title">Error en los clones de aplicaciones al utilizar restricciones de contexto de seguridad OCP de nivel de cuenta de servicio (SCC)</block>
   <block id="d3436d442a8980f0fa5c7451b72dc851" category="inline-link">artículo de base de conocimientos</block>
-  <block id="e6accc2a7c1df4a7d754d698ff720755" category="paragraph">Un clon de aplicación podría fallar si las restricciones de contexto de seguridad originales están configuradas en el nivel de cuenta de servicio dentro del espacio de nombres en el clúster de OpenShift Container Platform. Cuando se produce un error en el clon de la aplicación, aparece en el área aplicaciones gestionadas del Centro de control de Astra con el estado<block ref="93f07b720ebf7d1246512569761a5804" prefix=" " category="inline-code"></block>. Consulte<block ref="9fa49b796d4996efbeb6cfe9ed39c95e" category="inline-link-rx"></block> si quiere más información.</block>
   <block id="3460be97ad18de8f927ac029b73aea1e" category="section-title">Los backups de aplicaciones y las snapshots producen errores si la clase volumesnapshotse añade después de gestionar un clúster</block>
   <block id="4640bdf0aa8bd9424ced0104155962b8" category="paragraph">Los backups y las Snapshot fallan con un<block ref="ac08e080769a07edb99e40a7cec2c15e" prefix=" " category="inline-code"></block> en este escenario. Como solución alternativa, actualice la lista de aplicaciones.</block>
   <block id="1af0576f77189b1c71e1d3a9eade995a" category="section-title">Se produce un error en los clones de aplicaciones después de poner en marcha una aplicación con una clase de almacenamiento establecida</block>
   <block id="99dd9758763fdd9d63c8172bb77a83e6" category="paragraph">Una vez que se implementa una aplicación con una clase de almacenamiento definida explícitamente (por ejemplo,<block ref="f0318d56e2bef7e2cc1e885347ef6b43" prefix=" " category="inline-code"></block>), los intentos posteriores de clonar la aplicación requieren que el clúster de destino tenga la clase de almacenamiento especificada originalmente. Se producirá un error al clonar una aplicación con una clase de almacenamiento definida explícitamente a un clúster que no tenga la misma clase de almacenamiento. No existen pasos de recuperación en este escenario.</block>
   <block id="36b09903bc03f599758bd10a012681dc" category="section-title">La administración de un clúster con Astra Control Center falla cuando el archivo kubeconfig predeterminado contiene más de un contexto</block>
-  <block id="520978df3f125bf15af9a3b4c1e17a9e" category="paragraph">No puede utilizar una imagen de kubeconfig con más de un clúster y contexto en él. Consulte <block ref="f42e06683377be6f7c68a4e8b05a16c0" category="inline-link-macro-rx"></block> si quiere más información.</block>
   <block id="82471e9f643dacab1a6103e19aa281a3" category="section-title">Los clústeres gestionados no aparecen en Cloud Insights de NetApp cuando se conectan a través de un proxy</block>
   <block id="96f49a6fadb537fbf8c6f3a4a4564854" category="paragraph">Cuando Astra Control Center se conecta a Cloud Insights de NetApp mediante un proxy, es posible que los clústeres gestionados no aparezcan en Cloud Insights. Para solucionar esta solución, ejecute los siguientes comandos en cada clúster gestionado:</block>
   <block id="f64cab133147d09d35d2708459ada555" category="section-title">Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión</block>
@@ -2379,7 +2375,6 @@
   <block id="231cf4c70d866b616c21baddaeed0696" category="doc">Resolución de problemas</block>
   <block id="36e2bd9e7950f46d3ea6d2bca4c50ba1" category="paragraph">Aprenda a solucionar algunos problemas comunes que puede encontrar.</block>
   <block id="5fed03116ab579cfabba1dfd68c70bab" category="inline-link">Base de conocimientos de NetApp para Astra</block>
-  <block id="62b48e6002e259d6c98b0960c375f121" category="paragraph"><block ref="62b48e6002e259d6c98b0960c375f121" category="inline-link-rx"></block></block>
   <block id="4be9b50faf5ab46a9d28ac23f7713bec" category="inline-link">Cómo cargar un archivo en NetApp (se requiere inicio de sesión)</block>
   <block id="3b6bf15bbdfc90c8dc6d6778808539e1" category="list-text"><block ref="3b6bf15bbdfc90c8dc6d6778808539e1" category="inline-link-rx"></block></block>
   <block id="a921a3947d243a28982ffc8a6f357d21" category="inline-link">Cómo cargar manualmente un archivo en NetApp (se requiere inicio de sesión)</block>
@@ -2393,7 +2388,6 @@
   <block id="e9f9b053971e4cd8cce3a402331a125b" category="paragraph">Puede acceder a las opciones de soporte desde la interfaz de usuario del Centro de control de Astra seleccionando la pestaña *Soporte* del menú principal.</block>
   <block id="9d795eb350d2c42a03b181a4bc513987" category="paragraph">Estas opciones están disponibles de forma gratuita las 24 horas del día, los 7 días de la semana</block>
   <block id="68f269105158a82f8e06dd324631610e" category="inline-link">*Knowledge base* (se requiere inicio de sesión)</block>
-  <block id="3ce7820e1a8dcaf1b20e89638e9eb65c" category="list-text"><block ref="c21c91b055ef6d38b9e7473e1602e44f" category="inline-link-rx"></block>: Buscar artículos, preguntas frecuentes o romper información relacionada con Astra Control.</block>
   <block id="54fb836d65dfa963fa159aa13bf9fe60" category="list-text">*Centro de documentación*: Este es el sitio de documentación que está viendo actualmente.</block>
   <block id="35cdc0acd4828a4d409d79a5f18ee353" category="inline-link">*Obtenga ayuda a través de Discord*</block>
   <block id="5782a764d5148bc0a62fa0db213a073b" category="list-text"><block ref="f560054dea7b7d17ab98f97d9a55b6ac" category="inline-link-rx"></block>: Ve a Astra en la categoría Pub para conectarte con colegas y expertos.</block>
@@ -2874,4 +2868,10 @@
   <block id="9b846b7f30a8509224caa21eb61515be" category="list-text"><block ref="097c36d7e339c9c56e3325b9bd9b1890" category="inline-link-macro-rx"></block> Al iniciar sesión en el sitio de soporte de NetApp y navegar a sus licencias de software en el menú Sistemas.</block>
   <block id="385a524cc6007fc04ac1f61b90b72fa0" category="inline-link-macro">Soporte para migrar volúmenes de la clase de almacenamiento &lt;block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category='inline-code'/&gt; a la clase de almacenamiento ontap-nas</block>
   <block id="30070e59814ec1fda4c30c1c31eefb74" category="list-text"><block ref="8b33402cf5fbcddbe249556483cf0cc5" category="inline-link-macro-rx"></block></block>
+  <block id="8dd1f225c8914473641273beab27cfb5" category="list-text"><block ref="48b751d095184607defa7b45448cfbd4" category="inline-link-rx"></block>: Buscar artículos, preguntas frecuentes o romper información relacionada con Astra Control.</block>
+  <block id="a1e431f4eeaf20669c6a323a70204f3b" category="paragraph"><block ref="a1e431f4eeaf20669c6a323a70204f3b" category="inline-link-rx"></block></block>
+  <block id="192aebb6811705e0e43946e8f3c7ee31" category="paragraph">Un clon de aplicación podría fallar si las restricciones de contexto de seguridad originales están configuradas en el nivel de cuenta de servicio dentro del espacio de nombres en el clúster de OpenShift Container Platform. Cuando se produce un error en el clon de la aplicación, aparece en el área aplicaciones gestionadas del Centro de control de Astra con el estado<block ref="93f07b720ebf7d1246512569761a5804" prefix=" " category="inline-code"></block>. Consulte<block ref="664cdc6e32eb2b8d6157f7f7774ed5d3" category="inline-link-rx"></block> si quiere más información.</block>
+  <block id="150c473dfbcbc21128b1b0163082e277" category="paragraph">No puede utilizar una imagen de kubeconfig con más de un clúster y contexto en él. Consulte <block ref="a221b9db35a895d6b52e9dd52f69851e" category="inline-link-macro-rx"></block> si quiere más información.</block>
+  <block id="17aaff3db5ad600ae90d1c45f82a9ce8" category="list-text">Eliminado: No se puede acceder al depósito actualmente.</block>
+  <block id="a5e4709506a688389ca2ed37bb81ac98" category="admonition">Si elimina las credenciales de bloque activas, consulte<block ref="8270c6fae649ca696475ea8dc76c4710" category="inline-link-rx"></block>.</block>
 </blocks>
