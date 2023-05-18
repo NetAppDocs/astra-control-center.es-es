@@ -102,7 +102,7 @@ También puede realizar copias de seguridad de una aplicación en cualquier mome
 NOTE: Los bloques de S3 de Astra Control Center no informan sobre la capacidad disponible. Antes de realizar una copia de seguridad o clonar aplicaciones gestionadas por Astra Control Center, compruebe la información de los bloques en el sistema de gestión ONTAP o StorageGRID.
 
 
-IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, las copias de seguridad son disruptivas y la aplicación no estará disponible hasta que se complete la operación de copia de seguridad.
+IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, asegúrese de que ha definido un `backendType` parámetro en la https://["Objeto de almacenamiento de Kubernetes"^] con un valor de `ontap-nas-economy` antes de ejecutar cualquier operación de protección. Copias de seguridad para aplicaciones respaldadas por el `ontap-nas-economy` son disruptivos y la aplicación no estará disponible hasta que se complete la operación de backup.
 
 .Pasos
 . Seleccione *aplicaciones*.
