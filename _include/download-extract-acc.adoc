@@ -6,7 +6,7 @@
 
 == Descargue y extraiga Astra Control Center
 
-. Vaya a la https://["Página de descargas de Astra Control Center"^] En el sitio de soporte de NetApp.
+. Vaya a la https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de Astra Control Center"^] En el sitio de soporte de NetApp.
 . Descargue el paquete que contiene Astra Control Center (`astra-control-center-[version].tar.gz`).
 . (Recomendado pero opcional) Descargue el paquete de certificados y firmas para Astra Control Center (`astra-control-center-certs-[version].tar.gz`) para verificar la firma del paquete:
 +

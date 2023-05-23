@@ -16,4 +16,4 @@ Astra Control dispone de una API REST que le permite acceder directamente a la f
 
 Para configurar y gestionar sus aplicaciones Kubernetes, puede utilizar la interfaz de usuario de Astra Control Center o la API de Astra Control.
 
-Para obtener más información, visite la https://["Documentos de automatización de Astra"^].
+Para obtener más información, visite la https://docs.netapp.com/us-en/astra-automation/["Documentos de automatización de Astra"^].

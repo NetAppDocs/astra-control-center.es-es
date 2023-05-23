@@ -71,7 +71,7 @@ La eliminación de un clúster de Astra Control no realizará ningún cambio en 
 
 WARNING: Quite siempre un clúster de Astra Control antes de eliminarlo mediante cualquier otro método. La eliminación de un clúster con otra herramienta mientras Astra Control sigue gestionando puede causar problemas para su cuenta Astra Control.
 
-*¿Astra Trident de NetApp se desinstala automáticamente de un clúster cuando lo desgestiono?* Al desgestionar un clúster desde Astra Control Center, Astra Trident no se desinstala automáticamente del clúster. Para desinstalar Astra Trident, debes hacerlo https://["Siga estos pasos en la documentación de Astra Trident"^].
+*¿Astra Trident de NetApp se desinstala automáticamente de un clúster cuando lo desgestiono?* Al desgestionar un clúster desde Astra Control Center, Astra Trident no se desinstala automáticamente del clúster. Para desinstalar Astra Trident, debes hacerlo https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Siga estos pasos en la documentación de Astra Trident"^].
 
 
 

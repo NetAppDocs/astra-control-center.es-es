@@ -36,5 +36,5 @@ Cuando agregue un clúster a Astra Control Center, se le pedirá que seleccione 
 
 == Si quiere más información
 
-* https://["Documentación de Astra Trident"^]
+* https://docs.netapp.com/us-en/trident/index.html["Documentación de Astra Trident"^]
 

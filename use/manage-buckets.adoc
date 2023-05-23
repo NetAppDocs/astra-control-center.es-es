@@ -116,7 +116,7 @@ Debe eliminar las credenciales de bloque solo si se han aplicado credenciales nu
 TIP: El primer conjunto de credenciales que agregue a Astra Control siempre está en uso porque Astra Control utiliza las credenciales para autenticar el bloque de copia de seguridad. No elimine estas credenciales si el bloque está en uso activo, ya que esto dará lugar a fallos de copia de seguridad y a falta de disponibilidad de copia de seguridad.
 
 
-NOTE: Si elimina las credenciales de bloque activas, consulte https://["solución de problemas de eliminación de credenciales del bloque"].
+NOTE: Si elimina las credenciales de bloque activas, consulte https://kb.netapp.com/Cloud/Astra/Control/Deleting_active_S3_bucket_credentials_leads_to_spurious_500_errors_reported_in_the_UI["solución de problemas de eliminación de credenciales del bloque"].
 
 Para obtener instrucciones sobre cómo eliminar credenciales de S3 mediante la API Astra Control, consulte link:https://docs.netapp.com/us-en/astra-automation/["Información sobre API y automatización de Astra"^].
 
@@ -151,5 +151,5 @@ NOTE: Astra Control garantiza en primer lugar que no existan normativas de progr
 
 == Obtenga más información
 
-* https://["Utilice la API Astra Control"^]
+* https://docs.netapp.com/us-en/astra-automation/index.html["Utilice la API Astra Control"^]
 

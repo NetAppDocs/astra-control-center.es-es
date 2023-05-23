@@ -53,7 +53,7 @@ Puede ver la información del back-end de almacenamiento desde Dashboard o desde
 
 Vea información sobre el estado, la capacidad y el rendimiento del back-end (rendimiento de IOPS y/o latencia).
 
-Puede ver los volúmenes que usan las aplicaciones de Kubernetes, que se almacenan en un back-end de almacenamiento seleccionado. Con Cloud Insights, puede ver información adicional. Consulte https://["Documentación de Cloud Insights"^].
+Puede ver los volúmenes que usan las aplicaciones de Kubernetes, que se almacenan en un back-end de almacenamiento seleccionado. Con Cloud Insights, puede ver información adicional. Consulte https://docs.netapp.com/us-en/cloudinsights/["Documentación de Cloud Insights"^].
 
 .Pasos
 . En el área de navegación de la izquierda, seleccione *Backends*.
@@ -91,7 +91,7 @@ Para obtener más información sobre la activación de la autenticación basada 
 ** *Usar credenciales de administrador*: Ingrese la dirección IP de administración del clúster de ONTAP y las credenciales de administración. Las credenciales deben ser credenciales para todo el clúster.
 +
 
-NOTE: El usuario cuyas credenciales introduzca aquí debe tener la `ontapi` Método de acceso de inicio de sesión de usuario habilitado en System Manager de ONTAP en el clúster de ONTAP. Si planea utilizar la replicación de SnapMirror, aplique las credenciales de usuario con el rol "admin", que tiene los métodos de acceso `ontapi` y.. `http`, En clústeres ONTAP de origen y destino. Consulte https://["Gestionar cuentas de usuario en la documentación de ONTAP"^] si quiere más información.
+NOTE: El usuario cuyas credenciales introduzca aquí debe tener la `ontapi` Método de acceso de inicio de sesión de usuario habilitado en System Manager de ONTAP en el clúster de ONTAP. Si planea utilizar la replicación de SnapMirror, aplique las credenciales de usuario con el rol "admin", que tiene los métodos de acceso `ontapi` y.. `http`, En clústeres ONTAP de origen y destino. Consulte https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list["Gestionar cuentas de usuario en la documentación de ONTAP"^] si quiere más información.
 
 ** *Utilice un certificado*: Cargue el certificado `.pem` archivo, la clave de certificado `.key` archivo y, opcionalmente, el archivo de entidad de certificación.
 
@@ -164,5 +164,5 @@ Puede eliminar un back-end de almacenamiento que ya no se esté utilizando. Se r
 
 == Obtenga más información
 
-* https://["Utilice la API Astra Control"^]
+* https://docs.netapp.com/us-en/astra-automation/index.html["Utilice la API Astra Control"^]
 

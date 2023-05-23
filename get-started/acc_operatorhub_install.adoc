@@ -12,7 +12,7 @@ summary: Si utiliza Red Hat OpenShift, puede instalar Astra Control Center media
 
 
 [role="lead"]
-Si utiliza Red Hat OpenShift, puede instalar Astra Control Center mediante el operador certificado de Red Hat. Utilice este procedimiento para instalar Astra Control Center desde https://["Catálogo de Red Hat Ecosystem"^] O con Red Hat OpenShift Container Platform.
+Si utiliza Red Hat OpenShift, puede instalar Astra Control Center mediante el operador certificado de Red Hat. Utilice este procedimiento para instalar Astra Control Center desde https://catalog.redhat.com/software/operators/explore["Catálogo de Red Hat Ecosystem"^] O con Red Hat OpenShift Container Platform.
 
 Después de completar este procedimiento, debe volver al procedimiento de instalación para completar el link:../get-started/install_acc.html#verify-system-status["pasos restantes"^] para verificar que la instalación se ha realizado correctamente e iniciar sesión.
 
@@ -63,7 +63,7 @@ oc create namespace netapp-acc-operator
 
 == Descargue y extraiga Astra Control Center
 
-. Vaya a la https://["Página de descargas de Astra Control Center"^] En el sitio de soporte de NetApp.
+. Vaya a la https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de Astra Control Center"^] En el sitio de soporte de NetApp.
 . Descargue el paquete que contiene Astra Control Center (`astra-control-center-[version].tar.gz`).
 . (Recomendado pero opcional) Descargue el paquete de certificados y firmas para Astra Control Center (`astra-control-center-certs-[version].tar.gz`) para verificar la firma del paquete:
 +
@@ -134,7 +134,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 . Inserte las imágenes del paquete en el directorio de imágenes de Astra Control Center en su registro local. Realice las siguientes sustituciones antes de ejecutar el `push-images` comando:
 +
 ** Sustituya <BUNDLE_FILE> por el nombre del archivo Astra Control Bundle (`acc.manifest.bundle.yaml`).
-** Sustituya <MY_FULL_REGISTRY_PATH> por la URL del repositorio de Docker; por ejemplo, "https://[].
+** Sustituya <MY_FULL_REGISTRY_PATH> por la URL del repositorio de Docker; por ejemplo, "https://<docker-registry>"[].
 ** Reemplace <MY_REGISTRY_USER> por el nombre de usuario.
 ** Sustituya <MY_REGISTRY_TOKEN> por un token autorizado para el registro.
 +
@@ -230,7 +230,7 @@ image:openshift_operatorhub.png["Esta imagen muestra la página de instalación 
 
 ** En el catálogo de ecosistemas de Red Hat:
 +
-... Seleccione Astra Control Center de NetApp https://["operador"^].
+... Seleccione Astra Control Center de NetApp https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274["operador"^].
 ... Seleccione *desplegar y utilizar*.
 
 

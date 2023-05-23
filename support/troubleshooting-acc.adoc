@@ -14,11 +14,11 @@ summary: 'NetApp ofrece compatibilidad con Astra Control de varias formas. Hay d
 [role="lead"]
 Aprenda a solucionar algunos problemas comunes que puede encontrar.
 
-https://["Base de conocimientos de NetApp para Astra"^]
+https://kb.netapp.com/Cloud/Astra/Control["Base de conocimientos de NetApp para Astra"^]
 
 [discrete]
 == Obtenga más información
 
-* https://["Cómo cargar un archivo en NetApp (se requiere inicio de sesión)"^]
-* https://["Cómo cargar manualmente un archivo en NetApp (se requiere inicio de sesión)"^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp["Cómo cargar un archivo en NetApp (se requiere inicio de sesión)"^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_manually_upload_AutoSupport_messages_to_NetApp_in_ONTAP_9["Cómo cargar manualmente un archivo en NetApp (se requiere inicio de sesión)"^]
 

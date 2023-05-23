@@ -14,9 +14,9 @@ summary: La documentación de versiones anteriores está disponible por si no es
 [role="lead"]
 Hay documentación disponible sobre versiones anteriores.
 
-* https://["Documentación de Astra Control Center 22.11"^]
-* https://["Documentación de Astra Control Center 22.08"^]
-* https://["Documentación de Astra Control Center 22.04"^]
-* https://["Documentación de Astra Control Center 21.12"^]
-* https://["Documentación de Astra Control Center 21.08"^]
+* https://docs.netapp.com/us-en/astra-control-center-2211/index.html["Documentación de Astra Control Center 22.11"^]
+* https://docs.netapp.com/us-en/astra-control-center-2208/index.html["Documentación de Astra Control Center 22.08"^]
+* https://docs.netapp.com/us-en/astra-control-center-2204/index.html["Documentación de Astra Control Center 22.04"^]
+* https://docs.netapp.com/us-en/astra-control-center-2112/index.html["Documentación de Astra Control Center 21.12"^]
+* https://docs.netapp.com/us-en/astra-control-center-2108/index.html["Documentación de Astra Control Center 21.08"^]
 

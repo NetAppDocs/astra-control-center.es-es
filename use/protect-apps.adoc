@@ -12,7 +12,7 @@ summary: Proteja sus aplicaciones tomando snapshots y backups usando una políti
 
 
 [role="lead"]
-Proteger todas las aplicaciones mediante la toma de snapshots y backups a través de una política de protección automatizada o de manera ad hoc. Puede utilizar la interfaz de usuario de Astra Control Center o https://["La API de control Astra"^] para proteger aplicaciones.
+Proteger todas las aplicaciones mediante la toma de snapshots y backups a través de una política de protección automatizada o de manera ad hoc. Puede utilizar la interfaz de usuario de Astra Control Center o https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para proteger aplicaciones.
 
 .Acerca de esta tarea
 * *Helm implementó aplicaciones*: Si utiliza Helm para implementar aplicaciones, Astra Control Center requiere Helm versión 3. Se admite por completo la gestión y clonación de las aplicaciones implementadas con Helm 3 (o actualizadas de Helm 2 a Helm 3). Las aplicaciones implementadas con Helm 2 no son compatibles.
@@ -41,7 +41,7 @@ Puede realizar las siguientes tareas relacionadas con la protección de los dato
 
 La política de protección protege una aplicación mediante la creación de snapshots, backups o ambos con una programación definida. Puede optar por crear snapshots y backups por hora, día, semana y mes, y especificar la cantidad de copias que desea retener.
 
-Si necesita que backups o snapshots se ejecuten con más frecuencia de una vez por hora, puede hacerlo https://["Utilice la API REST de Astra Control para crear copias Snapshot y copias de seguridad"^].
+Si necesita que backups o snapshots se ejecuten con más frecuencia de una vez por hora, puede hacerlo https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html["Utilice la API REST de Astra Control para crear copias Snapshot y copias de seguridad"^].
 
 
 TIP: Reajuste los programas de copia de seguridad y replicación para evitar superposiciones de programas. Por ejemplo, realice backups en la parte superior de la hora cada hora y programe la replicación para que comience con un desplazamiento de 5 minutos y un intervalo de 10 minutos.
@@ -102,7 +102,7 @@ También puede realizar copias de seguridad de una aplicación en cualquier mome
 NOTE: Los bloques de S3 de Astra Control Center no informan sobre la capacidad disponible. Antes de realizar una copia de seguridad o clonar aplicaciones gestionadas por Astra Control Center, compruebe la información de los bloques en el sistema de gestión ONTAP o StorageGRID.
 
 
-IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, asegúrese de que ha definido un `backendType` parámetro en la https://["Objeto de almacenamiento de Kubernetes"^] con un valor de `ontap-nas-economy` antes de ejecutar cualquier operación de protección. Copias de seguridad para aplicaciones respaldadas por el `ontap-nas-economy` son disruptivos y la aplicación no estará disponible hasta que se complete la operación de backup.
+IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, asegúrese de que ha definido un `backendType` parámetro en la https://docs.netapp.com/us-en/trident/trident-reference/objects.html#kubernetes-storageclass-objects["Objeto de almacenamiento de Kubernetes"^] con un valor de `ontap-nas-economy` antes de ejecutar cualquier operación de protección. Copias de seguridad para aplicaciones respaldadas por el `ontap-nas-economy` son disruptivos y la aplicación no estará disponible hasta que se complete la operación de backup.
 
 .Pasos
 . Seleccione *aplicaciones*.

@@ -47,11 +47,11 @@ La replicación de aplicaciones de Astra Control requiere que se cumplan los sig
 
 * Para lograr una recuperación ante desastres sin problemas, le recomendamos que ponga en marcha Astra Control Center en un tercer dominio de fallo o ubicación secundaria.
 * El clúster de Kubernetes host de la aplicación y un clúster de Kubernetes de destino se deben gestionar junto con sus clústeres de ONTAP, lo que es ideal para diferentes dominios de fallo o sitios.
-* Los clústeres de ONTAP y la SVM de host se deben emparejar. Consulte https://["Información general sobre relaciones entre iguales de clústeres y SVM"^].
+* Los clústeres de ONTAP y la SVM de host se deben emparejar. Consulte https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html["Información general sobre relaciones entre iguales de clústeres y SVM"^].
 * La SVM remota con emparejamiento debe estar disponible para Astra Trident en el clúster de destino.
 * Debe haber Astra Trident versión 22.07 o superior en los clústeres ONTAP de origen y destino.
-* Las licencias asíncronas de SnapMirror de ONTAP que utilizan el paquete de protección de datos deben habilitarse en los clústeres de ONTAP de origen y de destino. Consulte https://["Información general sobre las licencias de SnapMirror en ONTAP"^].
-* Al añadir un back-end de almacenamiento de ONTAP a Astra Control Center, aplique las credenciales de usuario con la función "admin", que cuenta con métodos de acceso `http` y.. `ontapi` Se habilitó en los clústeres de origen y destino de ONTAP. Consulte https://["Gestionar cuentas de usuario en la documentación de ONTAP"^] si quiere más información.
+* Las licencias asíncronas de SnapMirror de ONTAP que utilizan el paquete de protección de datos deben habilitarse en los clústeres de ONTAP de origen y de destino. Consulte https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["Información general sobre las licencias de SnapMirror en ONTAP"^].
+* Al añadir un back-end de almacenamiento de ONTAP a Astra Control Center, aplique las credenciales de usuario con la función "admin", que cuenta con métodos de acceso `http` y.. `ontapi` Se habilitó en los clústeres de origen y destino de ONTAP. Consulte https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list["Gestionar cuentas de usuario en la documentación de ONTAP"^] si quiere más información.
 * Astra Control debe gestionar los clústeres de Kubernetes de origen y destino, y los clústeres de ONTAP.
 +
 

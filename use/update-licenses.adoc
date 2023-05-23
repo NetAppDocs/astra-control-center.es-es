@@ -12,10 +12,10 @@ summary: Puede convertir una licencia de evaluación a una licencia completa, o 
 
 
 [role="lead"]
-Puede convertir una licencia de evaluación a una licencia completa, o puede actualizar una evaluación existente o una licencia completa con una nueva licencia. Si no tiene una licencia completa, trabaje con su contacto de ventas de NetApp para obtener un número de serie y una licencia completa. Puede utilizar la interfaz de usuario de Astra Control Center o https://["La API de control Astra"^] para actualizar una licencia existente.
+Puede convertir una licencia de evaluación a una licencia completa, o puede actualizar una evaluación existente o una licencia completa con una nueva licencia. Si no tiene una licencia completa, trabaje con su contacto de ventas de NetApp para obtener un número de serie y una licencia completa. Puede utilizar la interfaz de usuario de Astra Control Center o https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para actualizar una licencia existente.
 
 .Pasos
-. Inicie sesión en la https://["Sitio de soporte de NetApp"^].
+. Inicie sesión en la https://mysupport.netapp.com/site/["Sitio de soporte de NetApp"^].
 . Acceda a la página de descarga de Astra Control Center, introduzca el número de serie y descargue el archivo de licencia completo de NetApp (NLF).
 . Inicie sesión en la interfaz de usuario de Astra Control Center.
 . En la navegación de la izquierda, seleccione *cuenta* > *Licencia*.
