@@ -47,7 +47,7 @@ Si necesita que backups o snapshots se ejecuten con más frecuencia de una vez p
 TIP: Reajuste los programas de copia de seguridad y replicación para evitar superposiciones de programas. Por ejemplo, realice backups en la parte superior de la hora cada hora y programe la replicación para que comience con un desplazamiento de 5 minutos y un intervalo de 10 minutos.
 
 
-IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, las políticas de protección no se pueden utilizar. Si desea una política de protección, use una clase de almacenamiento alternativa.
+IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, las políticas de protección no se pueden utilizar. Migra a un tipo de almacenamiento compatible con Astra Control si quieres programar backups y copias Snapshot.
 
 .Pasos
 . Seleccione *aplicaciones* y, a continuación, seleccione el nombre de una aplicación.
@@ -80,7 +80,7 @@ Astra Control implementa la política de protección de datos mediante la creaci
 Puede crear una snapshot bajo demanda en cualquier momento.
 
 
-IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, no se pueden utilizar instantáneas. Utilice una clase de almacenamiento alternativa para las instantáneas.
+IMPORTANT: Si su aplicación utiliza una clase de almacenamiento respaldada por `ontap-nas-economy` controlador, no se pueden crear instantáneas. Utilice una clase de almacenamiento alternativa para las instantáneas.
 
 .Pasos
 . Seleccione *aplicaciones*.

@@ -144,7 +144,7 @@ Debe tener un registro de imágenes de Docker privado existente en el que pueda 
 
 == Licencia de Astra Control Center
 
-Se requiere una licencia de Astra Control Center. Al instalar Astra Control Center, ya está activada una licencia de evaluación de 90 días para 4.800 CPU. Si necesita más capacidad o diferentes términos de evaluación, o si desea actualizar a una licencia completa, puede obtener otra licencia de evaluación o una licencia completa de NetApp. Necesita una licencia para proteger sus aplicaciones y datos. Consulte link:../concepts/intro.html["Características de Astra Control Center"] para obtener más detalles.
+Se requiere una licencia de Astra Control Center. Al instalar Astra Control Center, ya está activada una licencia de evaluación de 90 días para 4.800 CPU. Si necesita más capacidad o diferentes términos de evaluación, o si desea actualizar a una licencia completa, puede obtener otra licencia de evaluación o una licencia completa de NetApp. Necesita una licencia para proteger sus aplicaciones y datos.
 
 Para probar Astra Control Center, regístrate para obtener una prueba gratuita. Puede registrarse registrándose link:https://bluexp.netapp.com/astra-register["aquí"^].
 

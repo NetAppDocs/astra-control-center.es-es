@@ -119,7 +119,7 @@ TIP: Una etiqueta es una pareja clave/valor que se puede asignar a objetos de Ku
 
 .Acerca de esta tarea
 * Antes de empezar, también debe entender link:../use/manage-apps.html#what-about-system-namespaces["gestión de espacios de nombres estándar y del sistema"].
-* Si planea utilizar varios espacios de nombres con sus aplicaciones en Astra Control, link:../use/manage-roles.html#add-a-namespace-constraint-to-a-role["modificar los roles de usuario con restricciones de espacio de nombres"] Tras actualizar a una versión de Astra Control Center compatible con varios espacios de nombres.
+* Si planea utilizar varios espacios de nombres con sus aplicaciones en Astra Control, link:../use/manage-local-users-and-roles.html#add-a-namespace-constraint-to-a-role["modificar los roles de usuario con restricciones de espacio de nombres"] Tras actualizar a una versión de Astra Control Center compatible con varios espacios de nombres.
 * Para obtener instrucciones sobre cómo gestionar aplicaciones mediante la API de Astra Control, consulte link:https://docs.netapp.com/us-en/astra-automation/["Información sobre API y automatización de Astra"^].
 
 
@@ -132,7 +132,7 @@ TIP: Una etiqueta es una pareja clave/valor que se puede asignar a objetos de Ku
 
 === Defina los recursos que se van a administrar como una aplicación
 
-Puede especificar el link:../learn/app-management.html["Los recursos de Kubernetes forman una aplicación"] Que desea gestionar con Astra Control. Definir una aplicación le permite agrupar elementos de su clúster de Kubernetes en una única aplicación. Esta colección de recursos de Kubernetes está organizada por criterios de espacio de nombres y selector de etiquetas.
+Puede especificar el link:../concepts/app-management.html["Los recursos de Kubernetes forman una aplicación"] Que desea gestionar con Astra Control. Definir una aplicación le permite agrupar elementos de su clúster de Kubernetes en una única aplicación. Esta colección de recursos de Kubernetes está organizada por criterios de espacio de nombres y selector de etiquetas.
 
 Definir una aplicación le proporciona un control más granular de lo que se debe incluir en una operación Astra Control, que incluye clonado, copias Snapshot y backups.
 

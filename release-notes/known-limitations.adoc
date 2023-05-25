@@ -40,6 +40,7 @@ Las limitaciones conocidas identifican plataformas, dispositivos o funciones que
 * <<Es posible que no se conserven las copias de Snapshot durante la eliminación de una instancia de Astra Control Center>>
 * <<Limitaciones de usuarios y grupos LDAP>>
 * <<La página Actividad muestra hasta 100000 eventos>>
+* <<Es posible que las copias de Snapshot fallen en clústeres de Kubernetes 1,25 o posteriores con ciertas versiones de controladoras Snapshot>>
 
 
 
@@ -187,6 +188,21 @@ Astra Control Center admite hasta 5,000 grupos remotos y 10,000 usuarios remotos
 == La página Actividad muestra hasta 100000 eventos
 
 La página Actividad de Astra Control puede mostrar hasta 100.000 eventos. Para ver todos los eventos registrados, recupere los eventos mediante link:../rest-api/api-intro.html["API REST de Astra Control"^].
+
+
+
+== Es posible que las copias de Snapshot fallen en clústeres de Kubernetes 1,25 o posteriores con ciertas versiones de controladoras Snapshot
+
+Las snapshots de los clústeres de Kubernetes que ejecutan la versión 1,25 o posterior pueden fallar si la versión v1beta1 de las API del controlador de snapshots se instala en el clúster.
+
+Como solución alternativa, haga lo siguiente al actualizar instalaciones existentes de Kubernetes 1,25 o posteriores:
+
+. Elimine cualquier CRD de Snapshot existente y cualquier controlador de instantánea existente.
+. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Desinstale Astra Trident"^].
+. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller["Instale los CRD de instantánea y el controlador de instantánea"^].
+. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html["Instala la versión más reciente de Astra Trident"^].
+. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-create-a-volumesnapshotclass["Cree una instancia de VolumeSnapshotClass"^].
+
 
 
 

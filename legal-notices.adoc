@@ -47,7 +47,8 @@ https://www.netapp.com/us/legal/privacypolicy/index.aspx[]
 
 Los archivos de notificación proporcionan información sobre los derechos de autor y las licencias de terceros que se utilizan en software de NetApp.
 
-* link:NOTICE_AstraControlCenter_23.04.0.pdf["Aviso para Astra Control Center"^]
+* link:NOTICE_AstraControlCenter_23.04.1.pdf["Aviso para Astra Control Center 23.04.1"^]
+* link:NOTICE_AstraControlCenter_23.04.2.pdf["Aviso para Astra Control Center 23.04.2"^]
 
 
 

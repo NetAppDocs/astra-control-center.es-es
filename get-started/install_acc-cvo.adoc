@@ -37,8 +37,8 @@ Puede poner en marcha Astra Control Center en un clúster de Kubernetes autogest
 
 Antes de poner en marcha Astra Control Center en AWS, necesitará los siguientes elementos:
 
-* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"].
-* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"].
+* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"^].
+* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"^].
 * Cuenta de Cloud Central de NetApp
 * Si utiliza OCP, los permisos de Red Hat OpenShift Container Platform (OCP) (en el nivel de espacio de nombres para crear pods)
 * Credenciales de AWS, Access ID y Secret Key con permisos que permiten crear cubos y conectores
@@ -155,7 +155,7 @@ Siga la documentación de AWS para completar los pasos siguientes. Consulte http
 
 . Cree una red virtual AWS.
 . Revise las instancias de computación EC2. Puede ser un servidor con configuración básica o máquinas virtuales en AWS.
-. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en AWS para cumplir los requisitos de Astra. Consulte link:../requirements.html["Requisitos del Centro de Control de Astra"].
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en AWS para cumplir los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"^].
 . Cree al menos un bloque de AWS S3 para almacenar los backups.
 . Cree un AWS Elastic Container Registry (ECR) para alojar todas las imágenes ACC.
 +
@@ -214,7 +214,7 @@ TIP: Cloud Volumes ONTAP puede funcionar como un nodo único o en alta disponibi
 
 === Instale Astra Control Center para AWS
 
-Siga la norma link:../get-started/install_acc.html["Instrucciones de instalación de Astra Control Center"].
+Siga la norma link:../get-started/install_acc.html["Instrucciones de instalación de Astra Control Center"^].
 
 
 NOTE: AWS utiliza el tipo de bloque Generic S3.
@@ -231,8 +231,8 @@ Puede poner en marcha Astra Control Center en un clúster de Kubernetes autogest
 
 Antes de implementar Astra Control Center en GCP, necesitará los siguientes elementos:
 
-* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"].
-* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"].
+* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"^].
+* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"^].
 * Cuenta de Cloud Central de NetApp
 * Si se utiliza OCP, Red Hat OpenShift Container Platform (OCP) 4.10
 * Si utiliza OCP, los permisos de Red Hat OpenShift Container Platform (OCP) (en el nivel de espacio de nombres para crear pods)
@@ -356,7 +356,7 @@ Siga la documentación de GCP para completar los siguientes pasos. Consulte inst
 
 . Cree un proyecto de GCP y VPC en el GCP que planea utilizar para el clúster de OCP con el back-end de CVO.
 . Revise las instancias de computación. Puede tratarse de un servidor de configuración básica o máquinas virtuales en GCP.
-. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestro y trabajador, cambie el tipo de instancia de GCP para que cumpla los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"].
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestro y trabajador, cambie el tipo de instancia de GCP para que cumpla los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"^].
 . Cree al menos un bloque de almacenamiento en cloud de GCP para almacenar sus backups.
 . Crear un secreto, que es necesario para el acceso a bloques.
 . Cree un registro de Google Container para alojar todas las imágenes de Astra Control Center.
@@ -442,7 +442,7 @@ TIP: Cloud Volumes ONTAP puede funcionar como un nodo único o en alta disponibi
 
 === Instale Astra Control Center para GCP
 
-Siga la norma link:../get-started/install_acc.html["Instrucciones de instalación de Astra Control Center"].
+Siga la norma link:../get-started/install_acc.html["Instrucciones de instalación de Astra Control Center"^].
 
 
 NOTE: GCP utiliza el tipo de bloque Generic S3.
@@ -467,8 +467,8 @@ Puede poner en marcha Astra Control Center en un clúster de Kubernetes autogest
 
 Antes de poner en marcha Astra Control Center en Azure, necesitará los siguientes elementos:
 
-* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"].
-* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"].
+* Licencia Astra Control Center. Consulte link:../get-started/requirements.html["Requisitos de licencia de Astra Control Center"^].
+* link:../get-started/requirements.html["Cumpla los requisitos de Astra Control Center"^].
 * Cuenta de Cloud Central de NetApp
 * Si se utiliza OCP, Red Hat OpenShift Container Platform (OCP) 4.8
 * Si utiliza OCP, los permisos de Red Hat OpenShift Container Platform (OCP) (en el nivel de espacio de nombres para crear pods)
@@ -483,7 +483,7 @@ Asegúrese de que el entorno operativo que elija para alojar Astra Control Cente
 
 Astra Control Center requiere los siguientes recursos además de los requisitos de recursos del entorno:
 
-Consulte link:../get-started/requirements.html["Requisitos del entorno operativo del Centro de control de Astra"].
+Consulte link:../get-started/requirements.html["Requisitos del entorno operativo del Centro de control de Astra"^].
 
 [cols="1h,2a"]
 |===
@@ -593,7 +593,7 @@ Siga la documentación de Azure para completar los siguientes pasos. Consulte ht
 
 . Cree una red virtual de Azure.
 . Revise las instancias de computación. Puede ser un servidor con configuración básica o máquinas virtuales en Azure.
-. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en Azure para cumplir los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"].
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en Azure para cumplir los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"^].
 . Cree al menos un contenedor de Azure Blob para almacenar los backups.
 . Cree una cuenta de almacenamiento. Necesitará una cuenta de almacenamiento para crear un contenedor que se utilizará como bloque en Astra Control Center.
 . Crear un secreto, que es necesario para el acceso a bloques.
@@ -684,6 +684,6 @@ Esto importa su clúster de Red Hat OpenShift y asigna una clase de almacenamien
 
 === Instalar y configurar Astra Control Center para Azure
 
-Instale Astra Control Center con el estándar link:../get-started/install_acc.html["instrucciones de instalación"].
+Instale Astra Control Center con el estándar link:../get-started/install_acc.html["instrucciones de instalación"^].
 
-Con Astra Control Center, añada un bucket de Azure. Consulte link:../get-started/setup_overview.html["Configure Astra Control Center y añada cucharones"].
+Con Astra Control Center, añada un bucket de Azure. Consulte link:../get-started/setup_overview.html["Configure Astra Control Center y añada cucharones"^].
