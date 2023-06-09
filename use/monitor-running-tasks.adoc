@@ -19,7 +19,7 @@ Mientras ve una tarea en ejecución o completada, puede expandir los detalles de
 
 NOTE: Para las operaciones de clonado, las subtareas consisten en una operación de restauración de Snapshot y de Snapshot.
 
-Para ver más información sobre las tareas con errores, consulte link:view-account-activity.html["Controlar la actividad de la cuenta"].
+Para ver más información sobre las tareas fallidas, consulte link:view-account-activity.html["Controlar la actividad de la cuenta"].
 
 .Pasos
 . Mientras se está ejecutando una tarea, vaya a *aplicaciones*.

@@ -301,7 +301,7 @@ Astra Control Center utiliza un servicio del tipo "LoadBalancer" (`svc/traefik` 
 
 +
 
-NOTE: Para obtener más información sobre el tipo de servicio de "LoadBalancer" y la entrada, consulte link:../get-started/requirements.html["Requisitos"^].
+NOTE: Para obtener detalles sobre el tipo de servicio de “LoadBalancer” e Ingress, consulte link:../get-started/requirements.html["Requisitos"^].
 
 
 

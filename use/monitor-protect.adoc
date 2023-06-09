@@ -56,7 +56,7 @@ Puede editar la configuración del servidor proxy.
 .Pasos
 . Inicie sesión en Astra Control Center utilizando una cuenta con privilegios *admin*/*owner*.
 . Seleccione *cuenta* > *conexiones*.
-. Seleccione *Editar* en la lista desplegable para editar la conexión.
+. Seleccione *Editar* de la lista desplegable para editar la conexión.
 . Edite los detalles del servidor y la información de autenticación.
 . Seleccione *Guardar*.
 
@@ -176,7 +176,7 @@ NOTE: Solo puede editar las claves de API. Para cambiar la URL de inquilino de C
 .Pasos
 . Inicie sesión en Astra Control Center utilizando una cuenta con privilegios *admin*/*owner*.
 . Seleccione *cuenta* > *conexiones*.
-. Seleccione *Editar* en la lista desplegable para editar la conexión.
+. Seleccione *Editar* de la lista desplegable para editar la conexión.
 . Edite la configuración de la conexión Cloud Insights.
 . Seleccione *Guardar*.
 
@@ -320,7 +320,7 @@ Puede editar la conexión Fluentd a su instancia de Astra Control Center.
 .Pasos
 . Inicie sesión en Astra Control Center utilizando una cuenta con privilegios *admin*/*owner*.
 . Seleccione *cuenta* > *conexiones*.
-. Seleccione *Editar* en la lista desplegable para editar la conexión.
+. Seleccione *Editar* de la lista desplegable para editar la conexión.
 . Cambie la configuración del extremo fluentd.
 . Seleccione *Guardar*.
 

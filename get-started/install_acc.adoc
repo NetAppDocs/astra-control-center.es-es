@@ -37,6 +37,9 @@ kubectl get apiservices
 * Si ya existe un administrador de certificados en el clúster, tendrá que realizar algunos link:../get-started/cert-manager-prereqs.html["requisitos previos"^] Por lo tanto, Astra Control Center no intenta instalar su propio administrador de certificados. De forma predeterminada, Astra Control Center instala su propio administrador de certificados durante la instalación.
 
 
+
+TIP: Pon en marcha Astra Control Center en un tercer dominio de fallo o sitio secundario. Esto se recomienda para la replicación de aplicaciones y la recuperación ante desastres fluida.
+
 .Acerca de esta tarea
 El proceso de instalación de Astra Control Center le ayuda a hacer lo siguiente:
 
@@ -593,7 +596,17 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 | Ajuste | Orientación | Tipo | Opciones 
 
 
-| `ingressType` | Utilice uno de los siguientes tipos de entrada:*`Generic`* (`ingressType: "Generic"`) (Predeterminado) Utilice esta opción cuando tenga otro controlador de entrada en uso o prefiera usar su propio controlador de entrada. Después de implementar Astra Control Center, deberá configurar el link:../get-started/install_acc.html#set-up-ingress-for-load-balancing["controlador de entrada"^] Para exponer Astra Control Center con una URL.*`AccTraefik`* (`ingressType: "AccTraefik"`) Utilice esta opción cuando prefiera no configurar un controlador de entrada. Esto despliega el Astra Control Center `traefik` Puerta de enlace como servicio de tipo Kubernetes LoadBalancer. Astra Control Center utiliza un servicio del tipo "LoadBalancer" (`svc/traefik` En el espacio de nombres de Astra Control Center) y requiere que se le asigne una dirección IP externa accesible. Si se permiten equilibradores de carga en su entorno y aún no tiene uno configurado, puede utilizar MetalLB u otro equilibrador de carga de servicio externo para asignar una dirección IP externa al servicio. En la configuración interna del servidor DNS, debe apuntar el nombre DNS elegido para Astra Control Center a la dirección IP con equilibrio de carga. NOTA: Para obtener más información sobre el tipo de servicio de "LoadBalancer" y la entrada, consulte link:../get-started/requirements.html["Requisitos"^]. | cadena  a| 
+| `ingressType` | Utilice uno de los siguientes tipos de entrada:
+
+*`Generic`* (`ingressType: "Generic"`) (Predeterminado)
+Utilice esta opción cuando tenga otro controlador de entrada en uso o prefiera utilizar su propio controlador de entrada. Después de implementar Astra Control Center, deberá configurar el link:../get-started/install_acc.html#set-up-ingress-for-load-balancing["controlador de entrada"^] Para exponer Astra Control Center con una URL.
+
+*`AccTraefik`* (`ingressType: "AccTraefik"`)
+Utilice esta opción cuando prefiera no configurar un controlador de entrada. Esto despliega el Astra Control Center `traefik` Puerta de enlace como servicio de tipo Kubernetes LoadBalancer.
+
+Astra Control Center utiliza un servicio del tipo "LoadBalancer" (`svc/traefik` En el espacio de nombres de Astra Control Center) y requiere que se le asigne una dirección IP externa accesible. Si se permiten equilibradores de carga en su entorno y aún no tiene uno configurado, puede utilizar MetalLB u otro equilibrador de carga de servicio externo para asignar una dirección IP externa al servicio. En la configuración interna del servidor DNS, debe apuntar el nombre DNS elegido para Astra Control Center a la dirección IP con equilibrio de carga.
+
+NOTA: Para obtener detalles sobre el tipo de servicio de “LoadBalancer” y Ingress, consulte link:../get-started/requirements.html["Requisitos"^]. | cadena  a| 
 ** `Generic` (este es el valor predeterminado)
 ** `AccTraefik`
 

@@ -26,6 +26,7 @@ Las limitaciones conocidas identifican plataformas, dispositivos o funciones que
 
 .Limitaciones en la gestión de aplicaciones
 * <<No es posible restaurar varias aplicaciones en un espacio de nombres único de forma colectiva en un espacio de nombres diferente>>
+* <<Astra Control no es compatible con aplicaciones que usan varias clases de almacenamiento por espacio de nombres>>
 * <<Astra Control no asigna automáticamente bloques predeterminados para las instancias de la nube>>
 * <<Se pueden producir errores en los clones de aplicaciones instaladas con operadores de paso a referencia>>
 * <<No se admiten las operaciones de restauración in situ de las aplicaciones que utilizan un administrador de certificados>>
@@ -108,6 +109,12 @@ Cualquiera `member` El usuario con limitaciones de RBAC por nombre/ID de espacio
 == No es posible restaurar varias aplicaciones en un espacio de nombres único de forma colectiva en un espacio de nombres diferente
 
 Si administra varias aplicaciones en un espacio de nombres único (mediante la creación de varias definiciones de aplicaciones en Astra Control), no podrá restaurar todas las aplicaciones en un espacio de nombres único diferente. Es necesario restaurar cada aplicación a su propio espacio de nombres independiente.
+
+
+
+== Astra Control no es compatible con aplicaciones que usan varias clases de almacenamiento por espacio de nombres
+
+Astra Control admite aplicaciones que utilizan una única clase de almacenamiento por espacio de nombres. Al agregar una aplicación a un espacio de nombres, asegúrese de que la aplicación tenga la misma clase de almacenamiento que otras aplicaciones del espacio de nombres.
 
 
 

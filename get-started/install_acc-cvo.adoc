@@ -155,7 +155,7 @@ Siga la documentación de AWS para completar los pasos siguientes. Consulte http
 
 . Cree una red virtual AWS.
 . Revise las instancias de computación EC2. Puede ser un servidor con configuración básica o máquinas virtuales en AWS.
-. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en AWS para cumplir los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"^].
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en AWS para cumplir los requisitos de Astra.  Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"^].
 . Cree al menos un bloque de AWS S3 para almacenar los backups.
 . Cree un AWS Elastic Container Registry (ECR) para alojar todas las imágenes ACC.
 +
@@ -593,7 +593,7 @@ Siga la documentación de Azure para completar los siguientes pasos. Consulte ht
 
 . Cree una red virtual de Azure.
 . Revise las instancias de computación. Puede ser un servidor con configuración básica o máquinas virtuales en Azure.
-. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en Azure para cumplir los requisitos de Astra. Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"^].
+. Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en Azure para cumplir los requisitos de Astra.  Consulte link:../get-started/requirements.html["Requisitos del Centro de Control de Astra"^].
 . Cree al menos un contenedor de Azure Blob para almacenar los backups.
 . Cree una cuenta de almacenamiento. Necesitará una cuenta de almacenamiento para crear un contenedor que se utilizará como bloque en Astra Control Center.
 . Crear un secreto, que es necesario para el acceso a bloques.

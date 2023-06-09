@@ -50,11 +50,11 @@ Astra Control replica de forma asíncrona las copias Snapshot de las aplicacione
 
 La replicación de aplicaciones es diferente de la copia de seguridad y la restauración de aplicaciones de las siguientes formas:
 
-* *Replicación de aplicaciones*: Astra Control requiere que los clústeres de Kubernetes de origen y destino estén disponibles y gestionados con sus respectivos back-ends de almacenamiento de ONTAP configurados para habilitar SnapMirror de NetApp. Astra Control toma la instantánea de las aplicaciones basadas en normativas y la replica en el clúster remoto. La tecnología SnapMirror de NetApp se usa para replicar los datos de volúmenes persistentes. Para conmutar al nodo de respaldo, Astra Control puede poner en línea la aplicación replicada al volver a crear los objetos de aplicación en el clúster de Kubernetes de destino con los volúmenes replicados en el clúster de ONTAP de destino. Dado que los datos de volúmenes persistentes ya están presentes en el clúster de ONTAP de destino, Astra Control puede ofrecer tiempos de recuperación rápidos en caso de fallo.
+* *Replicación de aplicaciones*: Astra Control requiere que los clústeres de Kubernetes de origen y destino estén disponibles y gestionados con sus respectivos back-ends de almacenamiento de ONTAP configurados para habilitar SnapMirror de NetApp. Astra Control toma la copia Snapshot de la aplicación basada en políticas y la replica en el clúster remoto. La tecnología SnapMirror de NetApp se utiliza para replicar los datos de volumen persistentes. Para conmutar al nodo de respaldo, Astra Control puede poner en línea la aplicación replicada al volver a crear los objetos de aplicación en el clúster de Kubernetes de destino con los volúmenes replicados en el clúster de ONTAP de destino. Dado que los datos de volúmenes persistentes ya están presentes en el clúster de ONTAP de destino, Astra Control puede ofrecer tiempos de recuperación rápidos para la conmutación al respaldo.
 * *Copia de seguridad y restauración de aplicaciones*: Al hacer copias de seguridad de aplicaciones, Astra Control crea una instantánea de los datos de la aplicación y los almacena en un bloque de almacenamiento de objetos. Cuando se necesita una restauración, los datos del bloque deben copiarse a un volumen persistente del clúster de ONTAP. La operación de backup/restauración no requiere que el clúster de Kubernetes/ONTAP secundario esté disponible y gestionado, pero la copia de datos adicional puede provocar tiempos de restauración más prolongados.
 
 
-Para saber cómo replicar aplicaciones, consulte link:../use/replicate_snapmirror.html["Replicación de aplicaciones en un sistema remoto mediante la tecnología SnapMirror"].
+Para obtener más información sobre cómo replicar aplicaciones, consulte link:../use/replicate_snapmirror.html["Replicación de aplicaciones en un sistema remoto mediante la tecnología SnapMirror"].
 
 Las siguientes imágenes muestran el proceso de backup y restauración programado en comparación con el proceso de replicación.
 
@@ -62,7 +62,7 @@ El proceso de backup copia los datos en bloques de S3 y restaura a partir de blo
 
 image:acc-backup_4in.png["Esta imagen muestra un backup y una restauración programados entre dos clústeres de Kubernetes que usan S3 bucket"]
 
-Por otro lado, la replicación se realiza replicando en ONTAP para después crear el relevo de funciones en los recursos de Kubernetes:
+Por otro lado, la replicación se realiza replicando en ONTAP y, a continuación, una conmutación al respaldo crea los recursos de Kubernetes:
 
 image:acc-replication_4in.png["Esta imagen muestra la replicación y la conmutación al nodo de respaldo entre dos clústeres de Kubernetes y dos clústeres de ONTAP"]
 
