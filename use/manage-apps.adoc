@@ -69,8 +69,8 @@ Astra Control es compatible con los siguientes métodos de instalación de aplic
 ----
 kubectl apply -f myapp.yaml
 ----
-* *Helm 3*: Si utiliza Helm para instalar aplicaciones, Astra Control requiere Helm versión 3. La gestión y clonación de aplicaciones instaladas con Helm 3 (o actualizadas de Helm 2 a Helm 3) son totalmente compatibles. No se admite la administración de aplicaciones instaladas con Helm 2.
-* *Aplicaciones implementadas por el operador*: Astra Control admite aplicaciones instaladas con operadores de ámbito de espacio de nombres que, en general, están diseñados con una arquitectura de "paso por valor" en lugar de "paso por referencia". Un operador y la aplicación que instale deben usar el mismo espacio de nombres; es posible que deba modificar el archivo .yaml de despliegue para que el operador se asegure de que así sea.
+* *Helm 3*: Si utiliza Helm para instalar aplicaciones, Astra Control requiere Helm versión 3. Es totalmente compatible con la gestión y clonación de aplicaciones instaladas con Helm 3 (o actualizadas de Helm 2 a Helm 3). No se admite la administración de aplicaciones instaladas con Helm 2.
+* *Aplicaciones implementadas por el operador*: Astra Control admite aplicaciones instaladas con operadores de ámbito de espacio de nombres que, en general, están diseñadas con una arquitectura “pass-by-value” en lugar de “pass-by-reference”. Un operador y la aplicación que instala deben usar el mismo espacio de nombres; es posible que deba modificar el archivo YAML de implementación para que el operador se asegure de que este es el caso.
 +
 Las siguientes son algunas aplicaciones del operador que siguen estos patrones:
 
