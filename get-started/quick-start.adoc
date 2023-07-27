@@ -63,7 +63,7 @@ Complete algunas tareas básicas para comenzar:
 
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Cuatro"] Utilice Astra Control Center
-Cuando termine de configurar Astra Control Center, utiliza la interfaz de usuario de Astra Control o el https://docs.netapp.com/us-en/astra-automation/index.html["API de control Astra"^] para comenzar a administrar y proteger aplicaciones:
+Cuando termine de configurar Astra Control Center, utiliza la interfaz de usuario de Astra Control o el https://docs.netapp.com/us-en/astra-automation["API de control Astra"^] para comenzar a administrar y proteger aplicaciones:
 
 * link:../use/manage-apps.html["Gestionar aplicaciones"^]: Definir recursos para gestionar.
 * link:../use/protection-overview.html["Proteja sus aplicaciones"^]: Configurar directivas de protección y replicar, clonar y migrar aplicaciones.
@@ -75,7 +75,7 @@ Cuando termine de configurar Astra Control Center, utiliza la interfaz de usuari
 
 == Si quiere más información
 
-* https://docs.netapp.com/us-en/astra-automation/index.html["API de control Astra"^]
+* https://docs.netapp.com/us-en/astra-automation["Utilice la API Astra Control"^]
 * link:../use/upgrade-acc.html["Actualice Astra Control Center"^]
 * link:../support/get-help.html["Obtenga ayuda con Astra Control"^]
 

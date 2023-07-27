@@ -17,43 +17,12 @@ Los problemas conocidos identifican problemas por los que el uso correcto de est
 
 Los siguientes problemas conocidos afectan a la versión actual:
 
-.Aplicaciones
-* <<La restauración de una aplicación genera un tamaño VP superior al VP original>>
-* <<Los clones de aplicaciones producen un error al utilizar una versión específica de PostgreSQL>>
-* <<Error en los clones de aplicaciones al utilizar restricciones de contexto de seguridad OCP de nivel de cuenta de servicio (SCC)>>
-* <<Se produce un error en los clones de aplicaciones después de poner en marcha una aplicación con una clase de almacenamiento establecida>>
 * <<Los backups de aplicaciones y las snapshots producen errores si la clase volumesnapshotse añade después de gestionar un clúster>>
-
-
-.De clúster
-* <<La administración de un clúster con Astra Control Center falla cuando el archivo kubeconfig predeterminado contiene más de un contexto>>
-* <<Algunos pods no se inician después de actualizar a Astra Control Center 23,04>>
-* <<Algunos pods muestran un estado de error después de la etapa de depuración de la actualización de 23,04 a 23.04.2>>
+* <<Se produce un error en los clones de aplicaciones después de poner en marcha una aplicación con una clase de almacenamiento establecida>>
+* <<Se produce un error en la gestión de un clúster con Astra Control Center cuando el archivo kubeconfig contiene más de un contexto>>
 * <<Un pod de supervisión puede fallar en entornos Istio>>
-
-
-.Otros temas
-* <<Los clústeres gestionados no aparecen en Cloud Insights de NetApp cuando se conectan a través de un proxy>>
 * <<Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión>>
 
-
-
-
-== La restauración de una aplicación genera un tamaño VP superior al VP original
-
-Si cambia el tamaño de un volumen persistente después de crear un backup y luego se restaura a partir de ese backup, el tamaño del volumen persistente coincidiría con el nuevo tamaño del VP en lugar de usar el tamaño del backup.
-
-
-
-== Los clones de aplicaciones producen un error al utilizar una versión específica de PostgreSQL
-
-Los clones de aplicaciones dentro del mismo clúster fallan constantemente con el gráfico BitNami PostgreSQL 11.5.0. Para clonar correctamente, utilice una versión anterior o posterior del gráfico.
-
-
-
-== Error en los clones de aplicaciones al utilizar restricciones de contexto de seguridad OCP de nivel de cuenta de servicio (SCC)
-
-Un clon de aplicación podría fallar si las restricciones de contexto de seguridad originales están configuradas en el nivel de cuenta de servicio dentro del espacio de nombres en el clúster de OpenShift Container Platform. Cuando se produce un error en el clon de la aplicación, aparece en el área aplicaciones gestionadas del Centro de control de Astra con el estado `Removed`. Consulte https://kb.netapp.com/Cloud/Astra/Control/Application_clone_is_failing_for_an_application_in_Astra_Control_Center["artículo de base de conocimientos"^] si quiere más información.
 
 
 
@@ -69,56 +38,10 @@ Una vez que se implementa una aplicación con una clase de almacenamiento defini
 
 
 
-== La administración de un clúster con Astra Control Center falla cuando el archivo kubeconfig predeterminado contiene más de un contexto
+== Se produce un error en la gestión de un clúster con Astra Control Center cuando el archivo kubeconfig contiene más de un contexto
 
 No puede utilizar una imagen de kubeconfig con más de un clúster y contexto en él. Consulte link:https://kb.netapp.com/Cloud/Astra/Control/Managing_cluster_with_Astra_Control_Center_may_fail_when_using_default_kubeconfig_file_contains_more_than_one_context["artículo de base de conocimientos"^] si quiere más información.
 
-
-
-== Algunos pods no se inician después de actualizar a Astra Control Center 23,04
-
-Después de actualizar a Astra Control Center 23,04, es posible que algunos pods no se inicien. Como solución alternativa, reinicie manualmente los pods afectados mediante los siguientes pasos:
-
-. Busque los pods afectados y sustituya a <namespace> por el espacio de nombres actual:
-+
-[listing]
-----
-kubectl get pods -n <namespace> | grep au-pod
-----
-+
-Los pods afectados tendrán resultados similares a los siguientes:
-
-+
-[listing]
-----
-pcloud-astra-control-center-au-pod-0 0/1 CreateContainerConfigError 0 13s
-----
-. Reinicie cada pod afectado, sustituyendo <namespace> por el espacio de nombres actual:
-+
-[listing]
-----
-kubectl delete pod pcloud-astra-control-center-au-pod-0 -n <namespace>
-----
-
-
-
-
-== Algunos pods muestran un estado de error después de la etapa de depuración de la actualización de 23,04 a 23.04.2
-
-Después de actualizar a Astra Control Center 23.04.2, es posible que algunos pods muestren un error en los registros relacionados con `task-service-task-purge`:
-
-[listing]
-----
-kubectl get all -n netapp-acc -o wide|grep purge
-
-pod/task-service-task-purge-28282828-ab1cd     0/1     Error       0             48m     10.111.0.111   openshift-clstr-ol-07-zwlj8-worker-jhp2b   <none>           <none>
-----
-Este estado de error significa que un paso de limpieza no se ejecutó correctamente. La actualización general a 23.04.2 se realiza correctamente. Ejecute el siguiente comando para limpiar la tarea y eliminar el estado de error:
-
-[listing]
-----
-kubectl delete job task-service-task-purge-[system-generated task ID] -n <netapp-acc or custom namespace>
-----
 
 
 == Un pod de supervisión puede fallar en entornos Istio
@@ -171,24 +94,6 @@ telegraf-rs-rrnsb 2/2 Running 0 11s
 ----
 
 
-
-
-== Los clústeres gestionados no aparecen en Cloud Insights de NetApp cuando se conectan a través de un proxy
-
-Cuando Astra Control Center se conecta a Cloud Insights de NetApp mediante un proxy, es posible que los clústeres gestionados no aparezcan en Cloud Insights. Para solucionar esta solución, ejecute los siguientes comandos en cada clúster gestionado:
-
-[source, console]
-----
-kubectl get cm telegraf-conf -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
-----
-[source, console]
-----
-kubectl get cm telegraf-conf-rs -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
-----
-[source, console]
-----
-kubectl get pods -n netapp-monitoring --no-headers=true | grep 'telegraf-ds\|telegraf-rs' | awk '{print $1}' | xargs kubectl delete -n netapp-monitoring pod
-----
 
 
 == Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión

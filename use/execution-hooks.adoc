@@ -25,20 +25,19 @@ Astra Control admite los siguientes tipos de enlaces de ejecución, en función 
 * Previo al backup
 * Después del backup
 * Después de la restauración
+* Después de la conmutación al respaldo
 
 
 
 
 == Filtros de gancho de ejecución
 
-Al agregar o editar un enlace de ejecución a una aplicación, puede agregar filtros a un enlace de ejecución para gestionar qué contenedores coincidirán el gancho. Los filtros son útiles para aplicaciones que usan la misma imagen de contenedor en todos los contenedores, pero pueden usar cada imagen para un propósito diferente (como Elasticsearch). Los filtros permiten crear escenarios en los que los enlaces de ejecución se ejecutarán en algunos de esos contenedores idénticos, pero no necesariamente en todos ellos. Si crea varios filtros para un único enlace de ejecución, se combinan con un operador y lógico. Puede tener hasta 10 filtros activos por gancho de ejecución.
+Al agregar o editar un enlace de ejecución a una aplicación, puede agregar filtros a un enlace de ejecución para gestionar los contenedores que coincidirá el enlace. Los filtros son útiles para aplicaciones que usan la misma imagen de contenedor en todos los contenedores, pero pueden usar cada imagen para un propósito diferente (como Elasticsearch). Los filtros le permiten crear escenarios donde los enlaces de ejecución se ejecutan en algunos, pero no necesariamente todos los contenedores idénticos. Si crea varios filtros para un único enlace de ejecución, se combinan con un operador y lógico. Puede tener hasta 10 filtros activos por gancho de ejecución.
 
-Cada filtro que agregue a un enlace de ejecución utiliza una expresión regular para hacer coincidir los contenedores del clúster. Cuando un gancho coincide con un contenedor, el gancho ejecutará su script asociado en ese contenedor.
+Cada filtro que agregue a un enlace de ejecución utiliza una expresión regular para hacer coincidir los contenedores del clúster. Cuando un gancho coincide con un contenedor, el gancho ejecutará su script asociado en ese contenedor. Las expresiones regulares para los filtros utilizan la sintaxis expresión regular 2 (RE2), que no admite la creación de un filtro que excluye contenedores de la lista de coincidencias. Para obtener información sobre la sintaxis que admite Astra Control para las expresiones regulares en los filtros de enlace de ejecución, consulte https://github.com/google/re2/wiki/Syntax["Soporte de sintaxis de expresión regular 2 (RE2)"^].
 
 
-NOTE: Las expresiones regulares para los filtros utilizan la sintaxis expresión regular 2 (RE2), que no admite la creación de un filtro que excluye contenedores de la lista de coincidencias.
-
-Para obtener información sobre la sintaxis que admite Astra Control para las expresiones regulares en los filtros de enlace de ejecución, consulte https://github.com/google/re2/wiki/Syntax["Soporte de sintaxis de expresión regular 2 (RE2)"^].
+NOTE: Si se agrega un filtro de espacio de nombres a un enlace de ejecución que se ejecuta después de una operación de restauración o clonado y el origen y destino de la restauración o clonado se encuentran en diferentes espacios de nombres, el filtro de espacio de nombres solo se aplica al espacio de nombres de destino.
 
 
 
@@ -48,7 +47,8 @@ Tenga en cuenta lo siguiente al planificar enlaces de ejecución para sus aplica
 
 [NOTE]
 ====
-Puesto que los enlaces de ejecución a menudo reducen o desactivan por completo la funcionalidad de la aplicación con la que se ejecutan, siempre debe intentar minimizar el tiempo que tardan los enlaces de ejecución personalizados. Si inicia una operación de copia de seguridad o de instantánea con los enlaces de ejecución asociados pero, a continuación, la cancela, los ganchos pueden ejecutarse si ya se ha iniciado la operación de copia de seguridad o de Snapshot. Esto significa que la lógica utilizada en un enlace de ejecución posterior a la copia de seguridad no puede suponer que la copia de seguridad se ha completado.
+Debido a que los enlaces de ejecución a menudo reducen o desactivan por completo la funcionalidad de la aplicación con la que se ejecutan, siempre debe intentar minimizar el tiempo que tardan los enlaces de ejecución personalizados.
+Si inicia una operación de copia de seguridad o de instantánea con los enlaces de ejecución asociados pero, a continuación, la cancela, los ganchos pueden ejecutarse si ya se ha iniciado la operación de copia de seguridad o de Snapshot. Esto significa que la lógica utilizada en un enlace de ejecución posterior a la copia de seguridad no puede suponer que la copia de seguridad se ha completado.
 
 ====
 * Un enlace de ejecución debe utilizar una secuencia de comandos para realizar acciones. Muchos enlaces de ejecución pueden hacer referencia al mismo script.
@@ -58,9 +58,12 @@ Puesto que los enlaces de ejecución a menudo reducen o desactivan por completo 
 * Todos los fallos del enlace de ejecución son fallos de software; otros ganchos y la operación de protección de datos se siguen intentando incluso si falla un gancho. Sin embargo, cuando falla un gancho, se registra un suceso de advertencia en el registro de eventos de la página *Activity*.
 * Para crear, editar o eliminar enlaces de ejecución, debe ser un usuario con permisos de propietario, administrador o miembro.
 * Si un enlace de ejecución tarda más de 25 minutos en ejecutarse, el enlace fallará, creando una entrada de registro de eventos con un código de retorno de "N/A". Se agotará el tiempo de espera de todas las instantáneas afectadas y se marcarán como errores, con una entrada de registro de eventos resultante que tenga en cuenta el tiempo de espera.
-* Para las operaciones de protección de datos ad hoc, todos los eventos de enlace se generan y guardan en el registro de eventos de la página *actividad*. Sin embargo, en el caso de las operaciones de protección de datos programadas, solo se registran los eventos de fallo de enlace en el registro de eventos (los eventos generados por las propias operaciones de protección de datos programadas aún se registran).
-* Si Astra Control Center conmuta por error una aplicación de origen replicada a la aplicación de destino, todos los ganchos de ejecución posteriores a la restauración que estén habilitados para la aplicación de origen se ejecutan para la aplicación de destino una vez completada la conmutación por error.
-* Si se agrega un filtro de espacio de nombres a un enlace de ejecución que se ejecuta después de una operación de restauración o clonado y el origen y destino de la restauración o clonado se encuentran en diferentes espacios de nombres, el filtro de espacio de nombres solo se aplica al espacio de nombres de destino.
+* Para las operaciones de protección de datos ad hoc, todos los eventos de enlace se generan y guardan en el registro de eventos de la página *Actividad*. Sin embargo, en el caso de las operaciones de protección de datos programadas, solo se registran los eventos de fallo de enlace en el registro de eventos (los eventos generados por las propias operaciones de protección de datos programadas aún se registran).
+* Si Astra Control Center conmuta por error una aplicación de origen replicada a la aplicación de destino, todos los ganchos de ejecución posteriores a la conmutación al nodo de respaldo que estén habilitados para la aplicación de origen se ejecutan para la aplicación de destino una vez completada la conmutación por error.
++
+
+NOTE: Si has ejecutado ganchos posteriores a la restauración con Astra Control Center 23,04 y actualizado tu Astra Control Center a la versión 23,07, los ganchos de ejecución posteriores a la restauración ya no se ejecutarán tras una replicación de conmutación al nodo de respaldo. Necesitas crear nuevos ganchos de ejecución posteriores a la conmutación por error para tus aplicaciones. También puede cambiar el tipo de operación de los ganchos posteriores a la restauración existentes destinados a recuperaciones tras fallos de «post-restore» a «post-failover».
+
 
 
 
@@ -74,7 +77,7 @@ Cuando se ejecuta una operación de protección de datos, los eventos de enlace 
 . Los enlaces de ejecución de post-operación personalizados aplicables se ejecutan en los contenedores adecuados. Puede crear y ejecutar tantos enlaces de post-operación personalizados como necesite, pero el orden de ejecución de estos enlaces después de la operación no está garantizado ni configurable.
 
 
-Si crea varios enlaces de ejecución del mismo tipo (por ejemplo, presnapshot), no se garantiza el orden de ejecución de esos enlaces. Sin embargo, el orden de ejecución de ganchos de diferentes tipos está garantizado. Por ejemplo, el orden de ejecución de una configuración que tiene los cinco tipos diferentes de ganchos sería así:
+Si crea varios enlaces de ejecución del mismo tipo (por ejemplo, presnapshot), no se garantiza el orden de ejecución de esos enlaces. Sin embargo, el orden de ejecución de ganchos de diferentes tipos está garantizado. Por ejemplo, el orden de ejecución de una configuración que tiene todos los diferentes tipos de ganchos se vería así:
 
 . Ganchos de precopia de seguridad ejecutados
 . Ganchos presnapshot ejecutados
@@ -109,40 +112,46 @@ Si comienza pero luego cancela una copia de seguridad que incluye una instantán
 
 ====
 |===
-| Situación | Funcionamiento | Snapshot existente | Backup existente | Espacio de nombres | Clúster | Funcionan los enlaces de instantáneas | Funcionamiento de los ganchos de backup | Restaurar ejecución de ganchos 
+| Situación | Funcionamiento | Snapshot existente | Backup existente | Espacio de nombres | Clúster | Funcionan los enlaces de instantáneas | Funcionamiento de los ganchos de backup | Restaurar ejecución de ganchos | Se ejecutan los ganchos de failover 
 
 
-| 1 | Clonar | N | N | Nuevo | Igual | Y | N | Y 
+| 1 | Clonar | N | N | Nuevo | Igual | Y | N | Y | N 
 
 
-| 2 | Clonar | N | N | Nuevo | Diferente | Y | Y | Y 
+| 2 | Clonar | N | N | Nuevo | Diferente | Y | Y | Y | N 
 
 
-| 3 | Clonar o restaurar | Y | N | Nuevo | Igual | N | N | Y 
+| 3 | Clonar o restaurar | Y | N | Nuevo | Igual | N | N | Y | N 
 
 
-| 4 | Clonar o restaurar | N | Y | Nuevo | Igual | N | N | Y 
+| 4 | Clonar o restaurar | N | Y | Nuevo | Igual | N | N | Y | N 
 
 
-| 5 | Clonar o restaurar | Y | N | Nuevo | Diferente | N | N | Y 
+| 5 | Clonar o restaurar | Y | N | Nuevo | Diferente | N | N | Y | N 
 
 
-| 6 | Clonar o restaurar | N | Y | Nuevo | Diferente | N | N | Y 
+| 6 | Clonar o restaurar | N | Y | Nuevo | Diferente | N | N | Y | N 
 
 
-| 7 | Restaurar | Y | N | Existente | Igual | N | N | Y 
+| 7 | Restaurar | Y | N | Existente | Igual | N | N | Y | N 
 
 
-| 8 | Restaurar | N | Y | Existente | Igual | N | N | Y 
+| 8 | Restaurar | N | Y | Existente | Igual | N | N | Y | N 
 
 
-| 9 | Snapshot | N.A. | N.A. | N.A. | N.A. | Y | N.A. | N.A. 
+| 9 | Snapshot | N.A. | N.A. | N.A. | N.A. | Y | N.A. | N.A. | N 
 
 
-| 10 | Backup | N | N.A. | N.A. | N.A. | Y | Y | N.A. 
+| 10 | Backup | N | N.A. | N.A. | N.A. | Y | Y | N.A. | N 
 
 
-| 11 | Backup | Y | N.A. | N.A. | N.A. | N | N | N.A. 
+| 11 | Backup | Y | N.A. | N.A. | N.A. | N | N | N.A. | N 
+
+
+| 12 | Conmutación al respaldo | Y | N.A. | Creado por replicación | Diferente | N | N | N | Y 
+
+
+| 13 | Conmutación al respaldo | Y | N.A. | Creado por replicación | Igual | N | N | N | Y 
 |===
 
 
@@ -182,7 +191,7 @@ En esta página puede ver una lista de los scripts cargados existentes. La colum
 
 == Agregar un script
 
-Cada enlace de ejecución debe utilizar una secuencia de comandos para realizar acciones. Puede agregar una o más secuencias de comandos a las que puedan hacer referencia los enlaces de ejecución. Muchos enlaces de ejecución pueden hacer referencia a la misma secuencia de comandos; esto permite actualizar muchos enlaces de ejecución sólo cambiando una secuencia de comandos.
+Cada enlace de ejecución debe utilizar una secuencia de comandos para realizar acciones. Puede agregar una o más secuencias de comandos a las que puedan hacer referencia los enlaces de ejecución. Muchos ganchos de ejecución pueden hacer referencia al mismo script; esto le permite actualizar muchos ganchos de ejecución cambiando solo un script.
 
 .Pasos
 . Vaya a *cuenta*.
@@ -235,7 +244,7 @@ NOTE: Si la secuencia de comandos está asociada con uno o más enlaces de ejecu
 
 == Cree un enlace de ejecución personalizado
 
-Puede crear un enlace de ejecución personalizado para una aplicación. Consulte <<Ejemplos de gancho de ejecución>> para ejemplos de gancho. Necesita tener permisos de propietario, administrador o miembro para crear enlaces de ejecución.
+Puedes crear un gancho de ejecución personalizado para una aplicación y añadirlo a Astra Control. Consulte <<Ejemplos de gancho de ejecución>> para ejemplos de gancho. Necesita tener permisos de propietario, administrador o miembro para crear enlaces de ejecución.
 
 
 NOTE: Cuando cree un script de shell personalizado para utilizarlo como un enlace de ejecución, recuerde especificar el shell adecuado al principio del archivo, a menos que esté ejecutando comandos específicos o proporcionando la ruta completa a un ejecutable.

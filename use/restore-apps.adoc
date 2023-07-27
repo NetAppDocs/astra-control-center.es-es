@@ -12,10 +12,7 @@ summary: Astra puede restaurar la configuración de sus aplicaciones y el almace
 
 
 [role="lead"]
-Astra Control puede restaurar su aplicación a partir de una instantánea o una copia de seguridad. La restauración a partir de una snapshot existente será más rápida cuando se restaure la aplicación en el mismo clúster. Puede utilizar la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para restaurar aplicaciones.
-
-
-NOTE: Si se agrega un filtro de espacio de nombres a un enlace de ejecución que se ejecuta después de una operación de restauración o clonado y el origen y destino de la restauración o clonado se encuentran en diferentes espacios de nombres, el filtro de espacio de nombres solo se aplica al espacio de nombres de destino.
+Astra Control puede restaurar su aplicación a partir de una instantánea o una copia de seguridad. La restauración a partir de una snapshot existente será más rápida cuando se restaure la aplicación en el mismo clúster. Puede utilizar la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation["API de control Astra"^] para restaurar aplicaciones.
 
 .Acerca de esta tarea
 * *Proteja sus aplicaciones primero*: Se recomienda encarecidamente que tome una instantánea o una copia de seguridad de su aplicación antes de restaurarla. Esto le permitirá clonar desde la snapshot o backup en el caso de que la restauración no se realice correctamente.
@@ -115,7 +112,7 @@ IMPORTANT: Cualquier usuario miembro con restricciones de espacio de nombres por
 
 Puede agregar una regla de filtro a un link:../use/restore-apps.html["restaurar"] operación que especificará los recursos de aplicación existentes que se incluirán o excluirán de la aplicación restaurada. Puede incluir o excluir recursos basados en un espacio de nombres, etiqueta o GVK (GroupVersionKind) especificado.
 
-.Lea más sobre Incluir y excluir escenarios
+.Amplíe para obtener más información sobre Incluir y excluir escenarios
 [%collapsible]
 ====
 * *Selecciona una regla de inclusión con espacios de nombres originales (restauración in situ)*: Los recursos de aplicación existentes que definas en la regla se eliminarán y reemplazarán por aquellos de la instantánea o copia de seguridad seleccionada que estés utilizando para la restauración. Cualquier recurso que no especifique en la regla Incluir permanecerá sin cambios.

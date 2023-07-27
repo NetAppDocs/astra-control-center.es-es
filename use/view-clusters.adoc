@@ -25,7 +25,7 @@ Puede ver detalles sobre el clúster, como la ubicación, los nodos de trabajo, 
 . En la página *Clusters*, seleccione el clúster cuyos detalles desea ver.
 +
 
-NOTE: Si hay un clúster en `removed` estado aunque la conectividad del clúster y de la red parece correcta (los intentos externos de acceder al clúster mediante las API de Kubernetes se han realizado correctamente), es posible que la imagen que proporcionó a Astra Control ya no sea válida. Esto puede deberse a la rotación o a la caducidad del certificado en el clúster. Para corregir este problema, actualice las credenciales asociadas con el clúster en Astra Control mediante link:https://docs.netapp.com/us-en/astra-automation/index.html["API de control Astra"].
+NOTE: Si hay un clúster en `removed` estado aunque la conectividad del clúster y de la red parece correcta (los intentos externos de acceder al clúster mediante las API de Kubernetes se han realizado correctamente), es posible que la imagen que proporcionó a Astra Control ya no sea válida. Esto puede deberse a la rotación o a la caducidad del certificado en el clúster. Para corregir este problema, actualice las credenciales asociadas con el clúster en Astra Control mediante https://docs.netapp.com/us-en/astra-automation["API de control Astra"].
 
 . Consulte la información en las pestañas *Descripción general*, *almacenamiento* y *actividad* para encontrar la información que busca.
 +

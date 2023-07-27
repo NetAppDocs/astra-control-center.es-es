@@ -14,10 +14,7 @@ summary: Clone una aplicación existente para crear una aplicación duplicada en
 [role="lead"]
 Puede clonar una aplicación existente para crear una aplicación duplicada en el mismo clúster de Kubernetes o en otro clúster. Cuando Astra Control clona una aplicación, crea un clon de la configuración de la aplicación y del almacenamiento persistente.
 
-El clonado puede ayudarle si necesita mover aplicaciones y almacenamiento de un clúster de Kubernetes a otro. Por ejemplo, es posible que desee mover cargas de trabajo mediante una canalización de CI/CD y entre espacios de nombres Kubernetes. Puede utilizar la interfaz de usuario de Astra Control Center o https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para clonar y migrar aplicaciones.
-
-
-NOTE: Si se agrega un filtro de espacio de nombres a un enlace de ejecución que se ejecuta después de una operación de restauración o clonado y el origen y destino de la restauración o clonado se encuentran en diferentes espacios de nombres, el filtro de espacio de nombres solo se aplica al espacio de nombres de destino.
+El clonado puede ayudarle si necesita mover aplicaciones y almacenamiento de un clúster de Kubernetes a otro. Por ejemplo, es posible que desee mover cargas de trabajo mediante una canalización de CI/CD y entre espacios de nombres Kubernetes. Puede utilizar la interfaz de usuario de Astra Control Center o https://docs.netapp.com/us-en/astra-automation["API de control Astra"^] para clonar y migrar aplicaciones.
 
 .Antes de empezar
 * *Comprobar volúmenes de destino*: Si clona a una clase de almacenamiento diferente, asegúrese de que la clase de almacenamiento utilice el mismo modo de acceso de volumen persistente (por ejemplo, ReadWriteMany). Se producirá un error en la operación de clonado si el modo de acceso al volumen persistente de destino es diferente. Por ejemplo, si el volumen persistente de origen utiliza el modo de acceso RWX, seleccionando una clase de almacenamiento de destino que no pueda proporcionar RWX, como Azure Managed Disks, AWS EBS, Google Persistent Disk o. `ontap-san`, hará que se produzca un error en la operación de clonado. Para obtener más información sobre los modos de acceso a volúmenes persistentes, consulte la https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes["Kubernetes"^] documentación.
@@ -41,6 +38,7 @@ Durante la clonación de aplicaciones en entornos OpenShift, Astra Control Cente
 * *Los clones utilizan cubos predeterminados*: Durante una copia de seguridad de la aplicación o una restauración de la aplicación, puede especificar opcionalmente un ID de bloque. Sin embargo, en una operación de clonado de aplicaciones, siempre se utiliza el bloque predeterminado que se ha definido. No existe ninguna opción para cambiar bloques para un clon. Si desea controlar qué segmento se utiliza, puede hacer lo mismo link:../use/manage-buckets.html#edit-a-bucket["cambiar el valor predeterminado del segmento"] o haga un link:../use/protect-apps.html#create-a-backup["Backup"] seguido de un link:../use/restore-apps.html["restaurar"] por separado.
 * *Con Jenkins CI*: Si clona una instancia de Jenkins CI desplegada por el operador, debe restaurar manualmente los datos persistentes. Esta es una limitación del modelo de puesta en marcha de la aplicación.
 * *Con bloques S3*: Los bloques S3 de Astra Control Center no informan de la capacidad disponible. Antes de realizar una copia de seguridad o clonar aplicaciones gestionadas por Astra Control Center, compruebe la información de los bloques en el sistema de gestión ONTAP o StorageGRID.
+* *Con una versión específica de PostgreSQL*: Los clones de aplicaciones dentro del mismo clúster fallan constantemente con el gráfico BitNami PostgreSQL 11.5.0. Para clonar correctamente, utilice una versión anterior o posterior del gráfico.
 
 
 .Consideraciones sobre OpenShift
@@ -70,12 +68,6 @@ Durante la clonación de aplicaciones en entornos OpenShift, Astra Control Cente
 +
 
 NOTE: Astra Control crea nuevos espacios de nombres de destino como parte de la operación de clonación. Los espacios de nombres de destino que especifique no deben estar ya presentes en el clúster de destino.
-
-** Seleccione *Siguiente*.
-** Elija si desea crear el clon a partir de una snapshot o un backup existente. Si no selecciona esta opción, Astra Control Center crea el clon a partir del estado actual de la aplicación.
-+
-*** Si decide clonar desde una snapshot o un backup existente, elija la snapshot o el backup que desee utilizar.
-
 
 ** Seleccione *Siguiente*.
 ** Elija mantener la clase de almacenamiento original asociada a la aplicación o seleccionar una clase de almacenamiento diferente.

@@ -6,22 +6,23 @@
 
 == Descargue y extraiga Astra Control Center
 
-. Vaya a la https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de Astra Control Center"^] En el sitio de soporte de NetApp.
-. Descargue el paquete que contiene Astra Control Center (`astra-control-center-[version].tar.gz`).
-. (Recomendado pero opcional) Descargue el paquete de certificados y firmas para Astra Control Center (`astra-control-center-certs-[version].tar.gz`) para verificar la firma del paquete:
+. Descargue el paquete que contiene Astra Control Center (`astra-control-center-[version].tar.gz`) del https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de Astra Control Center"^].
+. (Recomendado pero opcional) Descargue el paquete de certificados y firmas para Astra Control Center (`astra-control-center-certs-[version].tar.gz`) para verificar la firma del paquete.
 +
+.Amplíe para obtener más detalles
+[%collapsible]
+====
 [source, console]
 ----
 tar -vxzf astra-control-center-certs-[version].tar.gz
 ----
-+
 [source, console]
 ----
 openssl dgst -sha256 -verify certs/AstraControlCenter-public.pub -signature certs/astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
-+
 Se mostrará la salida `Verified OK` después de una verificación correcta.
 
+====
 . Extraiga las imágenes del paquete Astra Control Center:
 +
 [source, console]

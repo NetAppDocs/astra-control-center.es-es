@@ -91,7 +91,7 @@ No Aunque Astra Control puede detectar aplicaciones que utilizan almacenamiento 
 
 *Debería gestionar Astra Control en sí?*
 
-No, no deberías gestionar Astra Control en sí mismo porque es una «aplicación del sistema».
+Astra Control Center no se muestra de forma predeterminada como una aplicación que puedes gestionar, pero puedes crear backups y restaurar una instancia de Astra Control Center mediante otra instancia de Astra Control Center.
 
 *¿Las vainas poco saludables afectan a la gestión de la aplicación?*
 

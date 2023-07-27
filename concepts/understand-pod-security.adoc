@@ -22,7 +22,7 @@ Puede utilizar la información y los ejemplos que se incluyen aquí para compren
 
 == El Servicio de Seguridad y Seguridad de la Seguridad y la Seguridad en el Control Center
 
-Durante la instalación, Astra Control Center permite la aplicación de una admisión de seguridad de POD agregando la siguiente etiqueta a la `netapp-acc` o un espacio de nombres personalizado:
+Astra Control Center permite aplicar una admisión de seguridad de pod añadiendo la siguiente etiqueta al espacio de nombres donde se ha instalado Astra (netapp-acc o espacio de nombres personalizado) y espacios de nombres creados para backups.
 
 [listing]
 ----

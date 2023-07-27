@@ -61,7 +61,7 @@ Astra Control Center también le permite gestionar, migrar y proteger los clúst
 * https://docs.netapp.com/us-en/astra/index.html["Documentación de Astra Control Service"^]
 * https://docs.netapp.com/us-en/astra-control-center/index.html["Documentación de Astra Control Center"^]
 * https://docs.netapp.com/us-en/trident/index.html["Documentación de Astra Trident"^]
-* https://docs.netapp.com/us-en/astra-automation/index.html["Utilice la API Astra Control"^]
+* https://docs.netapp.com/us-en/astra-automation["Utilice la API Astra Control"^]
 * https://docs.netapp.com/us-en/cloudinsights/["Documentación de Cloud Insights"^]
 * https://docs.netapp.com/us-en/ontap/index.html["Documentación de ONTAP"^]
 

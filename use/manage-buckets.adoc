@@ -151,5 +151,5 @@ NOTE: Astra Control garantiza en primer lugar que no existan normativas de progr
 
 == Obtenga más información
 
-* https://docs.netapp.com/us-en/astra-automation/index.html["Utilice la API Astra Control"^]
+* https://docs.netapp.com/us-en/astra-automation["Utilice la API Astra Control"^]
 
