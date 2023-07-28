@@ -21,6 +21,7 @@ Las limitaciones conocidas identifican plataformas, dispositivos o funciones que
 
 .Limitaciones de control de acceso basado en roles (RBAC)
 * <<Un usuario con restricciones de RBAC de espacio de nombres puede añadir y anular la gestión de un clúster>>
+* <<Un miembro con restricciones de espacio de nombres no puede acceder a las aplicaciones clonadas o restauradas hasta que el administrador agregue el espacio de nombres a la restricción>>
 
 
 .Limitaciones en la gestión de aplicaciones
@@ -96,6 +97,12 @@ current-context: kubernetes-admin@kubernetes
 == Un usuario con restricciones de RBAC de espacio de nombres puede añadir y anular la gestión de un clúster
 
 No se debe permitir que un usuario con restricciones de RBAC de espacio de nombres añada o anule la gestión de clústeres. Debido a una limitación actual, Astra no impide que estos usuarios desgestionen los clústeres.
+
+
+
+== Un miembro con restricciones de espacio de nombres no puede acceder a las aplicaciones clonadas o restauradas hasta que el administrador agregue el espacio de nombres a la restricción
+
+Cualquiera `member` El usuario con limitaciones de RBAC por nombre/ID de espacio de nombres puede clonar o restaurar una aplicación en un espacio de nombres nuevo en el mismo clúster o en cualquier otro clúster de la cuenta de la organización. Sin embargo, el mismo usuario no puede acceder a la aplicación clonada o restaurada en el nuevo espacio de nombres. Cuando se crea un espacio de nombres nuevo mediante una operación de clonado o restauración, el propietario/administrador de la cuenta puede editar el `member` cuenta de usuario y restricciones de función de actualización para que el usuario afectado conceda acceso al nuevo espacio de nombres.
 
 
 
