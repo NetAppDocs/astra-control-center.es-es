@@ -172,7 +172,7 @@ podman login <YOUR_REGISTRY>
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=23.07.0-24
+export PACKAGEVERSION=23.07.0-25
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -191,7 +191,7 @@ done
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=23.07.0-24
+export PACKAGEVERSION=23.07.0-25
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -207,7 +207,7 @@ NOTE: La ruta de acceso de imagen que crea el script debe parecerse a la siguien
 +
 [listing]
 ----
-https://netappdownloads.jfrog.io/docker-astra-control-prod/netapp/astra/acc/23.07.0-24/image:version
+https://netappdownloads.jfrog.io/docker-astra-control-prod/netapp/astra/acc/23.07.0-25/image:version
 ----
 
 
@@ -283,7 +283,7 @@ NOTE: Si ha seleccionado una estrategia de aprobación manual, se le pedirá que
 .. Agregue etiquetas para Astra Control Center.
 .. Habilitar o deshabilitar AutoSupport. Se recomienda conservar la funcionalidad de AutoSupport.
 .. Introduzca el FQDN o la dirección IP de Astra Control Center. No entre `http://` o. `https://` en el campo de dirección.
-.. Introduce la versión de Astra Control Center; por ejemplo, 23.07.0-24.
+.. Introduce la versión de Astra Control Center; por ejemplo, 23.07.0-25.
 .. Introduzca un nombre de cuenta, una dirección de correo electrónico y un apellido de administrador.
 .. Seleccione una política de reclamaciones de volumen de `Retain`, `Recycle`, o. `Delete`. El valor predeterminado es `Retain`.
 .. Seleccione el scaleSize de la instalación.
