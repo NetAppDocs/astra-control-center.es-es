@@ -464,6 +464,11 @@ additionalValues:
       startupProbe:
         periodSeconds: 30
         failureThreshold: 600
+    polaris-keycloak:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:
+        initialDelaySeconds: 180
 ----
 . Guarde y salga del editor de archivos. Se aplicarán los cambios y comenzará la actualización.
 . (Opcional) Verifique que los POD terminan y estén disponibles de nuevo:

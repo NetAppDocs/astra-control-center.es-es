@@ -610,6 +610,18 @@ NOTA: Para obtener detalles sobre el tipo de servicio de “LoadBalancer” y In
 .<code>additionalValues</code>
 [%collapsible]
 ====
+
+IMPORTANT: Añada los siguientes valores adicionales a Astra Control Center CR para evitar un problema conocido en la instalación de 23,07:
+
+[listing]
+----
+additionalValues:
+    polaris-keycloak:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:
+        initialDelaySeconds: 180
+----
 ** Para el Centro de control astral y la comunicación Cloud Insights, la verificación de certificados TLS está desactivada de forma predeterminada. Puede habilitar la verificación de la certificación TLS para la comunicación entre Cloud Insights y el clúster de host del Centro de control de Astra y el clúster gestionado, añadiendo la siguiente sección en la `additionalValues`.
 
 
@@ -674,7 +686,12 @@ spec:
   ingressType: "Generic"
   scaleSize: "Medium"
   astraResourcesScaler: "Default"
-  additionalValues: {}
+  additionalValues:
+    polaris-keycloak:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:
+        initialDelaySeconds: 180
   crds:
     externalTraefik: false
     externalCertManager: false
