@@ -55,6 +55,10 @@ La replicación de aplicaciones de Astra Control requiere que se cumplan los sig
 * *Peering*:
 +
 ** *Cluster y SVM*: Los back-ends de almacenamiento ONTAP deben ser peered. Consulte https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html["Información general sobre relaciones entre iguales de clústeres y SVM"^] si quiere más información.
++
+
+IMPORTANT: Compruebe que los nombres de las SVM utilizados en la relación de replicación entre dos clústeres de ONTAP sean únicos.
+
 ** *Astra Trident y SVM*: Las SVM remotas entre iguales deben estar disponibles para Astra Trident en el clúster de destino.
 
 
