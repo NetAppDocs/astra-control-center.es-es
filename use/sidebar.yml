@@ -18,6 +18,8 @@ entries:
     url: "/use/clone-apps.html"
   - title: Gestione los enlaces de ejecución de aplicaciones
     url: "/use/execution-hooks.html"
+  - title: Protege Astra Control Center con Astra Control Center
+    url: "/use/protect-acc-with-acc.html"
 - title: Supervise el estado de las aplicaciones y del clúster
   entries:
   - title: Resumen del panel
