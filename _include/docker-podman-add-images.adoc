@@ -13,10 +13,11 @@
 ====
 .Docker
 --
-. Cambie al directorio raíz del tarball. Debería ver este archivo y directorio:
+. Cambie al directorio raíz del tarball. Debería ver el `acc.manifest.bundle.yaml` archivo y estos directorios:
 +
-`acc.manifest.bundle.yaml`
 `acc/`
+`kubectl-astra/`
+`acc.manifest.bundle.yaml`
 
 . Inserte las imágenes del paquete en el directorio de imágenes de Astra Control Center en su registro local. Realice las siguientes sustituciones antes de ejecutar el `push-images` comando:
 +
