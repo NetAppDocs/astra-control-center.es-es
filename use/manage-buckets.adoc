@@ -126,8 +126,15 @@ Para obtener instrucciones sobre cómo eliminar credenciales de S3 mediante la A
 
 Puede eliminar un cubo que ya no esté en uso o que no esté sano. Se recomienda hacer esto para mantener la configuración del almacén de objetos sencilla y actualizada.
 
+[NOTE]
+====
+* No se puede eliminar un bloque predeterminado. Si desea eliminar ese bloque, seleccione primero otro bloque como predeterminado.
+* No puede quitar un depósito de escritura única y lectura múltiple (WORM) antes de que haya caducado el período de retención del proveedor de cloud del depósito. Los depósitos WORM están marcados con «bloqueados» junto al nombre del bloque.
 
-NOTE: No se puede eliminar un bloque predeterminado. Si desea eliminar ese bloque, seleccione primero otro bloque como predeterminado.
+
+====
+* No se puede eliminar un bloque predeterminado. Si desea eliminar ese bloque, seleccione primero otro bloque como predeterminado.
+
 
 .Antes de empezar
 * Antes de empezar, debe comprobar que no hay copias de seguridad en ejecución o completadas para este bloque.

@@ -42,6 +42,7 @@ Las limitaciones conocidas identifican plataformas, dispositivos o funciones que
 * <<Astra Control Center no valida los detalles introducidos para su servidor proxy>>
 * <<Las conexiones existentes a un pod Postgres provocan fallos>>
 * <<La página Actividad muestra hasta 100000 eventos>>
+* <<SnapMirror no admite aplicaciones que utilizan NVMe over TCP para back-ends de almacenamiento>>
 
 
 
@@ -102,7 +103,7 @@ No se debe permitir que un usuario con restricciones de RBAC de espacio de nombr
 
 == Un miembro con restricciones de espacio de nombres no puede acceder a las aplicaciones clonadas o restauradas hasta que el administrador agregue el espacio de nombres a la restricción
 
-Cualquiera `member` El usuario con limitaciones de RBAC por nombre/ID de espacio de nombres puede clonar o restaurar una aplicación en un espacio de nombres nuevo en el mismo clúster o en cualquier otro clúster de la cuenta de la organización. Sin embargo, el mismo usuario no puede acceder a la aplicación clonada o restaurada en el nuevo espacio de nombres. Cuando se crea un espacio de nombres nuevo mediante una operación de clonado o restauración, el propietario/administrador de la cuenta puede editar el `member` cuenta de usuario y restricciones de función de actualización para que el usuario afectado conceda acceso al nuevo espacio de nombres.
+Cualquiera `member` El usuario con limitaciones de RBAC por nombre/ID de espacio de nombres puede clonar o restaurar una aplicación en un espacio de nombres nuevo en el mismo clúster o en cualquier otro clúster de la cuenta de la organización. Sin embargo, el mismo usuario no puede acceder a la aplicación clonada o restaurada en el nuevo espacio de nombres. Una vez que una operación de clonado o restauración crea un nuevo espacio de nombres, el administrador/propietario de la cuenta puede editar el `member` cuenta de usuario y restricciones de función de actualización para que el usuario afectado conceda acceso al nuevo espacio de nombres.
 
 
 
@@ -212,6 +213,12 @@ Cuando realice operaciones en pods Postgres, no debe conectarse directamente den
 == La página Actividad muestra hasta 100000 eventos
 
 La página Actividad de Astra Control puede mostrar hasta 100.000 eventos. Para ver todos los eventos registrados, recupere los eventos mediante link:../rest-api/api-intro.html["API de control Astra"^].
+
+
+
+== SnapMirror no admite aplicaciones que utilizan NVMe over TCP para back-ends de almacenamiento
+
+Astra Control Center no admite la replicación de SnapMirror de NetApp para back-ends de almacenamiento que utilizan el protocolo NVMe over TCP.
 
 
 

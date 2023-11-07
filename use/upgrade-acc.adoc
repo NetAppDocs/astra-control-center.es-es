@@ -14,11 +14,14 @@ summary: Para actualizar Astra Control Center, descargue el paquete y actualice 
 [role="lead"]
 Para actualizar Astra Control Center, descargue el paquete de instalación desde el sitio de soporte de NetApp y complete estas instrucciones. Puede utilizar este procedimiento para actualizar Astra Control Center en entornos conectados a Internet o con conexión por aire.
 
+Estas instrucciones describen el proceso de actualización de Astra Control Center desde la segunda versión más reciente a esta versión actual. No puede actualizar directamente desde una versión que tenga dos o más versiones de la versión actual. Si la versión de Astra Control Center que tienes instalada es varias versiones detrás de la última versión, es posible que debas realizar actualizaciones en cadena a versiones más recientes hasta que el Astra Control Center instalado esté a solo una versión de la última versión. Para obtener una lista completa de las versiones lanzadas, consulte link:../release-notes/whats-new.html["notas de la versión"^].
+
 .Antes de empezar
 Antes de actualizar, asegúrese de que su entorno siga cumpliendo con el link:../get-started/requirements.html["Requisitos mínimos para la puesta en marcha de Astra Control Center"^]. Su entorno debe tener lo siguiente:
 
-* Una versión de Astra Trident compatible
+* *A link:../get-started/requirements.html#astra-trident-requirements["compatible"] Versión Astra Trident*
 +
+.Expanda para obtener los pasos
 [%collapsible]
 ====
 Determine la versión de Trident que ejecuta:
@@ -27,14 +30,18 @@ Determine la versión de Trident que ejecuta:
 ----
 kubectl get tridentversion -n trident
 ----
-Consulte https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to["Documentación de Astra Trident"] para actualizar desde una versión anterior.
 
-
-WARNING: Debe actualizar a Astra Trident 22.10 *ANTERIOR* a la actualización a Kubernetes 1.25.
+NOTE: Actualiza Astra Trident, si es necesario, mediante estos https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html["instrucciones"^].
 
 ====
-* Una distribución de Kubernetes compatible
+
+
+
+IMPORTANT: La versión 23,10 es la última versión de Astra Control Center que será compatible con Astra Trident. Se recomienda encarecidamente que usted link:../use/enable-acp.html["Habilita el aprovisionador de Astra Control"] Para acceder a funciones avanzadas de aprovisionamiento de almacenamiento y gestión más allá de las que ofrece Astra Trident. Ambos tendrás que actualizar a Astra Control Center 23,10 y habilitar Astra Control Provisioner para utilizar esta funcionalidad ampliada. El aprovisionador de Astra Control no funcionará con versiones anteriores de Astra Control Center.
+
+* *Una distribución de Kubernetes soportada*
 +
+.Expanda para obtener los pasos
 [%collapsible]
 ====
 Determine la versión de Kubernetes que ejecuta:
@@ -44,8 +51,9 @@ Determine la versión de Kubernetes que ejecuta:
 kubectl get nodes -o wide
 ----
 ====
-* Suficientes recursos de clúster
+* *Recursos suficientes del cluster*
 +
+.Expanda para obtener los pasos
 [%collapsible]
 ====
 Determine los recursos de clúster disponibles:
@@ -55,9 +63,10 @@ Determine los recursos de clúster disponibles:
 kubectl describe node <node name>
 ----
 ====
-* Registro que puede utilizar para insertar y cargar imágenes de Astra Control Center
-* Clase de almacenamiento predeterminada
+* *Un registro que puedes usar para insertar y cargar imágenes de Astra Control Center*
+* *Una clase de almacenamiento predeterminada*
 +
+.Expanda para obtener los pasos
 [%collapsible]
 ====
 Determine su clase de almacenamiento predeterminada:
@@ -67,8 +76,9 @@ Determine su clase de almacenamiento predeterminada:
 kubectl get storageclass
 ----
 ====
-* Servicios de API en buen estado y disponibles
+* *Servicios API saludables y disponibles*
 +
+.Expanda para obtener los pasos
 [%collapsible]
 ====
 Asegúrese de que todos los servicios de API se encuentren en buen estado y estén disponibles:
@@ -78,8 +88,9 @@ Asegúrese de que todos los servicios de API se encuentren en buen estado y est�
 kubectl get apiservices
 ----
 ====
-* (Solo OpenShift) Operadores de clúster en buen estado y disponibles
+* *(Solo OpenShift) Operadores de clúster sanos y disponibles*
 +
+.Expanda para obtener los pasos
 [%collapsible]
 ====
 Asegurarse de que todos los operadores del clúster se encuentren en estado correcto y estén disponibles.
@@ -89,10 +100,27 @@ Asegurarse de que todos los operadores del clúster se encuentren en estado corr
 kubectl get clusteroperators
 ----
 ====
+* *Acceda al registro de imágenes de NetApp Astra Control*:
+Tiene la opción de obtener imágenes de instalación y mejoras de funcionalidades para Astra Control, como Astra Control Provisioner, desde el registro de imágenes de NetApp.
++
+.Expanda para obtener los pasos
+[%collapsible]
+====
+.. Registra tu ID de cuenta de Astra Control que tendrás que iniciar sesión en el registro.
++
+Puedes ver tu ID de cuenta en la interfaz de usuario web de Astra Control Service. Selecciona el icono de la figura en la parte superior derecha de la página, selecciona *Acceso API* y escribe tu ID de cuenta.
+
+.. En la misma página, selecciona *Generar token de API* y copia la cadena de token de API en el portapapeles y guárdalo en tu editor.
+.. Inicia sesión en el Registro de Astra Control:
++
+[source, console]
+----
+docker login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
 
 
+====
 
-IMPORTANT: Como parte de este procedimiento, deberá hacerlo  Si estás actualizando Astra Control Center. No es posible actualizar a versiones anteriores de Astra Control Center con este operador actualizado.
 
 .Acerca de esta tarea
 El proceso de actualización del Centro de control de Astra le guiará por los siguientes pasos de alto nivel:
@@ -118,12 +146,18 @@ TIP: Realice actualizaciones en una ventana de mantenimiento cuando no se estén
 
 == Descargue y extraiga Astra Control Center
 
-. Vaya a la https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de productos de Astra Control Center"^] En el sitio de soporte de NetApp. Puede seleccionar la última versión u otra que desee en el menú desplegable.
+Puede elegir descargar el paquete Astra Control Center desde el sitio de soporte de NetApp o utilizar Docker para extraer el paquete del registro de imágenes del servicio de control de Astra.
+
+[role="tabbed-block"]
+====
+.Sitio de soporte de NetApp
+--
+. Descargue el paquete que contiene Astra Control Center (`astra-control-center-[version].tar.gz`) del https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab["Página de descargas de Astra Control Center"^].
 . (Recomendado pero opcional) Descargue el paquete de certificados y firmas para Astra Control Center (`astra-control-center-certs-[version].tar.gz`) para verificar la firma del paquete.
 +
 .Amplíe para obtener más detalles
 [%collapsible]
-====
+=====
 [source, console]
 ----
 tar -vxzf astra-control-center-certs-[version].tar.gz
@@ -134,7 +168,7 @@ openssl dgst -sha256 -verify certs/AstraControlCenter-public.pub -signature cert
 ----
 Se mostrará la salida `Verified OK` después de una verificación correcta.
 
-====
+=====
 . Extraiga las imágenes del paquete Astra Control Center:
 +
 [source, console]
@@ -143,6 +177,16 @@ tar -vxzf astra-control-center-[version].tar.gz
 ----
 
 
+--
+.Registro de imágenes de Astra Control
+--
+. Inicia sesión en el servicio Astra Control.
+. En el Dashboard, selecciona *Desplegar una instancia autogestionada de Astra Control*.
+. Sigue las instrucciones para iniciar sesión en el registro de imágenes de Astra Control, extraer la imagen de instalación de Astra Control Center y extraer la imagen.
+
+
+--
+====
 
 
 == Elimine el complemento Astra kubectl de NetApp y vuelva a instalarlo
@@ -220,8 +264,9 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 --
 . Cambie al directorio raíz del tarball. Debería ver este archivo y directorio:
 +
-`acc.manifest.bundle.yaml`
 `acc/`
+`kubectl-astra/`
+`acc.manifest.bundle.yaml`
 
 . Inicie sesión en su registro:
 +
@@ -240,7 +285,7 @@ podman login <YOUR_REGISTRY>
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=23.07.0-25
+export PACKAGEVERSION=23.10.0-68
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -259,7 +304,7 @@ done
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=23.07.0-25
+export PACKAGEVERSION=23.10.0-68
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -275,7 +320,7 @@ NOTE: La ruta de acceso de imagen que crea el script debe parecerse a la siguien
 +
 [listing]
 ----
-https://netappdownloads.jfrog.io/docker-astra-control-prod/netapp/astra/acc/23.07.0-25/image:version
+https://downloads.example.io/docker-astra-control-prod/netapp/astra/acc/23.10.0-68/image:version
 ----
 
 
@@ -360,7 +405,7 @@ spec:
           value: "2"
         *- name: ACCOP_HELM_UPGRADETIMEOUT*
           *value: 300m*
-        *image: ASTRA_IMAGE_REGISTRY/acc-operator:23.07.25*
+        *image: ASTRA_IMAGE_REGISTRY/acc-operator:23.10.72*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -491,7 +536,7 @@ Respuesta:
 [listing]
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      23.07.0-25   10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      23.10.0-68   10.111.111.111  True
 ----
 +
 

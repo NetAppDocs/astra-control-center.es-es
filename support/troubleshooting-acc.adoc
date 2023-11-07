@@ -14,7 +14,7 @@ summary: 'NetApp ofrece compatibilidad con Astra Control de varias formas. Hay d
 [role="lead"]
 Aprenda a solucionar algunos problemas comunes que puede encontrar.
 
-https://kb.netapp.com/Cloud/Astra/Control["Base de conocimientos de NetApp para Astra"^]
+https://kb.netapp.com/Cloud/Astra/Control["Base de conocimientos de NetApp para Astra Control"^]
 
 [discrete]
 == Obtenga más información

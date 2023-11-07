@@ -18,10 +18,12 @@ Los problemas conocidos identifican problemas por los que el uso correcto de est
 Los siguientes problemas conocidos afectan a la versión actual:
 
 * <<Los backups de aplicaciones y las snapshots producen errores si la clase volumesnapshotse añade después de gestionar un clúster>>
-* <<Se produce un error en los clones de aplicaciones después de poner en marcha una aplicación con una clase de almacenamiento establecida>>
 * <<Se produce un error en la gestión de un clúster con Astra Control Center cuando el archivo kubeconfig contiene más de un contexto>>
 * <<Un pod de supervisión puede fallar en entornos Istio>>
 * <<Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión>>
+* <<Las operaciones de restauración sin movimiento a las clases de almacenamiento económico ontap-nas fallan>>
+* <<Puede producirse un error en la restauración desde un backup cuando se utiliza el cifrado en tránsito de Kerberos>>
+* <<Los datos de backup permanecen en bloque tras la eliminación de bloques con política de retención vencida>>
 
 
 
@@ -29,12 +31,6 @@ Los siguientes problemas conocidos afectan a la versión actual:
 == Los backups de aplicaciones y las snapshots producen errores si la clase volumesnapshotse añade después de gestionar un clúster
 
 Los backups y las Snapshot fallan con un `UI 500 error` en este escenario. Como solución alternativa, actualice la lista de aplicaciones.
-
-
-
-== Se produce un error en los clones de aplicaciones después de poner en marcha una aplicación con una clase de almacenamiento establecida
-
-Una vez que se implementa una aplicación con una clase de almacenamiento definida explícitamente (por ejemplo, `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`), los intentos posteriores de clonar la aplicación requieren que el clúster de destino tenga la clase de almacenamiento especificada originalmente. Se producirá un error al clonar una aplicación con una clase de almacenamiento definida explícitamente a un clúster que no tenga la misma clase de almacenamiento. No existen pasos de recuperación en este escenario.
 
 
 
@@ -99,6 +95,30 @@ telegraf-rs-rrnsb 2/2 Running 0 11s
 == Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión
 
 Si Astra Trident se desconecta (y se vuelve a conectar) y se producen 500 errores internos de servicio al intentar gestionar los datos de las aplicaciones, reinicie todos los nodos de Kubernetes del clúster de aplicaciones para restaurar la funcionalidad.
+
+
+
+== Las operaciones de restauración sin movimiento a las clases de almacenamiento económico ontap-nas fallan
+
+Si realiza una restauración sin movimiento de una aplicación (restaura la aplicación en su espacio de nombres original) y la clase de almacenamiento de la aplicación utiliza el `ontap-nas-economy` controlador, se puede producir un error en la operación de restauración si el directorio snapshot no está oculto. Antes de restaurar en el lugar, siga las instrucciones de link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations["Habilite el backup y la restauración para las operaciones económicas de ontap-nas"^] para ocultar el directorio de instantáneas.
+
+
+
+== Puede producirse un error en la restauración desde un backup cuando se utiliza el cifrado en tránsito de Kerberos
+
+Cuando se restaura una aplicación desde un backup a un back-end de almacenamiento que utiliza el cifrado en tránsito de Kerberos, se puede producir un error en la operación de restauración. Este problema no afecta a la restauración de una copia Snapshot ni a la replicación de los datos de la aplicación mediante SnapMirror de NetApp.
+
+
+NOTE: Cuando use el cifrado en tránsito de Kerberos con volúmenes NFSv4, asegúrese de que los volúmenes NFSv4 estén utilizando la configuración correcta. Consulte la sección Configuración de dominio de NetApp NFSv4 (página 13) del https://www.netapp.com/media/16398-tr-3580.pdf["Guía de mejoras y prácticas recomendadas de NetApp NFSv4"^].
+
+
+
+== Los datos de backup permanecen en bloque tras la eliminación de bloques con política de retención vencida
+
+Si elimina el backup inmutable de una aplicación después de que la política de retención del bloque haya caducado, el backup se eliminará de Astra Control, pero no del bloque. Como solución alternativa, si necesita eliminar las copias de seguridad más recientes o todas las copias de seguridad de una aplicación, elimine las copias de seguridad manualmente del entorno de administración de almacenamiento.
+
+
+NOTE: Si tiene más de una copia de seguridad para una aplicación, elimine las copias de seguridad más recientes o todas las copias de seguridad de la aplicación. Si elimina cualquier copia de seguridad incremental intermedia, no podrá recuperar la aplicación de la última copia de seguridad.
 
 
 
