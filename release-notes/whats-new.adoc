@@ -42,6 +42,8 @@ Las siguientes funciones están disponibles en la versión Astra Control Provisi
 
 
 
+* *Soporte para la gestión de aplicaciones que utilizan almacenamiento NVMe/TCP*
+Astra Control ahora puede gestionar aplicaciones respaldadas por volúmenes persistentes que están conectados mediante NVMe/TCP.
 * * Ganchos de ejecución desactivados por defecto*: A partir de esta versión, la funcionalidad de los ganchos de ejecución puede ser link:../use/execution-hooks.html#enable-the-execution-hooks-feature["activado"] o desactivado para seguridad adicional (está desactivado de forma predeterminada). Si todavía no has creado enlaces de ejecución para usarlos con Astra Control, debes hacerlo link:../use/execution-hooks.html#enable-the-execution-hooks-feature["active la función de enlaces de ejecución"^] para empezar a crear ganchos. Si ha creado enlaces de ejecución antes de esta versión, la funcionalidad de enlaces de ejecución permanece activada y puede utilizar los enlaces como lo haría normalmente.
 
 

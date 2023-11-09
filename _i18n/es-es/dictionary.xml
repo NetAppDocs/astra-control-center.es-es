@@ -3426,4 +3426,6 @@ Puede hacerlo <block ref="34554017affcf2d95a6dc49ac60c5b22" category="inline-lin
   <block id="9e586fb8e7af6f105f029bce05abcad4" category="section-title">Los datos de backup permanecen en bloque tras la eliminación de bloques con política de retención vencida</block>
   <block id="03281739854e4951c0f98529e54a24f2" category="sidebar">Use el aprovisionador de Astra Control</block>
   <block id="3c4db63c6115c69942c67f6b04d8e645" category="paragraph">Si elimina el backup inmutable de una aplicación después de que la política de retención del bloque haya caducado, el backup se eliminará de Astra Control, pero no del bloque. Este problema se solucionará en una próxima versión.</block>
+  <block id="ac4da6c6894a7c36281036138b93deac" category="list-text">*Soporte para la gestión de aplicaciones que utilizan almacenamiento NVMe/TCP*
+Astra Control ahora puede gestionar aplicaciones respaldadas por volúmenes persistentes que están conectados mediante NVMe/TCP.</block>
 </blocks>
