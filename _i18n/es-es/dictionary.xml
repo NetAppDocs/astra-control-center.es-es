@@ -3358,7 +3358,6 @@ NOTA: Para obtener detalles sobre el tipo de servicio de “LoadBalancer” y In
   <block id="77786aa5158c2dd5c43d9bc74844fffd" category="admonition">No utilice Helm para habilitar el aprovisionador de Astra Control. Si ha utilizado Helm para la instalación original y está actualizando a la versión 23,10, tendrá que utilizar el operador Trident o tridentctl para ejecutar la habilitación del aprovisionador de control de Astra.</block>
   <block id="531dc1bead45003a393e1e227a07b0fa" category="list-text">Edite el CR de TridentOrchestrator y realice las siguientes modificaciones:</block>
   <block id="1dc3b7297d43967b1df8cc5f4718d2b7" category="list-text">Habilita el aprovisionador de Astra Control <block ref="b146a884950a14beaf7f7c32ccceea96" prefix="(" category="inline-code"></block>)</block>
-  <block id="0d93f0d7110c6fcd946df3239a7be503" category="list-text">Establezca la ubicación de registro de la imagen del aprovisionador de Astra Control <block ref="334c0a9162c18d888fae4c3071edcbf0" prefix="(" category="inline-code"></block>).</block>
   <block id="9f28a023f26c22c040e88a7f3791d0ed" category="inline-xref">la imagen descubre los secretos</block>
   <block id="32c8b1c79820bf7dfd85518c9c748641" category="admonition">Si estableció <block ref="565c9dfc4921fbeccbde323bc8a44cad" category="inline-xref-macro-rx"></block> anteriormente en este procedimiento, puede usarlos aquí <block ref="ce73ad6af69d89f0704d72b9000c5650" prefix="(" category="inline-code"></block>)</block>
   <block id="aef1a8f8ac300bc418eb75e7e1e3c426" category="list-text">Actualiza la configuración de Astra Trident para que disfrutes de la nueva<block ref="49c9f6c98d04c8c76aee7448fd9136ed" prefix=" " category="inline-code"></block> se ha implementado el contenedor:</block>
@@ -3428,4 +3427,5 @@ Puede hacerlo <block ref="34554017affcf2d95a6dc49ac60c5b22" category="inline-lin
   <block id="3c4db63c6115c69942c67f6b04d8e645" category="paragraph">Si elimina el backup inmutable de una aplicación después de que la política de retención del bloque haya caducado, el backup se eliminará de Astra Control, pero no del bloque. Este problema se solucionará en una próxima versión.</block>
   <block id="ac4da6c6894a7c36281036138b93deac" category="list-text">*Soporte para la gestión de aplicaciones que utilizan almacenamiento NVMe/TCP*
 Astra Control ahora puede gestionar aplicaciones respaldadas por volúmenes persistentes que están conectados mediante NVMe/TCP.</block>
+  <block id="e19d9fd02be50073f892bf959070ea25" category="list-text">Establezca la ubicación de registro de la imagen del aprovisionador de Astra Control <block ref="20edfaac0850c3e3743b65fa227b6f0b" prefix="(" category="inline-code"></block>).</block>
 </blocks>

@@ -229,7 +229,7 @@ WARNING: No utilice Helm para habilitar el aprovisionador de Astra Control. Si h
 . Edite el CR de TridentOrchestrator y realice las siguientes modificaciones:
 +
 ** Habilita el aprovisionador de Astra Control (`enableACP: true`)
-** Establezca la ubicación de registro de la imagen del aprovisionador de Astra Control (`acpImage: <my_custom_registry>/trident-acp:v23.10.0`).
+** Establezca la ubicación de registro de la imagen del aprovisionador de Astra Control (`acpImage: <my_custom_registry>/trident-acp:23.10.0`).
 +
 
 NOTE: Si estableció <<pull-secrets,la imagen descubre los secretos>> anteriormente en este procedimiento, puede usarlos aquí (`cr.astra.netapp.io/astra/trident-acp:23.10.0 imagePullSecrets: - <secret name>`)
@@ -247,7 +247,7 @@ spec:
   debug: true
   namespace: trident
   *enableACP: true*
-  *acpImage: <my_custom_registry>/trident-acp:v23.10.0*
+  *acpImage: <my_custom_registry>/trident-acp:23.10.0*
 ----
 . Aplicar los cambios:
 +
@@ -291,7 +291,7 @@ status:
   acpVersion: 23.10.0
   currentInstallationParams:
     ...
-    acpImage: <my_custom_registry>/trident-acp:v23.10.0
+    acpImage: <my_custom_registry>/trident-acp:23.10.0
     enableACP: "true"
     ...
   ...
@@ -307,7 +307,7 @@ status:
 +
 [listing]
 ----
-./tridentctl -n trident install --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
+./tridentctl -n trident install --enable-acp=true --acp-image=mycustomregistry/trident-acp:23.10
 ----
 . Confirme que se ha habilitado el aprovisionador de Astra Control:
 +
