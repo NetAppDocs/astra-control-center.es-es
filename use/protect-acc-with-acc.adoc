@@ -101,7 +101,7 @@ NOTE: Aunque no se describe, el operador de Astra Control Center también puede 
 .. Seleccione *Agregar regla de inclusión*.
 .. Seleccione estas entradas y seleccione *Agregar*:
 +
-*** Selector de etiquetas: acc-crd
+*** Selector de etiquetas: <label name>
 *** Grupo: Apiextensions.k8s.io
 *** Versión: V1
 *** Clase: CustomResourceDefinition

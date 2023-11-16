@@ -2879,7 +2879,6 @@ Póngase en contacto con el servicio de soporte de NetApp para obtener instrucci
   <block id="5e0afc8490cb0f9aef8e7d6aa9c2a95b" category="list-text">Elija la<block ref="f156b3af9d1139da01a7b4bb0a5ad8f0" prefix=" " category="inline-code"></block> Espacio de nombres para Astra Control Center en la lista desplegable *Namespace*.</block>
   <block id="13728b663815d8b9b7f3110a0f6ae3d3" category="list-text">En la página Recursos de Cluster, seleccione *Incluir recursos adicionales de ámbito de cluster*.</block>
   <block id="de4566456b44943a73dbc9f1d5f4cfb5" category="list-text">Seleccione estas entradas y seleccione *Agregar*:</block>
-  <block id="25a653c17051ef3ca841d953bbc19608" category="list-text">Selector de etiquetas: acc-crd</block>
   <block id="ece2d00e491a614dbc2abe1f851d18eb" category="list-text">Grupo: Apiextensions.k8s.io</block>
   <block id="7ad0a964a0623e55a6f1d8cd78457694" category="list-text">Versión: V1</block>
   <block id="5b8e73d5fcf09db630648e42903cd2b0" category="list-text">Clase: CustomResourceDefinition</block>
@@ -3428,4 +3427,5 @@ Puede hacerlo <block ref="34554017affcf2d95a6dc49ac60c5b22" category="inline-lin
   <block id="ac4da6c6894a7c36281036138b93deac" category="list-text">*Soporte para la gestión de aplicaciones que utilizan almacenamiento NVMe/TCP*
 Astra Control ahora puede gestionar aplicaciones respaldadas por volúmenes persistentes que están conectados mediante NVMe/TCP.</block>
   <block id="e19d9fd02be50073f892bf959070ea25" category="list-text">Establezca la ubicación de registro de la imagen del aprovisionador de Astra Control <block ref="20edfaac0850c3e3743b65fa227b6f0b" prefix="(" category="inline-code"></block>).</block>
+  <block id="2e307acdc1434ce81b546c869ac5d37c" category="list-text">Selector de etiquetas: &lt;label name&gt;</block>
 </blocks>

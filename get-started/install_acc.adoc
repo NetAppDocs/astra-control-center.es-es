@@ -696,7 +696,7 @@ IMPORTANT: Añada los siguientes valores adicionales a Astra Control Center CR p
 [listing]
 ----
 additionalValues:
-    polaris-keycloak:
+    keycloak-operator:
       livenessProbe:
         initialDelaySeconds: 180
       readinessProbe:
@@ -767,7 +767,7 @@ spec:
   scaleSize: "Medium"
   astraResourcesScaler: "Default"
   additionalValues:
-    polaris-keycloak:
+    keycloak-operator:
       livenessProbe:
         initialDelaySeconds: 180
       readinessProbe:
