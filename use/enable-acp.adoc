@@ -14,7 +14,7 @@ summary: Habilita el aprovisionador de Astra Control para acceder a funcionalida
 [role="lead"]
 Las versiones 23,10 y posteriores de Astra Trident incluyen la opción de usar Astra Control Provisioning, que permite a los usuarios de Astra Control con licencia acceder a funcionalidades avanzadas de aprovisionamiento del almacenamiento. El aprovisionador Astra Control ofrece esta funcionalidad ampliada, además de la funcionalidad estándar basada en CSI de Astra Trident.
 
-En las siguientes actualizaciones de Astra Control, Astra Control Provisioner reemplazará a Astra Trident como aprovisionador de almacenamiento y orquestador en la arquitectura de Astra Control. Por este motivo, es muy recomendable que los usuarios de Astra Control habiliten el aprovisionador de Astra Control. Astra Trident seguirá siendo de código abierto y se seguirá lanzando, manteniendo, admitiendo y actualizando con las nuevas funciones CSI y otras de NetApp.
+En las siguientes actualizaciones de Astra Control, Astra Control Provisioner reemplazará a Astra Trident como aprovisionador de almacenamiento y orquestador en la arquitectura de Astra Control. Por este motivo, se recomienda encarecidamente que los usuarios de Astra Control habiliten el aprovisionador de Astra Control. Astra Trident seguirá siendo de código abierto y se seguirá lanzando, manteniendo, admitiendo y actualizando con las nuevas funciones CSI y otras de NetApp.
 
 .Acerca de esta tarea
 Debes seguir este procedimiento si eres un usuario del Centro de control de Astra con licencia y quieres utilizar la funcionalidad de aprovisionamiento de Astra Control. También debes seguir este procedimiento si eres usuario de Astra Trident y quieres utilizar la funcionalidad adicional que proporciona el aprovisionador de Astra Control sin utilizar también Astra Control.
@@ -26,7 +26,7 @@ Si habilita el aprovisionador de Astra Control, primero haga lo siguiente:
 
 [role="tabbed-block"]
 ====
-.Astra Control proporciona a los usuarios aprovisionamiento con Astra Control Center
+.Usuarios de aprovisionamiento de Astra Control con Astra Control Center
 * *Obtén una licencia de Astra Control Center*: Necesitarás una link:../concepts/licensing.html["Licencia de Astra Control Center"] Para habilitar el aprovisionador de Astra Control y acceder a las funcionalidades que ofrece.
 * *Instalar o actualizar a Astra Control Center 23,10*: Necesitarás esta versión si planeas usar Astra Control Provisionador con Astra Control.
 * *Confirme que su clúster tiene una arquitectura de sistema AMD64*: La imagen del aprovisionador de Astra Control se proporciona en las arquitecturas de CPU AMD64 y ARM64, pero solo AMD64 es compatible con Astra Control Center.
