@@ -27,8 +27,8 @@ Puede acceder a las opciones de soporte desde la interfaz de usuario del Centro 
 
 Estas opciones están disponibles de forma gratuita las 24 horas del día, los 7 días de la semana
 
-* https://kb.netapp.com/Cloud/Astra/Control["*Knowledge base* (se requiere inicio de sesión)"^]: Buscar artículos, preguntas frecuentes o romper información relacionada con Astra Control.
-* *Centro de documentación*: Este es el sitio de documentación que está viendo actualmente.
+* https://kb.netapp.com/Cloud/Astra/Control["*Utilice la base de conocimientos* (se requiere login)"^]: Buscar artículos, preguntas frecuentes o romper información relacionada con Astra Control.
+* *Consulte la documentación del producto*: Este es el sitio de documentos que está viendo actualmente.
 * https://discord.gg/NetApp["*Obtenga ayuda a través de Discord*"^]: Ve a Astra en la categoría Pub para conectarte con colegas y expertos.
 * *Crear un caso de soporte*: Generar paquetes de soporte que se proporcionarán al soporte de NetApp para la solución de problemas.
 * *Danos tu opinión sobre Astra Control*: Envía un correo electrónico a astra.feedback@netapp.com para que sepamos tus pensamientos, ideas o preocupaciones.
