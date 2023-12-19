@@ -74,6 +74,24 @@ Antes de añadir un clúster, debe asegurarse de que se cumplen las siguientes c
 ----
 insecure-skip-tls-verify: true
 ----
+
+
+* [[enable-psa]]*Habilitar restricciones PSA*: Si su clúster tiene activada la aplicación de admisión de seguridad de pod, que es estándar para los clústeres de Kubernetes 1,25 y posteriores, debe habilitar las restricciones PSA en estos espacios de nombres:
++
+** `netapp-acc-operator` espacio de nombres:
++
+[listing]
+----
+kubectl label --overwrite ns netapp-acc-operator pod-security.kubernetes.io/enforce=privileged
+----
+** `netapp monitoring` espacio de nombres:
++
+[listing]
+----
+kubectl label --overwrite ns netapp-monitoring pod-security.kubernetes.io/enforce=privileged
+----
+
+
 * *Requisitos de Astra Trident*:
 +
 ** *Instalar una versión soportada*: Una versión de Astra Trident que es link:../get-started/requirements.html#astra-trident-requirements["Compatible con Astra Control Center"^] está instalado:
