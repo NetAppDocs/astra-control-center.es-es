@@ -199,7 +199,7 @@ NOTE: Puede poner en marcha Astra Control Center en un clúster de Kubernetes de
 | Origen | Destino | Puerto | Protocolo | Específico 
 
 
-| PC cliente | Astra Control Center | 443 | HTTPS | Acceso de interfaz de usuario/API: Asegúrese de que este puerto está abierto de ambas formas entre el clúster que aloja a Astra Control Center y cada clúster gestionado 
+| PC cliente | Astra Control Center | 443 | HTTPS | Acceso IU/API: Asegúrese de que este puerto esté abierto en ambas direcciones entre Astra Control Center y el sistema utilizado para acceder a Astra Control Center 
 
 
 | Consumidor de métricas | Nodo de trabajo de Astra Control Center | 9090 | HTTPS | Comunicación de datos de métricas: Asegúrese de que cada clúster gestionado pueda acceder a este puerto en el clúster que aloja a Astra Control Center (se requiere una comunicación bidireccional) 
@@ -212,6 +212,10 @@ NOTE: Puede poner en marcha Astra Control Center en un clúster de Kubernetes de
 
 
 | Astra Control Center | AutoSupport de NetApp  | 443 | HTTPS | Comunicación AutoSupport de NetApp 
+
+
+| Astra Control Center | Clúster de Kubernetes gestionado | 443/6443
+*NOTA*: El puerto que utiliza el clúster administrado puede variar dependiendo del clúster. Consulte la documentación del proveedor de software del clúster. | HTTPS | Comunicación con el clúster gestionado: Asegúrese de que este puerto esté abierto en ambos sentidos entre el clúster que aloja Astra Control Center y cada clúster gestionado 
 |===
 
 
