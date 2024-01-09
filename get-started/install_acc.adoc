@@ -30,7 +30,8 @@ Para ver una demostración del proceso de instalación de Astra Control Center, 
 
 TIP: Pon en marcha Astra Control Center en un tercer dominio de fallo o sitio secundario. Esto se recomienda para la replicación de aplicaciones y la recuperación ante desastres fluida.
 
-* *Considera las políticas de seguridad del pod*: Si has configurado o quieres configurar las políticas de seguridad del pod en tu entorno, familiarízate con las políticas de seguridad del pod y cómo afectan a la instalación de Astra Control Center. Consulte link:../concepts/understand-pod-security.html["restricciones de seguridad del pod"^].
+
+
 * *Asegurar servicios saludables*: Comprueba que todos los servicios API estén en buen estado y disponibles:
 +
 [source, console]
