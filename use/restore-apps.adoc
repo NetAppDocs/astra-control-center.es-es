@@ -24,6 +24,14 @@ Astra Control puede restaurar su aplicación a partir de una instantánea o una 
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 
+* *Controladores de clase de almacenamiento compatibles*: Astra Control admite la restauración de copias de seguridad mediante clases de almacenamiento respaldadas por los siguientes controladores:
++
+** `ontap-nas`
+** `ontap-nas-economy`
+** `ontap-san`
+** `ontap-san-economy`
+
+
 * *(Solo controlador económico de ontap-nas) Copias de seguridad y restauraciones*: Antes de realizar copias de seguridad o restaurar una aplicación que utiliza una clase de almacenamiento respaldada por el `ontap-nas-economy` controlador, compruebe que el link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations["El directorio Snapshot del sistema de administración de almacenamiento de ONTAP está oculto"]. Si no se oculta este directorio, se puede perder el acceso a la aplicación, especialmente si se utiliza NFSv3.
 * * Aplicaciones implementadas de Helm*: Las aplicaciones implementadas con Helm 3 (o actualizadas de Helm 2 a Helm 3) son totalmente compatibles. Las aplicaciones implementadas con Helm 2 no son compatibles.
 
