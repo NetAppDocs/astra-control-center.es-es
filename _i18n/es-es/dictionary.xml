@@ -1606,12 +1606,10 @@
   <block id="c49be33f592950e78d23dd417a4a75e5" category="list-text">Una imagen de referencia activa para el clúster que pretende gestionar con derechos de administrador del clúster para el contexto activo</block>
   <block id="565bfe8a9451afd10f3c41fe9fa4cf22" category="list-text">Cree una cuenta de servicio:</block>
   <block id="4ab759267d2877902a521921e10f5f5b" category="list-text">Cree un archivo de cuenta de servicio llamado<block ref="a22dad5601b31427598f571133fb2aed" prefix=" " category="inline-code"></block>.</block>
-  <block id="210c5331ab46caa141e6ac9d5aeb1bee" category="paragraph">Ajuste el nombre y el espacio de nombres según sea necesario. Si se realizan cambios aquí, debe aplicar los mismos cambios en los pasos siguientes.</block>
   <block id="605443509a67749999ab3b0d3ba43e8b" category="list-text">Aplicar la cuenta de servicio:</block>
   <block id="d2f7aa8c006dd5e0b027cb6e32926a4e" category="list-text">Aplique el rol de clúster:</block>
   <block id="a30ca90c640932dfa98b3ac560bb10ab" category="list-text">Cree el enlace de rol de clúster para el rol del clúster a la cuenta de servicio:</block>
   <block id="b29afe741178d8d4966c07c97f9892db" category="list-text">Cree un<block ref="e866afd8290d5c73cda6260e04e6eef0" prefix=" " category="inline-code"></block> archivo llamado<block ref="79e1486667eff2c5e1915f58701f3a18" prefix=" " category="inline-code"></block>.</block>
-  <block id="51980eaff0de60f578593fb8ae77f9b3" category="paragraph">Ajuste los nombres y espacios de nombres modificados al crear la cuenta de servicio según sea necesario.</block>
   <block id="c6c2bc2133c73ae2516508de9a2b5869" category="list-text">Aplique el enlace de roles del clúster:</block>
   <block id="b6e00a7dda090ccd5afd1c904d80548c" category="list-text">Enumere los secretos de la cuenta de servicio, reemplazando<block ref="af16c4db277e0498b5fa9e30613367f1" prefix=" " category="inline-code"></block> con el contexto correcto para su instalación:</block>
   <block id="f087976277d273660b942918b43af841" category="paragraph">El final de la salida debe ser similar a lo siguiente:</block>
@@ -3315,7 +3313,6 @@ Si instalaste una malla de servicio de Istio durante la instalación de Astra Co
   <block id="cafefc5f50506723aef36efe08228ac6" category="list-text"><block ref="cafefc5f50506723aef36efe08228ac6" category="inline-link-macro-rx"></block></block>
   <block id="ebbf8ab2cc98d2a82b96a1a2f7b5ae63" category="list-text">*Clases de almacenamiento respaldadas por el almacenamiento de ONTAP*: Si estás usando un backend de ONTAP, el Centro de control de Astra ofrece la capacidad de importar el backend de ONTAP para informar de la información de monitoreo.</block>
   <block id="8253c8b1a609f9ce1a02c4e2a504c939" category="admonition">Las clases de almacenamiento deberían ser<block ref="77905d0564a40ee81ff9591499f11020" category="inline-link-rx"></block> Con el aprovisionador de Astra Control.</block>
-  <block id="14fe383b66664af3f619add4f5177375" category="section-title">14 de marzo de 2023 (24.02.0)</block>
   <block id="d63699561e9e89b24f74267a42a43fcb" category="list-text">*Implementar Astra Control Center sin un registro privado*: Ya no es necesario enviar imágenes de Astra Control Center a un registro privado o usar uno como parte de su entorno de Astra Control.</block>
   <block id="2d34fffcd239d9123b41c19f296a8e34" category="list-text">*Correcciones de errores menores*</block>
   <block id="52431bbd389e0fa547d3457c7623dfdb" category="paragraph-title">(Vista previa técnica) Flujos de trabajo declarativos de Kubernetes</block>
@@ -3360,12 +3357,10 @@ Puede hacerlo<block ref="095384769efa0cb75b3680e52d8f483a" category="inline-link
   <block id="12547cb718bd5cdda0698d3425c2efd9" category="admonition">La integración de Astra Control Center con una malla de servicios solo puede llevarse a cabo durante Astra Control Center <block ref="62b215247cb296dff8f12da472ca9c46" category="inline-link-macro-rx"></block> y no independiente de este proceso. No se admite el cambio de un entorno mallado a otro sin mallado.</block>
   <block id="8eae7b52d2951fd68c2e610fc6a8003d" category="paragraph">Complete estos pasos para instalar el plugin de línea de comandos kubectl de NetApp Astra más reciente.</block>
   <block id="fa221b4f0b04edab66e833af2ce3f2ef" category="paragraph">Si ya tiene instalado el plugin desde una instalación anterior, <block ref="2a7472047c8e1a767aa63b6d837cb04d" category="inline-link-macro-rx"></block> antes de realizar estos pasos.</block>
-  <block id="93cd09cf13a63fbf73e885567e601af2" category="admonition">El marcador de posición<block ref="facf912114e23f5e3f2192e508b5894a" prefix=" " category="inline-code"></block> debe coincidir con la ubicación de las imágenes que ha cargado anteriormente (por ejemplo,<block ref="4bb7b95e87f41970aa8eeb1f4893161d" prefix=" " category="inline-code"></block>).</block>
   <block id="5168e33647c31de13dabe5499c7ce89a" category="list-text">Cree un secreto para<block ref="f156b3af9d1139da01a7b4bb0a5ad8f0" prefix=" " category="inline-code"></block> (o nombre personalizado). Agregue información de Docker y ejecute uno de los comandos adecuados en función de sus preferencias de registro:</block>
   <block id="1464e6df18144d722e7dceece5a6e602" category="list-text">Cambiar<block ref="e7fbb61ffc587682a801796b46db408a" prefix=" " category="inline-code"></block> para la<block ref="83f93b05da174976bd534cc67ad9f7b4" prefix=" " category="inline-code"></block> imagen a la ruta del registro en la que se insertó la imagen en un <block ref="354650eb3180bfec1ebeac2793978bb8" category="inline-xref-macro-rx"></block>.</block>
   <block id="cd7a180ee2029176203abb971a5e5ed9" category="example-title">Nombre de cuenta</block>
   <block id="bbdbf70444e48a34a4a7e7d708d85eec" category="example-title">Versión astraVersion</block>
-  <block id="79f6e92153762d586d165283a990b5d3" category="cell"><block ref="5649416aab23d5e9c0991adb30326363" prefix="" category="inline-code"></block></block>
   <block id="d27903c79b643b2f565c31e894abb568" category="example-title">Dirección de astern</block>
   <block id="3b34fa10a1849149ef360d65f3b2584b" category="cell">Cambie el<block ref="d27903c79b643b2f565c31e894abb568" prefix=" " category="inline-code"></block> Cadena al FQDN (recomendado) o dirección IP que desea utilizar en su navegador para acceder a Astra Control Center. Esta dirección define cómo se encontrará Astra Control Center en su centro de datos y es el mismo FQDN o la dirección IP que ha aprovisionado desde su equilibrador de carga cuando ha finalizado <block ref="474766b82367a3ec4c760e75a04081da" category="inline-link-macro-rx"></block>.
 
@@ -3426,7 +3421,6 @@ NOTA: Para obtener detalles sobre el tipo de servicio de “LoadBalancer” y In
   <block id="ff8f3c1816620cf8943535a74e369c1e" category="list-text">Utilice la<block ref="8045a0a6c688b0635e3caccc408a1446" prefix=" " category="inline-code"></block> <block ref="8787af0c37edaa1239d34c7f166a1210" category="inline-xref-macro-rx"></block> y proporcionar una entrada alternativa para <block ref="e5cc4e9a9ac2da26f1059b40c2f5790a" category="inline-link-macro-rx"></block>.</block>
   <block id="783fbd40d340f1c6d7af1fab635a9cf5" category="open-title">Consola web de Red Hat OpenShift</block>
   <block id="de70fb086d01bb5437ce1b74c04a3604" category="admonition">Si ha seleccionado una estrategia de aprobación manual, se le pedirá que apruebe el plan de instalación manual para este operador.</block>
-  <block id="4012f625d5dc882e710f5fd5f479e236" category="list-text">Introduce la versión de Astra Control Center; por ejemplo, 24.02.0-65.</block>
   <block id="15105b1c130e1cdf07a5bcc7b4c2e25a" category="list-text">Seleccione el tamaño de escala de la instalación.</block>
   <block id="a56226948269f21e33c8cedc94f81f6e" category="list-text">*Genérico* <block ref="70110d526a7afb77cc9b5240e79845c0" prefix="(" category="inline-code"></block>) (Predeterminado)</block>
   <block id="bc56063dd5f901e8aacc233e02694865" category="paragraph">Utilice esta opción cuando tenga otro controlador de entrada en uso o prefiera utilizar su propio controlador de entrada. Después de poner en marcha Astra Control Center, será necesario configurar el <block ref="d5e402858a9f759437c0ead0501ac799" category="inline-link-macro-rx"></block> Para exponer Astra Control Center con una URL.</block>
@@ -3556,7 +3550,6 @@ RKE 2: Versiones 1.24.17, 1.25.14, 1.26.9 con Rancher Manager 2.7.9</block>
   <block id="8af6183c9bdfc7399cee2ffcfafecbd2" category="paragraph">Los índices de cada elemento de la<block ref="7de38f3c3d3baa7ca58a366f09577586" prefix=" " category="inline-code"></block> la matriz comienza con 0. En el ejemplo anterior, el índice para<block ref="b91e4862bb487ade8bbd4f9eefe0618e" prefix=" " category="inline-code"></block> sería 0 y el índice para<block ref="ce8dd462bb623b9902ba4f0151eb2f1b" prefix=" " category="inline-code"></block> sería 1. En la salida, anote el número de índice del secreto de la cuenta de servicio. Necesitará este número de índice en el siguiente paso.</block>
   <block id="a40c084314b74a686572312dc71c4738" category="list-text">Cree un<block ref="3d3f9b7a5974a7898593a3d2f5549f15" prefix=" " category="inline-code"></block> archivo.</block>
   <block id="23ed633c6130c18f08608b6efce84dc4" category="list-text">Sustituya<block ref="089d02fba2ffcdb49a91320ff506dfa3" prefix=" " category="inline-code"></block> al principio de la secuencia de comandos siguiente con el valor correcto.</block>
-  <block id="8ef78cb986fb315aafc3d106d5e46291" category="list-text">Sustituya<block ref="7347fe5a0f184f79ef064e92e3beb297" prefix=" " category="inline-code"></block> Con el espacio de nombres de Astra Control Center.</block>
   <block id="c103c1b613b979158e5cb38bf6ed5f16" category="inline-link">Siga estos pasos para desinstalar la instancia de Astra Trident que contiene el servicio de aprovisionamiento Astra Control</block>
   <block id="2c5e000851530d456765d6ad7069ee9a" category="paragraph">*¿Se desinstala automáticamente Astra Control Provisionador (o Astra Trident) de un clúster cuando lo desgestiono?*
 Cuando se desgestiona un clúster de Astra Control Center, el aprovisionador de Astra Control o Astra Trident no se desinstalan automáticamente del clúster. Para desinstalar Astra Control Provisioner y sus componentes o Astra Trident, deberá hacerlo<block ref="20ce5e359d2a1fb9fe63ec6fbc3432ca" category="inline-link-rx"></block>.</block>
@@ -3616,4 +3609,8 @@ Astra Control Provisioning se instala automáticamente como parte del proceso de
   <block id="7742ba7740cead9fe565013f4bdb49ae" category="sidebar">Prepare la gestión del clúster con Astra Control</block>
   <block id="3b99b0d7fdee4b22f7669dcf30bd5137" category="sidebar">Instala Astra Connector para clústeres gestionados</block>
   <block id="bb46bb8b123b387689649bcd6e67f690" category="sidebar">Habilite la autenticación del back-end del almacenamiento</block>
+  <block id="e9876a34f200453c5276db1bcd936066" category="section-title">15 de marzo de 2023 (24.02.0)</block>
+  <block id="8eb0443b63cbd12e3161aa0214feb89c" category="admonition">El marcador de posición<block ref="facf912114e23f5e3f2192e508b5894a" prefix=" " category="inline-code"></block> debe coincidir con la ubicación de las imágenes que ha cargado anteriormente (por ejemplo,<block ref="69d1ad4e27c121d5699f0cde5eb5c93c" prefix=" " category="inline-code"></block>).</block>
+  <block id="f768e6dcac13eb19534cf966f45963b6" category="cell"><block ref="f88ff30441dac38b9948d4f74cec7a17" prefix="" category="inline-code"></block></block>
+  <block id="a4d0aec7cffdaed0bf8e97e7c30b486b" category="list-text">Introduce la versión de Astra Control Center; por ejemplo, 24.02.0-69.</block>
 </blocks>
