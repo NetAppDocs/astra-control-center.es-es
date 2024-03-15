@@ -24,6 +24,22 @@ entries:
   - title: Configurar Astra Control Center después de la instalación
     url: "/get-started/configure-after-install.html"
 - title: Configure Astra Control Center
-  url: "/get-started/setup_overview.html"
+  entries:
+  - title: Añada licencia
+    url: "/get-started/add-license.html"
+  - title: Habilita el aprovisionador de Astra Control
+    url: "/get-started/enable-acp.html"
+  - title: Prepare la gestión del clúster con Astra Control
+    url: "/get-started/prep-for-cluster-management.html"
+  - title: Instala Astra Connector para clústeres gestionados
+    url: "/get-started/install-astra-connector.html"
+  - title: Añadir un clúster
+    url: "/get-started/add-cluster.html"
+  - title: Habilite la autenticación del back-end del almacenamiento
+    url: "/get-started/enable-auth-ontap-backend.html"
+  - title: Añada un back-end de almacenamiento
+    url: "/get-started/add-storage-backend.html"
+  - title: Añadir un bucket
+    url: "/get-started/add-bucket.html"
 - title: PREGUNTAS FRECUENTES
   url: "/get-started/faq.html"

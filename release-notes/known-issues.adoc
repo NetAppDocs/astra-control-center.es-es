@@ -19,7 +19,6 @@ Los siguientes problemas conocidos afectan a la versión actual:
 
 * <<Los backups de aplicaciones y las snapshots producen errores si la clase volumesnapshotse añade después de gestionar un clúster>>
 * <<Se produce un error en la gestión de un clúster con Astra Control Center cuando el archivo kubeconfig contiene más de un contexto>>
-* <<Un pod de supervisión puede fallar en entornos Istio>>
 * <<Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión>>
 * <<Las operaciones de restauración sin movimiento a las clases de almacenamiento económico ontap-nas fallan>>
 * <<Puede producirse un error en la restauración desde un backup cuando se utiliza el cifrado en tránsito de Kerberos>>
@@ -40,58 +39,6 @@ No puede utilizar una imagen de kubeconfig con más de un clúster y contexto en
 
 
 
-== Un pod de supervisión puede fallar en entornos Istio
-
-Si emparejas Astra Control Center con Cloud Insights en un entorno de Istio, el `telegraf-rs` el pod puede bloquearse. Para solucionar esta solución, siga estos pasos:
-
-. Busque el pod averiado:
-+
-[listing]
-----
-kubectl -n netapp-monitoring get pod | grep Error
-----
-+
-Debería ver una salida similar a la siguiente:
-
-+
-[listing]
-----
-NAME READY STATUS RESTARTS AGE
-telegraf-rs-fhhrh 1/2 Error 2 (26s ago) 32s
-----
-. Reinicie el pod averiado, sustituyéndolo `<pod_name_from_output>` con el nombre del pod afectado:
-+
-[listing]
-----
-kubectl -n netapp-monitoring delete pod <pod_name_from_output>
-----
-+
-Debería ver una salida similar a la siguiente:
-
-+
-[listing]
-----
-pod "telegraf-rs-fhhrh" deleted
-----
-. Compruebe que el pod se ha reiniciado y que no está en un estado de error:
-+
-[listing]
-----
-kubectl -n netapp-monitoring get pod
-----
-+
-Debería ver una salida similar a la siguiente:
-
-+
-[listing]
-----
-NAME READY STATUS RESTARTS AGE
-telegraf-rs-rrnsb 2/2 Running 0 11s
-----
-
-
-
-
 == Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión
 
 Si Astra Trident se desconecta (y se vuelve a conectar) y se producen 500 errores internos de servicio al intentar gestionar los datos de las aplicaciones, reinicie todos los nodos de Kubernetes del clúster de aplicaciones para restaurar la funcionalidad.
@@ -100,7 +47,7 @@ Si Astra Trident se desconecta (y se vuelve a conectar) y se producen 500 errore
 
 == Las operaciones de restauración sin movimiento a las clases de almacenamiento económico ontap-nas fallan
 
-Si realiza una restauración sin movimiento de una aplicación (restaura la aplicación en su espacio de nombres original) y la clase de almacenamiento de la aplicación utiliza el `ontap-nas-economy` controlador, se puede producir un error en la operación de restauración si el directorio snapshot no está oculto. Antes de restaurar en el lugar, siga las instrucciones de link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations["Habilite el backup y la restauración para las operaciones económicas de ontap-nas"^] para ocultar el directorio de instantáneas.
+Si realiza una restauración sin movimiento de una aplicación (restaura la aplicación en su espacio de nombres original) y la clase de almacenamiento de la aplicación utiliza el `ontap-nas-economy` controlador, se puede producir un error en la operación de restauración si el directorio snapshot no está oculto. Antes de restaurar en el lugar, siga las instrucciones de link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations["Habilite el backup y la restauración para las operaciones económicas de ontap-nas"] para ocultar el directorio de instantáneas.
 
 
 

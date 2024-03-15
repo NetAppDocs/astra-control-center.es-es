@@ -17,13 +17,13 @@ Al implementar Astra Control Center, se instala con una licencia de evaluación 
 Usted obtiene una licencia de una de las siguientes maneras:
 
 * Si va a evaluar Astra Control Center y necesita términos de evaluación distintos a los incluidos en la licencia de evaluación integrada, póngase en contacto con NetApp para solicitar un archivo de licencia de evaluación diferente.
-* link:https://mysupport.netapp.com/site/["Si ya ha adquirido Astra Control Center, genere su archivo de licencia de NetApp (NLF)"^] Al iniciar sesión en el sitio de soporte de NetApp y navegar a sus licencias de software en el menú Sistemas.
+* https://mysupport.netapp.com/site/["Si ya ha adquirido Astra Control Center, genere su archivo de licencia de NetApp (NLF)"^] Al iniciar sesión en el sitio de soporte de NetApp y navegar a sus licencias de software en el menú Sistemas.
 
 
 Para obtener más información sobre las licencias necesarias para los back-ends de almacenamiento de ONTAP, consulte link:../get-started/requirements.html["compatibles con los back-ends de almacenamiento"].
 
 
-NOTE: Asegúrese de que su licencia habilita al menos tantas unidades de CPU como necesite. Si el número de unidades de CPU que gestiona Astra Control Center supera las unidades de CPU disponibles en la nueva licencia que se está aplicando, no podrá aplicar la nueva licencia.
+NOTE: Asegúrese de que su licencia habilita al menos tantas unidades de CPU como necesite. Si el número de unidades de CPU que gestiona actualmente Astra Control Center supera las unidades de CPU disponibles en la nueva licencia que se está aplicando, no podrá aplicar la nueva licencia.
 
 
 
@@ -60,6 +60,6 @@ NOTE: Los nodos de infraestructura de Red Hat OpenShift no consumen licencias en
 
 == Obtenga más información
 
-* link:../get-started/setup_overview.html#add-a-license-for-astra-control-center["Agregue una licencia cuando configure por primera vez Astra Control Center"]
+* link:../get-started/add-license.html["Agregue una licencia cuando configure por primera vez Astra Control Center"]
 * link:../use/update-licenses.html["Actualizar una licencia existente"]
 

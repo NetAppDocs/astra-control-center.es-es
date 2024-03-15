@@ -25,7 +25,7 @@ Con Astra Control Provisioning, puede crear relaciones de mirroring entre un vol
 Asegúrese de que se cumplen los siguientes requisitos previos antes de comenzar:
 
 .Clústeres ONTAP
-* *Astra Control Provisionador*: Astra Control Provisionador versión 22,10 o posterior debe existir en los clústeres de Kubernetes de origen y destino que utilizan ONTAP como backend.
+* *Astra Control Provisionador*: Astra Control Provisionador versión 23,10 o posterior o A link:../get-started/requirements.html["Astra Trident compatible"] Debe existir en los clústeres de Kubernetes de origen y de destino que utilicen ONTAP como back-end.
 * *Licencias*: Las licencias asíncronas de SnapMirror de ONTAP que utilizan el paquete de protección de datos deben estar habilitadas en los clústeres de ONTAP de origen y de destino. Consulte https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["Información general sobre las licencias de SnapMirror en ONTAP"^] si quiere más información.
 
 

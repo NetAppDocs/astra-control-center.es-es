@@ -1,0 +1,44 @@
+---
+sidebar: sidebar 
+permalink: get-started/add-license.html 
+keywords: set up astra control, astra control license 
+summary: Después de instalar Astra Control Center, inicia sesión en la interfaz de usuario de y cambia la contraseña, querrá configurar una licencia. 
+---
+= Agregue una licencia de Astra Control Center
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/get-started/
+
+
+[role="lead"]
+Al instalar Astra Control Center, ya hay una licencia de evaluación integrada instalada. Si estás evaluando Astra Control Center, puedes omitir este paso.
+
+Puede añadir una nueva licencia con la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation["API de control Astra"^].
+
+Las licencias de Astra Control Center miden los recursos de CPU mediante unidades de CPU de Kubernetes y representan los recursos de CPU asignados a los nodos de trabajo de todos los clústeres de Kubernetes gestionados. Las licencias se basan en el uso de vCPU. Para obtener más información sobre cómo se calculan las licencias, consulte link:../concepts/licensing.html["Licencia"].
+
+
+NOTE: Si su instalación crece para superar el número de unidades CPU con licencia, Astra Control Center le impide gestionar nuevas aplicaciones. Se muestra una alerta cuando se supera la capacidad.
+
+
+NOTE: Para actualizar una evaluación existente o una licencia completa, consulte link:../use/update-licenses.html["Actualizar una licencia existente"].
+
+.Antes de empezar
+* Acceso a una instancia de Astra Control Center recién instalada.
+* Permisos del rol de administrador.
+* A. link:../concepts/licensing.html["Archivo de licencia de NetApp"] (NLF).
+
+
+.Pasos
+. Inicie sesión en la interfaz de usuario de Astra Control Center.
+. Seleccione *cuenta* > *Licencia*.
+. Seleccione *Agregar licencia*.
+. Busque el archivo de licencia (NLF) que descargó.
+. Seleccione *Agregar licencia*.
+
+
+La página *cuenta* > *Licencia* muestra la información de la licencia, la fecha de caducidad, el número de serie de la licencia, el ID de cuenta y las unidades de CPU utilizadas.
+
+
+NOTE: Si tiene una licencia de evaluación y no envía datos a AutoSupport, asegúrese de almacenar su ID de cuenta para evitar la pérdida de datos en caso de un fallo en Astra Control Center.

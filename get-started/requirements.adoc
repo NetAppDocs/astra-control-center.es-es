@@ -27,25 +27,21 @@ NOTE: Compruebe que el entorno de Kubernetes que elijas para alojar Astra Contro
 | Distribución de Kubernetes en clúster de hosts | Versiones compatibles 
 
 
-| Azure Kubernetes Service en HCI de pila de Azure | Azure Stack HCI 21H2 y 22H2 con AKS 1,24.x y 1,25.x 
+| Azure Kubernetes Service en HCI de pila de Azure | Azure Stack HCI 21H2 y 22H2 con AKS 1.24.11 a 1.26.6 
 
 
 | Anthos de Google | 1,15 a 1,16 (consulte <<Requisitos de incorporación de Google Anthos>>) 
 
 
-| Kubernetes (ascendente) | 1,26 a 1,28 
+| Kubernetes (ascendente) | 1,27 a 1,29 
 
 
-| Motor Kubernetes de rancher (RKE) | RKE 1,3 con Rancher Manager 2,6
-RKE 1,4 con Rancher Manager 2,7
-RKE 2 (v1,24.x) con Rancher 2,6
-RKE 2 (v1,26.x) con Rancher 2,7 
+| Motor Kubernetes de rancher (RKE) | RKE 1: Versiones 1.24.17, 1.25.13, 1.26.8 con Rancher Manager 2.7.9
+RKE 2: Versiones 1.23.16 y 1.24.13 con Rancher Manager 2.6.13
+RKE 2: Versiones 1.24.17, 1.25.14, 1.26.9 con Rancher Manager 2.7.9 
 
 
-| OpenShift Container Platform de Red Hat | 4,11 hasta 4,14 
-
-
-| VMware Tanzu Kubernetes Grid Integrated Edition | 1,16.x (consulte <<Requisitos de recursos del clúster de hosts>>) 
+| OpenShift Container Platform de Red Hat | 4,12 hasta 4,14 
 |===
 
 
@@ -63,7 +59,13 @@ NOTE: Estos requisitos suponen que Astra Control Center es la única aplicación
 ** El token predeterminado del archivo de configuración de VMware TKG y TKGi caduca diez horas después de la implementación. Si utiliza productos de la cartera de Tanzu, debe generar un archivo de configuración de tanzu Kubernetes Cluster con un token que no caduca para evitar problemas de conexión entre Astra Control Center y clústeres de aplicaciones administradas. Si desea obtener instrucciones, visite https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html["La documentación de producto del centro de datos NSX-T de VMware."^]
 ** Utilice la `kubectl get nsxlbmonitors -A` comando para ver si ya tiene un monitor de servicio configurado para aceptar tráfico de entrada. Si existe una, no debe instalar MetalLB, ya que el monitor de servicio existente anulará cualquier nueva configuración de equilibrador de carga.
 ** Desactive la implementación predeterminada de la clase de almacenamiento TKG o TKGi en cualquier cluster de aplicaciones que Astra Control deba gestionar. Para ello, edite la `TanzuKubernetesCluster` recurso en el clúster de espacio de nombres.
-** Tenga en cuenta los requisitos específicos para Astra Trident al implementar Astra Control Center en un entorno TKG o TKGi. Para obtener más información, consulte https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options["Documentación de Astra Trident"^].
+** Ten en cuenta los requisitos específicos para el aprovisionador de Astra Control al implementar Astra Control Center en un entorno TKG o TKGi:
++
+*** El clúster debe admitir cargas de trabajo con privilegios.
+*** La `--kubelet-dir` el indicador se debe establecer en la ubicación del directorio kubelet. De forma predeterminada, esta es `/var/vcap/data/kubelet`.
+*** Especificación de la ubicación del kubelet mediante `--kubelet-dir` Sabe que funciona para el operador, Helm y. `tridentctl` implementaciones.
+
+
 
 
 
@@ -72,40 +74,42 @@ NOTE: Estos requisitos suponen que Astra Control Center es la única aplicación
 
 == Requisitos de malla de servicio
 
-Se recomienda encarecidamente instalar una versión vanilla compatible de la malla de servicio de Istio en el clúster de hosts de Astra Control Center. Consulte https://istio.io/latest/docs/releases/supported-releases/["versiones compatibles"^] Para versiones compatibles de Istio. Los lanzamientos de marca de la malla de servicio de Istio, como OpenShift Service Mesh, no están validados con Astra Control Center.
+Se recomienda instalar una versión vanilla compatible de la malla de servicio de Istio en el clúster de hosts de Astra Control Center. Consulte https://istio.io/latest/docs/releases/supported-releases/["versiones compatibles"^] Para versiones compatibles de Istio. Los lanzamientos de marca de la malla de servicio de Istio, como OpenShift Service Mesh, no están validados con Astra Control Center.
 
-Para integrar Astra Control Center con la malla de servicio de Istio instalada en el clúster de hosts, es necesario hacer la integración como parte de Astra Control Center link:../get-started/install_acc.html["instalación"] proceso y no independiente de este proceso.
-
-
-NOTE: La instalación de Astra Control Service sin configurar una malla de servicio en el clúster de hosts tiene implicaciones de seguridad potencialmente graves.
+Para integrar Astra Control Center con la malla de servicio de Istio instalada en el clúster de hosts, es necesario hacer la integración como parte de un Astra Control Center link:../get-started/install_acc.html["instalación"] y no independiente de este proceso.
 
 
-
-== Requisitos de Astra Trident
-
-Asegúrese de cumplir los siguientes requisitos de Astra Trident específicos para las necesidades de su entorno:
-
-* *Versión mínima para usar con Astra Control Center*: Astra Trident 23,01 o posterior instalado y configurado
-* *Configuración ONTAP con Astra Trident*:
-+
-** * Clase de almacenamiento*: Configure al menos una clase de almacenamiento Astra Trident en el clúster. Si se configura una clase de almacenamiento predeterminada, asegúrese de que es la única clase de almacenamiento con la designación predeterminada.
-** *Controladores de almacenamiento y nodos de trabajo*: Asegúrese de configurar los nodos de trabajo en su clúster con los controladores de almacenamiento adecuados para que los pods puedan interactuar con el almacenamiento de backend. Astra Control Center es compatible con los siguientes controladores de ONTAP proporcionados por Astra Trident:
-+
-*** `ontap-nas`
-*** `ontap-san`
-*** `ontap-san-economy` (la replicación de aplicaciones no está disponible con este tipo de clase de almacenamiento)
-*** `ontap-nas-economy` (las snapshots y las políticas de replicación no están disponibles con este tipo de clase de almacenamiento)
+NOTE: La instalación y el uso de Astra Control Center sin configurar una malla de servicio en el clúster de host tiene implicaciones de seguridad potencialmente graves.
 
 
 
+== Astra Trident
 
-
+Si piensa utilizar Astra Trident en lugar de Astra Control Provisioner con esta versión, se admiten Astra Trident 23,04 y las versiones posteriores. Astra Control Center requerirá <<Aprovisionador de Astra Control>> en futuras versiones.
 
 
 
 == Aprovisionador de Astra Control
 
-Para usar la funcionalidad de almacenamiento avanzada del aprovisionador de Astra Control, debe instalar Astra Trident 23,10 o una versión posterior y habilitarla link:../use/enable-acp.html["Funcionalidad de aprovisionamiento Astra Control"].
+Para usar la funcionalidad de almacenamiento avanzada del aprovisionador de Astra Control, debe instalar Astra Trident 23,10 o una versión posterior y habilitarla link:../get-started/enable-acp.html["Funcionalidad de aprovisionamiento Astra Control"]. Para utilizar las funcionalidades del aprovisionador de control de Astra más recientes, necesitarás las versiones más recientes de Astra Trident y Astra Control Center.
+
+* *Versión mínima de Astra Control Provisionador para usar con Astra Control Center*: Astra Control Provisionador 23,10 o posterior instalado y configurado.
+
+
+
+
+=== Configuración de ONTAP con Astra Trident
+
+* *Clase de almacenamiento*: Configure al menos una clase de almacenamiento en el clúster. Si se configura una clase de almacenamiento predeterminada, asegúrese de que es la única clase de almacenamiento con la designación predeterminada.
+* *Controladores de almacenamiento y nodos de trabajo*: Asegúrese de configurar los nodos de trabajo en su clúster con los controladores de almacenamiento adecuados para que los pods puedan interactuar con el almacenamiento de backend. Astra Control Center es compatible con los siguientes controladores de ONTAP proporcionados por Astra Trident:
++
+** `ontap-nas`
+** `ontap-san`
+** `ontap-san-economy` (la replicación de aplicaciones no está disponible con este tipo de clase de almacenamiento)
+** `ontap-nas-economy` (las instantáneas y las políticas de replicación de aplicaciones no están disponibles con este tipo de clase de almacenamiento)
+
+
+
 
 
 
@@ -116,10 +120,11 @@ Asegúrese de tener un backend soportado con capacidad suficiente.
 * * Capacidad de almacenamiento de backend requerida*: Al menos 500GB disponibles
 * *Backends soportados*: Astra Control Center soporta los siguientes backends de almacenamiento:
 +
-** NetApp ONTAP 9.9.1 o sistemas AFF, FAS y ASA posteriores
+** Sistemas NetApp ONTAP 9.9.1 o posteriores AFF, FAS y ASA
 ** NetApp ONTAP Select 9.9.1 o posterior
 ** NetApp Cloud Volumes ONTAP 9.9.1 o posterior
-** Longhorn 1.5.0 o más reciente
+** (Para la vista previa técnica de Centro de control de Astra) NetApp ONTAP 9.10.1 o posterior para operaciones de protección de datos que se proporcionan como versión preliminar técnica
+** Longhorn 1.5.0 o posterior
 +
 *** Requiere la creación manual de un objeto VolumeSnapshotClass. Consulte la https://longhorn.io/docs/1.5.0/snapshots-and-backups/csi-snapshot-support/csi-volume-snapshot-associated-with-longhorn-snapshot/#create-a-csi-volumesnapshot-associated-with-longhorn-snapshot["Documentación de Longhorn"^] si desea obtener instrucciones.
 
@@ -157,17 +162,11 @@ Cuando usa NetApp MetroCluster como back-end de almacenamiento, tiene que hacer 
 * Asegúrese de tener la licencia de ONTAP adecuada
 
 
-Para configurar la LIF de MetroCluster, consulte la documentación de Astra Trident para obtener más información sobre cada controlador:
+Para configurar el LIF MetroCluster, consulte estas opciones y ejemplos de cada controlador:
 
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html["SAN"^]
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html["NAS"^]
 
-
-
-
-== Registro de imágenes
-
-Debe tener un registro de imágenes de Docker privado existente en el que pueda transferir las imágenes de creación de Astra Control Center. Debe proporcionar la dirección URL del registro de imágenes donde cargará las imágenes.
 
 
 
@@ -177,9 +176,9 @@ Se requiere una licencia de Astra Control Center. Al instalar Astra Control Cent
 
 Para probar Astra Control Center, regístrate para obtener una prueba gratuita. Puede registrarse registrándose link:https://bluexp.netapp.com/astra-register["aquí"^].
 
-Para configurar la licencia, consulte link:setup_overview.html["utilice una licencia de evaluación de 90 días"^].
+Para configurar la licencia, consulte link:add-license.html["utilice una licencia de evaluación de 90 días"].
 
-Para obtener más información sobre cómo funcionan las licencias, consulte link:../concepts/licensing.html["Licencia"^].
+Para obtener más información sobre cómo funcionan las licencias, consulte link:../concepts/licensing.html["Licencia"].
 
 
 
@@ -188,7 +187,7 @@ Para obtener más información sobre cómo funcionan las licencias, consulte lin
 Configura tu entorno operativo para garantizar que Astra Control Center se pueda comunicar correctamente. Se requieren las siguientes configuraciones de red:
 
 * *Dirección FQDN*: Debes tener una dirección FQDN para Astra Control Center.
-* *Acceso a internet*: Debes determinar si tienes acceso externo a internet. Si no lo hace, es posible que algunas funcionalidades sean limitadas, como recibir datos de supervisión y métricas de Cloud Insights de NetApp, o enviar paquetes de soporte al https://mysupport.netapp.com/site/["Sitio de soporte de NetApp"^].
+* *Acceso a internet*: Debes determinar si tienes acceso externo a internet. Si no lo hace, es posible que algunas funcionalidades se vean limitadas, por ejemplo, enviar paquetes de soporte al https://mysupport.netapp.com/site/["Sitio de soporte de NetApp"^].
 * *Acceso al puerto*: El entorno operativo que aloja Astra Control Center se comunica mediante los siguientes puertos TCP. Debe asegurarse de que estos puertos estén permitidos a través de cualquier firewall y configurar firewalls para permitir que cualquier tráfico de salida HTTPS que se origine en la red Astra. Algunos puertos requieren conectividad de ambos modos entre el entorno que aloja Astra Control Center y cada clúster gestionado (se indica si procede).
 
 
@@ -203,9 +202,6 @@ NOTE: Puede poner en marcha Astra Control Center en un clúster de Kubernetes de
 
 
 | Consumidor de métricas | Nodo de trabajo de Astra Control Center | 9090 | HTTPS | Comunicación de datos de métricas: Asegúrese de que cada clúster gestionado pueda acceder a este puerto en el clúster que aloja a Astra Control Center (se requiere una comunicación bidireccional) 
-
-
-| Astra Control Center | Servicio Cloud Insights alojado  | 443 | HTTPS | Comunicación de Cloud Insights 
 
 
 | Astra Control Center | Proveedor de bloques de almacenamiento Amazon S3 | 443 | HTTPS | Comunicación del almacenamiento de Amazon S3 
@@ -226,13 +222,13 @@ Puede elegir el tipo de entrada de red que utiliza Astra Control Center. De form
 
 NOTE: El equilibrador de carga debe utilizar una dirección IP ubicada en la misma subred que las direcciones IP del nodo de trabajo de Astra Control Center.
 
-Para obtener más información, consulte link:../get-started/install_acc.html#set-up-ingress-for-load-balancing["Configure la entrada para el equilibrio de carga"^].
+Para obtener más información, consulte link:../get-started/install_acc.html#set-up-ingress-for-load-balancing["Configure la entrada para el equilibrio de carga"].
 
 
 
 === Requisitos de incorporación de Google Anthos
 
-Cuando alojes Astra Control Center en un clúster Anthos de Google, ten en cuenta que Google Anthos incluye de forma predeterminada el equilibrador de carga MetalLB y el servicio Istio Ingress, lo que te permite usar simplemente las capacidades genéricas de ingreso de Astra Control Center durante la instalación. Consulte link:install_acc.html#configure-astra-control-center["Configurar Astra Control Center"^] para obtener más detalles.
+Cuando alojes Astra Control Center en un clúster Anthos de Google, ten en cuenta que Google Anthos incluye de forma predeterminada el equilibrador de carga MetalLB y el servicio Istio Ingress, lo que te permite usar simplemente las capacidades genéricas de ingreso de Astra Control Center durante la instalación. Consulte link:install_acc.html#configure-astra-control-center["Documentación de instalación de Astra Control Center"] para obtener más detalles.
 
 
 
@@ -246,10 +242,10 @@ Astra Control Center es compatible con las versiones recientes de Firefox, Safar
 
 Tenga en cuenta estos requisitos si planea utilizar estas funciones de Astra Control Center:
 
-* *Requisitos del clúster de aplicaciones*: link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control["Requisitos de gestión de clústeres"^]
+* *Requisitos del clúster de aplicaciones*: link:../get-started/prep-for-cluster-management.html["Requisitos de gestión de clústeres"]
 +
-** *Requisitos de aplicación gestionada*: link:../use/manage-apps.html#application-management-requirements["Y gestión de aplicaciones"^]
-** *Requisitos adicionales para la replicación de aplicaciones*: link:../use/replicate_snapmirror.html#replication-prerequisites["Requisitos previos de replicación"^]
+** *Requisitos de aplicación gestionada*: link:../use/manage-apps.html#application-management-requirements["Y gestión de aplicaciones"]
+** *Requisitos adicionales para la replicación de aplicaciones*: link:../use/replicate_snapmirror.html#replication-prerequisites["Requisitos previos de replicación"]
 
 
 
@@ -258,4 +254,4 @@ Tenga en cuenta estos requisitos si planea utilizar estas funciones de Astra Con
 
 == El futuro
 
-Vea la link:quick-start.html["inicio rápido"^] descripción general.
+Vea la link:quick-start.html["inicio rápido"] descripción general.

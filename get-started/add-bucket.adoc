@@ -1,0 +1,72 @@
+---
+sidebar: sidebar 
+permalink: get-started/add-bucket.html 
+keywords: set up astra control, add bucket 
+summary: Tras la instalación de Astra Control Center, deberías considerar la posibilidad de añadir un bucket como parte de la configuración. 
+---
+= Añadir un bucket
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/get-started/
+
+
+[role="lead"]
+Puede añadir un bloque con la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation["API de control Astra"^]. Añadir proveedores de bloques de almacenamiento de objetos es esencial si desea realizar backups de sus aplicaciones y del almacenamiento persistente o si desea clonar aplicaciones entre clústeres. Astra Control almacena estas copias de seguridad o clones en los bloques de almacenamiento de objetos que defina.
+
+No necesita un bloque de Astra Control si clona la configuración de sus aplicaciones y el almacenamiento persistente en el mismo clúster. La funcionalidad de snapshots de aplicaciones no requiere un bloque.
+
+.Antes de empezar
+* Asegúrese de tener un bloque al que se puede acceder desde los clústeres que gestiona Astra Control Center.
+* Asegúrese de tener credenciales para el bloque.
+* Asegúrese de que el cucharón es uno de los siguientes tipos:
++
+** ONTAP S3 de NetApp
+** StorageGRID S3 de NetApp
+** Microsoft Azure
+** Genérico S3
+
+
+
+
+
+NOTE: Amazon Web Services (AWS) y Google Cloud Platform (GCP) utilizan el tipo de bloque Generic S3.
+
+
+NOTE: Aunque Astra Control Center es compatible con Amazon S3 como proveedor de bloques Generic S3, es posible que Astra Control Center no admita todos los proveedores de almacenes de objetos que afirman que Amazon es compatible con S3.
+
+.Pasos
+. En el área de navegación de la izquierda, seleccione *Cuchos*.
+. Seleccione *Agregar*.
+. Seleccione el tipo de bloque.
++
+
+NOTE: Cuando agregue un bloque, seleccione el proveedor de segmento correcto y proporcione las credenciales correctas para ese proveedor. Por ejemplo, la interfaz de usuario acepta ONTAP S3 de NetApp como tipo y acepta credenciales de StorageGRID; sin embargo, esto hará que se produzcan errores en todos los futuros backups de aplicaciones y restauraciones usando este bucket.
+
+. Introduzca un nombre de bloque existente y una descripción opcional.
++
+
+TIP: El nombre y la descripción del bloque aparecen como una ubicación de backup que se puede elegir más adelante al crear un backup. El nombre también aparece durante la configuración de la política de protección.
+
+. Introduzca el nombre o la dirección IP del extremo de S3.
+. En *Seleccionar credenciales*, elija la ficha *Agregar* o *utilizar existente*.
++
+** Si ha elegido *Agregar*:
++
+... Introduzca un nombre para la credencial que la distingue de otras credenciales en Astra Control.
+... Escriba el identificador de acceso y la clave secreta pegando el contenido del portapapeles.
+
+
+** Si ha elegido *utilizar existente*:
++
+... Seleccione las credenciales existentes que desea utilizar con el bloque.
+
+
+
+
+. Seleccione `Add`.
++
+
+NOTE: Cuando se agrega un bloque, Astra Control Marca un bloque con el indicador de segmento predeterminado. El primer bloque que crea se convierte en el bloque predeterminado. A medida que se añaden bloques, más adelante se puede decidir a. link:../use/manage-buckets.html#set-the-default-bucket["establecer otro bloque predeterminado"].
+
+

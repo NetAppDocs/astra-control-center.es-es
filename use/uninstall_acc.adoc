@@ -17,8 +17,8 @@ Es posible que necesite eliminar los componentes de Astra Control Center si va a
 Si tiene algún problema con la desinstalación, consulte <<Solución de problemas de desinstalación>>.
 
 .Antes de empezar
-. link:../use/unmanage.html#unmanage-an-app["Anular la gestión de todas las aplicaciones"^] en los clústeres.
-. link:../use/unmanage.html#unmanage-a-cluster["Anule la gestión de todos los clústeres"^].
+. link:../use/unmanage.html#unmanage-an-app["Anular la gestión de todas las aplicaciones"] en los clústeres.
+. link:../use/unmanage.html#unmanage-a-cluster["Anule la gestión de todos los clústeres"].
 
 
 .Pasos

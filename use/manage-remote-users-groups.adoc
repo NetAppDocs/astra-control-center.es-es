@@ -74,9 +74,13 @@ NOTE: El rol que seleccione se asigna a todos los usuarios de este grupo. Si asi
 
 . Opcionalmente, asigne una o más restricciones de espacio de nombres a este grupo y seleccione *restringir rol a restricciones* para aplicarlas. Puede agregar una nueva restricción de espacio de nombres seleccionando *Agregar restricción*.
 +
+[NOTE]
+====
+** *Si los recursos a los que se accede pertenecen a clusters que tienen instalado el último Astra Connector*: Cuando se asignan varios roles a un usuario a través de la pertenencia a un grupo LDAP, se combinan las restricciones de los roles. Por ejemplo, si un usuario con un rol de visor local une tres grupos vinculados al rol de miembro, el usuario ahora tendrá acceso al rol de visor a los recursos originales, así como acceso al rol de miembro a los recursos obtenidos mediante la pertenencia al grupo.
+** *Si los recursos a los que se accede pertenecen a clusters que no tienen instalado Astra Connector*: Cuando se asignan varios roles a un usuario a través de la pertenencia a un grupo LDAP, las restricciones del rol más permisivo son las únicas que surten efecto.
 
-NOTE: Cuando a un usuario se le asignan varias funciones a través de la pertenencia a grupos LDAP, las restricciones de la función más permisiva son las únicas que surtan efecto. Por ejemplo, si un usuario con una función de visor local se une a tres grupos que están enlazados a la función Member, la suma de las restricciones de las funciones Member se aplicará y se ignoran todas las restricciones de la función Viewer.
 
+====
 . Seleccione *Agregar*.
 
 

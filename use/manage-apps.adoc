@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: use/manage-apps.html 
-keywords: how to manage apps with astra control, discover app, how to define kubernetes apps, astra control, astra 
+keywords: how to manage apps with astra control, define app, how to define kubernetes apps, cr, custom resource, astra control 
 summary: 'Después de añadir clústeres de Kubernetes a Astra Control, puede instalar aplicaciones en ese clúster (fuera de Astra Control) y, a continuación, ir a la página aplicaciones de Astra Control para comenzar a gestionar las aplicaciones.' 
 ---
 = Inicie la gestión de aplicaciones
@@ -12,7 +12,7 @@ summary: 'Después de añadir clústeres de Kubernetes a Astra Control, puede in
 
 
 [role="lead"]
-Usted primero link:../get-started/setup_overview.html#add-cluster["Añada un clúster a la gestión de Astra Control"], Puede instalar aplicaciones en el clúster (fuera de Astra Control) y, a continuación, ir a la página aplicaciones de Astra Control para definir las aplicaciones y sus recursos.
+Usted primero link:../get-started/add-cluster.html["Añada un clúster a la gestión de Astra Control"], Puede instalar aplicaciones en el clúster (fuera de Astra Control) y, a continuación, ir a la página aplicaciones de Astra Control para definir las aplicaciones y sus recursos.
 
 Puede definir y gestionar aplicaciones que incluyan recursos de almacenamiento con pods en ejecución o aplicaciones que incluyan recursos de almacenamiento sin ningún pods en ejecución. Las aplicaciones que no tienen pods en ejecución se conocen como aplicaciones de solo datos.
 
@@ -95,7 +95,7 @@ Es posible que Astra Control no pueda clonar a un operador diseñado con una arq
 
 == Instale las aplicaciones en el clúster
 
-La tienes link:../get-started/setup_overview.html#add-cluster["ha agregado el clúster"] A Astra Control, puede instalar aplicaciones o gestionar las aplicaciones existentes en el clúster. Cualquier aplicación que se limita a uno o más espacios de nombres se puede gestionar.
+La tienes link:../get-started/add-cluster.html["ha agregado el clúster"] A Astra Control, puede instalar aplicaciones o gestionar las aplicaciones existentes en el clúster. Cualquier aplicación que se limita a uno o más espacios de nombres se puede gestionar.
 
 
 
@@ -128,6 +128,7 @@ TIP: Una etiqueta es una pareja clave/valor que se puede asignar a objetos de Ku
 .Opciones de gestión de aplicaciones
 * <<Defina los recursos que se van a administrar como una aplicación>>
 * <<Defina un espacio de nombres para administrar como una aplicación>>
+* link:../use/manage-apps.html#tech-preview-define-an-application-using-a-kubernetes-custom-resource["(Vista previa técnica) Definir una aplicación utilizando un recurso personalizado de Kubernetes"]
 
 
 
@@ -239,6 +240,106 @@ NOTE: Active la casilla de verificación *Mostrar espacios de nombres del sistem
 
 
 Una vez completado el proceso, las aplicaciones asociadas al espacio de nombres aparecen en la `Associated applications` columna.
+
+
+
+=== [Vista PREVIA TÉCNICA] Defina una aplicación utilizando un recurso personalizado de Kubernetes
+
+Puede especificar los recursos de Kubernetes que desee gestionar con Astra Control definiéndolos como aplicación mediante un recurso personalizado (CR). Puede añadir recursos de ámbito en clúster si desea gestionar esos recursos individualmente o todos los recursos de Kubernetes en un espacio de nombres si, por ejemplo, tiene la intención de gestionar y proteger todos los recursos de un espacio de nombres particular de una forma similar y con intervalos comunes.
+
+.Pasos
+. Cree el archivo de recursos personalizados (CR) y asígnele un nombre (por ejemplo, `astra_mysql_app.yaml`).
+. Asigne un nombre a la aplicación en `metadata.name`.
+. Defina los recursos de aplicación que se van a gestionar:
++
+[role="tabbed-block"]
+====
+.spec.includedClusterScopedResources
+--
+Incluye los tipos de recursos de ámbito del clúster además de los que Astra Control incluye automáticamente:
+
+** *spec.includedClusterScopedResources*: _(Opcional)_ Una lista de tipos de recursos de ámbito de cluster que se incluirán.
++
+*** *GroupVersionKind*: _(Opcional)_ identifica inequívocamente un tipo.
++
+**** *GROUP*: _(requerido si se usa groupVersionKind)_ Grupo API del recurso a incluir.
+**** *VERSIÓN*: _(requerido si se usa groupVersionKind)_ Versión API del recurso a incluir.
+**** *Kind*: _(requerido si se usa groupVersionKind)_ tipo de recurso a incluir.
+
+
+*** *LabelSelector*: _(Opcional)_ Una consulta de etiqueta para un conjunto de recursos. Se utiliza para recuperar solo los recursos que coinciden con la etiqueta. Si no proporciona una etiqueta, Astra Control recopila todas las instancias del tipo de recurso especificado para ese clúster. El resultado de matchLabels y matchExpressions son ANDed.
++
+**** *MatchLabels*: _(Opcional)_ Un mapa de {key,value} pares. Un único {key,value} en el mapa matchLabels es equivalente a un elemento de matchExpressions que tiene un campo clave de “key”, operador como “in” y matriz de valores que contiene solo “value”. Los requisitos son ANDed.
+**** *MatchExpressions*: _(Opcional)_ Una lista de los requisitos del selector de etiquetas. Los requisitos son ANDed.
++
+***** *KEY*: _(requerido si se usa matchExpressions)_ La clave de etiqueta asociada con el selector de etiquetas.
+***** *OPERATOR*: _(requerido si se usa matchExpressions)_ representa la relación de una clave con un conjunto de valores. Los operadores válidos son `In`, `NotIn`, `Exists` y.. `DoesNotExist`.
+***** *VALORES*: _(requerido si se utiliza matchExpressions)_Una matriz de valores de cadena. Si el operador es `In` o. `NotIn`, la matriz de valores debe _not_ estar vacía. Si el operador es `Exists` o. `DoesNotExist`, la matriz de valores debe estar vacía.
+
+
+
+
+
+
+
+
+--
+.spec.includedNamespaces
+--
+Incluya espacios de nombres y recursos dentro de esos recursos en la aplicación:
+
+** *spec.includedNamespaces*: _(required)_Define el espacio de nombres y los filtros opcionales para la selección de recursos.
++
+*** *Namespace*: _(required)_ El espacio de nombres que contiene los recursos de la aplicación que desea administrar con Astra Control.
+*** *LabelSelector*: _(Opcional)_ Una consulta de etiqueta para un conjunto de recursos. Se utiliza para recuperar solo los recursos que coinciden con la etiqueta. Si no proporciona una etiqueta, Astra Control recopila todas las instancias del tipo de recurso especificado para ese clúster. El resultado de matchLabels y matchExpressions son ANDed.
++
+**** *MatchLabels*: _(Opcional)_ Un mapa de {key,value} pares. Un único {key,value} en el mapa matchLabels es equivalente a un elemento de matchExpressions que tiene un campo clave de “key”, operador como “in” y matriz de valores que contiene solo “value”. Los requisitos son ANDed.
+**** *MatchExpressions*: _(Opcional)_ Una lista de los requisitos del selector de etiquetas. `key` y.. `operator` son obligatorios. Los requisitos son ANDed.
++
+***** *KEY*: _(requerido si se usa matchExpressions)_ La clave de etiqueta asociada con el selector de etiquetas.
+***** *OPERATOR*: _(requerido si se usa matchExpressions)_ representa la relación de una clave con un conjunto de valores. Los operadores válidos son `In`, `NotIn`, `Exists` y.. `DoesNotExist`.
+***** *Valores*: _(requerido si se usa matchExpressions)_ Una matriz de valores de cadena. Si el operador es `In` o. `NotIn`, la matriz de valores debe _not_ estar vacía. Si el operador es `Exists` o. `DoesNotExist`, la matriz de valores debe estar vacía.
+
+
+
+
+
+
+
+
+--
+====
++
+Ejemplo YAML:
+
++
+[source, yaml]
+----
+apiVersion: astra.netapp.io/v1
+kind: Application
+metadata:
+  name: astra_mysql_app
+spec:
+  includedNamespaces:
+    - namespace: astra_mysql_app
+      labelSelector:
+        matchLabels:
+          app: nginx
+          env: production
+        matchExpressions:
+          - key: tier
+            operator: In
+            values:
+              - frontend
+              - backend
+----
+. Después de rellenar el `astra_mysql_app.yaml` Con los valores correctos, aplique el CR:
++
+[source, console]
+----
+kubectl apply -f astra_mysql_app.yaml -n neptune-system
+----
+
 
 
 

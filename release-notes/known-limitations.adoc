@@ -22,6 +22,7 @@ Las limitaciones conocidas identifican plataformas, dispositivos o funciones que
 .Limitaciones de control de acceso basado en roles (RBAC)
 * <<Un usuario con restricciones de RBAC de espacio de nombres puede añadir y anular la gestión de un clúster>>
 * <<Un miembro con restricciones de espacio de nombres no puede acceder a las aplicaciones clonadas o restauradas hasta que el administrador agregue el espacio de nombres a la restricción>>
+* <<Las restricciones de rol restrictivas se pueden ignorar para los recursos en clusters que no son de conector>>
 
 
 .Limitaciones en la gestión de aplicaciones
@@ -107,6 +108,14 @@ Cualquiera `member` El usuario con limitaciones de RBAC por nombre/ID de espacio
 
 
 
+== Las restricciones de rol restrictivas se pueden ignorar para los recursos en clusters que no son de conector
+
+* *Si los recursos a los que se accede pertenecen a clusters que tienen instalado el último Astra Connector*: Cuando se asignan varios roles a un usuario a través de la pertenencia a un grupo LDAP, se combinan las restricciones de los roles. Por ejemplo, si un usuario con un rol de visor local une tres grupos vinculados al rol de miembro, el usuario ahora tendrá acceso al rol de visor a los recursos originales, así como acceso al rol de miembro a los recursos obtenidos mediante la pertenencia al grupo.
+* *Si los recursos a los que se accede pertenecen a clusters que no tienen instalado Astra Connector*: Cuando se asignan varios roles a un usuario a través de la pertenencia a un grupo LDAP, las restricciones del rol más permisivo son las únicas que surten efecto.
+
+
+
+
 == No es posible restaurar varias aplicaciones en un espacio de nombres único de forma colectiva en un espacio de nombres diferente
 
 Si administra varias aplicaciones en un espacio de nombres único (mediante la creación de varias definiciones de aplicaciones en Astra Control), no podrá restaurar todas las aplicaciones en un espacio de nombres único diferente. Es necesario restaurar cada aplicación a su propio espacio de nombres independiente.
@@ -171,7 +180,7 @@ Como solución alternativa, haga lo siguiente al actualizar instalaciones existe
 
 . Elimine cualquier CRD de Snapshot existente y cualquier controlador de instantánea existente.
 . https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Desinstale Astra Trident"^].
-. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller["Instale los CRD de instantánea y el controlador de instantánea"^].
+. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["Instale los CRD de instantánea y el controlador de instantánea"^].
 . https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html["Instala la versión más reciente de Astra Trident"^].
 . https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-create-a-volumesnapshotclass["Cree una instancia de VolumeSnapshotClass"^].
 
@@ -212,7 +221,7 @@ Cuando realice operaciones en pods Postgres, no debe conectarse directamente den
 
 == La página Actividad muestra hasta 100000 eventos
 
-La página Actividad de Astra Control puede mostrar hasta 100.000 eventos. Para ver todos los eventos registrados, recupere los eventos mediante link:../rest-api/api-intro.html["API de control Astra"^].
+La página Actividad de Astra Control puede mostrar hasta 100.000 eventos. Para ver todos los eventos registrados, recupere los eventos mediante https://docs.netapp.com/us-en/astra-automation/index.html["API de control Astra"^].
 
 
 

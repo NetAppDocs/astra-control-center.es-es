@@ -50,7 +50,7 @@ NOTE: Antes de anular la administración del clúster, debe anular la administra
 Cuando se desadministra un clúster:
 
 * Con esta acción, Astra Control Center no gestiona su clúster. No realiza cambios en la configuración del clúster y no elimina el clúster.
-* Astra Trident no se desinstala del clúster. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Descubra cómo desinstalar Astra Trident"^].
+* El aprovisionador Astra Control o Astra Trident no se desinstalarán del clúster. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html["Descubra cómo desinstalar Astra Trident"^].
 
 
 .Pasos
@@ -64,4 +64,4 @@ Cuando se desadministra un clúster:
 El estado del clúster cambia a *Extracción*. Después de eso, el clúster se eliminará de la página *Clusters* y ya no será gestionado por Astra Control Center.
 
 
-IMPORTANT: *Si el Centro de control de Astra y Cloud Insights no están conectados*, al anular la gestión del clúster se quitan todos los recursos que se instalaron para enviar datos de telemetría. *Si el Centro de control de Astra y Cloud Insights están conectados*, al anular la gestión del clúster sólo se elimina el `fluentbit` y.. `event-exporter` pods.
+IMPORTANT: Al anular la gestión del clúster se eliminan todos los recursos que se instalaron para enviar datos de telemetría.
