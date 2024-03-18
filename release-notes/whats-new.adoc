@@ -16,7 +16,7 @@ Nos complace anunciar la última versión de Astra Control Center.
 
 
 
-== 15 de marzo de 2023 (24.02.0)
+== 15 de marzo de 2024 (24.02.0)
 
 .Nuevas funciones y soporte
 * *Implementar Astra Control Center sin un registro privado*: Ya no es necesario enviar imágenes de Astra Control Center a un registro privado o usar uno como parte de su entorno de Astra Control.
