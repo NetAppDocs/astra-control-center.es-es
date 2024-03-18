@@ -130,7 +130,7 @@ Es posible restaurar datos desde un backup con un archivo de recurso personaliza
 +
 [listing]
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 ** <SOURCE_NAMESPACE>: El espacio de nombres de origen de la operación de restauración.
 ** <DESTINATION_NAMESPACE>: El espacio de nombres de destino de la operación de restauración.
@@ -201,7 +201,7 @@ kubectl apply -f astra-control-backup-restore-cr.yaml
 +
 [listing]
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 +
 [source, yaml]
@@ -278,7 +278,7 @@ Puede restaurar datos desde una copia Snapshot con un archivo de recurso persona
 +
 [listing]
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 ** <SOURCE_NAMESPACE>: El espacio de nombres de origen de la operación de restauración.
 ** <DESTINATION_NAMESPACE>: El espacio de nombres de destino de la operación de restauración.
@@ -349,7 +349,7 @@ kubectl apply -f astra-control-snapshot-restore-cr.yaml
 +
 [listing]
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 +
 [source, yaml]
