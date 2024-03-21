@@ -39,7 +39,7 @@ oc get apiservices
 
 
 * *Asegúrese de que un FQDN enrutable*: El FQDN de Astra que planea utilizar se puede enrutar al clúster. Esto significa que tiene una entrada DNS en el servidor DNS interno o que está utilizando una ruta URL principal que ya está registrada.
-* *Obtenga permisos OpenShift*: Necesitará todos los permisos necesarios y acceso a Red Hat OpenShift Container Platform para realizar los pasos de instalación descritos.
+* *Obtenga permisos de OpenShift*: Necesitará todos los permisos necesarios y acceso a Red Hat OpenShift Container Platform para realizar los pasos de instalación descritos.
 * *Configurar un administrador de cert*: Si ya existe un administrador de cert en el clúster, debe realizar algunos link:../get-started/cert-manager-prereqs.html["requisitos previos"] Por lo tanto, Astra Control Center no instala su propio administrador de certificados. De forma predeterminada, Astra Control Center instala su propio administrador de certificados durante la instalación.
 * *Configurar el controlador de ingreso de Kubernetes*: Si tienes un controlador de ingreso de Kubernetes que administre el acceso externo a los servicios, como el balanceo de carga en un clúster, debes configurarlo para usarlo con Astra Control Center:
 +
@@ -56,6 +56,24 @@ oc create namespace netapp-acc-operator
 
 
 También debe tener en cuenta lo siguiente:
+
+* *Acceda al registro de imágenes de NetApp Astra Control*:
++
+Tiene la opción de obtener imágenes de instalación y mejoras de funcionalidades para Astra Control, como Astra Control Provisioner, desde el registro de imágenes de NetApp.
+
++
+.. Registra tu ID de cuenta de Astra Control que tendrás que iniciar sesión en el registro.
++
+Puedes ver tu ID de cuenta en la interfaz de usuario web de Astra Control Service. Selecciona el icono de la figura en la parte superior derecha de la página, selecciona *Acceso API* y escribe tu ID de cuenta.
+
+.. En la misma página, selecciona *Generar token de API* y copia la cadena de token de API en el portapapeles y guárdalo en tu editor.
+.. Inicia sesión en el Registro de Astra Control:
++
+[source, console]
+----
+docker login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
+
 
 * *Instale una malla de servicio para comunicaciones seguras*: Se recomienda encarecidamente que los canales de comunicaciones del clúster host de Astra Control estén protegidos mediante un link:requirements.html#service-mesh-requirements["malla de servicio compatible"].
 +
@@ -313,7 +331,7 @@ cd manifests
 
 NOTE: Solo se puede actualizar a la versión actual de Astra Control Center con este operador.
 
-.. Busque y seleccione el operador Centro de control Astra de NetApp.
+.. Busque `netapp-acc` Y selecciona el operador Centro de control de Astra de NetApp.
 +
 image:openshift_operatorhub.png["Esta imagen muestra la página de instalación de Astra Control Center desde la interfaz de usuario de OpenShift Container Platform"]
 
@@ -323,7 +341,7 @@ image:openshift_operatorhub.png["Esta imagen muestra la página de instalación 
 .Catálogo de Red Hat Ecosystem
 --
 .. Seleccione Astra Control Center de NetApp https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274["operador"^].
-.. Seleccione *desplegar y utilizar*.
+.. Seleccione *Desplegar y usar*.
 +
 image:red_hat_catalog.png["Esta imagen muestra la página general de Astra Control Center que está disponible en Red Ecosystem Catalog"]
 
