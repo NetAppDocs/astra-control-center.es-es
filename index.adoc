@@ -2,7 +2,7 @@
 layout: landing-page 
 sidebar: sidebar 
 permalink: index.html 
-summary: El software Astra Control Center proporciona gestión de datos para aplicaciones de los clústeres de Kubernetes en su entorno local. Realice backups fácilmente de aplicaciones de Kubernetes, migre datos a un clúster diferente y cree, de forma instantánea, clones de aplicaciones de trabajo. Si necesita gestionar aplicaciones de Kubernetes que se ejecutan en un cloud público, diríjase a los documentos de Astra Control Service. 
+summary: El software Astra Control Center proporciona la gestión de datos para aplicaciones de los clústeres de Kubernetes en tu entorno on-premises. Realice backups fácilmente de aplicaciones de Kubernetes, migre datos a un clúster diferente y cree, de forma instantánea, clones de aplicaciones de trabajo. Si necesita gestionar aplicaciones de Kubernetes que se ejecutan en un cloud público, diríjase a los documentos de Astra Control Service. 
 ---
 = Documentación de Astra Control Center 24,02
 :hardbreaks:

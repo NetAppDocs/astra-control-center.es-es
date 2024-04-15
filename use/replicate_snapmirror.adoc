@@ -18,10 +18,10 @@ Si quiere ver una comparación entre backups/restauraciones y replicación, cons
 
 Puede replicar aplicaciones en diferentes situaciones, como las siguientes situaciones de solo en las instalaciones, de cloud híbrido y multicloud:
 
-* Sitio local A a sitio local A
-* En el sitio Local A al sitio local B
-* Del entorno local al cloud con Cloud Volumes ONTAP
-* Cloud con Cloud Volumes ONTAP para infraestructura en las instalaciones
+* Del sitio local A al sitio local A
+* De sitio en las instalaciones A al sitio en las instalaciones B
+* De las instalaciones al cloud con Cloud Volumes ONTAP
+* Cloud con Cloud Volumes ONTAP a las instalaciones
 * Cloud con Cloud Volumes ONTAP al cloud (entre distintas regiones del mismo proveedor de cloud o a distintos proveedores de cloud)
 
 
