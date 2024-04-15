@@ -14,7 +14,7 @@ summary: A continuación se ofrece una descripción general de los distintos com
 [role="lead"]
 A continuación se ofrece una descripción general de los distintos componentes del entorno de Astra Control.
 
-image:astra-architecture-diagram-v6.png["Imagen conceptual que describe la arquitectura Astra Control y sus componentes"]
+image:astra-architecture-diagram-v7.png["Imagen conceptual que describe la arquitectura Astra Control y sus componentes"]
 
 
 
