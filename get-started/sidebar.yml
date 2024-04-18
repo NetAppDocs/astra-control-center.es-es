@@ -41,5 +41,3 @@ entries:
     url: "/get-started/add-storage-backend.html"
   - title: Añadir un bucket
     url: "/get-started/add-bucket.html"
-- title: PREGUNTAS FRECUENTES
-  url: "/get-started/faq.html"

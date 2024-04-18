@@ -40,6 +40,8 @@ sidebar:
   - section: support
   - title: Versiones anteriores
     url: "/acc-earlier-versions.html"
+  - title: PREGUNTAS FRECUENTES
+    url: "/get-started/faq.html"
   - title: Avisos legales
     url: "/legal-notices.html"
 product-family:
