@@ -288,52 +288,6 @@ Astra Control crea una copia de seguridad de la aplicación.
 ====
 
 
-=== [Tech preview] Cree un backup programado de espacios de nombres
-
-Es posible crear un backup programado y automático de cualquiera de los espacios de nombres o de todos ellos en un clúster. Estos flujos de trabajo son proporcionados por NetApp como archivos CR emparejados con un script Python. Al configurar e instalar los flujos de trabajo, los backups de espacio de nombres se crean automáticamente según la programación que elija durante la instalación. Es posible proteger todos los espacios de nombres de un clúster con el flujo de trabajo de backup de clústeres completo, o solo ciertos espacios de nombres con el flujo de trabajo de backup basado en etiquetas.
-
-Cuando se agrega al clúster un nuevo espacio de nombres o una aplicación que se encuentra dentro del alcance de la programación de copias de seguridad, se protege de forma automática.
-
-.Ejemplo: Backup completo del clúster
-Un ejemplo: Cuando configura e instala el flujo de trabajo de backup completo del clúster, el administrador realiza un backup periódico de las aplicaciones en cualquier espacio de nombres sin que el administrador lo haga. El espacio de nombres no tiene que existir en el momento de instalar el flujo de trabajo; si se agrega un espacio de nombres en el futuro, se protegerá.
-
-.Ejemplo: Backup basado en etiquetas
-Para obtener más granularidad, puede utilizar el flujo de trabajo basado en etiquetas. Por ejemplo, puede instalar este flujo de trabajo y decirle a los usuarios que apliquen una de varias etiquetas a cualquier espacio de nombres que quieran proteger, según el nivel de protección que necesiten. Esto permite a los usuarios crear el espacio de nombres con una de estas etiquetas, y no tienen que notificar a un administrador. Su nuevo espacio de nombres y todas las aplicaciones que contiene quedan protegidas de forma automática.
-
-
-
-==== Cree una copia de seguridad programada de todos los espacios de nombres
-
-Es posible crear un backup programado de todos los espacios de nombres en un clúster mediante el flujo de trabajo de backup de clúster completo.
-
-.Pasos
-. Descargue los siguientes archivos en una máquina que tenga acceso a la red al clúster:
-+
-** https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/fullcluster-backup/components.yaml["Archivo CRD Components.yaml"]
-** https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/fullcluster-backup/protectCluster.py["protectCluster.py Script Python"]
-
-
-. Para configurar e instalar el kit de herramientas: https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/fullcluster-backup/README.md["siga las instrucciones incluidas"^].
-
-
-
-
-==== Crear una copia de seguridad programada de espacios de nombres específicos
-
-Puede crear un backup programado de espacios de nombres específicos mediante sus etiquetas mediante el flujo de trabajo de backup basado en etiquetas.
-
-.Pasos
-. Descargue los siguientes archivos en una máquina que tenga acceso a la red al clúster:
-+
-** https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/labelbased-backup/components.yaml["Archivo CRD Components.yaml"]
-** https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/labelbased-backup/protectCluster.py["protectCluster.py Script Python"]
-
-
-. Para configurar e instalar el kit de herramientas: https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/labelbased-backup/README.md["siga las instrucciones incluidas"^].
-
-
-
-
 == Habilite el backup y la restauración para las operaciones económicas de ontap-nas
 
 Astra Control Provisioning ofrece funcionalidad de backup y restauración que puede habilitarse para los back-ends de almacenamiento que utilicen el `ontap-nas-economy` clase de almacenamiento.
