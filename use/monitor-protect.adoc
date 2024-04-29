@@ -156,6 +156,9 @@ NOTE: Si se recopilaron varios datos de clúster, las métricas de cada clúster
 
 Puede enviar registros (eventos de Kubernetes) desde un sistema supervisado por Astra Control Center a su extremo de Fluentd. La conexión fluentd está desactivada de forma predeterminada.
 
+
+NOTE: Las conexiones de Fluentd no son compatibles con clústeres gestionados con flujos de trabajo de Kubernetes declarativos. Solo puede conectar Fluentd a clústeres gestionados con flujos de trabajo que no sean nativos de Kubernetes.
+
 image:fluentbit.png["Este es un diagrama conceptual de los registros de eventos que van de Astra a Fluentd."]
 
 
