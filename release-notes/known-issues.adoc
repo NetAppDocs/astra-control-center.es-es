@@ -20,7 +20,6 @@ Los siguientes problemas conocidos afectan a la versión actual:
 * <<Los backups de aplicaciones y las snapshots producen errores si la clase volumesnapshotse añade después de gestionar un clúster>>
 * <<Se produce un error en la gestión de un clúster con Astra Control Center cuando el archivo kubeconfig contiene más de un contexto>>
 * <<Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión>>
-* <<Las operaciones de restauración sin movimiento a las clases de almacenamiento económico ontap-nas fallan>>
 * <<Puede producirse un error en la restauración desde un backup cuando se utiliza el cifrado en tránsito de Kerberos>>
 * <<Los datos de backup permanecen en bloque tras la eliminación de bloques con política de retención vencida>>
 
@@ -42,12 +41,6 @@ No puede utilizar una imagen de kubeconfig con más de un clúster y contexto en
 == Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión
 
 Si Astra Trident se desconecta (y se vuelve a conectar) y se producen 500 errores internos de servicio al intentar gestionar los datos de las aplicaciones, reinicie todos los nodos de Kubernetes del clúster de aplicaciones para restaurar la funcionalidad.
-
-
-
-== Las operaciones de restauración sin movimiento a las clases de almacenamiento económico ontap-nas fallan
-
-Si realiza una restauración sin movimiento de una aplicación (restaura la aplicación en su espacio de nombres original) y la clase de almacenamiento de la aplicación utiliza el `ontap-nas-economy` controlador, se puede producir un error en la operación de restauración si el directorio snapshot no está oculto. Antes de restaurar en el lugar, siga las instrucciones de link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations["Habilite el backup y la restauración para las operaciones económicas de ontap-nas"] para ocultar el directorio de instantáneas.
 
 
 
