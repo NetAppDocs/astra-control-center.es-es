@@ -548,7 +548,7 @@ NOTA: No utilizar `http://` o. `https://` en la dirección. Copie este FQDN para
 .AutoSupport
 [%collapsible]
 ====
-Sus selecciones en esta sección determinan si participará en la aplicación de soporte proactivo de NetApp, NetApp Active IQ y dónde se envían los datos. Se requiere una conexión a Internet (puerto 442) y todos los datos de soporte se anóniman.
+Sus selecciones en esta sección determinan si participará en la aplicación de soporte proactivo de NetApp, el asesor digital y dónde se envían los datos. Se requiere una conexión a Internet (puerto 442) y todos los datos de soporte se anóniman.
 
 |===
 | Ajuste | Uso | Orientación | Tipo | Ejemplo 

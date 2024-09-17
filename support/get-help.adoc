@@ -100,7 +100,7 @@ Puede utilizar uno de los siguientes métodos para ello:
 +
 ** Uso https://upload.netapp.com/sg["Carga de archivos autenticados de NetApp (se requiere inicio de sesión)"^].
 ** Adjunte el paquete al caso directamente en NSS.
-** Utilice Active IQ de NetApp.
+** Utilice el asesor digital.
 
 
 

@@ -1514,7 +1514,6 @@
   <block id="181e1260b62d0667dd25d8e26eba83f5" category="paragraph">El plan gratuito de Astra Control le permite gestionar hasta 10 espacios de nombres en su cuenta. Si desea gestionar más de 10, deberá configurar la facturación actualizando del plan gratuito al plan Premium.</block>
   <block id="b714fdd25acef8e71be758de7ff02f0b" category="section-title">Cómo funciona Astra Control Center</block>
   <block id="90d397f2aa31c2e6d9f5dfda5d12adca" category="paragraph">Astra Control Center se ejecuta en forma local en su propia nube privada.</block>
-  <block id="ea2708b459fc0cad6936ec216bd9405e" category="paragraph">Astra Control Center está totalmente integrado en el ecosistema de AutoSupport y Active IQ para proporcionar a los usuarios y el soporte de NetApp información sobre solución de problemas y uso.</block>
   <block id="b4851e92b19af0c5c82447fc0937709d" category="inline-link">requisitos</block>
   <block id="6319f881d45c326a5f6222a746f50981" category="paragraph">En un nivel superior, Astra Control Center funciona de esta manera:</block>
   <block id="2cb07ff1146f3d6896d00ffdcea250ef" category="inline-link">Instalar Astra Control Center</block>
@@ -1914,7 +1913,6 @@
   <block id="35f3a2f7a0f2c01d03afedb95ece66ab" category="inline-link">Carga de archivos autenticados de NetApp (se requiere inicio de sesión)</block>
   <block id="1c2989d4329c8aeec5e01506816fb04e" category="list-text">Uso<block ref="4b0bc63f683ccbf4dcf0ba2a6a1b561f" category="inline-link-rx"></block>.</block>
   <block id="94bcffc8ff8a109a8267202d2aaa5526" category="list-text">Adjunte el paquete al caso directamente en NSS.</block>
-  <block id="4345f2150d39e38a6a11ee7ee57bed28" category="list-text">Utilice Active IQ de NetApp.</block>
   <block id="0a560904c58e3cede88c521d796e1617" category="sidebar">Documentos de Astra Control Center</block>
   <block id="93168a8084b3e838d2932c4734bd234e" category="sidebar">Versiones anteriores</block>
   <block id="0798c457df65a765c2a3aace627c312b" category="sidebar">Comience con Astra Control Center</block>
@@ -3319,7 +3317,6 @@ Puede hacerlo<block ref="095384769efa0cb75b3680e52d8f483a" category="inline-link
 
 NOTA: No utilizar<block ref="dbd7790bcd23fde7607101ef6a633779" prefix=" " category="inline-code"></block> o.<block ref="f8eae6750519389e078e1eb1bcb3d708" prefix=" " category="inline-code"></block> en la dirección. Copie este FQDN para utilizarlo en un <block ref="39c8566ec35b62823c898c5e38a4b78c" category="inline-xref-macro-rx"></block>.</block>
   <block id="5398d7dab242bfea13c044912cacfd10" category="example-title">AutoSupport</block>
-  <block id="0ce9b2186063c7d6c825ba5631c6f471" category="paragraph">Sus selecciones en esta sección determinan si participará en la aplicación de soporte proactivo de NetApp, NetApp Active IQ y dónde se envían los datos. Se requiere una conexión a Internet (puerto 442) y todos los datos de soporte se anóniman.</block>
   <block id="0c83f57c786a0b4a39efab23731c7ebc" category="example-title">correo electrónico</block>
   <block id="ed89387bcd11937a7a92a99a2cbfb5d7" category="example-title">Nombre</block>
   <block id="539c5300bf48f8a3e3009ce33d49a240" category="example-title">Apellidos</block>
@@ -3717,4 +3714,7 @@ Astra Control Provisioning se instala automáticamente como parte del proceso de
   <block id="adeac59ad1862a3e0c4f40cfe863ae90" category="list-text"><block ref="adeac59ad1862a3e0c4f40cfe863ae90" category="inline-link-macro-rx"></block></block>
   <block id="a8d3d65f332ebd25e2d0cd4a39fa56bb" category="admonition">Las conexiones de Fluentd no son compatibles con clústeres gestionados con flujos de trabajo de Kubernetes declarativos. Solo puede conectar Fluentd a clústeres gestionados con flujos de trabajo que no sean nativos de Kubernetes.</block>
   <block id="a4c308fa75b477e34ffefe1e02628412" category="list-text">*Cumplir con los requisitos ambientales*: Antes de actualizar, asegúrese de que su entorno aún cumple con el <block ref="7b0354d91aa605027490ffc0bb4c260d" category="inline-link-macro-rx"></block>.</block>
+  <block id="a9cf730f8ab04a5b52f1d19c74c1483c" category="paragraph">Astra Control Center está totalmente integrado en el ecosistema del asesor digital de AutoSupport y Active IQ (también conocido como asesor digital) para proporcionar a los usuarios y al servicio de soporte de NetApp información sobre solución de problemas e uso.</block>
+  <block id="10c74eb5a029f34a100ad38aab60e5a3" category="paragraph">Sus selecciones en esta sección determinan si participará en la aplicación de soporte proactivo de NetApp, el asesor digital y dónde se envían los datos. Se requiere una conexión a Internet (puerto 442) y todos los datos de soporte se anóniman.</block>
+  <block id="3cf9bc07c0ae31018d3336b8f32de6c8" category="list-text">Utilice el asesor digital.</block>
 </blocks>
