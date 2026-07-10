@@ -45,6 +45,7 @@ Realice los siguientes pasos, según el tipo de archivo que desee restaurar:
 
 
 
+[[restore-data-from-backup-or-snapshot-using-the-web-ui]]
 == Restaure los datos de un backup o una copia Snapshot mediante la interfaz de usuario web
 
 Puede restaurar datos con la interfaz de usuario web de Astra Control.
@@ -112,6 +113,7 @@ NOTE: Para obtener más información sobre la configuración de reglas de inclus
 
 
 
+[[tech-preview-restore-from-backup-using-a-custom-resource-cr]]
 == [Vista previa técnica] Restaurar a partir del backup mediante un recurso personalizado (CR)
 
 Es posible restaurar datos desde un backup con un archivo de recurso personalizado (CR) en otro espacio de nombres o en el espacio de nombres de origen original.
@@ -258,6 +260,7 @@ kubectl apply -f astra-control-backup-ipr-cr.yaml
 ====
 
 
+[[tech-preview-restore-from-snapshot-using-a-custom-resource-cr]]
 == [Vista PREVIA TÉCNICA] Restauración a partir de una instantánea con un recurso personalizado (CR)
 
 Puede restaurar datos desde una copia Snapshot con un archivo de recurso personalizado (CR) en un espacio de nombres diferente o en el espacio de nombres de origen original.
@@ -413,6 +416,7 @@ IMPORTANT: Cualquier usuario miembro con restricciones de espacio de nombres por
 
 
 
+[[filter-resources-during-an-application-restore]]
 == Filtre recursos durante una restauración de aplicación
 
 Puede agregar una regla de filtro a un link:../use/restore-apps.html["restaurar"] operación que especificará los recursos de aplicación existentes que se incluirán o excluirán de la aplicación restaurada. Puede incluir o excluir recursos basados en un espacio de nombres, etiqueta o GVK (GroupVersionKind) especificado.
@@ -471,6 +475,7 @@ TIP: Puede crear tantas reglas de inclusión y exclusión de recursos como desee
 
 
 
+[[in-place-restore-complications-for-an-app-that-shares-resources-with-another-app]]
 == Complicaciones de restauración in situ para una aplicación que comparte recursos con otra aplicación
 
 Puede realizar una operación de restauración in situ en una aplicación que comparta recursos con otra aplicación y produzca resultados no deseados. Los recursos compartidos entre las aplicaciones se reemplazan cuando se realiza una restauración sin movimiento en una de las aplicaciones.

@@ -56,12 +56,13 @@ NOTE: Los bloques de S3 de Astra Control Center no informan sobre la capacidad d
 
 
 
+[[edit-a-bucket]]
 == Editar un bloque
 
 Puede cambiar la información de credenciales de acceso de un bloque y cambiar si un bloque seleccionado es el bloque predeterminado.
 
 
-NOTE: Cuando agregue un bloque, seleccione el proveedor de segmento correcto y proporcione las credenciales correctas para ese proveedor. Por ejemplo, la interfaz de usuario acepta ONTAP S3 de NetApp como tipo y acepta credenciales de StorageGRID; sin embargo, esto hará que se produzcan errores en todos los futuros backups de aplicaciones y restauraciones usando este bucket. Consulte link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures["Notas de la versión"].
+NOTE: Al añadir un bucket, selecciona el proveedor de buckets adecuado e introduce las credenciales correctas para ese proveedor. Por ejemplo, la interfaz de usuario acepta NetApp ONTAP S3 como tipo y acepta credenciales de StorageGRID; sin embargo, esto hará que todas las futuras copias de seguridad y restauraciones de apps que usen este bucket fallen. Consulta el link:../release-notes/known-issues.html["Notas de la versión"].
 
 .Pasos
 . En la navegación de la izquierda, seleccione *Cuchos*.
@@ -76,6 +77,7 @@ TIP: No puede modificar el tipo de segmento.
 
 
 
+[[set-the-default-bucket]]
 == Establecer el bloque predeterminado
 
 Cuando se realiza un clon entre clústeres, Astra Control requiere un bloque predeterminado. Siga estos pasos para establecer un bloque predeterminado para todos los clústeres.
@@ -90,12 +92,14 @@ Cuando se realiza un clon entre clústeres, Astra Control requiere un bloque pre
 
 
 
+[[rotate-or-remove-bucket-credentials]]
 == Gire o elimine las credenciales del cucharón
 
 Astra Control utiliza las credenciales de bloque para obtener acceso y proporcionar claves secretas para un bloque de S3, de forma que Astra Control Center pueda comunicarse con el cucharón.
 
 
 
+[[rotate-bucket-credentials]]
 === Rotar las credenciales del cucharón
 
 Si gira las credenciales, gírelos durante una ventana de mantenimiento cuando no haya copias de seguridad en curso (programadas o bajo demanda).
@@ -109,6 +113,7 @@ Si gira las credenciales, gírelos durante una ventana de mantenimiento cuando n
 
 
 
+[[remove-bucket-credentials]]
 === Quitar las credenciales del bloque
 
 Debe eliminar las credenciales de bloque solo si se han aplicado credenciales nuevas a un bloque o si ya no se utiliza el bloque de forma activa.
@@ -123,6 +128,7 @@ Para obtener instrucciones sobre cómo eliminar credenciales de S3 mediante la A
 
 
 
+[[remove-a-bucket]]
 == Retirar un cucharón
 
 Puede eliminar un cubo que ya no esté en uso o que no esté sano. Se recomienda hacer esto para mantener la configuración del almacén de objetos sencilla y actualizada.
@@ -157,6 +163,7 @@ NOTE: Astra Control garantiza en primer lugar que no existan normativas de progr
 
 
 
+[[tech-preview-manage-a-bucket-using-a-custom-resource]]
 == [Vista PREVIA TÉCNICA] Gestione un bloque con un recurso personalizado
 
 Puede añadir un bloque con un recurso personalizado de Astra Control (CR) en el clúster de aplicaciones. Añadir proveedores de bloques de almacenamiento de objetos es esencial si desea realizar backups de sus aplicaciones y del almacenamiento persistente o si desea clonar aplicaciones entre clústeres. Astra Control almacena estas copias de seguridad o clones en los bloques de almacenamiento de objetos que defina. Si utiliza el método de recursos personalizado, la funcionalidad de snapshots de aplicaciones requiere un bloque.
@@ -239,12 +246,13 @@ kubectl apply -f astra-appvault.yaml -n astra-connector
 ----
 +
 
-NOTE: Cuando se agrega un bloque, Astra Control Marca un bloque con el indicador de segmento predeterminado. El primer bloque que crea se convierte en el bloque predeterminado. A medida que se añaden bloques, más adelante se puede decidir a. link:../use/manage-buckets.html#set-the-default-bucket["establecer otro bloque predeterminado"^].
+NOTE: Cuando se agrega un bloque, Astra Control Marca un bloque con el indicador de segmento predeterminado. El primer bloque que crea se convierte en el bloque predeterminado. A medida que se añaden bloques, más adelante se puede decidir a. link:../use/manage-buckets.html#set-the-default-bucket["establecer otro bloque predeterminado"].
 
 
 
 
 
+[[find-more-information]]
 == Obtenga más información
 
 * https://docs.netapp.com/us-en/astra-automation["Utilice la API Astra Control"^]

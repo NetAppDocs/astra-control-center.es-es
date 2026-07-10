@@ -127,6 +127,7 @@ IMPORTANT: No elimine el operador Astra Control Center (por ejemplo, `kubectl de
 
 
 
+[[download-and-extract-astra-control-center]]
 == Descargue y extraiga Astra Control Center
 
 Descargue las imágenes del Centro de control de Astra de una de las siguientes ubicaciones:
@@ -174,12 +175,14 @@ tar -vxzf astra-control-center-[version].tar.gz
 ====
 
 
+[[complete-additional-steps-if-you-use-a-local-registry]]
 == Complete los pasos adicionales si utiliza un registro local
 
 Si tiene pensado enviar el paquete Centro de control de Astra a su registro local, debe usar el complemento de la línea de comandos kubectl de Astra de NetApp.
 
 
 
+[[remove-the-netapp-astra-kubectl-plugin-and-install-it-again]]
 === Elimine el complemento Astra kubectl de NetApp y vuelva a instalarlo
 
 Debes usar la versión más reciente del complemento de línea de comandos kubectl de Astra de NetApp para insertar imágenes en un repositorio local de Docker.
@@ -220,6 +223,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 
 
+[[add-the-images-to-your-registry]]
 === Agregue las imágenes a su registro
 
 . Si planeas enviar el paquete Astra Control Center a tu registro local, completa la secuencia de pasos apropiada para tu motor de contenedores:
@@ -326,6 +330,7 @@ cd manifests
 
 
 
+[[install-the-updated-astra-control-center-operator]]
 == Instale el operador actualizado de Astra Control Center
 
 . (Solo registros locales) Si está utilizando un registro local, complete estos pasos:
@@ -464,6 +469,7 @@ kubectl get pods -n netapp-acc-operator
 
 
 
+[[upgrade-astra-control-center]]
 == Actualice Astra Control Center
 
 . Edite el recurso personalizado de Astra Control Center (CR):
@@ -557,6 +563,7 @@ NOTE: Para inspeccionar los registros del operador de Astra Control Center, ejec
 
 
 
+[[verify-system-status]]
 == Comprobar el estado del sistema
 
 . Inicie sesión en Astra Control Center.

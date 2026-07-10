@@ -79,12 +79,14 @@ deployment.apps/acc-operator-controller-manager deleted
 
 
 
+[[troubleshooting-uninstall-issues]]
 == Solución de problemas de desinstalación
 
 Utilice las siguientes soluciones alternativas para solucionar cualquier problema que tenga al desinstalar Astra Control Center.
 
 
 
+[[uninstall-of-astra-control-center-fails-to-clean-up-the-monitoring-operator-pod-on-the-managed-cluster]]
 === La desinstalación de Astra Control Center no puede limpiar el módulo de control del operador de supervisión en el clúster gestionado
 
 Si no ha desgestionar los clústeres antes de desinstalar Astra Control Center, puede eliminar manualmente los POD del espacio de nombres para la supervisión de netapp y el espacio de nombres con los siguientes comandos:
@@ -164,6 +166,7 @@ customresourcedefinition.apiextensions.k8s.io "agents.monitoring.netapp.com" del
 
 
 
+[[uninstall-of-astra-control-center-fails-to-clean-up-traefik-crds]]
 === La desinstalación de Astra Control Center no limpia los CRD de Traefik
 
 Puede eliminar manualmente los CRD de Traefik. Los CRD son recursos globales y su eliminación podría afectar a otras aplicaciones del cluster.
@@ -201,6 +204,7 @@ kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.co
 
 
 
+[[find-more-information]]
 == Obtenga más información
 
 * link:../release-notes/known-issues.html["Problemas conocidos para la desinstalación"]

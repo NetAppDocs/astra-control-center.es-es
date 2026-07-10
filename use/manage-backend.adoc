@@ -28,12 +28,14 @@ Es posible completar las siguientes tareas relacionadas con la gestión de un ba
 
 
 
+[[view-storage-backend-details]]
 == Ver detalles del back-end de almacenamiento
 
 Puede ver la información del back-end de almacenamiento desde Dashboard o desde la opción Backends.
 
 
 
+[[view-storage-backend-details-from-the-dashboard]]
 === Consulte los detalles del back-end de almacenamiento en la Consola
 
 .Pasos
@@ -49,6 +51,7 @@ Puede ver la información del back-end de almacenamiento desde Dashboard o desde
 
 
 
+[[view-storage-backend-details-from-the-backends-option]]
 === Consulte los detalles del backends de almacenamiento en la opción Backends
 
 Vea información sobre el estado, la capacidad y el rendimiento del back-end (rendimiento de IOPS y/o latencia).
@@ -62,6 +65,7 @@ Puede ver los volúmenes que usan las aplicaciones de Kubernetes, que se almacen
 
 
 
+[[edit-storage-backend-authentication-details]]
 == Editar los detalles de autenticación del back-end de almacenamiento
 
 El Centro de control de Astra ofrece dos modos de autenticación de un back-end de ONTAP.
@@ -93,6 +97,7 @@ NOTE: El usuario cuyas credenciales introduzca aquí debe tener la `ontapi` Mét
 
 
 
+[[manage-a-discovered-storage-backend]]
 == Gestionar un back-end de almacenamiento detectado
 
 Puede seleccionar gestionar un back-end de almacenamiento no gestionado pero detectado. Cuando gestionas un back-end de almacenamiento, Astra Control indica si ha caducado un certificado para la autenticación.
@@ -108,6 +113,7 @@ Puede seleccionar gestionar un back-end de almacenamiento no gestionado pero det
 
 
 
+[[unmanage-a-storage-backend]]
 == Desgestione un back-end de almacenamiento
 
 Puede anular la gestión del back-end.
@@ -122,6 +128,7 @@ Puede anular la gestión del back-end.
 
 
 
+[[remove-a-storage-backend]]
 == Quite un back-end de almacenamiento
 
 Puede eliminar un back-end de almacenamiento que ya no se esté utilizando. Se recomienda hacer esto para mantener su configuración sencilla y actualizada.
@@ -154,6 +161,7 @@ Puede eliminar un back-end de almacenamiento que ya no se esté utilizando. Se r
 
 
 
+[[find-more-information]]
 == Obtenga más información
 
 * https://docs.netapp.com/us-en/astra-automation["Utilice la API Astra Control"^]

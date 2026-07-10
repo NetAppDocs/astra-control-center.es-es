@@ -18,6 +18,7 @@ No se trata sólo de números o Estados estáticos, sino que se puede profundiza
 
 
 
+[[applications-tile]]
 == Aplicaciones
 
 El mosaico *aplicaciones* le ayuda a identificar lo siguiente:
@@ -33,12 +34,14 @@ Lo ideal sería que este número fuera cero porque gestionaría o ignoraría apl
 
 
 
+[[clusters-tile]]
 == Icono de clústeres
 
 El mosaico *Clusters* proporciona detalles similares sobre el estado de los clústeres que está administrando utilizando Astra Control Center, y puede profundizar para obtener más detalles como usted puede con una app.
 
 
 
+[[storage-backends-tile]]
 == Icono de los back-ends de almacenamiento
 
 El mosaico *back-ends* de almacenamiento proporciona información para ayudarle a identificar el estado de los back-ends de almacenamiento, incluidos:

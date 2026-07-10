@@ -28,6 +28,7 @@ La página *cuenta* > *licencias* muestra la información de la licencia, la fec
 
 
 
+[[for-more-information]]
 == Si quiere más información
 
 * link:../concepts/licensing.html["Licencias de Astra Control Center"]

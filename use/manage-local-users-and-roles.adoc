@@ -18,6 +18,7 @@ También se puede utilizar LDAP para realizar autenticación para los usuarios s
 
 
 
+[[use-ldap]]
 == Utilice LDAP
 
 LDAP es un protocolo estándar del sector para acceder a información de directorio distribuida y una opción muy popular para la autenticación empresarial. Puede conectar Astra Control Center a un servidor LDAP para realizar la autenticación de los usuarios seleccionados de Astra Control. En un nivel elevado, la configuración implica integrar Astra con LDAP y definir los usuarios y grupos de Astra Control correspondientes a las definiciones LDAP. Puede utilizar la API Astra Control o la interfaz de usuario web para configurar la autenticación LDAP y los usuarios y grupos LDAP. En la siguiente documentación, se ofrece más información:
@@ -29,6 +30,7 @@ LDAP es un protocolo estándar del sector para acceder a información de directo
 
 
 
+[[add-users]]
 == Añadir usuarios
 
 Los propietarios y administradores de cuentas pueden agregar más usuarios a la instalación de Astra Control Center.
@@ -61,12 +63,14 @@ Para obtener más información sobre cómo agregar restricciones, consulte link:
 
 
 
+[[manage-passwords]]
 == Gestionar contraseñas
 
 Puede gestionar las contraseñas de las cuentas de usuario en Astra Control Center.
 
 
 
+[[change-your-password]]
 === Cambie la contraseña
 
 Puede cambiar la contraseña de su cuenta de usuario en cualquier momento.
@@ -82,6 +86,7 @@ Puede cambiar la contraseña de su cuenta de usuario en cualquier momento.
 
 
 
+[[reset-another-users-password]]
 === Restablecer la contraseña de otro usuario
 
 Si su cuenta tiene permisos de rol de administrador o propietario, puede restablecer las contraseñas de otras cuentas de usuario así como las suyas propias. Al restablecer una contraseña, asigna una contraseña temporal que el usuario tendrá que cambiar al iniciar sesión.
@@ -101,6 +106,7 @@ NOTE: La próxima vez que el usuario inicie sesión, se le pedirá que cambie la
 
 
 
+[[remove-users]]
 == Quitar usuarios
 
 Los usuarios con el rol propietario o administrador pueden eliminar otros usuarios de la cuenta en cualquier momento.
@@ -117,12 +123,14 @@ Astra Control Center elimina al usuario de la cuenta.
 
 
 
+[[manage-roles]]
 == Gestionar roles
 
 Es posible gestionar roles si se añaden restricciones de espacio de nombres y se restringen los roles del usuario a dichas restricciones. Esto le permite controlar el acceso a los recursos de su organización. Puede utilizar la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation["API de control Astra"^] para administrar roles.
 
 
 
+[[add-a-namespace-constraint-to-a-role]]
 === Agregar una restricción de espacio de nombres a una función
 
 Un usuario Administrador o propietario puede agregar restricciones de espacio de nombres a las funciones de miembro o de visor.
@@ -157,6 +165,7 @@ NOTE: Si habilita restricciones para una función y selecciona *Confirmar* sin a
 
 
 
+[[remove-a-namespace-constraint-from-a-role]]
 === Quitar una restricción de espacio de nombres de una función
 
 Un usuario Admin o Owner puede eliminar una restricción de espacio de nombres de una función.
@@ -175,6 +184,7 @@ El cuadro de diálogo *Editar función* muestra las restricciones activas para l
 
 
 
+[[for-more-information]]
 == Si quiere más información
 
 * link:../concepts/user-roles-namespaces.html["Roles de usuario y espacios de nombres"]

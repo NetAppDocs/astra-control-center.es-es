@@ -16,6 +16,7 @@ Un enlace de ejecución es una acción personalizada que puede configurar para q
 
 
 
+[[types-of-execution-hooks]]
 == Tipos de enlaces de ejecución
 
 Astra Control Center admite los siguientes tipos de ganchos de ejecución, basados en el momento en el que se pueden ejecutar:
@@ -30,6 +31,7 @@ Astra Control Center admite los siguientes tipos de ganchos de ejecución, basad
 
 
 
+[[execution-hook-filters]]
 == Filtros de gancho de ejecución
 
 Al agregar o editar un enlace de ejecución a una aplicación, puede agregar filtros a un enlace de ejecución para gestionar los contenedores que coincidirá el enlace. Los filtros son útiles para aplicaciones que usan la misma imagen de contenedor en todos los contenedores, pero pueden usar cada imagen para un propósito diferente (como Elasticsearch). Los filtros le permiten crear escenarios donde los enlaces de ejecución se ejecutan en algunos, pero no necesariamente todos los contenedores idénticos. Si crea varios filtros para un único enlace de ejecución, se combinan con un operador y lógico. Puede tener hasta 10 filtros activos por gancho de ejecución.
@@ -41,6 +43,7 @@ NOTE: Si se agrega un filtro de espacio de nombres a un enlace de ejecución que
 
 
 
+[[important-notes-about-custom-execution-hooks]]
 == Notas importantes sobre los enlaces de ejecución personalizados
 
 Tenga en cuenta lo siguiente al planificar enlaces de ejecución para sus aplicaciones.
@@ -75,6 +78,7 @@ NOTE: Si has ejecutado ganchos posteriores a la restauración con Astra Control 
 
 
 
+[[order-of-execution]]
 === Orden de ejecución
 
 Cuando se ejecuta una operación de protección de datos, los eventos de enlace de ejecución tienen lugar en el siguiente orden:
@@ -100,6 +104,7 @@ NOTE: Siempre debe probar sus secuencias de comandos de ejecución de enlace ant
 
 
 
+[[determine-whether-a-hook-will-run]]
 === Determine si se ejecutará un gancho
 
 Utilice la siguiente tabla para determinar si se ejecutará un enlace de ejecución personalizado para su aplicación.
@@ -162,12 +167,14 @@ Si comienza pero luego cancela una copia de seguridad que incluye una instantán
 |===
 
 
+[[execution-hook-examples]]
 == Ejemplos de gancho de ejecución
 
 Visite la https://github.com/NetApp/Verda["Proyecto Verda GitHub de NetApp"] Para descargar enlaces de ejecución real para aplicaciones populares como Apache Cassandra y Elasticsearch. También puede ver ejemplos y obtener ideas para estructurar sus propios enlaces de ejecución personalizados.
 
 
 
+[[enable-the-execution-hooks-feature]]
 == Active la función de enlaces de ejecución
 
 Si es un usuario propietario o administrador, puede activar la función de enlaces de ejecución. Cuando habilita la función, todos los usuarios definidos en esta cuenta de Astra Control pueden usar ganchos de ejecución y ver los ganchos de ejecución y los scripts de enlace existentes.
@@ -187,6 +194,7 @@ Aparece la pestaña *Cuenta* > *Ajustes de función*.
 
 
 
+[[disable-the-execution-hooks-feature]]
 == Desactive la función de enlaces de ejecución
 
 Si eres un usuario propietario o administrador, puedes deshabilitar la función de enlaces de ejecución para todos los usuarios definidos en esta cuenta de Astra Control. Debe suprimir todos los enlaces de ejecución existentes antes de desactivar la función de enlaces de ejecución. Consulte <<Eliminar un gancho de ejecución>> para obtener instrucciones sobre cómo eliminar un enlace de ejecución existente.
@@ -203,6 +211,7 @@ Si eres un usuario propietario o administrador, puedes deshabilitar la función 
 
 
 
+[[view-existing-execution-hooks]]
 == Ver los enlaces de ejecución existentes
 
 Puede ver los enlaces de ejecución personalizados existentes para una aplicación.
@@ -217,6 +226,7 @@ Puede ver todos los enlaces de ejecución habilitados o desactivados en la lista
 
 
 
+[[view-existing-scripts]]
 == Ver los scripts existentes
 
 Puede ver los scripts cargados existentes. También puede ver qué scripts están en uso, y qué enlaces los están utilizando, en esta página.
@@ -231,6 +241,7 @@ En esta página puede ver una lista de los scripts cargados existentes. La colum
 
 
 
+[[add-a-script]]
 == Agregar un script
 
 Cada enlace de ejecución debe utilizar una secuencia de comandos para realizar acciones. Puede agregar una o más secuencias de comandos a las que puedan hacer referencia los enlaces de ejecución. Muchos ganchos de ejecución pueden hacer referencia al mismo script; esto le permite actualizar muchos ganchos de ejecución cambiando solo un script.
@@ -269,6 +280,7 @@ La nueva secuencia de comandos aparece en la lista de la ficha *Scripts*.
 
 
 
+[[delete-a-script]]
 == Eliminar un script
 
 Puede eliminar una secuencia de comandos del sistema si ya no es necesaria y no se utiliza en ningún anzuelo de ejecución.
@@ -285,6 +297,7 @@ NOTE: Si la secuencia de comandos está asociada con uno o más enlaces de ejecu
 
 
 
+[[create-a-custom-execution-hook]]
 == Cree un enlace de ejecución personalizado
 
 Puedes crear un gancho de ejecución personalizado para una aplicación y añadirlo a Astra Control. Consulte <<Ejemplos de gancho de ejecución>> para ejemplos de gancho. Necesita tener permisos de propietario, administrador o miembro para crear enlaces de ejecución.
@@ -362,6 +375,7 @@ Esto indica al enlace de ejecución que utilice esta secuencia de comandos.
 
 
 
+[[check-the-state-of-an-execution-hook]]
 == Compruebe el estado de un enlace de ejecución
 
 Después de que una operación de instantánea, backup o restauración finalice la ejecución, puede comprobar el estado de los enlaces de ejecución que se ejecutan como parte de la operación. Puede utilizar esta información de estado para determinar si desea mantener el enlace de ejecución, modificarlo o eliminarlo.
@@ -377,6 +391,7 @@ El estado * gancho* muestra el estado de la ejecución del gancho de ejecución 
 
 
 
+[[view-script-usage]]
 == Ver el uso de las secuencias de comandos
 
 Puede ver qué enlaces de ejecución utilizan una secuencia de comandos determinada en la interfaz de usuario web de Astra Control.
@@ -395,6 +410,7 @@ Aparece una lista más detallada, con los nombres de los ganchos que utilizan la
 
 
 
+[[edit-an-execution-hook]]
 == Edite un gancho de ejecución
 
 Puede editar un enlace de ejecución si desea cambiar sus atributos, filtros o la secuencia de comandos que utiliza. Necesita tener permisos de propietario, administrador o miembro para editar los enlaces de ejecución.
@@ -410,6 +426,7 @@ Puede editar un enlace de ejecución si desea cambiar sus atributos, filtros o l
 
 
 
+[[disable-an-execution-hook]]
 == Desactivar un gancho de ejecución
 
 Puede desactivar un gancho de ejecución si desea impedir temporalmente que se ejecute antes o después de una instantánea de una aplicación. Necesita tener permisos de propietario, administrador o miembro para desactivar los enlaces de ejecución.
@@ -423,6 +440,7 @@ Puede desactivar un gancho de ejecución si desea impedir temporalmente que se e
 
 
 
+[[delete-an-execution-hook]]
 == Eliminar un gancho de ejecución
 
 Puede eliminar un enlace de ejecución por completo si ya no lo necesita. Necesita tener permisos de propietario, administrador o miembro para eliminar los enlaces de ejecución.
@@ -438,6 +456,7 @@ Puede eliminar un enlace de ejecución por completo si ya no lo necesita. Necesi
 
 
 
+[[for-more-information]]
 == Si quiere más información
 
 * https://github.com/NetApp/Verda["Proyecto Verda GitHub de NetApp"]

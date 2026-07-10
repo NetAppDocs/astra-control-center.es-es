@@ -16,6 +16,7 @@ Es posible crear un backup automático programado de cualquiera de los espacios 
 
 
 
+[[how-it-works]]
 == Cómo funciona
 
 Cuando configura e instala el flujo de trabajo de backup de clúster completo, un trabajo con cron se ejecuta periódicamente y protege cualquier espacio de nombres que aún no esté gestionado, lo que crea automáticamente políticas de protección basadas en los programas que elija durante la instalación.
@@ -32,6 +33,7 @@ Para obtener más granularidad, puede utilizar el flujo de trabajo basado en eti
 
 
 
+[[create-a-scheduled-backup-of-all-namespaces]]
 == Cree una copia de seguridad programada de todos los espacios de nombres
 
 Es posible crear un backup programado de todos los espacios de nombres en un clúster mediante el flujo de trabajo de backup de clúster completo.
@@ -48,6 +50,7 @@ Es posible crear un backup programado de todos los espacios de nombres en un cl�
 
 
 
+[[create-a-scheduled-backup-of-specific-namespaces]]
 == Crear una copia de seguridad programada de espacios de nombres específicos
 
 Puede crear un backup programado de espacios de nombres específicos mediante sus etiquetas mediante el flujo de trabajo de backup basado en etiquetas.

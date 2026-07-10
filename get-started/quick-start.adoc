@@ -74,6 +74,7 @@ Cuando termine de configurar Astra Control Center, utiliza la interfaz de usuari
 
 
 
+[[for-more-information]]
 == Si quiere más información
 
 * https://docs.netapp.com/us-en/astra-automation["Utilice la API Astra Control"^]

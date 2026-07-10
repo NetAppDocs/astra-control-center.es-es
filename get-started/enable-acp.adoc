@@ -45,6 +45,7 @@ Si habilita el aprovisionador de Astra Control, primero haga lo siguiente:
 ====
 
 
+[[step-1-get-the-astra-control-provisioner-image]]
 == (Paso 1) Obtén la imagen del aprovisionador de Astra Control
 
 Los usuarios de Astra Control Center pueden obtener la imagen del aprovisionador de control de Astra mediante el registro de Astra Control o el método del sitio de soporte de NetApp. Los usuarios de Astra Trident que deseen utilizar el aprovisionador de control de Astra sin Astra Control deben utilizar el método de registro.
@@ -162,6 +163,7 @@ docker push <my_custom_registry>/trident-acp:24.02.0
 ====
 
 
+[[step-2-enable-astra-control-provisioner-in-astra-trident]]
 == (Paso 2) Habilitar el aprovisionador de Astra Control en Astra Trident
 
 Determine si el método de instalación original ha utilizado un https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method["Operador (manualmente o con Helm) o tridentctl"^] y complete los pasos apropiados de acuerdo con su método original.
@@ -170,7 +172,7 @@ Determine si el método de instalación original ha utilizado un https://docs.ne
 ====
 .Operador Astra Trident
 --
-. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-operator.html#step-1-download-the-trident-installer-package["Descarga el instalador de Astra Trident y extráigalo"^].
+. https://docs.netapp.com/us-en/trident/trident-install/kubernetes-deploy-operator.html#step-1-download-the-trident-installer-package["Descarga el instalador de Astra Trident y extráigalo"^].
 . Complete estos pasos si todavía no ha instalado Astra Trident o si ha quitado el operador de la implementación original de Astra Trident:
 +
 .. Cree el CRD:
@@ -416,6 +418,7 @@ Si tiene problemas para poner en marcha Trident mediante Helm, ejecute este coma
 ====
 
 
+[[result]]
 == Resultado
 
 Está habilitada la funcionalidad de aprovisionamiento de Astra Control y es posible usar cualquier función disponible para la versión que esté ejecutando.

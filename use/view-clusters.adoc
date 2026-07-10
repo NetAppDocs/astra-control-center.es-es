@@ -16,6 +16,7 @@ Después de añadir clústeres que debe gestionar Astra Control Center, puede ve
 
 
 
+[[view-cluster-health-and-details]]
 == Ver el estado y los detalles del clúster
 
 Puede ver detalles sobre el clúster, como la ubicación, los nodos de trabajo, los volúmenes persistentes y las clases de almacenamiento.
@@ -41,6 +42,7 @@ NOTE: También puede ver la información del clúster a partir de Astra Control 
 
 
 
+[[change-the-default-storage-class]]
 == Cambie la clase de almacenamiento predeterminada
 
 Es posible cambiar la clase de almacenamiento predeterminada para un clúster de. Cuando Astra Control gestiona un clúster, realiza un seguimiento de la clase de almacenamiento predeterminada del clúster.

@@ -16,6 +16,7 @@ Los clústeres gestionados por Astra Control Center utilizan Astra Connector par
 
 
 
+[[install-astra-connector]]
 == Instala Astra Connector
 
 Instalas Astra Connector con comandos de Kubernetes y archivos de recursos personalizados (CR).

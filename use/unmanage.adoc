@@ -16,6 +16,7 @@ Elimine las aplicaciones o clústeres que ya no desee gestionar desde Astra Cont
 
 
 
+[[unmanage-an-app]]
 == Desgestionar una aplicación
 
 Detenga la gestión de las aplicaciones de las que ya no desee realizar copias de seguridad, copias Snapshot o clones de Astra Control Center.
@@ -40,6 +41,7 @@ Astra Control Center deja de gestionar la aplicación.
 
 
 
+[[unmanage-a-cluster]]
 == Desgestione un clúster
 
 Deje de gestionar el clúster que ya no desea gestionar desde Astra Control Center.

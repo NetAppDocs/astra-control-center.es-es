@@ -42,6 +42,7 @@ Con Astra Control, puede realizar las siguientes tareas relacionadas con la repl
 
 
 
+[[replication-prerequisites]]
 == Requisitos previos de replicación
 
 La replicación de aplicaciones de Astra Control requiere que se cumplan los siguientes requisitos previos antes de empezar:
@@ -99,6 +100,7 @@ IMPORTANT: La replicación de Astra Control admite aplicaciones que utilicen una
 
 
 
+[[set-up-a-replication-relationship]]
 == Configurar una relación de replicación
 
 La configuración de una relación de replicación implica lo siguiente:
@@ -161,6 +163,7 @@ Obtenga más información acerca de los estados y el estado de replicación al f
 
 
 
+[[bring-a-replicated-app-online-on-the-destination-cluster-failover]]
 == Ponga una aplicación replicada en línea en el clúster de destino (conmutación por error)
 
 Mediante Astra Control, puede conmutar al respaldo las aplicaciones replicadas en un clúster de destino. Este procedimiento detiene la relación de replicación y conecta la aplicación en el clúster de destino. Este procedimiento no detiene la aplicación en el clúster de origen si estaba operativa.
@@ -185,6 +188,7 @@ Las siguientes acciones se producen como resultado del procedimiento de failover
 
 
 
+[[resync-a-failed-over-replication]]
 == Se ha producido un error al sincronizar una replicación
 
 La operación de resincronización vuelve a establecer la relación de replicación. Puede elegir el origen de la relación para conservar los datos en el clúster de origen o de destino. Esta operación vuelve a establecer las relaciones de SnapMirror para iniciar la replicación de volúmenes en la dirección que se desee.
@@ -217,6 +221,7 @@ CAUTION: Elija el origen de resincronización con cuidado, ya que los datos del 
 
 
 
+[[reverse-application-replication]]
 == Replicación de aplicaciones inversa
 
 Esta es la operación planificada para mover la aplicación al back-end del almacenamiento de destino y continuar replicando de nuevo al back-end del almacenamiento de origen original. Astra Control detiene la aplicación de origen y replica los datos en el destino antes de conmutar por error a la aplicación de destino.
@@ -243,6 +248,7 @@ Las siguientes acciones ocurren como resultado de la replicación inversa:
 
 
 
+[[fail-back-applications-to-the-original-source-cluster]]
 == Conmutación tras error de las aplicaciones al clúster de origen original
 
 Con Astra Control, puede conseguir un «retorno tras la recuperación» después de una operación de conmutación por error utilizando la siguiente secuencia de operaciones. En este flujo de trabajo para restaurar la dirección de replicación original, Astra Control replica (resincroniza) cualquier cambio de aplicación en la aplicación de origen original antes de revertir la dirección de la replicación.
@@ -270,6 +276,7 @@ Esto combina los resultados de las operaciones de "resincronización" y "relaci�
 
 
 
+[[delete-an-application-replication-relationship]]
 == Eliminar una relación de replicación de aplicaciones
 
 La eliminación de la relación da como resultado dos aplicaciones independientes sin relación entre ellas.
@@ -289,12 +296,14 @@ Las siguientes acciones ocurren como resultado de eliminar una relación de repl
 
 
 
+[[replication-relationship-health-status-and-relationship-life-cycle-states]]
 == estado de la relación de replicación y estados del ciclo de vida de la relación
 
 Astra Control muestra el estado de la relación y los estados del ciclo de vida de la relación de replicación.
 
 
 
+[[replication-relationship-health-statuses]]
 === Estados de la relación de replicación
 
 Los siguientes Estados indican el estado de la relación de replicación:
@@ -312,6 +321,7 @@ Los siguientes Estados indican el estado de la relación de replicación:
 
 
 
+[[replication-life-cycle-states]]
 === estados de ciclo de vida de replicación
 
 Los siguientes estados reflejan las diferentes etapas del ciclo de vida de la replicación:

@@ -16,6 +16,7 @@ Conozca los tipos disponibles de protección de datos en Astra Control Center y 
 
 
 
+[[snapshots-backups-and-protection-policies]]
 == Snapshot, backups y políticas de protección
 
 Tanto Snapshot como los backups protegen los siguientes tipos de datos:
@@ -36,6 +37,7 @@ CAUTION: _no puede estar completamente protegido hasta que tenga una copia de se
 
 
 
+[[immutable-backups]]
 === Backups inmutables
 
 Un backup inmutable es un backup que no se puede cambiar ni eliminar durante un periodo determinado. Cuando creas un backup inmutable, Astra Control realiza una comprobación para garantizar que el bloque que utilizas sea un bloque de escritura única y lectura múltiple (WORM), y, si es así, garantiza que el backup sea inmutable desde Astra Control.
@@ -53,12 +55,14 @@ Tenga en cuenta lo siguiente cuando trabaje con copias de seguridad inmutables:
 
 
 
+[[clones]]
 == Clones
 
 Un _clone_ es un duplicado exacto de una aplicación, su configuración y sus volúmenes de datos persistentes. Es posible crear manualmente un clon en el mismo clúster de Kubernetes o en otro clúster. El clonado de una aplicación puede ser útil si necesita mover aplicaciones y almacenamiento de un clúster de Kubernetes a otro.
 
 
 
+[[replication-between-storage-backends]]
 == Replicación entre back-ends de almacenamiento
 
 Con Astra Control, puede aumentar la continuidad del negocio para sus aplicaciones con un objetivo de punto de recuperación (RPO) y un objetivo de tiempo de recuperación bajo (Recovery Time Objective) mediante funcionalidades de replicación asíncrona de la tecnología SnapMirror de NetApp. Una vez configurado, esto permite a sus aplicaciones replicar los cambios de aplicaciones y datos de un back-end de almacenamiento a otro, en el mismo clúster o entre diferentes clústeres.
@@ -87,6 +91,7 @@ image:acc-replication_4in.png["Esta imagen muestra la replicación y la conmutac
 
 
 
+[[backups-snapshots-and-clones-with-an-expired-license]]
 == Backups, snapshots y clones con una licencia caducada
 
 Si caduca la licencia, solo puede añadir una nueva aplicación o realizar operaciones de protección de la aplicación (como snapshots, backups, clones y operaciones de restauración) si la aplicación que está añadiendo o protegiendo es otra instancia de Astra Control Center.

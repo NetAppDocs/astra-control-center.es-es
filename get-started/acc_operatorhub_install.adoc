@@ -128,6 +128,7 @@ IMPORTANT: No elimine el operador Astra Control Center (por ejemplo, `kubectl de
 
 
 
+[[download-and-extract-astra-control-center]]
 == Descargue y extraiga Astra Control Center
 
 Descargue las imágenes del Centro de control de Astra de una de las siguientes ubicaciones:
@@ -175,12 +176,14 @@ tar -vxzf astra-control-center-[version].tar.gz
 ====
 
 
+[[complete-additional-steps-if-you-use-a-local-registry]]
 == Complete los pasos adicionales si utiliza un registro local
 
 Si tiene pensado enviar el paquete Centro de control de Astra a su registro local, debe usar el complemento de la línea de comandos kubectl de Astra de NetApp.
 
 
 
+[[install-the-netapp-astra-kubectl-plugin]]
 === Instale el complemento Astra kubectl de NetApp
 
 Complete estos pasos para instalar el plugin de línea de comandos kubectl de NetApp Astra más reciente.
@@ -211,6 +214,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 
 
+[[add-the-images-to-your-registry]]
 === Agregue las imágenes a su registro
 
 . Si planeas enviar el paquete Astra Control Center a tu registro local, completa la secuencia de pasos apropiada para tu motor de contenedores:
@@ -317,6 +321,7 @@ cd manifests
 
 
 
+[[find-the-operator-install-page]]
 == Busque la página de instalación del operador
 
 . Realice uno de los siguientes procedimientos para acceder a la página de instalación del operador:
@@ -353,6 +358,7 @@ image:red_hat_catalog.png["Esta imagen muestra la página general de Astra Contr
 
 
 
+[[install-the-operator]]
 == Instale el operador
 
 . Complete la página *Install Operator* e instale el operador:
@@ -379,6 +385,7 @@ NOTE: Si ha seleccionado una estrategia de aprobación manual, se le pedirá que
 
 
 
+[[install-astra-control-center]]
 == Instalar Astra Control Center
 
 . Desde la consola de la pestaña *Astra Control Center* del operador Astra Control Center, seleccione *Crear AstraControlCenter*.image:openshift_acc-operator_details.png["Esta imagen muestra la página del operador de Astra Control Center que tiene seleccionada la ficha Astra Control Center"]
@@ -437,6 +444,7 @@ NOTE: Si se configura una clase de almacenamiento predeterminada, asegúrese de 
 
 
 
+[[create-a-registry-secret]]
 == Cree un secreto de registro
 
 Si utiliza un registro que requiere autenticación, cree un secreto en el clúster de OpenShift e introduzca el nombre secreto en el `Create AstraControlCenter` campo de formulario.
@@ -462,6 +470,7 @@ NOTE: Astra Control sólo admite secretos de registro Docker.
 
 
 
+[[whats-next]]
 == El futuro
 
 Complete el link:../get-started/install_acc.html#verify-system-status["pasos restantes"] Para verificar que Astra Control Center se ha instalado correctamente, configure un controlador de entrada (opcional) e inicie sesión en la interfaz de usuario. Además, deberá realizar el trabajo link:quick-start.html["tareas de configuración"] tras completar la instalación.

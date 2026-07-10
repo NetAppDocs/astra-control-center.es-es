@@ -26,24 +26,28 @@ Los siguientes problemas conocidos afectan a la versión actual:
 
 
 
+[[app-backups-and-snapshots-fail-if-the-volumesnapshotclass-is-added-after-a-cluster-is-managed]]
 == Los backups de aplicaciones y las snapshots producen errores si la clase volumesnapshotse añade después de gestionar un clúster
 
 Los backups y las Snapshot fallan con un `UI 500 error` en este escenario. Como solución alternativa, actualice la lista de aplicaciones.
 
 
 
+[[managing-a-cluster-with-astra-control-center-fails-when-kubeconfig-file-contains-more-than-one-context]]
 == Se produce un error en la gestión de un clúster con Astra Control Center cuando el archivo kubeconfig contiene más de un contexto
 
 No puede utilizar una imagen de kubeconfig con más de un clúster y contexto en él. Consulte link:https://kb.netapp.com/Cloud/Astra/Control/Managing_cluster_with_Astra_Control_Center_may_fail_when_using_default_kubeconfig_file_contains_more_than_one_context["artículo de base de conocimientos"^] si quiere más información.
 
 
 
+[[app-data-management-operations-fail-with-internal-service-error-500-when-astra-trident-is-offline]]
 == Las operaciones de gestión de datos de aplicaciones producen errores internos de servicio (500) cuando Astra Trident está sin conexión
 
 Si Astra Trident se desconecta (y se vuelve a conectar) y se producen 500 errores internos de servicio al intentar gestionar los datos de las aplicaciones, reinicie todos los nodos de Kubernetes del clúster de aplicaciones para restaurar la funcionalidad.
 
 
 
+[[restoring-from-a-backup-when-using-kerberos-in-flight-encryption-can-fail]]
 == Puede producirse un error en la restauración desde un backup cuando se utiliza el cifrado en tránsito de Kerberos
 
 Cuando se restaura una aplicación desde un backup a un back-end de almacenamiento que utiliza el cifrado en tránsito de Kerberos, se puede producir un error en la operación de restauración. Este problema no afecta a la restauración de una copia Snapshot ni a la replicación de los datos de la aplicación mediante SnapMirror de NetApp.
@@ -53,12 +57,14 @@ NOTE: Cuando use el cifrado en tránsito de Kerberos con volúmenes NFSv4, aseg�
 
 
 
+[[backup-data-remains-in-bucket-after-deletion-for-buckets-with-expired-retention-policy]]
 == Los datos de backup permanecen en bloque tras la eliminación de bloques con política de retención vencida
 
 Si elimina el backup inmutable de una aplicación después de que la política de retención del bloque haya caducado, el backup se eliminará de Astra Control, pero no del bloque. Este problema se solucionará en una próxima versión.
 
 
 
+[[find-more-information]]
 == Obtenga más información
 
 * link:../release-notes/known-limitations.html["Limitaciones conocidas"]

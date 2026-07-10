@@ -4,6 +4,7 @@
 
 
 
+[[download-and-extract-astra-control-center]]
 == Descargue y extraiga Astra Control Center
 
 Descargue las imágenes del Centro de control de Astra de una de las siguientes ubicaciones:
