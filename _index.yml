@@ -47,7 +47,7 @@ indexpage:
     - title: Introducción a la API Astra Control
       url: https://docs.netapp.com/us-en/astra-automation/get-started/before_get_started.html
     - title: Referencia de API
-      url: https://docs.netapp.com/us-en/astra-automation/reference/overview.html
+      url: https://docs.netapp.com/us-en/astra-automation/reference/astra_api_(acc)_overview.html
     - title: Flujos de trabajo API
       url: https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html
   - title: Breve descripción de la solución
